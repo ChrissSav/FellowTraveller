@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="650dp"
-    android:background="#3aa435"
+    android:background="@drawable/popupdrawable"
     android:layout_centerInParent="true"
     android:padding="5dp"
     android:layout_gravity="center">
@@ -16,61 +16,61 @@
 
         <Button
             android:id="@+id/popup_button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="120dp"
-            android:text="Button"
+            android:layout_width="131dp"
+            android:layout_height="99dp"
+            android:background="@drawable/btn_backround"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="92dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/popup_button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="36dp"
-            android:text="Button"
+            android:layout_width="131dp"
+            android:layout_height="99dp"
+            android:background="@drawable/btn_backround"
+            android:layout_marginTop="92dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/popup_button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="116dp"
-            android:text="Button"
+            android:layout_width="131dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/btn_backround"
+            android:layout_marginTop="104dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/popup_button2" />
 
         <Button
             android:id="@+id/popup_button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:layout_marginEnd="36dp"
-            android:text="Button"
+            android:layout_width="131dp"
+            android:layout_height="99dp"
+            android:background="@drawable/btn_backround"
+            android:layout_marginTop="104dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/popup_button3" />
 
         <Button
             android:id="@+id/popup_button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="152dp"
-            android:text="Button"
+            android:layout_width="131dp"
+            android:layout_height="99dp"
+            android:background="@drawable/btn_backround"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="92dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/popup_button4" />
 
         <Button
             android:id="@+id/popup_button7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="152dp"
-            android:layout_marginEnd="36dp"
-            android:text="Button"
+            android:layout_width="131dp"
+            android:layout_height="99dp"
+            android:layout_marginTop="92dp"
+            android:background="@drawable/btn_backround"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/popup_button5" />
 
@@ -78,10 +78,11 @@
             android:id="@+id/popup_button_close"
             android:layout_width="25dp"
             android:layout_height="25sp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/btn_popup_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

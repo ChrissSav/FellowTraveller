@@ -6,6 +6,7 @@
     android:layout_width="350dp"
     android:layout_height="650dp"
     android:background="#3aa435"
+    android:layout_centerInParent="true"
     android:padding="5dp"
     android:layout_gravity="center">
 

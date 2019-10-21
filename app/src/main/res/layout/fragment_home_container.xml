@@ -13,6 +13,7 @@
         app:tabTextAppearance="@style/MyCustomTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabMode="fixed"
         app:tabIndicatorColor="#889CFF">
 
     </com.google.android.material.tabs.TabLayout>

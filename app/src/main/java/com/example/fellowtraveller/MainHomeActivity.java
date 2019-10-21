@@ -3,7 +3,6 @@ package com.example.fellowtraveller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -59,7 +58,6 @@ public class MainHomeActivity extends AppCompatActivity {
                 dia.show();
             }
         });
-
         btn2 = dia.findViewById(R.id.popup_button_close);
         btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)

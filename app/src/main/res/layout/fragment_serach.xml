@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SearchFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fragment_search_textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="Fragment search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/frag_home_textView1"
+            android:layout_width="378dp"
+            android:layout_height="206dp"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/main_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/frag_home_textView"
+            android:layout_width="378dp"
+            android:layout_height="206dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/main_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_home_textView1" />
+
+        <Button
+            android:id="@+id/frag_home_button_search"
+            android:layout_width="153dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/main_btn_login"
+            android:text="Αναζήτηση"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_home_textView1"
+            app:layout_constraintEnd_toEndOf="@+id/frag_home_textView1"
+            app:layout_constraintStart_toStartOf="@+id/frag_home_textView1" />
+
+        <Button
+            android:id="@+id/frag_home_button_offer"
+            android:layout_width="153dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/main_btn_login"
+            android:text="Προσφορά"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_home_textView"
+            app:layout_constraintEnd_toEndOf="@+id/frag_home_textView"
+            app:layout_constraintStart_toStartOf="@+id/frag_home_textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

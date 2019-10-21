@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/main_textView"
+        android:layout_width="362dp"
+        android:layout_height="305dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/main_textView2"
+        android:layout_width="152dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:text="Καλώς ήρθατε"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView" />
+
+    <Button
+        android:id="@+id/main_button1"
+        android:layout_width="155dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="52dp"
+        android:textSize="16sp"
+        android:background="@drawable/main_btn_login"
+        android:text="Σύνδεση"
+        android:textColor="#ffffff"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView3" />
+
+    <Button
+        android:id="@+id/main_button2"
+        android:layout_width="155dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:textSize="16sp"
+        android:background="@drawable/main_btn_sigin"
+        android:layout_marginEnd="32dp"
+        android:textColor="#000000"
+        android:text="Εγγραφή"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView3" />
+
+    <TextView
+        android:id="@+id/main_textView3"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView2" />
+
+    <TextView
+        android:id="@+id/main_textView5"
+        android:layout_width="104dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/main_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_button1" />
+
+    <TextView
+        android:id="@+id/main_textView4"
+        android:layout_width="104dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/main_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_button1" />
+
+    <TextView
+        android:id="@+id/main_textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Είσοδος με"
+        android:textColor="#C9C9C9"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/main_textView5"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toEndOf="@+id/main_textView4"
+        app:layout_constraintTop_toBottomOf="@+id/main_button1" />
+
+    <TextView
+        android:id="@+id/main_textView10"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/main_f_b"
+        android:gravity="center"
+        android:text="F"
+        android:textColor="#FFC088"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView9"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/main_textView11"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="128dp"
+        android:background="@drawable/main_f_b"
+        android:gravity="center"
+        android:text="G"
+        android:textColor="#FFC088"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView9"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

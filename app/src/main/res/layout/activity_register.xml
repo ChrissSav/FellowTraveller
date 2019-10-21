@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+
+    <EditText
+        android:id="@+id/register_editText_name"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFC088"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/register_textView_email"
+        app:layout_constraintTop_toBottomOf="@+id/register_textView_name" />
+
+    <EditText
+        android:id="@+id/register_editText_email"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFC088"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/register_textView_password"
+        app:layout_constraintTop_toBottomOf="@+id/register_textView_email" />
+
+    <TextView
+        android:id="@+id/register_textView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#FFC088"
+        app:layout_constraintStart_toStartOf="@+id/register_editText_email"
+        app:layout_constraintTop_toBottomOf="@+id/register_editText_name" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="328dp"
+        android:layout_height="248dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_header" />
+
+    <TextView
+        android:id="@+id/register_textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Όνομα"
+        android:textColor="#FFC088"
+        app:layout_constraintStart_toStartOf="@+id/register_editText_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/register_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Εγγραφή"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/register_textView_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Κωδικός"
+        android:textColor="#FFC088"
+        app:layout_constraintStart_toStartOf="@+id/register_editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/register_editText_email" />
+
+    <EditText
+        android:id="@+id/register_editText_password"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFC088"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/register_button_register"
+        app:layout_constraintTop_toBottomOf="@+id/register_textView_password" />
+
+    <Button
+        android:id="@+id/register_button_register"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/main_btn_login"
+        android:text="Εγγραφή"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_editText_password" />
+
+    <TextView
+        android:id="@+id/register_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="19sp"
+        android:layout_marginStart="108dp"
+        android:text="Έχεις ήδη λογαριασμό; "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_button_register"
+        app:layout_constraintVertical_bias="0.506" />
+
+    <Button
+        android:id="@+id/register_button_login"
+        android:layout_width="73dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="84dp"
+        android:background="@android:color/transparent"
+        android:text="Είσοδος"
+        android:textAllCaps="false"
+        android:textColor="#889CFF"
+        app:layout_constraintBottom_toBottomOf="@+id/register_textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/register_textView3"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

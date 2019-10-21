@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <EditText
+        android:id="@+id/login_editText_name"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFC088"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/login_textView_email"
+        app:layout_constraintTop_toBottomOf="@+id/login_textView_name" />
+
+    <EditText
+        android:id="@+id/login_editText_password"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFC088"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/login_button_login"
+        app:layout_constraintTop_toBottomOf="@+id/login_textView_email" />
+
+    <TextView
+        android:id="@+id/login_textView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Κωδικός"
+        android:textColor="#FFC088"
+        app:layout_constraintStart_toStartOf="@+id/login_editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/login_editText_name" />
+
+    <TextView
+        android:id="@+id/login_textView"
+        android:layout_width="328dp"
+        android:layout_height="248dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_header" />
+
+    <TextView
+        android:id="@+id/login_textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Email"
+        android:textColor="#FFC088"
+        app:layout_constraintStart_toStartOf="@+id/login_editText_name"
+        app:layout_constraintTop_toBottomOf="@+id/login_textView" />
+
+
+    <TextView
+        android:id="@+id/login_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Είσοδος"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/login_button_login"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/main_btn_login"
+        android:text="Είσοδος"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_editText_password" />
+
+    <TextView
+        android:id="@+id/login_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="19sp"
+        android:layout_marginStart="68dp"
+        android:text="Δεν έχεις λογαριασμό; Κάνε"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
+
+    <Button
+        android:id="@+id/login_button_register"
+        android:layout_width="73dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="88dp"
+        android:background="@android:color/transparent"
+        android:text="Εγγραφή"
+        android:textAllCaps="false"
+        android:textColor="#889CFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
+
+    <Button
+        android:id="@+id/login_button_visible"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:background="@drawable/login_password_view"
+        app:layout_constraintBottom_toBottomOf="@+id/login_editText_password"
+        app:layout_constraintEnd_toEndOf="@+id/login_editText_password"
+        app:layout_constraintTop_toTopOf="@+id/login_editText_password" />
+
+    <TextView
+        android:id="@+id/login_textView_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_erro_close"
+        app:layout_constraintBottom_toBottomOf="@+id/login_editText_name"
+        app:layout_constraintEnd_toEndOf="@+id/login_editText_name"
+        app:layout_constraintTop_toTopOf="@+id/login_editText_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

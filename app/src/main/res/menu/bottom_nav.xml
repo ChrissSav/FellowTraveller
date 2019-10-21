@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_nav_chat"
+
+        android:icon="@drawable/nav_chat_default"/>
+    <item
+        android:id="@+id/bottom_nav_home"
+        android:icon="@drawable/nav_home_default"
+         />
+    <item
+        android:id="@+id/bottom_nav_notification"
+        android:icon="@drawable/nav_notification_default"
+        />
+</menu>

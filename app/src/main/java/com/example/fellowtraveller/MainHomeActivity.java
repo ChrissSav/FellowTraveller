@@ -60,7 +60,7 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         });
 
-        btn2 = dia.findViewById(R.id.popup_button2);
+        btn2 = dia.findViewById(R.id.popup_button_close);
         btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {

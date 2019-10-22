@@ -7,7 +7,7 @@
     tools:context=".NewOfferStage1Fragment">
 
     <TextView
-        android:id="@+id/fragment_textView2"
+        android:id="@+id/fragment_stage1_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -17,10 +17,10 @@
         android:text="Νέα προσφορά"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage1_textView7" />
 
     <TextView
-        android:id="@+id/fragment_textView3"
+        android:id="@+id/fragment_stage1_textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#C9C9C9"
@@ -28,10 +28,10 @@
         android:text="Επέλεξε τη διαδρομή, ημερομηνία και ώρα αναχώρησης"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage1_textView2" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/fragment_stage1_textView7"
         android:layout_width="325dp"
         android:layout_height="219dp"
         android:background="@drawable/main_shape"
@@ -47,11 +47,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_textView3"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage1_textView3"
         app:layout_constraintVertical_bias="1.0">
 
         <EditText
-            android:id="@+id/fragment_editText_date"
+            android:id="@+id/fragment_stage1_editText_date"
             android:layout_width="170dp"
             android:layout_height="40dp"
             android:layout_marginStart="40dp"
@@ -59,14 +59,14 @@
             android:backgroundTint="#FFC088"
             android:ems="10"
             android:hint="Ημερομηνία"
-            android:inputType="textPersonName"
+            android:inputType="date"
             android:textColor="#000"
             android:textColorHint="#C9C9C9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_editText_from" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_stage1_editText_from" />
 
         <EditText
-            android:id="@+id/fragment_editText_time"
+            android:id="@+id/fragment_stage1_editText_time"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_marginTop="44dp"
@@ -74,26 +74,26 @@
             android:backgroundTint="#FFC088"
             android:ems="10"
             android:hint="Ώρα"
-            android:inputType="textPersonName"
+            android:inputType="time"
             android:textColor="#000"
             android:textColorHint="#C9C9C9"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_editText_to" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_stage1_editText_to" />
 
         <TextView
-            android:id="@+id/fragment_textView4"
+            android:id="@+id/fragment_stage1_textView4"
             android:layout_width="23dp"
             android:layout_height="9dp"
             android:background="@drawable/dart"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_editText_to"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_editText_to"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_stage1_editText_to"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_stage1_editText_to"
             app:layout_constraintHorizontal_bias="0.586"
-            app:layout_constraintStart_toEndOf="@+id/fragment_editText_from"
-            app:layout_constraintTop_toTopOf="@+id/fragment_editText_to"
+            app:layout_constraintStart_toEndOf="@+id/fragment_stage1_editText_from"
+            app:layout_constraintTop_toTopOf="@+id/fragment_stage1_editText_to"
             app:layout_constraintVertical_bias="0.49" />
 
         <EditText
-            android:id="@+id/fragment_editText_to"
+            android:id="@+id/fragment_stage1_editText_to"
             android:layout_width="127dp"
             android:layout_height="40dp"
             android:layout_marginTop="44dp"
@@ -108,7 +108,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/fragment_editText_from"
+            android:id="@+id/fragment_stage1_editText_from"
             android:layout_width="127dp"
             android:layout_height="40dp"
             android:layout_marginStart="40dp"

@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewOfferStage3Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/fragment_stage3_textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Νέα προσφορά"
+        android:textColor="#000"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage3_textView1" />
+
+    <TextView
+        android:id="@+id/fragment_stage3_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Επέλεξε τη διαδρομή, ημερομηνία και ώρα αναχώρησης"
+        android:textColor="#C9C9C9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage3_textView2" />
+
+    <TextView
+        android:id="@+id/fragment_stage3_textView1"
+        android:layout_width="325dp"
+        android:layout_height="219dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_stage3_textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:text="Περιγραφή"
+        android:textColor="#000"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage3_textView3" />
+
+    <TextView
+        android:id="@+id/fragment_stage3_textView_description"
+        android:layout_width="326dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/fragment_new_offer_stage3_description"
+        android:paddingLeft="4dp"
+        android:paddingTop="5dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="5dp"
+        android:text="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου."
+        app:layout_constraintStart_toStartOf="@+id/fragment_stage3_textView4"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_stage3_textView4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

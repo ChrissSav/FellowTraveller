@@ -16,35 +16,36 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/new_offer_button_back"
             android:layout_width="27dp"
             android:layout_height="36dp"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/new_offer_btn_back_default"
+            android:background="@drawable/new_offer_button_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <view
-        android:id="@+id/view"
-        class="androidx.viewpager.widget.ViewPager"
+    <FrameLayout
+        android:id="@+id/new_offer_container"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignBottom="@+id/new_offer_bottomBar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_above="@+id/new_offer_bottomBar"
-        android:layout_below="@+id/constraintLayout"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_appBar"
+        android:layout_above="@+id/home_bottom_nav"
         app:layout_constraintBottom_toTopOf="@+id/new_offer_bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <view
+            android:id="@+id/view"
+            class="androidx.viewpager.widget.ViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/new_offer_bottomBar"
@@ -56,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/new_offer_textView_fragment1"
+            android:id="@+id/new_offer_textView_stage1"
             android:layout_width="55dp"
             android:layout_height="18dp"
             android:layout_marginStart="100dp"
@@ -67,19 +68,19 @@
             app:layout_constraintVertical_bias="0.509" />
 
         <TextView
-            android:id="@+id/new_offer_textView_fragment2"
+            android:id="@+id/new_offer_textView_stage2"
             android:layout_width="55dp"
             android:layout_height="18dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/new_offer_btn_bottom_default"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/new_offer_textView_fragment3"
-            app:layout_constraintStart_toEndOf="@+id/new_offer_textView_fragment1"
+            app:layout_constraintEnd_toStartOf="@+id/new_offer_textView_stage3"
+            app:layout_constraintStart_toEndOf="@+id/new_offer_textView_stage1"
             app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
 
         <TextView
-            android:id="@+id/new_offer_textView_fragment3"
+            android:id="@+id/new_offer_textView_stage3"
             android:layout_width="55dp"
             android:layout_height="18dp"
             android:layout_marginEnd="100dp"

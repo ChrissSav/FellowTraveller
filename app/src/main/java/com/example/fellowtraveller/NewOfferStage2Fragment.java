@@ -27,5 +27,8 @@ public class NewOfferStage2Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_new_offer_stage2, container, false);
     }
+    public String toString(){
+        return "stage2";
+    }
 
 }

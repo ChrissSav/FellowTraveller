@@ -25,7 +25,10 @@ public class NewOfferStage3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_offer_stage2, container, false);
+        return inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
+    }
+    public String toString(){
+        return "stage3";
     }
 
 }

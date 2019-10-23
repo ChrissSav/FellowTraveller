@@ -14,7 +14,7 @@
             android:id="@+id/frag_home_textView1"
             android:layout_width="378dp"
             android:layout_height="206dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="52dp"
             android:background="@drawable/main_shape"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.515"

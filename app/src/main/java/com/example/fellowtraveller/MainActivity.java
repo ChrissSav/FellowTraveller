@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn;
     private Button btn1;
     private TextView text;
+    private ConnectToServer c = new ConnectToServer();
     private TextView text1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(mainIntent);
             }
         });
+        if(c.getusers()){
+            Toast.makeText(MainActivity.this,"true",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(MainActivity.this,"false",Toast.LENGTH_SHORT).show();        }
     }
 }

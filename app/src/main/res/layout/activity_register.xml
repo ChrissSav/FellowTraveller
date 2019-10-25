@@ -7,35 +7,6 @@
     tools:context=".RegisterActivity">
 
 
-    <EditText
-        android:id="@+id/register_editText_name"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#FFC088"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/register_textView_email"
-        app:layout_constraintTop_toBottomOf="@+id/register_textView_name" />
-
-    <EditText
-        android:id="@+id/register_editText_email"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#FFC088"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/register_textView_password"
-        app:layout_constraintTop_toBottomOf="@+id/register_textView_email" />
-
-    <TextView
-        android:id="@+id/register_textView_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:textColor="#FFC088"
-        app:layout_constraintStart_toStartOf="@+id/register_editText_email"
-        app:layout_constraintTop_toBottomOf="@+id/register_editText_name" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="328dp"
@@ -46,16 +17,6 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_header" />
-
-    <TextView
-        android:id="@+id/register_textView_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Όνομα"
-        android:textColor="#FFC088"
-        app:layout_constraintStart_toStartOf="@+id/register_editText_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
     <androidx.constraintlayout.widget.Group
@@ -76,30 +37,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/register_textView_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Κωδικός"
-        android:textColor="#FFC088"
-        app:layout_constraintStart_toStartOf="@+id/register_editText_password"
-        app:layout_constraintTop_toBottomOf="@+id/register_editText_email" />
-
-    <EditText
-        android:id="@+id/register_editText_password"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#FFC088"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/register_button_register"
-        app:layout_constraintTop_toBottomOf="@+id/register_textView_password" />
-
     <Button
         android:id="@+id/register_button_register"
         android:layout_width="326dp"
         android:layout_height="45dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/main_btn_login"
         android:text="Εγγραφή"
         android:textAllCaps="false"
@@ -134,5 +76,77 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/register_textView3"
         app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_editText_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Όνομα"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_editText_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_editText_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_editText_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_editText_email"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Κωδικός"
+            android:inputType="textPassword"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

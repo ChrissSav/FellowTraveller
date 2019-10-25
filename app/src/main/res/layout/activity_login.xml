@@ -6,37 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-
-    <EditText
-        android:id="@+id/login_editText_name"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#FFC088"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/login_textView_email"
-        app:layout_constraintTop_toBottomOf="@+id/login_textView_name" />
-
-    <EditText
-        android:id="@+id/login_editText_password"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#FFC088"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/login_button_login"
-        app:layout_constraintTop_toBottomOf="@+id/login_textView_email" />
-
-    <TextView
-        android:id="@+id/login_textView_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Κωδικός"
-        android:textColor="#FFC088"
-        app:layout_constraintStart_toStartOf="@+id/login_editText_password"
-        app:layout_constraintTop_toBottomOf="@+id/login_editText_name" />
-
     <TextView
         android:id="@+id/login_textView"
         android:layout_width="328dp"
@@ -44,19 +13,8 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/main_shape"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_header" />
-
-    <TextView
-        android:id="@+id/login_textView_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Email"
-        android:textColor="#FFC088"
-        app:layout_constraintStart_toStartOf="@+id/login_editText_name"
-        app:layout_constraintTop_toBottomOf="@+id/login_textView" />
 
 
     <TextView
@@ -72,20 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/login_button_login"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/main_btn_login"
-        android:text="Είσοδος"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_editText_password" />
+
 
     <TextView
         android:id="@+id/login_textView3"
@@ -96,6 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
+
 
     <Button
         android:id="@+id/login_button_register"
@@ -110,21 +56,65 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
 
-    <Button
-        android:id="@+id/login_button_visible"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:background="@drawable/login_password_view"
-        app:layout_constraintBottom_toBottomOf="@+id/login_editText_password"
-        app:layout_constraintEnd_toEndOf="@+id/login_editText_password"
-        app:layout_constraintTop_toTopOf="@+id/login_editText_password" />
 
-    <TextView
-        android:id="@+id/login_textView_error"
+    <Button
+        android:id="@+id/login_button_login"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/main_btn_login"
+        android:text="Είσοδος"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_editText_password" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_editText_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_erro_close"
-        app:layout_constraintBottom_toBottomOf="@+id/login_editText_name"
-        app:layout_constraintEnd_toEndOf="@+id/login_editText_name"
-        app:layout_constraintTop_toTopOf="@+id/login_editText_name" />
+        android:textSize="20dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_textView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:backgroundTint="#FFC088"
+            android:hint="Email"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_editText_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/login_editText_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#FFC088"
+            android:textSize="20dp"
+            android:textColorHint="#FFC088"
+            android:textColor="#000"
+            android:hint="Κωδικός"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

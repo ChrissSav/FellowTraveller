@@ -16,37 +16,16 @@ yourEditText.setTransformationMethod(new PasswordTransformationMethod());
 
 public class LoginActivity extends AppCompatActivity {
     private Button btn;
-    private Button btnPassword;
-    private boolean passwordvisible = false;
     private EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        password = findViewById(R.id.login_editText_password);
-        btnPassword = findViewById(R.id.login_button_visible);
         btn = findViewById(R.id.login_button_register);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent mainIntent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(mainIntent);
-            }
-        });
-
-
-        btnPassword.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(passwordvisible){
-                    btnPassword.setBackgroundResource(R.drawable.login_password_view);
-                    password.setTransformationMethod(new PasswordTransformationMethod());
-                    passwordvisible=false;
-                }else{
-                    passwordvisible=true;
-                    btnPassword.setBackgroundResource(R.drawable.login_password_hide);
-                    password.setTransformationMethod(null);
-                }
-
-
             }
         });
     }

@@ -18,12 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_header" />
 
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <TextView
         android:id="@+id/register_header"
         android:layout_width="wrap_content"
@@ -82,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        app:errorEnabled="true"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +99,7 @@
         android:id="@+id/register_editText_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         android:layout_marginTop="16dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,6 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:errorEnabled="true"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;
     private Button btn1;
     private TextView text;
-    private ConnectToServer c = new ConnectToServer();
     private TextView text1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +42,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        text1 = findViewById(R.id.main_textView11);
+       /* text1 = findViewById(R.id.main_textView11);
         text1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent mainIntent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(mainIntent);
+
             }
-        });
-        if(c.getusers()){
-            Toast.makeText(MainActivity.this,"true",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(MainActivity.this,"false",Toast.LENGTH_SHORT).show();        }
+        });*/
+       
     }
 }

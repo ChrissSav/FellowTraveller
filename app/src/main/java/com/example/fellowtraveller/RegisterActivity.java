@@ -100,10 +100,12 @@ public class RegisterActivity extends AppCompatActivity {
         String email = textInputEmail.getEditText().getText().toString();
         String password = textInputPassword.getEditText().getText().toString();
 
-        User user = new User(1,name,email,password);
+        User user = new User(name,email,password);
 
         Call<User> call = jsonPlaceHolderApi.createUser(name,email,password);
-
+        Intent intent = new Intent(RegisterActivity.this,MainHomeActivity.class);
+        startActivity(intent);
+        finish();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -119,7 +121,6 @@ public class RegisterActivity extends AppCompatActivity {
                 content += "Text: " + postResponse.getPassword() + "\n\n";
                 Toast.makeText(RegisterActivity.this,content, Toast.LENGTH_LONG);
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this,t.getMessage(), Toast.LENGTH_LONG);

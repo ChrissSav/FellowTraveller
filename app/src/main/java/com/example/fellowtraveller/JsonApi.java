@@ -12,7 +12,10 @@ public interface JsonApi {
     @GET("getusers")
     Call<List<User>> getUsers();
 
-
+    @GET("getusers/{id}")
+    Call<List<User>> getUsers(
+            @Path("id") int id
+    );
 
     @POST("adduser/{name}/{email}/{password}")
     Call<User> createUser(

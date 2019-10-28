@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,7 +52,6 @@ public class MainHomeActivity extends AppCompatActivity {
                     }
                 });
 
-
         btn_popup_menu = findViewById(R.id.home_button_popup_menu);
         btn_popup_menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -65,5 +66,9 @@ public class MainHomeActivity extends AppCompatActivity {
                 dia.dismiss();
             }
         });
+
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user");
+        Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
     }
 }

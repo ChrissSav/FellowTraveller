@@ -29,10 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn,btn_login;
     private JsonApi jsonPlaceHolderApi;
     private EditText password;
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
     @Override
@@ -53,7 +50,10 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                createUser();
+                if (CheckEmail() & CheckPassword()) {
+                    createUser();
+                }
+
             }
         });
     }
@@ -66,14 +66,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(LoginActivity.this,"Return object = "+response.body().get(0).getName(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(LoginActivity.this,"Return object = "+response.body().get(0).getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this,MainHomeActivity.class);
                     intent.putExtra("user",response.body().get(0));
                     startActivity(intent);
                     finish();
                 }
                 else {
-                    Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -84,7 +84,32 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
+    }
 
 
+
+
+    private boolean CheckEmail() {
+        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            textInputEmail.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        } else {
+            textInputEmail.setError(null);
+            return true;
+        }
+    }
+
+    private boolean CheckPassword() {
+        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            textInputPassword.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        } else {
+            textInputPassword.setError(null);
+            return true;
+        }
     }
 }

@@ -18,9 +18,11 @@ public interface JsonApi {
     );
 
     @POST("adduser/{name}/{email}/{password}")
-    Call<User> createUser(
+    Call<List<User>> createUser(
             @Path("name") String name,
             @Path("email") String email,
             @Path("password") String password
     );
+
+
 }

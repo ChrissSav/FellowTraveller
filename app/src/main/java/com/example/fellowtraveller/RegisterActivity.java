@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,29 +102,33 @@ public class RegisterActivity extends AppCompatActivity {
         String email = textInputEmail.getEditText().getText().toString();
         String password = textInputPassword.getEditText().getText().toString();
 
-        User user = new User(name,email,password);
 
-        Call<User> call = jsonPlaceHolderApi.createUser(name,email,password);
-        Intent intent = new Intent(RegisterActivity.this,MainHomeActivity.class);
-        startActivity(intent);
-        finish();
-        call.enqueue(new Callback<User>() {
+        Call<List<User>> call = jsonPlaceHolderApi.createUser(name,email,password);
+
+        call.enqueue(new Callback<List<User>> () {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<List<User>>  call, Response<List<User>>  response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(RegisterActivity.this,"Error", Toast.LENGTH_LONG);
+                    Intent intent = new Intent(RegisterActivity.this,MainHomeActivity.class);
+                    intent.putExtra("user",response.body().get(0));
+                    startActivity(intent);
+                    finish();
                 }
-                User postResponse = response.body();
+              /*  User postResponse = response.body();
                 String content = "";
                 content += "Code: " + response.code() + "\n";
                 content += "ID: " + postResponse.getId() + "\n";
                 content += "User ID: " + postResponse.getName() + "\n";
                 content += "Title: " + postResponse.getEmail() + "\n";
                 content += "Text: " + postResponse.getPassword() + "\n\n";
-                Toast.makeText(RegisterActivity.this,content, Toast.LENGTH_LONG);
+                Toast.makeText(RegisterActivity.this,content, Toast.LENGTH_LONG);*/
+                else {
+                    Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<List<User>>  call, Throwable t) {
                 Toast.makeText(RegisterActivity.this,t.getMessage(), Toast.LENGTH_LONG);
             }
         });

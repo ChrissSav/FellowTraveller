@@ -90,7 +90,7 @@
             </Button>
 
             <TextView
-                android:id="@+id/search_items_container_textView4"
+                android:id="@+id/search_items_container_textView_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search_items_container_textView_from"
@@ -107,7 +107,7 @@
                 android:layout_below="@+id/search_items_container_textView_from"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="18dp"
-                android:layout_toEndOf="@+id/search_items_container_textView4"
+                android:layout_toEndOf="@+id/search_items_container_textView_name"
                 android:text="+2"
                 android:textColor="#fff" />
 

@@ -11,4 +11,9 @@
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="holoSpinner" parent="Widget.AppCompat.Spinner.Underlined">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#3F51B5</item>
+    </style>
 </resources>

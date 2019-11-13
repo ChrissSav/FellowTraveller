@@ -58,7 +58,7 @@
             android:id="@+id/search_offer_button_next_fragment"
             android:layout_width="326dp"
             android:layout_height="45dp"
-            android:background="@drawable/main_btn_login"
+            android:background="@drawable/search_offer_btn"
             android:text=" Επόμενο"
             android:textAllCaps="false"
             android:textColor="#fff"

@@ -18,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NewOfferActivity extends AppCompatActivity {
     private Button btn_next_stage,btn_back;
-    private String curent = "";
     private Fragment fra;
     private TextView tvStage1,tvStage2,tvStage3;
     private NewOfferStage1Fragment stage1 = new NewOfferStage1Fragment() ;

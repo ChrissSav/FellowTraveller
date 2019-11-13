@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewOfferActivity">
-
+    tools:context=".SearchOfferActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/search_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/new_offer_button_back"
+            android:id="@+id/search_offer_button_back"
             android:layout_width="27dp"
             android:layout_height="36dp"
             android:layout_marginStart="24dp"
@@ -30,11 +29,11 @@
         android:id="@+id/new_offer_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/new_offer_bottomBar"
+        app:layout_constraintBottom_toTopOf="@+id/search_offer_bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/search_constraintLayout"
         app:layout_constraintVertical_bias="0.0">
 
         <view
@@ -47,7 +46,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/new_offer_bottomBar"
+        android:id="@+id/search_offer_bottomBar"
         android:layout_width="match_parent"
         android:layout_height="99dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,55 +54,19 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/new_offer_textView_stage1"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="100dp"
-            android:background="@drawable/new_offer_btn_bottom_click"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment"
-            app:layout_constraintVertical_bias="0.509" />
-
-        <TextView
-            android:id="@+id/new_offer_textView_stage2"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/new_offer_btn_bottom_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/new_offer_textView_stage3"
-            app:layout_constraintStart_toEndOf="@+id/new_offer_textView_stage1"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
-
-        <TextView
-            android:id="@+id/new_offer_textView_stage3"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="100dp"
-            android:background="@drawable/new_offer_btn_bottom_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
-
         <Button
-            android:id="@+id/new_offer_button_next_fragment"
+            android:id="@+id/search_offer_button_next_fragment"
             android:layout_width="326dp"
             android:layout_height="45dp"
-            android:layout_marginTop="2dp"
             android:background="@drawable/main_btn_login"
             android:text=" Επόμενο"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

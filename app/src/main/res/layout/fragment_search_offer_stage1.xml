@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SearchOfferStage1Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_search_offer_stage1_editText_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="145dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="152dp"
+            android:layout_height="39dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Από"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_search_offer_stage1_editText_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="246dp"
+        tools:layout_editor_absoluteY="145dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="152dp"
+            android:layout_height="39dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Προς"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_search_offer_stage1_editText_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="302dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="231dp"
+            android:layout_height="41dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Ημερομηνία"
+            android:inputType="date"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/fragment_search_offer_stage1_textView_pavla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="#000"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage1_editText_time_from"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_search_offer_stage1_editText_time_from"
+        app:layout_constraintStart_toEndOf="@+id/fragment_search_offer_stage1_editText_time_to"
+        app:layout_constraintTop_toTopOf="@+id/fragment_search_offer_stage1_editText_time_from" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_search_offer_stage1_editText_time_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="40dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_search_offer_stage1_Time">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="124dp"
+            android:layout_height="42dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Από (ωρα)"
+            android:inputType="time"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_search_offer_stage1_editText_time_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_search_offer_stage1_Time">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="124dp"
+            android:layout_height="42dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Έως"
+            android:inputType="time"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/fragment_search_offer_stage1_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ώρα"
+        android:textColor="#000"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <TextView
+        android:id="@+id/fragment_search_offer_stage1_textView_velos"
+        android:layout_width="45dp"
+        android:layout_height="16dp"
+        android:background="@drawable/dart"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="165dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

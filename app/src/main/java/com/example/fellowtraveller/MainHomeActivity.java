@@ -67,8 +67,8 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user");
-        Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
+       // Intent intent = getIntent();
+       // User user = intent.getParcelableExtra("user");
+       // Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
     }
 }

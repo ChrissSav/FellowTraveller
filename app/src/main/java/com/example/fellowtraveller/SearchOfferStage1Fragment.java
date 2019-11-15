@@ -24,5 +24,7 @@ public class SearchOfferStage1Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_offer_stage1, container, false);
     }
-
+    public String toString(){
+        return "stage1";
+    }
 }

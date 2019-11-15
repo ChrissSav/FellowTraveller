@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomeFragment extends Fragment {
-    private Button btn;
+    private Button btn1,btn2;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -25,11 +25,19 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        btn = v.findViewById(R.id.frag_home_button_offer);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn1 = v.findViewById(R.id.frag_home_button_offer);
+        btn2 = v.findViewById(R.id.frag_home_button_search);
+        btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 Intent intent = new Intent(getActivity(),NewOfferActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(),SearchOfferActivity.class);
                 startActivity(intent);
             }
         });

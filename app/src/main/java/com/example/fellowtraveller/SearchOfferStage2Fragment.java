@@ -28,4 +28,8 @@ public class SearchOfferStage2Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_search_offer_stage2, container, false);
     }
 
+    public String toString(){
+        return "stage2";
+    }
+
 }

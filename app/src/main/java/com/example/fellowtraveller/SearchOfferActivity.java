@@ -23,13 +23,13 @@ public class SearchOfferActivity extends AppCompatActivity {
         btn_next_stage = findViewById(R.id.search_offer_button_next_fragment);
         btn_back = findViewById(R.id.search_offer_button_back);
         fra = stage1;
-        fragmentManager.beginTransaction().replace(R.id.new_offer_container,fra).commit();
+        fragmentManager.beginTransaction().replace(R.id.search_offer_container,fra).commit();
         btn_next_stage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 if(fra.toString().equals("stage1")){
                     fra = stage2;
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.new_offer_container,fra).commit();
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.search_offer_container,fra).commit();
                 }
             }
         });
@@ -43,7 +43,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 }
                 else if(fra.toString().equals("stage2")) {
                     fra = stage1;
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container, fra).commit();
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.search_offer_container, fra).commit();
                 }
             }
         });

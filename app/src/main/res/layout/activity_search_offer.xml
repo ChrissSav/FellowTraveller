@@ -26,7 +26,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/new_offer_container"
+        android:id="@+id/search_offer_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/search_offer_bottomBar"

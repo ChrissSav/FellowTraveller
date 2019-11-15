@@ -68,13 +68,13 @@ public class NewOfferActivity extends AppCompatActivity {
                     fra = stage1;
                     tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
                     tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.exit_to_right, R.anim.enter_from_left).replace(R.id.new_offer_container,fra).commit();
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
                 }
                 else if(fra.toString().equals("stage3")){
                     fra = stage2;
                     tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
                     tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.exit_to_right, R.anim.enter_from_left).replace(R.id.new_offer_container,fra).commit();
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
                 }
             }
         });

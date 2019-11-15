@@ -43,7 +43,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 }
                 else if(fra.toString().equals("stage2")) {
                     fra = stage1;
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.exit_to_right, R.anim.enter_from_left).replace(R.id.new_offer_container, fra).commit();
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container, fra).commit();
                 }
             }
         });

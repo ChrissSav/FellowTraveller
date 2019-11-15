@@ -47,11 +47,12 @@
 
     <Spinner
         android:id="@+id/fragment_search_offer_stage2_spinner_suitcases_to"
-        android:layout_width="79dp"
+        android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="#000"
+        android:backgroundTint="#FFAA5E"
+        style="@style/holoSpinner"
         android:entries="@array/spinner_num"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage2_spinner_suitcases_from"
@@ -61,11 +62,12 @@
 
     <Spinner
         android:id="@+id/fragment_search_offer_stage2_spinner_suitcases_from"
-        android:layout_width="79dp"
+        android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#000"
+        android:backgroundTint="#FFAA5E"
+        style="@style/holoSpinner"
         android:entries="@array/spinner_num"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage2_textView5"
@@ -86,12 +88,13 @@
 
     <Spinner
         android:id="@+id/fragment_search_offer_stage2_spinner_bags_from"
-        android:layout_width="79dp"
+        android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#000"
+        android:backgroundTint="#FFAA5E"
         android:entries="@array/spinner_num"
+        style="@style/holoSpinner"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage2_textView6"
         app:layout_constraintEnd_toStartOf="@+id/fragment_search_offer_stage2_spinner_bags_to"
@@ -100,13 +103,14 @@
 
     <Spinner
         android:id="@+id/fragment_search_offer_stage2_spinner_bags_to"
-        android:layout_width="79dp"
+        android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="#000"
+        android:backgroundTint="#FFAA5E"
         android:entries="@array/spinner_num"
         android:textAlignment="center"
+        style="@style/holoSpinner"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage2_spinner_bags_from"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fragment_search_offer_stage2_spinner_bags_from"
@@ -127,11 +131,12 @@
 
     <Spinner
         android:id="@+id/fragment_search_offer_stage2_spinner_seats_from"
-        android:layout_width="79dp"
+        style="@style/holoSpinner"
+        android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#000"
+        android:backgroundTint="#FFAA5E"
         android:entries="@array/spinner_num"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage2_textView"
@@ -141,11 +146,12 @@
 
     <Spinner
         android:id="@+id/fragment_search_offer_stage2_spinner_seats_to"
-        android:layout_width="79dp"
+        android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_gravity="center_horizontal"
+        style="@style/holoSpinner"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="#000"
+        android:backgroundTint="#FFAA5E"
         android:entries="@array/spinner_num"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_search_offer_stage2_spinner_seats_from"

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Arrays;
 
 public class NewOfferActivity extends AppCompatActivity {
     private Button btn_next_stage,btn_back;
@@ -24,10 +34,37 @@ public class NewOfferActivity extends AppCompatActivity {
     private NewOfferStage2Fragment stage2 = new NewOfferStage2Fragment();
     private NewOfferStage3Fragment stage3 = new NewOfferStage3Fragment() ;
     private FragmentManager fragmentManager;
+            PlacesClient placesClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_offer);
+
+        //PlaceAPI
+        String apikey = "AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg";
+        if(!Places.isInitialized()){
+            Places.initialize(getApplicationContext(),apikey);
+        }
+
+        placesClient = Places.createClient(this);
+        final AutocompleteSupportFragment autocompleteSupportFragment =
+                (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.LAT_LNG,Place.Field.NAME));
+        autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                final LatLng latLng = place.getLatLng();
+                //ConsoleCheck     Log.i("PlaceAPI", "onPlaceSelected: " + latLng.latitude + "/n" + latLng.longitude);
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+
+            }
+        });
+
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.new_offer_button_next_fragment);
         btn_back = findViewById(R.id.new_offer_button_back);

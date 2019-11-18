@@ -34,7 +34,7 @@ public class NewOfferActivity extends AppCompatActivity {
     private NewOfferStage2Fragment stage2 = new NewOfferStage2Fragment();
     private NewOfferStage3Fragment stage3 = new NewOfferStage3Fragment() ;
     private FragmentManager fragmentManager;
-            PlacesClient placesClient;
+    private PlacesClient placesClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

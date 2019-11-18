@@ -46,6 +46,8 @@ public class SearchFragment extends Fragment {
         mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+3"));
         mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+4"));
         mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+5"));
+        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+6"));
+        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+7"));
         mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+8"));
         mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+9"));
         mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+10"));
@@ -65,7 +67,7 @@ public class SearchFragment extends Fragment {
         mAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(), position+"",
+                Toast.makeText(getActivity(), position+1+"",
                         Toast.LENGTH_SHORT).show();
             }
         });

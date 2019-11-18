@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserProfileActivity">
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Σχετικά με εμένα"
+        android:textColor="#000"
+        app:layout_constraintStart_toStartOf="@+id/UserProfileActivity_textView1_desc"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_prodfores" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView1_desc"
+        android:layout_width="328dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#545454"
+        android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη. Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView12" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView3"
+        android:layout_width="172dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Αλντι Μάλκα"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView3" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="stars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_name" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="125 reviews"
+        android:textColor="#C9C9C9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_stars" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Thessaloniki, Greece"
+        android:textColor="#545454"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_reviews" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_prosforesnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="32dp"
+        android:text="50"
+        android:textStyle="bold"
+        android:textSize="24dp"
+
+        android:textColor="#FFAA5E"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_place" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_prodfores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Προσφορές"
+        android:textColor="#000"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/UserProfileActivity_textView_prosforesnum"
+        app:layout_constraintStart_toStartOf="@+id/UserProfileActivity_textView_prosforesnum"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_prosforesnum" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_anazitisisnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="124dp"
+        android:text="24"
+        android:textColor="#FFAA5E"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_place" />
+
+    <TextView
+        android:id="@+id/UserProfileActivity_textView_anazitisis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Αναζητήσεις"
+        android:textSize="14dp"
+        android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="@+id/UserProfileActivity_textView_anazitisisnum"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="@+id/UserProfileActivity_textView_anazitisisnum"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_anazitisisnum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

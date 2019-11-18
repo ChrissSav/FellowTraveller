@@ -14,8 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchOfferActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".UserProfileActivity"></activity>
+        <activity
+            android:name=".SearchOfferActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".NewOfferActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

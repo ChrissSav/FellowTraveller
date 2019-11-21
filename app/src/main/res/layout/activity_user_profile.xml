@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".UserProfileActivity">
 
     <TextView
@@ -22,6 +23,8 @@
         android:layout_height="95dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
+        android:padding="10dp"
+        android:background="@drawable/textview_search_add_offer"
         android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη. Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
         android:textColor="#545454"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,10 +57,10 @@
 
     <TextView
         android:id="@+id/UserProfileActivity_textView_stars"
-        android:layout_width="90dp"
-        android:layout_height="18dp"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/stars_1"
+        android:background="@drawable/star_4"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

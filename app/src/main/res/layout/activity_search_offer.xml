@@ -12,7 +12,7 @@
         android:layout_width="16dp"
         android:layout_height="23dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:background="@drawable/new_offer_button_back"
         app:layout_constraintBottom_toBottomOf="@+id/search_offer_textView_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +207,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_offer_editText_time_from"
+            android:id="@+id/search_offer_editText_time_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

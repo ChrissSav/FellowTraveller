@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragment_search_offer_editText_from"
+        android:id="@+id/search_offer_editText_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
@@ -60,7 +60,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragment_search_offer_editText_to"
+        android:id="@+id/search_offer_editText_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -70,7 +70,7 @@
         app:hintTextAppearance="@style/CustomTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_search_offer_editText_from">
+        app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_from">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="360dp"
@@ -95,7 +95,7 @@
         android:background="@drawable/textview_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_search_offer_editText_to">
+        app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_to">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -207,7 +207,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_offer_editText_time_to"
+            android:id="@+id/search_offer_editText_time_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -244,7 +244,7 @@
             app:layout_constraintTop_toTopOf="@+id/search_offer_editText_time_from" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
-        android:id="@+id/search_offer_button_next_fragment"
+        android:id="@+id/new_offer_button_next"
         android:layout_width="326dp"
         android:layout_height="60dp"
         android:layout_marginBottom="30dp"

@@ -4,126 +4,260 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".NewOfferActivity">
 
     //Layout For PlaceAPI
-<!--    <LinearLayout-->
+    <!--    <LinearLayout-->
 
-<!--        android:orientation="horizontal"-->
-<!--        android:background="@color/colorPrimaryDark"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-<!--        -->
-<!--        <fragment-->
-<!--            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"-->
-<!--            android:id="@+id/autocomplete_fragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-<!--        </fragment>-->
-<!--    </LinearLayout>-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:background="@color/colorPrimaryDark"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+    <!--        -->
+    <!--        <fragment-->
+    <!--            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"-->
+    <!--            android:id="@+id/autocomplete_fragment"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
+    <!--        </fragment>-->
+    <!--    </LinearLayout>-->
     //Finished PlaceAPI
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <Button
+        android:id="@+id/new_offer_button_back"
+        android:layout_width="16dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/new_offer_button_back"
+        app:layout_constraintBottom_toBottomOf="@+id/search_offer_textView_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/new_offer_textView_header" />
 
-        <Button
-            android:id="@+id/new_offer_button_back"
-            android:layout_width="27dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/new_offer_button_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <FrameLayout
-        android:id="@+id/new_offer_container"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/new_offer_textView_header"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/new_offer_bottomBar"
+        android:layout_marginTop="16dp"
+        android:text="Νέα προσφορά"
+        android:textColor="#FFAA5E"
+        android:textSize="24dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <view
-            android:id="@+id/view"
-            class="androidx.viewpager.widget.ViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_offer_textView_header">
 
-    </FrameLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="360dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:hint="Άπο"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="241dp"
+            tools:layout_editor_absoluteY="85dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_from">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="360dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:hint="Πρός"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="241dp"
+            tools:layout_editor_absoluteY="85dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/new_offer_bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="99dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="5dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_to"
+        app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_to">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="156dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:backgroundTint="#FFC088"
+            android:hint="Ημερ/νία"
+            android:inputType="date"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="46dp"
+            tools:layout_editor_absoluteY="446dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="5dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintBottom_toBottomOf="@+id/new_offer_editText_date"
+        app:layout_constraintEnd_toEndOf="@+id/new_offer_editText_to"
+        app:layout_constraintTop_toTopOf="@+id/new_offer_editText_date">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="156dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:backgroundTint="#FFC088"
+            android:hint="Ώρα"
+            android:inputType="time"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="46dp"
+            tools:layout_editor_absoluteY="446dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_seats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="5dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_date"
+        app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_date">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="158dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:backgroundTint="#FFC088"
+            android:hint="Θέσεις"
+            android:inputType="number"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="46dp"
+            tools:layout_editor_absoluteY="446dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_cases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="5dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintBottom_toBottomOf="@+id/new_offer_editText_seats"
+        app:layout_constraintEnd_toEndOf="@+id/new_offer_editText_to"
+        app:layout_constraintTop_toTopOf="@+id/new_offer_editText_seats">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="156dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:backgroundTint="#FFC088"
+            android:hint="Αποσκεύες"
+            android:inputType="date"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="46dp"
+            tools:layout_editor_absoluteY="446dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="5dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_seats"
+        app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_seats">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="360dp"
+            android:layout_height="115dp"
+            android:background="@null"
+            android:backgroundTint="#FFC088"
+            android:hint="Περιγραφή"
+            android:paddingTop="8dp"
+            android:inputType="textMultiLine"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#FFC088"
+            android:textSize="17dp"
+            tools:layout_editor_absoluteX="46dp"
+            tools:layout_editor_absoluteY="446dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/new_offer_button_next"
+        android:layout_width="326dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/search_offer_btn"
+        android:text=" Αναζήτηση"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/new_offer_textView_stage1"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="100dp"
-            android:background="@drawable/new_offer_btn_bottom_click"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment"
-            app:layout_constraintVertical_bias="0.509" />
-
-        <TextView
-            android:id="@+id/new_offer_textView_stage2"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/new_offer_btn_bottom_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/new_offer_textView_stage3"
-            app:layout_constraintStart_toEndOf="@+id/new_offer_textView_stage1"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
-
-        <TextView
-            android:id="@+id/new_offer_textView_stage3"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="100dp"
-            android:background="@drawable/new_offer_btn_bottom_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
-
-        <Button
-            android:id="@+id/new_offer_button_next_fragment"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/main_btn_login"
-            android:text=" Επόμενο"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

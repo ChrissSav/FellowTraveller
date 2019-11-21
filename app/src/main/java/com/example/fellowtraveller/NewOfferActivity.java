@@ -42,7 +42,7 @@ public class NewOfferActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_offer);
 
         //PlaceAPI
-        String apikey = "AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg";
+        /*String apikey = "AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg";
         if(!Places.isInitialized()){
             Places.initialize(getApplicationContext(),apikey);
         }
@@ -63,7 +63,7 @@ public class NewOfferActivity extends AppCompatActivity {
             public void onError(@NonNull Status status) {
 
             }
-        });
+        });*/
 
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.new_offer_button_next_fragment);

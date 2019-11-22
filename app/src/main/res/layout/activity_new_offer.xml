@@ -7,31 +7,12 @@
     android:background="#fff"
     tools:context=".NewOfferActivity">
 
-    //Layout For PlaceAPI
-    <!--    <LinearLayout-->
 
-    <!--        android:orientation="horizontal"-->
-    <!--        android:background="@color/colorPrimaryDark"-->
-    <!--        android:layout_margin="20dp"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-    <!--        -->
-    <!--        <fragment-->
-    <!--            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"-->
-    <!--            android:id="@+id/autocomplete_fragment"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content">-->
-    <!--        </fragment>-->
-    <!--    </LinearLayout>-->
-    //Finished PlaceAPI
 
     <Button
         android:id="@+id/new_offer_button_back"
-        android:layout_width="16dp"
-        android:layout_height="23dp"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/new_offer_button_back"
@@ -46,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:text="Νέα προσφορά"
         android:textColor="#FFAA5E"
-        android:textSize="24dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +89,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_offer_editText_date"
+        android:id="@+id/textInputLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -120,10 +101,12 @@
         app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_to">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_offer_editText_date"
             android:layout_width="156dp"
             android:layout_height="42dp"
             android:background="@null"
             android:backgroundTint="#FFC088"
+            android:focusable="false"
             android:hint="Ημερ/νία"
             android:inputType="date"
             android:paddingLeft="20dp"
@@ -135,22 +118,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_offer_editText_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textview_search_add_offer"
         android:paddingTop="5dp"
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintBottom_toBottomOf="@+id/new_offer_editText_date"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="@+id/new_offer_editText_to"
-        app:layout_constraintTop_toTopOf="@+id/new_offer_editText_date">
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_offer_editText_time"
             android:layout_width="156dp"
             android:layout_height="42dp"
             android:background="@null"
             android:backgroundTint="#FFC088"
+            android:focusable="false"
             android:hint="Ώρα"
             android:inputType="time"
             android:paddingLeft="20dp"
@@ -171,8 +155,8 @@
         android:paddingTop="5dp"
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_date"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_date">
+        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_to"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="158dp"
@@ -208,7 +192,7 @@
             android:background="@null"
             android:backgroundTint="#FFC088"
             android:hint="Αποσκεύες"
-            android:inputType="date"
+            android:inputType="number"
             android:paddingLeft="20dp"
             android:textColor="#817F7F"
             android:textColorHint="#FFC088"
@@ -227,7 +211,7 @@
         android:paddingTop="5dp"
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_seats"
+        app:layout_constraintStart_toStartOf="@+id/new_offer_editText_to"
         app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_seats">
 
         <com.google.android.material.textfield.TextInputEditText

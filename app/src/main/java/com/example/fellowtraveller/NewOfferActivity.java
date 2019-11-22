@@ -1,34 +1,31 @@
 package com.example.fellowtraveller;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NewOfferActivity extends AppCompatActivity {
     private Button btn_back;
-
+    private DatePickerDialog.OnDateSetListener mDateListener;
+    private TimePickerDialog.OnTimeSetListener mTimeListener;
+    private TextInputEditText date_trip;
+    private TextInputEditText time_trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +33,60 @@ public class NewOfferActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_offer);
 
         btn_back = findViewById(R.id.new_offer_button_back);
+        date_trip = findViewById(R.id.new_offer_editText_date);
+        time_trip = findViewById(R.id.new_offer_editText_time);
+
+
+        date_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        NewOfferActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                dialog.show();
+            }
+        });
+
+
+        mDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = day + "/" + month + "/" + year;
+                date_trip.setText(date+"");
+            }
+        };
+
+
+
+        time_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int minute = cal.get(Calendar.MINUTE);
+                TimePickerDialog dialog = new TimePickerDialog(
+                        NewOfferActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mTimeListener, hour, minute,true);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                dialog.show();
+            }
+        });
+        mTimeListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String time = hourOfDay + ":" + minute;
+                time_trip.setText(time+"");
+            }
+        };
+
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -44,4 +95,5 @@ public class NewOfferActivity extends AppCompatActivity {
             }
         });
     }
+
 }

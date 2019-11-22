@@ -79,7 +79,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(
                         SearchOfferActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mDateListener1, year, month, day);
+                        mDateListener2, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
                 dialog.show();
             }

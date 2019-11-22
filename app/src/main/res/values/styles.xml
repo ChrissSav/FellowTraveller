@@ -19,7 +19,7 @@
 
     <style name="CustomTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">#171717</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">12dp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
         <item name="colorAccent">#171717</item>
         <item name="colorControlNormal">#171717</item>

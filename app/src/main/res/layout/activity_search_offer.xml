@@ -31,67 +31,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_offer_editText_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:textColorHint="#000"
+        android:layout_marginTop="80dp"
         android:background="@drawable/textview_search_add_offer"
-        android:paddingTop="10dp"
+        android:paddingTop="4dp"
+        android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_offer_textView_header">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="360dp"
-            android:layout_height="65dp"
+            android:layout_height="42dp"
             android:background="@null"
             android:hint="Από"
             android:inputType="text"
             android:paddingLeft="20dp"
             android:textColor="#817F7F"
             android:textColorHint="#000"
-            android:textSize="20dp"
+            android:textSize="16dp"
             tools:layout_editor_absoluteX="30dp"
             tools:layout_editor_absoluteY="85dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_offer_editText_to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textColorHint="#000"
-        android:background="@drawable/textview_search_add_offer"
-        android:paddingTop="10dp"
-        app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_from">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="360dp"
-            android:layout_height="65dp"
-            android:background="@null"
-            android:hint="Προς"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:textColor="#817F7F"
-            android:textColorHint="#000"
-            android:textSize="20dp"
-            tools:layout_editor_absoluteX="241dp"
-            tools:layout_editor_absoluteY="85dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="359dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:background="@drawable/textview_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,14 +87,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="126dp"
-                android:layout_height="65dp"
+                android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:hint="Ημερ/νία (από)"
                 android:inputType="date"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
-                android:textSize="17dp"
+                android:textSize="16dp"
                 tools:layout_editor_absoluteX="46dp"
                 tools:layout_editor_absoluteY="446dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -142,14 +115,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="126dp"
-                android:layout_height="65dp"
+                android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:hint="Ημερ/νία (έως)"
                 android:inputType="date"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
-                android:textSize="17dp"
+                android:textSize="16dp"
                 tools:layout_editor_absoluteX="170dp"
                 tools:layout_editor_absoluteY="4dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -168,12 +141,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="359dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:background="@drawable/textview_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -194,14 +165,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="126dp"
-                android:layout_height="65dp"
+                android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:hint="Ώρα (έως)"
                 android:inputType="time"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 tools:layout_editor_absoluteX="253dp"
                 tools:layout_editor_absoluteY="446dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -221,14 +192,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="126dp"
-                android:layout_height="65dp"
+                android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:hint="Ώρα (από)"
                 android:inputType="time"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 tools:layout_editor_absoluteX="46dp"
                 tools:layout_editor_absoluteY="446dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -243,6 +214,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/search_offer_editText_time_from" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_offer_editText_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_from">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="360dp"
+            android:layout_height="42dp"
+            android:background="@null"
+            android:hint="Προς"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
+            android:textSize="16dp"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="260dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <Button
         android:id="@+id/new_offer_button_next"
         android:layout_width="326dp"

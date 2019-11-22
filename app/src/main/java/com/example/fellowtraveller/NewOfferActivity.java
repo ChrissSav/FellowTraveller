@@ -58,7 +58,20 @@ public class NewOfferActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = day + "/" + month + "/" + year;
+                String mon,d;
+                if (month<=9){
+                    mon = "0"+month;
+                }
+                else{
+                    mon = month+"";
+                }
+                if(day<=9){
+                    d = "0"+day;
+                }
+                else{
+                    d = day+"";
+                }
+                String date = d + "/" + mon + "/" + year;
                 date_trip.setText(date+"");
             }
         };
@@ -82,7 +95,20 @@ public class NewOfferActivity extends AppCompatActivity {
         mTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String time = hourOfDay + ":" + minute;
+                String hour,min;
+                if (hourOfDay<=9){
+                    hour = "0"+hourOfDay;
+                }
+                else{
+                    hour = hourOfDay+"";
+                }
+                if(minute<=9){
+                    min = "0"+minute;
+                }
+                else{
+                    min = minute+"";
+                }
+                String time = hour + ":" + min;
                 time_trip.setText(time+"");
             }
         };

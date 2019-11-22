@@ -63,7 +63,20 @@ public class SearchOfferActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = day + "/" + month + "/" + year;
+                String mon,d;
+                if (month<=9){
+                    mon = "0"+month;
+                }
+                else{
+                    mon = month+"";
+                }
+                if(day<=9){
+                    d = "0"+day;
+                }
+                else{
+                    d = day+"";
+                }
+                String date = d + "/" + mon + "/" + year;
                 date_from.setText(date+"");
             }
         };
@@ -90,7 +103,20 @@ public class SearchOfferActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = day + "/" + month + "/" + year;
+                String mon,d;
+                if (month<=9){
+                    mon = "0"+month;
+                }
+                else{
+                    mon = month+"";
+                }
+                if(day<=9){
+                    d = "0"+day;
+                }
+                else{
+                    d = day+"";
+                }
+                String date = d + "/" + mon + "/" + year;
                 date_to.setText(date+"");
             }
         };
@@ -113,7 +139,20 @@ public class SearchOfferActivity extends AppCompatActivity {
         mTimeListener1 = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String time = hourOfDay + ":" + minute;
+                String hour,min;
+                if (hourOfDay<=9){
+                    hour = "0"+hourOfDay;
+                }
+                else{
+                    hour = hourOfDay+"";
+                }
+                if(minute<=9){
+                    min = "0"+minute;
+                }
+                else{
+                    min = minute+"";
+                }
+                String time = hour + ":" + min;
                 time_from.setText(time+"");
             }
         };
@@ -135,7 +174,20 @@ public class SearchOfferActivity extends AppCompatActivity {
         mTimeListener2 = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String time = hourOfDay + ":" + minute;
+                String hour,min;
+                if (hourOfDay<=9){
+                    hour = "0"+hourOfDay;
+                }
+                else{
+                    hour = hourOfDay+"";
+                }
+                if(minute<=9){
+                    min = "0"+minute;
+                }
+                else{
+                    min = minute+"";
+                }
+                String time = hour + ":" + min;
                 time_to.setText(time+"");
             }
         };

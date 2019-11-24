@@ -46,7 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_offer_textView_header">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/new_offer_autoComplete_editText_from"
             android:layout_width="360dp"
             android:layout_height="42dp"
             android:background="@null"
@@ -73,7 +74,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_from">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/new_offer_autoComplete_editText_to"
             android:layout_width="360dp"
             android:layout_height="42dp"
             android:background="@null"
@@ -147,7 +149,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_offer_editText_seats"
+        android:id="@+id/textInputLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -159,6 +161,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_offer_editText_seats"
             android:layout_width="158dp"
             android:layout_height="42dp"
             android:background="@null"
@@ -175,18 +178,18 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_offer_editText_cases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textview_search_add_offer"
         android:paddingTop="5dp"
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintBottom_toBottomOf="@+id/new_offer_editText_seats"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="@+id/new_offer_editText_to"
-        app:layout_constraintTop_toTopOf="@+id/new_offer_editText_seats">
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_offer_editText_cases"
             android:layout_width="156dp"
             android:layout_height="42dp"
             android:background="@null"
@@ -203,7 +206,6 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_offer_editText_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -212,9 +214,10 @@
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
         app:layout_constraintStart_toStartOf="@+id/new_offer_editText_to"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_seats">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_offer_editText_description"
             android:layout_width="360dp"
             android:layout_height="115dp"
             android:background="@null"

@@ -1,8 +1,6 @@
 package com.example.fellowtraveller;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -10,11 +8,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.fellowtraveller.BetaAutocomplete.PlaceAutoSuggestAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
@@ -25,16 +24,28 @@ public class SearchOfferActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateListener2;
     private TimePickerDialog.OnTimeSetListener mTimeListener1;
     private TimePickerDialog.OnTimeSetListener mTimeListener2;
+    private TextInputEditText from;
+    private TextInputEditText to;
     private TextInputEditText date_from;
     private TextInputEditText date_to;
     private TextInputEditText time_from;
     private TextInputEditText time_to;
+    private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_offer);
         btn_back = findViewById(R.id.search_offer_button_back);
+
+
+        String KEY = getString(R.string.api_key);
+
+        autoCompleteTextViewFrom = findViewById(R.id.search_offer_autoComplete_editText_from);
+        autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(SearchOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
+        autoCompleteTextViewTo = findViewById(R.id.search_offer_autoComplete_editText_to);
+        autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(SearchOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
+
 
         date_from = findViewById(R.id.search_offer_editText_date_from);
         date_to = findViewById(R.id.search_offer_editText_date_to);
@@ -45,6 +56,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         date_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutFocus();
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
@@ -85,6 +97,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         date_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutFocus();
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
@@ -125,6 +138,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         time_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutFocus();
                 Calendar cal = Calendar.getInstance();
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
@@ -160,6 +174,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         time_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutFocus();
                 Calendar cal = Calendar.getInstance();
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
@@ -213,5 +228,10 @@ public class SearchOfferActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void OutFocus(){
+        from.clearFocus();
+        to.clearFocus();
     }
 }

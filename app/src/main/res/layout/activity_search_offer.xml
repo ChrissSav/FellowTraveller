@@ -46,7 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_offer_textView_header">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/search_offer_autoComplete_editText_from"
             android:layout_width="360dp"
             android:layout_height="42dp"
             android:background="@null"
@@ -234,7 +235,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_from">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/search_offer_autoComplete_editText_to"
             android:layout_width="360dp"
             android:layout_height="42dp"
             android:background="@null"

@@ -8,17 +8,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.fellowtraveller.BetaAutocomplete.PlaceAutoSuggestAdapter;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class NewOfferActivity extends AppCompatActivity {
     private Button btn_back;
@@ -26,11 +24,27 @@ public class NewOfferActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener mTimeListener;
     private TextInputEditText date_trip;
     private TextInputEditText time_trip;
+    private TextInputEditText description;
+    private TextInputEditText seats;
+    private TextInputEditText sutcases;
+    private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_offer);
+        String KEY = getString(R.string.api_key);
+
+
+        description = findViewById(R.id.new_offer_editText_description);
+        seats = findViewById(R.id.new_offer_editText_seats);
+        sutcases = findViewById(R.id.new_offer_editText_cases);
+        autoCompleteTextViewFrom = findViewById(R.id.new_offer_autoComplete_editText_from);
+        autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(NewOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
+        autoCompleteTextViewTo = findViewById(R.id.new_offer_autoComplete_editText_to);
+        autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(NewOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
+
 
         btn_back = findViewById(R.id.new_offer_button_back);
         date_trip = findViewById(R.id.new_offer_editText_date);
@@ -40,6 +54,7 @@ public class NewOfferActivity extends AppCompatActivity {
         date_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutFocus();
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
@@ -81,6 +96,7 @@ public class NewOfferActivity extends AppCompatActivity {
         time_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutFocus();
                 Calendar cal = Calendar.getInstance();
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
@@ -120,6 +136,14 @@ public class NewOfferActivity extends AppCompatActivity {
                 NewOfferActivity.this.onBackPressed();
             }
         });
+    }
+
+    public void OutFocus(){
+        autoCompleteTextViewFrom.clearFocus();
+        autoCompleteTextViewTo.clearFocus();
+        description.clearFocus();
+        seats.clearFocus();
+        sutcases.clearFocus();
     }
 
 }

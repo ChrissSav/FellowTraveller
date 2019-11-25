@@ -10,5 +10,10 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+    <string-array name="spinner_sort">
+        <item>Ημερομινία</item>
+        <item>Φθηνά>Ακριβά</item>
+        <item>Ακριβά>Φθηνά</item>
+    </string-array>
     <string name="api_key">AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg</string>
 </resources>

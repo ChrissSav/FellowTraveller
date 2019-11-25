@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    tools:context=".ViewSearchOffersActivity">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Αποτελέσματα"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ViewSearchOffersActivity_button_back"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/new_offer_button_back"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <Button
+        android:id="@+id/ViewSearchOffersActivity_button_filters"
+        android:layout_width="41dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/filter"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="4dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <AutoCompleteTextView
+            android:id="@+id/ViewSearchOffersActivity_autoComplete_editText_from"
+            android:layout_width="360dp"
+            android:layout_height="42dp"
+            android:background="@null"
+            android:hint="Από"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
+            android:textSize="16dp"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="85dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="4dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+
+        <AutoCompleteTextView
+            android:id="@+id/ViewSearchOffersActivity_autoComplete_editText_to"
+            android:layout_width="360dp"
+            android:layout_height="42dp"
+            android:background="@null"
+            android:hint="Πρός"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
+            android:textSize="16dp"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="85dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_search_add_offer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/textview_search_add_offer"
+            android:paddingTop="5dp"
+            android:textColorHint="#000"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ViewSearchOffersActivity_editText_date_from"
+                android:layout_width="126dp"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:backgroundTint="#FFC088"
+                android:focusable="false"
+                android:hint="Ημερ/νία (από)"
+                android:inputType="date"
+                android:textColor="#817F7F"
+                android:textColorHint="#FFC088"
+                android:textSize="16dp"
+                tools:layout_editor_absoluteX="46dp"
+                tools:layout_editor_absoluteY="446dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/textview_search_add_offer"
+            android:paddingTop="5dp"
+            android:textColorHint="#000"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ViewSearchOffersActivity_editText_date_to"
+                android:layout_width="126dp"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:backgroundTint="#FFC088"
+                android:focusable="false"
+                android:hint="Ημερ/νία (έως)"
+                android:inputType="date"
+                android:textColor="#817F7F"
+                android:textColorHint="#FFC088"
+                android:textSize="16dp"
+                tools:layout_editor_absoluteX="170dp"
+                tools:layout_editor_absoluteY="4dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="1dp"
+            android:layout_height="48dp"
+            android:background="#FFAA5E"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.478" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Spinner
+        android:id="@+id/ViewSearchOffersActivity_spinner_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/spinner_sort"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ViewSearchOffersActivity_RecyclerView_items"
+        android:layout_width="fill_parent"
+        android:layout_height="391dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

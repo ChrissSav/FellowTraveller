@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".TripPageActivity">
 
 
@@ -93,11 +94,14 @@
         android:id="@+id/tripPage_textView_state"
         android:layout_width="138dp"
         android:layout_height="58dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/main_btn_login"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/trip_page_btn_state"
         android:gravity="center"
         android:text="Σε εξέλιξη"
         android:textAlignment="center"
+        android:textColor="#FFAA5E"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tripPage_textView_to"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tripPage_textView_from" />
@@ -116,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Ημερ/νία"
+        android:text="Ημερομηνία"
         android:textColor="#000"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView26"
@@ -146,6 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Θέσεις"
+        android:textSize="16dp"
         android:textColor="#000"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView28"
@@ -157,6 +162,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="3/5"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView28"
         app:layout_constraintStart_toEndOf="@+id/textView28"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
@@ -233,21 +239,64 @@
 
     <TextView
         android:id="@+id/tripPage_textView_fromAdmin"
-        android:layout_width="353dp"
-        android:layout_height="98dp"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
         android:layout_marginTop="16dp"
         android:text="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου."
+        android:textColor="#5C5B5B"
         app:layout_constraintStart_toStartOf="@+id/tripPage_textView_adminImage"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <Button
         android:id="@+id/tripPage_button_sendMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="317dp"
+        android:layout_height="65dp"
         android:layout_marginTop="24dp"
         android:text="Στείλε μήνυμα"
         android:textAllCaps="false"
+        android:textColor="#8297FF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:background="@drawable/trip_page_btn_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tripPage_textView_fromAdmin" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="427dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/trip_page_constraint_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tripPage_button_sendMessage">
+
+        <TextView
+            android:id="@+id/tripPage_textView_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:text="100 €"
+            android:textColor="#000"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/tripPage_button_sign"
+            android:layout_width="139dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="33dp"
+            android:background="@drawable/main_btn_login"
+            android:text="Επιλογή"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

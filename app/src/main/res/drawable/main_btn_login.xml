@@ -21,10 +21,10 @@
 
             <gradient
                 android:angle="225"
-                android:startColor="#FFC088"
-                android:endColor="#FFC088"/>
+                android:startColor="#FFAA5E"
+                android:endColor="#FFAA5E"/>
 
-            <solid android:color="#FFC088"/>
+            <solid android:color="#FFAA5E"/>
             <corners
                 android:bottomLeftRadius="24dp"
                 android:bottomRightRadius="24dp"

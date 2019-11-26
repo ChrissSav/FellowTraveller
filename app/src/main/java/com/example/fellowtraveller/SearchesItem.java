@@ -1,12 +1,12 @@
 package com.example.fellowtraveller;
 
-public class SearchItem {
+public class SearchesItem {
     private String from;
     private String to;
     private String name;
     private String num;
 
-    public SearchItem(String from, String to, String name, String num) {
+    public SearchesItem(String from, String to, String name, String num) {
         this.from = from;
         this.to = to;
         this.name = name;

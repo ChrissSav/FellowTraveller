@@ -1,7 +1,5 @@
 package com.example.fellowtraveller;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +18,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private  ArrayList<SearchItem> mExampleList ;
+    private  ArrayList<SearchesItem> mExampleList ;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -41,17 +39,17 @@ public class SearchFragment extends Fragment {
 
     public void createExampleList() {
         mExampleList = new ArrayList<>();
-        mExampleList.add(new SearchItem("Αθηνα", "Θεσσαλονικη", "Σπυρος Ραντ","+1"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+2"));
-        mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+3"));
-        mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+4"));
-        mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+5"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+6"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+7"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+8"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+9"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+10"));
-        mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+11"));
+        mExampleList.add(new SearchesItem("Αθηνα", "Θεσσαλονικη", "Σπυρος Ραντ","+1"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+2"));
+        mExampleList.add(new SearchesItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+3"));
+        mExampleList.add(new SearchesItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+4"));
+        mExampleList.add(new SearchesItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+5"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+6"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+7"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+8"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+9"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+10"));
+        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+11"));
 
 
     }

@@ -67,7 +67,7 @@
 
     <EditText
         android:id="@+id/tripPage_textView_from"
-        android:layout_width="174dp"
+        android:layout_width="300dp"
         android:layout_height="20dp"
         android:layout_marginStart="28dp"
         android:background="@android:color/transparent"
@@ -76,7 +76,7 @@
         android:focusable="false"
         android:singleLine="true"
         android:textColor="#000"
-        android:textSize="16dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView24"
         app:layout_constraintStart_toEndOf="@+id/textView24"
@@ -85,7 +85,7 @@
 
     <EditText
         android:id="@+id/tripPage_textView_to"
-        android:layout_width="174dp"
+        android:layout_width="300dp"
         android:layout_height="20dp"
         android:background="@android:color/transparent"
         android:clickable="false"
@@ -93,25 +93,25 @@
         android:focusable="false"
         android:singleLine="true"
         android:textColor="#000"
-        android:textSize="16dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tripPage_textView_from"
         app:layout_constraintTop_toTopOf="@+id/textView25" />
 
     <TextView
         android:id="@+id/tripPage_textView_status"
-        android:layout_width="130dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/trip_page_btn_state"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="#FFAA5E"
         android:textSize="14dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tripPage_textView_to"
+        app:layout_constraintBottom_toBottomOf="@+id/tripPage_textView_adminImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tripPage_textView_from" />
+        app:layout_constraintTop_toTopOf="@+id/tripPage_textView_adminImage" />
 
     <TextView
         android:id="@+id/textView26"
@@ -156,8 +156,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Θέσεις"
-        android:textSize="16dp"
         android:textColor="#000"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView28"
         app:layout_constraintTop_toTopOf="@+id/textView28" />
@@ -254,12 +254,12 @@
         android:layout_width="317dp"
         android:layout_height="65dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/trip_page_btn_message"
         android:text="Στείλε μήνυμα"
         android:textAllCaps="false"
         android:textColor="#8297FF"
-        android:textStyle="bold"
         android:textSize="20dp"
-        android:background="@drawable/trip_page_btn_message"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tripPage_textView_description" />
@@ -267,11 +267,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="427dp"
         android:layout_height="104dp"
-        android:layout_marginTop="44dp"
         android:background="@drawable/trip_page_constraint_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tripPage_button_sendMessage">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tripPage_textView_price"

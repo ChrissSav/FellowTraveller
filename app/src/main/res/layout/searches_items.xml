@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#fff">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp">
@@ -13,61 +16,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="297dp"
             android:padding="2dp"
-            android:text="20/10/2019" />
+            android:text="20/10/2019"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="350dp"
-            android:layout_height="100dp"
+            android:layout_height="84dp"
             android:layout_below="@+id/search_items_container_textView_date"
             android:layout_alignStart="@+id/search_items_container_textView_date"
-            android:layout_marginStart="-17dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/search_items_backround">
+            android:layout_marginTop="16dp"
+            android:background="@drawable/search_items_backround"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/search_items_container_textView_date"
+            app:layout_constraintTop_toBottomOf="@+id/search_items_container_textView_date">
 
             <TextView
                 android:id="@+id/search_items_container_textView_from"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:padding="2dp"
                 android:text="Αθήνα"
                 android:textColor="#fff"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/imageVεfew"
-                android:layout_width="28dp"
-                android:layout_height="8dp"
-                android:layout_alignTop="@+id/search_items_container_textView_from"
-                android:layout_alignBottom="@+id/search_items_container_textView_from"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginBottom="6dp"
-                android:layout_toEndOf="@+id/search_items_container_textView_from"
-                android:background="@drawable/dart_white"
-                android:padding="2dp"
-                android:textColor="#fff" />
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/search_items_container_textView_to"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="13dp"
-                android:layout_toEndOf="@+id/imageVεfew"
+                android:layout_marginEnd="192dp"
                 android:padding="2dp"
                 android:text="Θεσσαλονίκη"
                 android:textColor="#fff"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/search_items_container_textView_from"
+                app:layout_constraintTop_toBottomOf="@+id/search_items_container_textView_from" />
 
             <Button
                 android:id="@+id/search_items_container_btn_approved"
@@ -76,14 +75,15 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="29dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="29dp"
+                android:layout_marginEnd="24dp"
                 android:background="@android:color/transparent"
                 android:text="Approved"
                 android:textAllCaps="false"
                 android:textColor="#fff"
-                android:textSize="13dp">
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </Button>
 
@@ -93,21 +93,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search_items_container_textView_from"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginStart="2dp"
                 android:text="Σπυρος Ρεντογλου"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:textSize="14dp"
+                app:layout_constraintStart_toStartOf="@+id/search_items_container_textView_from"
+                app:layout_constraintTop_toBottomOf="@+id/search_items_container_textView_to" />
 
             <TextView
                 android:id="@+id/search_items_container_textView_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search_items_container_textView_from"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginStart="16dp"
                 android:layout_toEndOf="@+id/search_items_container_textView_name"
                 android:text="+2"
-                android:textColor="#fff" />
-        </RelativeLayout>
-    </RelativeLayout>
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="@+id/search_items_container_textView_name"
+                app:layout_constraintStart_toEndOf="@+id/search_items_container_textView_name"
+                app:layout_constraintTop_toTopOf="@+id/search_items_container_textView_name" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

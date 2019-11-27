@@ -14,11 +14,12 @@ public class MainActivity extends AppCompatActivity {
     private Button btn1;
     private TextView text;
     private TextView text1;
+    private TextView eisodos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        eisodos = findViewById(R.id.main_textView9);
         btn = findViewById(R.id.main_button1);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -50,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
                 String description ="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. ";
                 Trip trip = new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",3,2,description,"100");
                 intent.putExtra("Trip",trip);
+                startActivity(intent);
+            }
+        });
+
+
+        eisodos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, ViewSearchOffersActivity.class);
                 startActivity(intent);
             }
         });

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/SearchFiltersActivity_button_exit"
+        android:id="@+id/SearchFiltersActivity_button_back"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="24dp"
@@ -370,9 +370,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/SearchFiltersActivity_button_apply"
         android:layout_width="326dp"
-        android:layout_height="67dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="27dp"
         android:background="@drawable/search_offer_btn"
         android:text="Εφαρμογή"

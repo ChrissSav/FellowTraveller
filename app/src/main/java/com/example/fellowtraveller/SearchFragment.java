@@ -45,9 +45,9 @@ public class SearchFragment extends Fragment {
         User creator3 = new User("Φώτης Πεχλιβάνης", "email","password");
         String description ="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. ";
         Trip trip = new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",3,2,description,"100");
-        mExampleList.add(new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",3,2,description,"100"));
-        mExampleList.add(new Trip(creator2,"Αισώπου 30, Λάρισα","Εγνατιας 30 Θεσσαλόνίκη","03/12/2019","12:00",3,2,description,"100"));
-        mExampleList.add(new Trip(creator2,"Αισώπου 30, Λάρισα","Εγνατιας 30 Θεσσαλόνίκη","13/12/2019","12:00",3,2,description,"100"));
+        mExampleList.add(new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",1,1,description,"50"));
+        mExampleList.add(new Trip(creator2,"Καποδήστρια 20, Λάρισα","Εγνατιας 30 Θεσσαλόνίκη","03/12/2019","07:00",3,3,description,"20"));
+        mExampleList.add(new Trip(creator2,"Αισώπου 30, Λάρισα","Εγνατιας 30 Θεσσαλόνίκη","13/12/2019","02:00",3,2,description,"101"));
         mExampleList.add(new Trip(creator3,"Ενγατία 120, Θεσσαλόνίκη","Εγνατιας 30 Θεσσαλόνίκη","23/09/2019","02:00",3,2,description,"100"));
         mExampleList.add(new Trip(creator3,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Θεσσαλόνίκη","23/11/2019","11:00",3,2,description,"100"));
        /* mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+2"));

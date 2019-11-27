@@ -47,12 +47,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 User creator = new User("Σπυρίδων Ράντογλου", "email","password");
                 Intent intent = new Intent(MainActivity.this, TripPageActivity.class);
-                String from = "Αισώπου 30, Θεσσαλόνίκη";
-                String to = "Εγνατιας 30, Αθήνα";
-                String date = "23/12/2019";
-                String time = "12:30";
                 String description ="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. ";
-                Trip trip = new Trip(creator,from,to,date,time,3,2,description,"100");
+                Trip trip = new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",3,2,description,"100");
                 intent.putExtra("Trip",trip);
                 startActivity(intent);
             }

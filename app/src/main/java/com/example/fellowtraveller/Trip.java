@@ -7,6 +7,7 @@ package com.example.fellowtraveller;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trip  implements Parcelable{
@@ -14,7 +15,7 @@ public class Trip  implements Parcelable{
     private String status;
     private String from;
     private String to;
-    private List<User> passengers;
+    private ArrayList<User> passengers = new ArrayList<>();
     private String date;
     private String time;
     private int current_suitcases;
@@ -143,6 +144,11 @@ public class Trip  implements Parcelable{
 
     public List<User> getPassengers() {
         return passengers;
+    }
+
+    public int getNumOfPassengers() {
+
+            return passengers.size();
     }
 
     public int getMax_seats() {

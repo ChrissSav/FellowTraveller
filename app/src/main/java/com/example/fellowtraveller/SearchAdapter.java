@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleViewHolder> {
-    private ArrayList<SearchesItem> mExampleList;
+    private ArrayList<Trip> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -48,12 +48,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
                             listener.onItemClick(position);
                         }
                     }
+
+
                 }
             });
         }
     }
 
-    public SearchAdapter(ArrayList<SearchesItem> exampleList) {
+    public SearchAdapter(ArrayList<Trip> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -66,12 +68,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        SearchesItem currentItem = mExampleList.get(position);
+        Trip currentItem = mExampleList.get(position);
 
         holder.from.setText(currentItem.getFrom());
         holder.to.setText(currentItem.getTo());
-        holder.name.setText(currentItem.getName());
-        holder.number.setText(currentItem.getNum());
+        holder.name.setText(currentItem.getCreator().getName());
+        holder.number.setText(currentItem.getNumOfPassengers()+"");
     }
 
     @Override

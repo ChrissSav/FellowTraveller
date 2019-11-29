@@ -41,7 +41,6 @@ public class SearchFragment extends Fragment {
 
     public void createExampleList() {
         mExampleList = new ArrayList<>();
-        mExampleList.add(new SearchItem("Αθηνα", "Θεσσαλονικη", "Σπυρος Ραντ","+1"));
         mExampleList.add(new SearchItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+2"));
         mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+3"));
         mExampleList.add(new SearchItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+4"));

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class ProsforesFragment extends Fragment {
     private RecyclerView myRecyclerView;
-    private OfferItemAdapter myAdapter;
+    private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
     private ArrayList <OfferItem> myExampleList;
 
@@ -36,6 +36,7 @@ public class ProsforesFragment extends Fragment {
 
        createExampleList();
        buildRecyclerView(view);
+
        return view;
 
     }
@@ -56,15 +57,13 @@ public class ProsforesFragment extends Fragment {
     }
 
     public void buildRecyclerView(View v){
-        myRecyclerView = v.findViewById(R.id.recyclerView);
+        myRecyclerView = v.findViewById(R.id.recyclerViewOffer);
         myRecyclerView.setHasFixedSize(true);
         myLayoutManager = new LinearLayoutManager(getActivity());
         myAdapter = new OfferItemAdapter(myExampleList);
 
         myRecyclerView.setLayoutManager(myLayoutManager);
         myRecyclerView.setAdapter(myAdapter);
-
-
 
 
     }

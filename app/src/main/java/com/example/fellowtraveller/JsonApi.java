@@ -24,5 +24,16 @@ public interface JsonApi {
             @Path("password") String password
     );
 
+    @GET("gettrip/{id}")
+    Call<exampleTrip> getTripById(
+            @Path("id") String id
+    );
+
+    @GET("gettrip/{id}")
+    Call<List<exampleTrip>> getTrip(
+            @Path("id") String id
+    );
+    @GET("gettrips")
+    Call<List<exampleTrip>> getTrips();
 
 }

@@ -7,78 +7,95 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private  ArrayList<Trip> mExampleList ;
+    private ArrayList<exampleTrip> Listoftrips ;
+    private JsonApi jsonPlaceHolderApi;
+    private Retrofit retrofit ;
+    private TextView textError;
 
     public SearchFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
-
-        createExampleList();
+        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        textError = view.findViewById(R.id.SearchFragment_textView3);
+        Listoftrips = new ArrayList<>();
+        createUser();
         buildRecyclerView(view);
         return view;
     }
 
-    public void createExampleList() {
-        mExampleList = new ArrayList<>();
-        User creator = new User("Σπυρίδων Ράντογλου", "email","password");
-        User creator2 = new User("Ρέτζινο Πρίφτη", "email","password");
-        User creator3 = new User("Φώτης Πεχλιβάνης", "email","password");
-        String description ="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. ";
-        Trip trip = new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",3,2,description,"100");
-        mExampleList.add(new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",1,1,description,"50"));
-        mExampleList.add(new Trip(creator2,"Καποδήστρια 20, Λάρισα","Εγνατιας 30 Θεσσαλόνίκη","03/12/2019","07:00",3,3,description,"20"));
-        mExampleList.add(new Trip(creator2,"Αισώπου 30, Λάρισα","Εγνατιας 30 Θεσσαλόνίκη","13/12/2019","02:00",3,2,description,"101"));
-        mExampleList.add(new Trip(creator3,"Ενγατία 120, Θεσσαλόνίκη","Εγνατιας 30 Θεσσαλόνίκη","23/09/2019","02:00",3,2,description,"100"));
-        mExampleList.add(new Trip(creator3,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Θεσσαλόνίκη","23/11/2019","11:00",3,2,description,"100"));
-       /* mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+2"));
-        mExampleList.add(new SearchesItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+3"));
-        mExampleList.add(new SearchesItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+4"));
-        mExampleList.add(new SearchesItem("Ξανθη", "Θεσσαλονικη", "Φωτης Πεχλ","+5"));
-        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+6"));
-        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+7"));
-        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+8"));
-        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+9"));
-        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+10"));
-        mExampleList.add(new SearchesItem("Λαρισα", "Θεσσαλονικη", "Ρετζινο Ποφτ","+11"));*/
 
-
-    }
     public void buildRecyclerView(View v) {
         mRecyclerView = v.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new SearchAdapter(mExampleList);
-
+        mAdapter = new SearchAdapter(Listoftrips);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
         mAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), TripPageActivity.class);
-                intent.putExtra("Trip",mExampleList.get(position));
+                intent.putExtra("Trip",Listoftrips.get(position));
                 startActivity(intent);
             }
         });
     }
+
+
+
+    private void createUser() {
+
+        Call<List<exampleTrip>> call = jsonPlaceHolderApi.getTrips();
+        call.enqueue(new Callback<List<exampleTrip>>() {
+            @Override
+            public void onResponse(Call<List<exampleTrip>> mcall, Response<List<exampleTrip>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                textError.setText("");
+
+                List<exampleTrip> trips = response.body();
+                for (int i=0; i<trips.size(); i++){
+                    Log.i("RestAPI","i: "+i);
+
+                    Listoftrips.add(trips.get(i));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<exampleTrip>> call, Throwable t) {
+                textError.setText("t: "+t.getMessage());
+                Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

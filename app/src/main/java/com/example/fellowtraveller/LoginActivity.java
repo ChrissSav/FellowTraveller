@@ -36,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
+
+
+
         setContentView(R.layout.activity_login);
         textInputEmail = findViewById(R.id.login_editText_email);
         textInputPassword = findViewById(R.id.login_editText_password);

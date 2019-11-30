@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class TripPageActivity extends AppCompatActivity {
 
-    private Trip trip;
+    private exampleTrip trip;
     private TextView textView_status;
     private TextView textView_creator_name;
     private EditText textView_from;
@@ -63,22 +63,22 @@ public class TripPageActivity extends AppCompatActivity {
 
 
     public void FillFields(){
-        String status = trip.getStatus();
-        if(status.equals("good")){
+        String status = trip.getState();
+        if(status.equals("available")){
             textView_status.setText("Σε εξέλιξη");
         }
         else {
             textView_status.setText("Ολοκληρώθηκε");
             select.setEnabled(false);
         }
-        textView_creator_name.setText(trip.getCreator().getName());
-        textView_from.setText(trip.getFrom());
-        textView_to.setText(trip.getTo());
+        textView_creator_name.setText(trip.getCreator().get(0).getName());
+        textView_from.setText(trip.getFfrom());
+        textView_to.setText(trip.getTto());
         textView_date.setText(trip.getDate());
         textView_time.setText(trip.getTime());
         textView_seats.setText(trip.getSeatesStatus());
         textView_suitcases.setText(trip.getSuitcasesStatus());
         textView_description.setText(trip.getDescription());
-        textView_price.setText(trip.getPrice()+"€");
+        textView_price.setText("100 €");
     }
 }

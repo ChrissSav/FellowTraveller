@@ -24,6 +24,19 @@ public interface JsonApi {
             @Path("password") String password
     );
 
+    @GET("trips/{from}/{to}/{date}/{time}/{creator_id}/{description}/{max_seats}/{max_bags}")
+    Call<List<Status_handling>> createTrip(
+            @Path("from") String from,
+            @Path("to") String to,
+            @Path("date") String date,
+            @Path("time") String time,
+            @Path("creator_id") int creator_id,
+            @Path("description") String description,
+            @Path("max_seats") int max_seats,
+            @Path("max_bags") int max_bags
+
+    );
+
     @GET("gettrip/{id}")
     Call<Trip> getTripById(
             @Path("id") String id

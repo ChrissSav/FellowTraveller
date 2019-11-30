@@ -44,16 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         text1 = findViewById(R.id.main_textView11);
-        text1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                User creator = new User("Σπυρίδων Ράντογλου", "email","password");
-                Intent intent = new Intent(MainActivity.this, TripPageActivity.class);
-                String description ="Είστε όλοι άπλυτη. Δε θα μπει κανένας στο αμάξι μου. ";
-                Trip trip = new Trip(creator,"Αισώπου 30, Θεσσαλόνίκη","Εγνατιας 30 Αθήνα","23/12/2019","12:00",3,2,description,"100");
-                intent.putExtra("Trip",trip);
-                startActivity(intent);
-            }
-        });
+
 
 
         eisodos.setOnClickListener(new View.OnClickListener() {

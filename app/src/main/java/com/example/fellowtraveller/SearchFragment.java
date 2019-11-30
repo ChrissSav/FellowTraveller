@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +28,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<exampleTrip> Listoftrips ;
+    private ArrayList<Trip> Listoftrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private TextView textError;
@@ -72,17 +71,17 @@ public class SearchFragment extends Fragment {
 
     private void createUser() {
 
-        Call<List<exampleTrip>> call = jsonPlaceHolderApi.getTrips();
-        call.enqueue(new Callback<List<exampleTrip>>() {
+        Call<List<Trip>> call = jsonPlaceHolderApi.getTrips();
+        call.enqueue(new Callback<List<Trip>>() {
             @Override
-            public void onResponse(Call<List<exampleTrip>> mcall, Response<List<exampleTrip>> response) {
+            public void onResponse(Call<List<Trip>> mcall, Response<List<Trip>> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 textError.setText("");
 
-                List<exampleTrip> trips = response.body();
+                List<Trip> trips = response.body();
                 for (int i=0; i<trips.size(); i++){
                     Log.i("RestAPI","i: "+i);
 
@@ -91,7 +90,7 @@ public class SearchFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<exampleTrip>> call, Throwable t) {
+            public void onFailure(Call<List<Trip>> call, Throwable t) {
                 textError.setText("t: "+t.getMessage());
                 Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }

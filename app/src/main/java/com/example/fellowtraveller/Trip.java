@@ -1,68 +1,78 @@
 package com.example.fellowtraveller;
 
-
-
-
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Trip  implements Parcelable{
-    private User creator;
-    private String status;
-    private String from;
-    private String to;
-    private ArrayList<User> passengers = new ArrayList<>();
+public class Trip implements Parcelable {
+
+    private String ffrom;
+    private String tto;
     private String date;
     private String time;
-    private int current_suitcases;
-    private int current_seats;
-    private int max_seats;
-    private int max_suitcases;
+    private List<User> creator;
+    private List<User> passengers;
     private String description;
-    private String price;
-
-
-
-    public Trip(User creator, String from, String to,
-               String date, String time, int max_seats, int max_suitcases
-                ,String description,String price) {
-        //**************
-        this.creator = creator;
-        this.from = from;
-        this.to = to;
-        this.date = date;
-        this.time = time;
-        this.max_seats = max_seats;
-        this.max_suitcases = max_suitcases;
-        this.description = description;
-        this.price = price;
-        //**************
-        this.status = "good";
-        this.current_suitcases = 0;
-        this.current_seats = 0;
-
-
-    }
+    private int max_seats;
+    private int current_num_of_seats;
+    private int max_bags;
+    private int current_num_of_bags;
+    private int max_suitcases;
+    private int current_num_of_suitcases;
+    private Double rate;
+    private String state;
 
 
     protected Trip(Parcel in) {
-        creator = in.readParcelable(User.class.getClassLoader());
-        status = in.readString();
-        from = in.readString();
-        to = in.readString();
-        passengers = in.createTypedArrayList(User.CREATOR);
+        ffrom = in.readString();
+        tto = in.readString();
         date = in.readString();
         time = in.readString();
-        current_suitcases = in.readInt();
-        current_seats = in.readInt();
-        max_seats = in.readInt();
-        max_suitcases = in.readInt();
+        creator = in.createTypedArrayList(User.CREATOR);
+        passengers = in.createTypedArrayList(User.CREATOR);
         description = in.readString();
-        price = in.readString();
+        max_seats = in.readInt();
+        current_num_of_seats = in.readInt();
+        max_bags = in.readInt();
+        current_num_of_bags = in.readInt();
+        max_suitcases = in.readInt();
+        current_num_of_suitcases = in.readInt();
+        if (in.readByte() == 0) {
+            rate = null;
+        } else {
+            rate = in.readDouble();
+        }
+        state = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(ffrom);
+        dest.writeString(tto);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeTypedList(creator);
+        dest.writeTypedList(passengers);
+        dest.writeString(description);
+        dest.writeInt(max_seats);
+        dest.writeInt(current_num_of_seats);
+        dest.writeInt(max_bags);
+        dest.writeInt(current_num_of_bags);
+        dest.writeInt(max_suitcases);
+        dest.writeInt(current_num_of_suitcases);
+        if (rate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(rate);
+        }
+        dest.writeString(state);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -77,41 +87,21 @@ public class Trip  implements Parcelable{
         }
     };
 
-    public String getStatus() {
-        return status;
+    public String getFfrom() {
+        return ffrom;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setFfrom(String ffrom) {
+        this.ffrom = ffrom;
     }
 
-//*************************
-    public User getCreator() {
-        return creator;
+    public String getTto() {
+        return tto;
     }
 
-//*************************
-
-
-
-    public String getFrom() {
-        return from;
+    public void setTto(String tto) {
+        this.tto = tto;
     }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-
-
 
     public String getDate() {
         return date;
@@ -129,6 +119,21 @@ public class Trip  implements Parcelable{
         this.time = time;
     }
 
+    public List<User> getCreator() {
+        return creator;
+    }
+
+    public void setCreator(List<User> creator) {
+        this.creator = creator;
+    }
+
+    public List<User> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<User> passengers) {
+        this.passengers = passengers;
+    }
 
     public String getDescription() {
         return description;
@@ -136,19 +141,6 @@ public class Trip  implements Parcelable{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public List<User> getPassengers() {
-        return passengers;
-    }
-
-    public int getNumOfPassengers() {
-
-            return passengers.size();
     }
 
     public int getMax_seats() {
@@ -159,6 +151,30 @@ public class Trip  implements Parcelable{
         this.max_seats = max_seats;
     }
 
+    public int getCurrent_num_of_seats() {
+        return current_num_of_seats;
+    }
+
+    public void setCurrent_num_of_seats(int current_num_of_seats) {
+        this.current_num_of_seats = current_num_of_seats;
+    }
+
+    public int getMax_bags() {
+        return max_bags;
+    }
+
+    public void setMax_bags(int max_bags) {
+        this.max_bags = max_bags;
+    }
+
+    public int getCurrent_num_of_bags() {
+        return current_num_of_bags;
+    }
+
+    public void setCurrent_num_of_bags(int current_num_of_bags) {
+        this.current_num_of_bags = current_num_of_bags;
+    }
+
     public int getMax_suitcases() {
         return max_suitcases;
     }
@@ -167,56 +183,38 @@ public class Trip  implements Parcelable{
         this.max_suitcases = max_suitcases;
     }
 
+    public int getCurrent_num_of_suitcases() {
+        return current_num_of_suitcases;
+    }
 
+    public void setCurrent_num_of_suitcases(int current_num_of_suitcases) {
+        this.current_num_of_suitcases = current_num_of_suitcases;
+    }
 
-    public void addPassenger(User user){
-        passengers.add(user);
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getSeatesStatus(){
-        String s = current_seats+"/"+max_seats;
+        String s = current_num_of_bags+"/"+max_seats;
         return s;
     }
 
     public String getSuitcasesStatus(){
-        String s = current_suitcases+"/"+max_suitcases;
+        String s = current_num_of_suitcases+"/"+max_suitcases;
         return s;
     }
 
-    public void IncreaseSeats(){
-        current_seats += 1;
-    }
-    public void IncreaseSuitcases(){
-        current_suitcases += 1;
-    }
-
-    public void DecreaseSeats(){
-        current_seats -= 1;
-    }
-    public void DecreaseSuitcases(){
-        current_suitcases -= 1;
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(creator, flags);
-        dest.writeString(status);
-        dest.writeString(from);
-        dest.writeString(to);
-        dest.writeTypedList(passengers);
-        dest.writeString(date);
-        dest.writeString(time);
-        dest.writeInt(current_suitcases);
-        dest.writeInt(current_seats);
-        dest.writeInt(max_seats);
-        dest.writeInt(max_suitcases);
-        dest.writeString(description);
-        dest.writeString(price);
-    }
 }

@@ -1,6 +1,5 @@
 package com.example.fellowtraveller;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleViewHolder> {
-    private ArrayList<exampleTrip> mExampleList;
+    private ArrayList<Trip> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -56,7 +55,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         }
     }
 
-    public SearchAdapter(ArrayList<exampleTrip> exampleList) {
+    public SearchAdapter(ArrayList<Trip> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -69,7 +68,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        exampleTrip currentItem = mExampleList.get(position);
+        Trip currentItem = mExampleList.get(position);
         holder.from.setText(currentItem.getFfrom());
         holder.to.setText(currentItem.getTto());
         holder.name.setText(currentItem.getCreator().get(0).getName());

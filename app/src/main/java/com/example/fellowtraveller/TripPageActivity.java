@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 
 public class TripPageActivity extends AppCompatActivity {
 
-    private exampleTrip trip;
+    private Trip trip;
     private TextView textView_status;
     private TextView textView_creator_name;
     private EditText textView_from;

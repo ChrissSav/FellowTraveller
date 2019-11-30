@@ -25,15 +25,15 @@ public interface JsonApi {
     );
 
     @GET("gettrip/{id}")
-    Call<exampleTrip> getTripById(
+    Call<Trip> getTripById(
             @Path("id") String id
     );
 
     @GET("gettrip/{id}")
-    Call<List<exampleTrip>> getTrip(
+    Call<List<Trip>> getTrip(
             @Path("id") String id
     );
     @GET("gettrips")
-    Call<List<exampleTrip>> getTrips();
+    Call<List<Trip>> getTrips();
 
 }

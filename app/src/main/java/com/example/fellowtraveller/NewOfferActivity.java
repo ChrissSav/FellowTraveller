@@ -181,18 +181,18 @@ public class NewOfferActivity extends AppCompatActivity {
         String des = description.getText().toString();
         int max_seats = Integer.parseInt(seats.getText().toString());
         int  max_bags = Integer.parseInt(bags.getText().toString());
-        
-        Call<List<Status_handling>> call = jsonPlaceHolderApi.createTrip(from,to,date,time,1,des,max_seats,max_bags);
+
+        Call<Status_handling> call = jsonPlaceHolderApi.createTrip(from,to,date,time,1,des,max_seats,max_bags);
         call.toString();
-        call.enqueue(new Callback<List<Status_handling>>() {
+        call.enqueue(new Callback<Status_handling>() {
             @Override
-            public void onResponse(Call<List<Status_handling>> mcall, Response<List<Status_handling>> response) {
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(NewOfferActivity.this,"responseb "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<Status_handling> status = response.body();
-                if(status.get(0).getStatus().equals("success")){
+                Status_handling status = response.body();
+                if(status.getStatus().equals("success")){
                     Toast.makeText(NewOfferActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
                     try {
                         Thread.sleep(1000);
@@ -207,7 +207,7 @@ public class NewOfferActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Status_handling>> call, Throwable t) {
+            public void onFailure(Call<Status_handling> call, Throwable t) {
                 Toast.makeText(NewOfferActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });

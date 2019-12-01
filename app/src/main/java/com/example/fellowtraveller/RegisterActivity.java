@@ -2,14 +2,20 @@ package com.example.fellowtraveller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,10 +25,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
-    private Button btn,register_user;
-    private TextInputLayout textInputName;
-    private TextInputLayout textInputEmail;
-    private TextInputLayout textInputPassword;
+    private Button button_login,button_register,button_back;
+    private TextInputEditText textInputName;
+    private TextInputEditText textInputEmail;
+    private TextInputEditText textInputPassword;
+    private DatePickerDialog.OnDateSetListener mDateListener;
+    private TextInputEditText textInputBirthday;
+    private TextInputEditText textInputPhone;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/")
@@ -36,16 +45,59 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        textInputName = findViewById(R.id.register_editText_name);
-        textInputEmail = findViewById(R.id.register_editText_email);
-        textInputPassword = findViewById(R.id.register_editText_password);
-        register_user = findViewById(R.id.register_button_register);
-        btn = findViewById(R.id.register_button_login);
+
+        textInputName = findViewById(R.id.RegisterActivity_editText_name);
+        textInputEmail = findViewById(R.id.RegisterActivity_editText_email);
+        textInputBirthday = findViewById(R.id.RegisterActivity_editText_date);
+        textInputPhone = findViewById(R.id.RegisterActivity_editText_phone);
+        textInputPassword = findViewById(R.id.RegisterActivity_editText_password);
+
+        button_back = findViewById(R.id.RegisterActivity_button_back);
+        button_register = findViewById(R.id.RegisterActivity_button_register);
+        button_login = findViewById(R.id.RegisterActivity_button_login);
 
 
 
+        textInputBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OutFocus();
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        RegisterActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                dialog.show();
+            }
+        });
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        mDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String mon,d;
+                if (month<=9){
+                    mon = "0"+month;
+                }
+                else{
+                    mon = month+"";
+                }
+                if(day<=9){
+                    d = "0"+day;
+                }
+                else{
+                    d = day+"";
+                }
+                String date = d + "/" + mon + "/" + year;
+                textInputBirthday.setText(date+"");
+            }
+        };
+
+        button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent mainIntent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(mainIntent);
@@ -54,82 +106,61 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-
-
-
-        register_user.setOnClickListener(new View.OnClickListener() {
+        button_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!CheckEmail() | !CheckName() | !CheckPassword()) {
-
-                }
-                String input = "Email: " + textInputEmail.getEditText().getText().toString();
-                input += "\n";
-                input += "Username: " + textInputName.getEditText().getText().toString();
-                input += "\n";
-                input += "Password: " + textInputPassword.getEditText().getText().toString();
-
-              //  Toast.makeText(RegisterActivity.this, input, Toast.LENGTH_SHORT).show();
-                createUser();
+                onBackPressed();
+                finish();
             }
         });
 
 
+        button_register.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (CheckEmail() | CheckName() | CheckPassword()) {
+                    createUser();
+                }
+            }
+        });
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void OutFocus(){
+        textInputName.clearFocus();
+        textInputEmail.clearFocus();
+        textInputPhone.clearFocus();
+        textInputPassword.clearFocus();
     }
 
     private void createUser(){
-        String name = textInputName.getEditText().getText().toString();
-        String email = textInputEmail.getEditText().getText().toString();
-        String password = textInputPassword.getEditText().getText().toString();
+        String name = textInputName.getText().toString();
+        String birth = textInputBirthday.getText().toString();
+        String email = textInputEmail.getText().toString();
+        String password = textInputPassword.getText().toString();
+        String phone = textInputPhone.getText().toString();
 
 
-        Call<List<User>> call = jsonPlaceHolderApi.createUser(name,email,password);
+        Call<Status_handling> call = jsonPlaceHolderApi.createUser(name,birth,email,password,phone);
 
-        call.enqueue(new Callback<List<User>> () {
+        call.enqueue(new Callback<Status_handling> () {
             @Override
-            public void onResponse(Call<List<User>>  call, Response<List<User>>  response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(RegisterActivity.this,"Error", Toast.LENGTH_LONG);
-                    Intent intent = new Intent(RegisterActivity.this,MainHomeActivity.class);
-                    intent.putExtra("user",response.body().get(0));
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Status_handling status = response.body();
+                if(status.getStatus().equals("success")){
+                    Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, MainHomeActivity.class);
                     startActivity(intent);
-                    finish();
+                    return;
                 }
-              /*  User postResponse = response.body();
-                String content = "";
-                content += "Code: " + response.code() + "\n";
-                content += "ID: " + postResponse.getId() + "\n";
-                content += "User ID: " + postResponse.getName() + "\n";
-                content += "Title: " + postResponse.getEmail() + "\n";
-                content += "Text: " + postResponse.getPassword() + "\n\n";
-                Toast.makeText(RegisterActivity.this,content, Toast.LENGTH_LONG);*/
-                else {
-                    Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(RegisterActivity.this,"Ανεπιτυχής καταχώρηση\n"+status.getMsg(),Toast.LENGTH_SHORT).show();
             }
+
             @Override
-            public void onFailure(Call<List<User>>  call, Throwable t) {
-                Toast.makeText(RegisterActivity.this,t.getMessage(), Toast.LENGTH_LONG);
+            public void onFailure(Call<Status_handling> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -163,7 +194,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private boolean CheckEmail() {
-        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+        String emailInput = textInputEmail.getText().toString().trim();
 
         if (emailInput.isEmpty()) {
             textInputEmail.setError("Υποχρεωτικό Πεδίο!");
@@ -175,7 +206,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean CheckName() {
-        String usernameInput = textInputName.getEditText().getText().toString().trim();
+        String usernameInput = textInputName.getText().toString().trim();
 
         if (usernameInput.isEmpty()) {
             textInputName.setError("Υποχρεωτικό Πεδίο!");
@@ -187,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean CheckPassword() {
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+        String passwordInput = textInputPassword.getText().toString().trim();
 
         if (passwordInput.isEmpty()) {
             textInputPassword.setError("Υποχρεωτικό Πεδίο!");

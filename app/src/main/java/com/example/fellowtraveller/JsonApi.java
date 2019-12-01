@@ -17,15 +17,17 @@ public interface JsonApi {
             @Path("email") String email
     );
 
-    @POST("adduser/{name}/{email}/{password}")
-    Call<List<User>> createUser(
+    @GET("registeruser/{name}/{birthday}/{email}/{password}/{phone}")
+    Call<Status_handling> createUser(
             @Path("name") String name,
+            @Path("birthday") String birthday,
             @Path("email") String email,
-            @Path("password") String password
+            @Path("password") String password,
+            @Path("phone") String phone
     );
 
     @GET("trips/{from}/{to}/{date}/{time}/{creator_id}/{description}/{max_seats}/{max_bags}")
-    Call<List<Status_handling>> createTrip(
+    Call<Status_handling> createTrip(
             @Path("from") String from,
             @Path("to") String to,
             @Path("date") String date,

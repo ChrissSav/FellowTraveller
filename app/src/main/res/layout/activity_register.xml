@@ -7,20 +7,18 @@
     android:background="#fff"
     tools:context=".RegisterActivity">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="328dp"
-        android:layout_height="248dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/main_shape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+    <Button
+        android:id="@+id/RegisterActivity_button_back"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/new_offer_button_back"
+        app:layout_constraintBottom_toBottomOf="@+id/RegisterActivity_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_header" />
+        app:layout_constraintTop_toTopOf="@+id/RegisterActivity_header" />
 
     <TextView
-        android:id="@+id/register_header"
+        android:id="@+id/RegisterActivity_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -33,57 +31,56 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/register_button_register"
+        android:id="@+id/RegisterActivity_button_register"
         android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="51dp"
         android:background="@drawable/main_btn_login"
         android:text="Εγγραφή"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_editText_password" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout17" />
 
     <TextView
-        android:id="@+id/register_textView3"
+        android:id="@+id/RegisterActivity_textView"
         android:layout_width="wrap_content"
         android:layout_height="19sp"
         android:layout_marginStart="108dp"
         android:text="Έχεις ήδη λογαριασμό; "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_button_register"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_button_register" />
+
 
     <Button
-        android:id="@+id/register_button_login"
-        android:layout_width="73dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="84dp"
+        android:id="@+id/RegisterActivity_button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="Είσοδος"
         android:textAllCaps="false"
         android:textColor="#889CFF"
-        app:layout_constraintBottom_toBottomOf="@+id/register_textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/register_textView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/RegisterActivity_textView"
+        app:layout_constraintStart_toEndOf="@+id/RegisterActivity_textView"
+        app:layout_constraintTop_toTopOf="@+id/RegisterActivity_textView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_editText_name"
+        android:id="@+id/RegisterActivity_textInputLayout9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:errorEnabled="true"
+        android:layout_marginTop="52dp"
         android:textSize="20dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_header">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/RegisterActivity_editText_name"
             android:layout_width="326dp"
             android:layout_height="45dp"
             android:backgroundTint="#FFC088"
@@ -95,20 +92,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_editText_email"
+        android:id="@+id/RegisterActivity_textInputLayout14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:errorEnabled="true"
         android:layout_marginTop="16dp"
         android:textSize="20dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_editText_name">
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout9">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/RegisterActivity_editText_email"
             android:layout_width="326dp"
             android:layout_height="45dp"
             android:backgroundTint="#FFC088"
@@ -121,24 +117,78 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_editText_password"
+        android:id="@+id/RegisterActivity_textInputLayout15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:errorEnabled="true"
         android:textSize="20dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_editText_email"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout14"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/RegisterActivity_editText_password"
             android:layout_width="326dp"
             android:layout_height="45dp"
             android:backgroundTint="#FFC088"
             android:hint="Κωδικός"
             android:inputType="textPassword"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegisterActivity_textInputLayout16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20dp"
+        app:errorEnabled="true"
+        android:focusable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout15">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/RegisterActivity_editText_date"
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#FFC088"
+            android:focusable="false"
+            android:hint="Ημερομηνία γέννησης"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textColorHint="#FFC088"
+            android:textSize="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegisterActivity_textInputLayout17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20dp"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout16">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/RegisterActivity_editText_phone"
+            android:layout_width="326dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#FFC088"
+            android:hint="Τηλέφωνο"
+            android:inputType="number"
             android:textColor="#000"
             android:textColorHint="#FFC088"
             android:textSize="20dp" />

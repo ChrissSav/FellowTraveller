@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainHomeActivity extends AppCompatActivity {
     private Dialog dia;
-    private Button btn_popup_menu,btn2;
+   // private Button btn_popup_menu,btn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,20 +52,20 @@ public class MainHomeActivity extends AppCompatActivity {
                     }
                 });
 
-        btn_popup_menu = findViewById(R.id.home_button_popup_menu);
-        btn_popup_menu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                dia.show();
-            }
-        });
-        btn2 = dia.findViewById(R.id.popup_button_close);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                dia.dismiss();
-            }
-        });
+        //btn_popup_menu = findViewById(R.id.home_button_popup_menu);
+        //btn_popup_menu.setOnClickListener(new View.OnClickListener() {
+           // public void onClick(View v)
+            //{
+             //   dia.show();
+           // }
+       // });
+      //  btn2 = dia.findViewById(R.id.popup_button_close);
+       // btn2.setOnClickListener(new View.OnClickListener() {
+          //  public void onClick(View v)
+           // {
+            //    dia.dismiss();
+          //  }
+        //});
 
        // Intent intent = getIntent();
        // User user = intent.getParcelableExtra("user");

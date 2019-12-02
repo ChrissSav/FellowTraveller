@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), TripPageActivity.class);
                 intent.putExtra("Trip",Listoftrips.get(position));
                 startActivity(intent);
-                getActivity().finish();
+
             }
         });
     }

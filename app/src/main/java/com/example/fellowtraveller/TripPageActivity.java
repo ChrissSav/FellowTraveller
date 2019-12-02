@@ -70,7 +70,7 @@ public class TripPageActivity extends AppCompatActivity {
             textView_status.setText("Ολοκληρώθηκε");
             select.setEnabled(false);
         }
-        textView_creator_name.setText(trip.getCreator().get(0).getName());
+        textView_creator_name.setText(trip.getCreator().getName());
         textView_from.setText(trip.getFfrom());
         textView_to.setText(trip.getTto());
         textView_date.setText(trip.getDate());

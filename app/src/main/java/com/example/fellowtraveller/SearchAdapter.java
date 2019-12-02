@@ -33,11 +33,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            from = itemView.findViewById(R.id.search_items_container_textView_from);
+            /*from = itemView.findViewById(R.id.search_items_container_textView_from);
             to = itemView.findViewById(R.id.search_items_container_textView_to);
             name = itemView.findViewById(R.id.search_items_container_textView_name);
             number = itemView.findViewById(R.id.search_items_container_textView_number);
-            btn = itemView.findViewById((R.id.search_items_container_btn_approved));
+            btn = itemView.findViewById((R.id.search_items_container_btn_approved));*/
+            from = itemView.findViewById(R.id.searchItem_textView_from);
+            to = itemView.findViewById(R.id.searchItem_textView_to);
+            name = itemView.findViewById(R.id.searchItem_textView_name);
+            number = itemView.findViewById(R.id.searchItem_textView_seats);
+            btn = itemView.findViewById((R.id.searchItem_button_select));
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -61,7 +66,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.searches_items, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_trip_item, parent, false);
         ExampleViewHolder evh = new ExampleViewHolder(v,mListener);
         return evh;
     }
@@ -71,7 +76,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         Trip currentItem = mExampleList.get(position);
         holder.from.setText(currentItem.getFfrom());
         holder.to.setText(currentItem.getTto());
-        holder.name.setText(currentItem.getCreator().get(0).getName());
+        holder.name.setText(currentItem.getCreator().getName());
         holder.number.setText(currentItem.getPassengers().size()+"");
     }
 

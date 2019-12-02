@@ -6,117 +6,12 @@
     android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="4dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/search_items_container_textView_date"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_marginStart="45dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:padding="2dp"-->
-<!--            android:text="20/10/2019" />-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="350dp"-->
-<!--            android:layout_height="100dp"-->
-<!--            android:layout_below="@+id/search_items_container_textView_date"-->
-<!--            android:layout_alignStart="@+id/search_items_container_textView_date"-->
-<!--            android:layout_marginStart="-17dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:background="@drawable/search_items_backround">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/search_items_container_textView_from"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_marginStart="22dp"-->
-<!--                android:layout_marginTop="13dp"-->
-<!--                android:padding="2dp"-->
-<!--                android:text="Αθήνα"-->
-<!--                android:textColor="#fff"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/imageVεfew"-->
-<!--                android:layout_width="28dp"-->
-<!--                android:layout_height="8dp"-->
-<!--                android:layout_alignTop="@+id/search_items_container_textView_from"-->
-<!--                android:layout_alignBottom="@+id/search_items_container_textView_from"-->
-<!--                android:layout_marginStart="9dp"-->
-<!--                android:layout_marginTop="9dp"-->
-<!--                android:layout_marginBottom="6dp"-->
-<!--                android:layout_toEndOf="@+id/search_items_container_textView_from"-->
-<!--                android:background="@drawable/dart_white"-->
-<!--                android:padding="2dp"-->
-<!--                android:textColor="#fff" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/search_items_container_textView_to"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_marginStart="11dp"-->
-<!--                android:layout_marginTop="13dp"-->
-<!--                android:layout_toEndOf="@+id/imageVεfew"-->
-<!--                android:padding="2dp"-->
-<!--                android:text="Θεσσαλονίκη"-->
-<!--                android:textColor="#fff"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/search_items_container_btn_approved"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_alignParentBottom="true"-->
-<!--                android:layout_marginTop="29dp"-->
-<!--                android:layout_marginEnd="14dp"-->
-<!--                android:layout_marginBottom="29dp"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:text="Approved"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textColor="#fff"-->
-<!--                android:textSize="13dp">-->
-
-<!--            </Button>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/search_items_container_textView_name"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/search_items_container_textView_from"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_marginStart="21dp"-->
-<!--                android:layout_marginTop="18dp"-->
-<!--                android:text="Σπυρος Ρεντογλου"-->
-<!--                android:textColor="#fff" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/search_items_container_textView_number"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/search_items_container_textView_from"-->
-<!--                android:layout_marginStart="26dp"-->
-<!--                android:layout_marginTop="18dp"-->
-<!--                android:layout_toEndOf="@+id/search_items_container_textView_name"-->
-<!--                android:text="+2"-->
-<!--                android:textColor="#fff" />-->
-<!--        </RelativeLayout>-->
-<!--    </RelativeLayout-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+        android:layout_width="375dp"
+        android:layout_height="285dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_trip_page_backround"
+>
 
         <TextView
             android:id="@+id/textView35"
@@ -143,7 +38,7 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/blackshape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -204,7 +99,7 @@
             android:layout_height="wrap_content"
             android:text="Λεπτομέρεις"
             android:textColor="#FFAA5E"
-            android:textSize="14sp"
+            android:textSize="11dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView37"
             app:layout_constraintEnd_toStartOf="@+id/textView36"
@@ -225,7 +120,7 @@
             android:id="@+id/textView37"
             android:layout_width="110dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:background="#FFAA5E"
             app:layout_constraintStart_toStartOf="@+id/searchItem_textView_adminImage"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
@@ -234,7 +129,7 @@
             android:id="@+id/textView21"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/black_calendar"
             app:layout_constraintStart_toStartOf="@+id/searchItem_textView_adminImage"
             app:layout_constraintTop_toBottomOf="@+id/textView37" />
@@ -277,7 +172,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="136dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/black_seat"
             app:layout_constraintStart_toEndOf="@+id/searchItem_textView_date"
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
@@ -308,17 +203,16 @@
 
         <Button
             android:id="@+id/searchItem_button_select"
-            android:layout_width="338dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/main_btn_login"
             android:text="Εμφάνιση"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
@@ -330,9 +224,8 @@
             android:textColor="#000"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/searchItem_textView_to"
-            app:layout_constraintStart_toStartOf="@+id/textView23"
-            app:layout_constraintTop_toTopOf="@+id/searchItem_textView_from" />
+            app:layout_constraintBottom_toBottomOf="@+id/searchItem_textView_adminImage"
+            app:layout_constraintStart_toStartOf="@+id/textView23" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,7 +1,9 @@
 package com.example.fellowtraveller;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import android.app.Dialog;
 import android.content.Intent;
@@ -17,14 +19,30 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainHomeActivity extends AppCompatActivity {
     private Dialog dia;
-   // private Button btn_popup_menu,btn2;
+    private DrawerLayout myDrawer;
+    private ActionBarDrawerToggle myToggle;
+
+    private Button btn_popup_menu,btn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainhome);
-        dia = new Dialog(this);
-        dia.setContentView(R.layout.popup);
-        dia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        myDrawer = (DrawerLayout) findViewById(R.id.myDrawer);
+        myToggle = new ActionBarDrawerToggle(this, myDrawer, R.string.open, R.string.close);
+
+        myDrawer.addDrawerListener(myToggle);
+        myToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+       // dia = new Dialog(this);
+        //dia.setContentView(R.layout.popup);
+        //dia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.home_bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
@@ -70,5 +88,13 @@ public class MainHomeActivity extends AppCompatActivity {
        // Intent intent = getIntent();
        // User user = intent.getParcelableExtra("user");
        // Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(myToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

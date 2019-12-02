@@ -22,7 +22,7 @@ public class MainHomeActivity extends AppCompatActivity {
     private DrawerLayout myDrawer;
     private ActionBarDrawerToggle myToggle;
 
-    private Button btn_popup_menu,btn2;
+    //private Button btn_popup_menu,btn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,9 @@ public class MainHomeActivity extends AppCompatActivity {
 
 
 
-       // dia = new Dialog(this);
-        //dia.setContentView(R.layout.popup);
-        //dia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //dia = new Dialog(this);
+        //dia.setContentView(R.layout.drawer_nav);
+       // dia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         BottomNavigationView bottomNavigationView;
@@ -70,28 +70,28 @@ public class MainHomeActivity extends AppCompatActivity {
                     }
                 });
 
-        //btn_popup_menu = findViewById(R.id.home_button_popup_menu);
+       // btn_popup_menu = findViewById(R.id.home_button_popup_menu);
         //btn_popup_menu.setOnClickListener(new View.OnClickListener() {
-           // public void onClick(View v)
-            //{
-             //   dia.show();
-           // }
-       // });
-      //  btn2 = dia.findViewById(R.id.popup_button_close);
-       // btn2.setOnClickListener(new View.OnClickListener() {
           //  public void onClick(View v)
            // {
-            //    dia.dismiss();
-          //  }
-        //});
+          //      dia.show();
+           // }
+       // });
+        //btn2 = dia.findViewById(R.id.popup_button_close);
+        //btn2.setOnClickListener(new View.OnClickListener() {
+           // public void onClick(View v)
+           // {
+             //   dia.dismiss();
+            //}
+       // });
 
-       // Intent intent = getIntent();
-       // User user = intent.getParcelableExtra("user");
-       // Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
+        //Intent intent = getIntent();
+        //User user = intent.getParcelableExtra("user");
+        //Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(myToggle.onOptionsItemSelected(item)){
             return true;
         }

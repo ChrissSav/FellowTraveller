@@ -16,25 +16,31 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".SearchOfferActivity"
+
             ></activity>
         <activity
             android:name=".NewOfferActivity"
+
              />
         <activity
             android:name=".HomeActivity"
+
              />
         <activity
             android:name=".MainHomeActivity"
+
              />
         <activity
             android:name=".RegisterActivity"
+
              />
         <activity
             android:name=".LoginActivity"
+
              />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

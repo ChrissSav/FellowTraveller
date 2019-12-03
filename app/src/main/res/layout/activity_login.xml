@@ -48,20 +48,19 @@
         android:id="@+id/login_button_register"
         android:layout_width="73dp"
         android:layout_height="19dp"
-        android:layout_marginEnd="88dp"
         android:background="@android:color/transparent"
         android:text="Εγγραφή"
         android:textAllCaps="false"
         android:textColor="#889CFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/login_textView3"
         app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
 
 
     <Button
         android:id="@+id/login_button_login"
         android:layout_width="326dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_marginTop="56dp"
         android:background="@drawable/main_btn_login"
         android:text="Είσοδος"
@@ -76,22 +75,27 @@
         android:id="@+id/login_editText_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="52dp"
+        android:paddingTop="8dp"
+        android:background="@drawable/textview_search_add_offer"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_textView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="326dp"
             android:layout_height="45dp"
-            android:textColorHint="#FFC088"
-            android:textSize="20dp"
-            android:textColor="#000"
+            android:background="@null"
             android:backgroundTint="#FFC088"
             android:hint="Email"
-            android:inputType="text" />
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
+            android:textSize="20dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +104,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-
+        android:background="@drawable/textview_search_add_offer"
+        android:paddingTop="8dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,11 +117,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="326dp"
             android:layout_height="45dp"
-            android:backgroundTint="#FFC088"
+            android:background="@null"
             android:textSize="20dp"
-            android:textColorHint="#FFC088"
-            android:textColor="#000"
+            android:backgroundTint="#FFC088"
             android:hint="Κωδικός"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#000"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 

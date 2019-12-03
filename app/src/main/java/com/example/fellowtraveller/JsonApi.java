@@ -12,9 +12,10 @@ public interface JsonApi {
     @GET("getusers")
     Call<List<User>> getUsers();
 
-    @GET("getuser/{email}")
-    Call<List<User>> getUserById(
-            @Path("email") String email
+    @GET("getuserauth/{email}/{password}")
+    Call<Status_handling> getUserAuth(
+            @Path("email") String email,
+            @Path("password") String password
     );
 
     @GET("registeruser/{name}/{birthday}/{email}/{password}/{phone}")

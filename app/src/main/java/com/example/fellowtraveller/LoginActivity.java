@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,9 +29,9 @@ yourEditText.setTransformationMethod(new PasswordTransformationMethod());
 */
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn,btn_login;
     private JsonApi jsonPlaceHolderApi;
-    private EditText password;
     private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
@@ -54,47 +57,65 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (CheckEmail() & CheckPassword()) {
+                if (CheckEmail() | CheckPassword()) {
                     createUser();
                 }
 
             }
         });
     }
-
-
-    private void createUser() {
+    private void createUser(){
         String email = textInputEmail.getEditText().getText().toString();
-        Call<List<User>> call = jsonPlaceHolderApi.getUserById(email);
-        call.enqueue(new Callback<List<User>>() {
+        String password = textInputPassword.getEditText().getText().toString();
+        Call<Status_handling> call = jsonPlaceHolderApi.getUserAuth(email,password);
+
+        call.enqueue(new Callback<Status_handling> () {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if(response.isSuccessful()){
-                   // Toast.makeText(LoginActivity.this,"Return object = "+response.body().get(0).getName(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this,MainHomeActivity.class);
-                    intent.putExtra("user",response.body().get(0));
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Status_handling status = response.body();
+                if(status.getStatus().equals("success")){
+                    save("true");
+                    Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);
                     startActivity(intent);
                     finish();
+                    return;
                 }
-                else {
-                   Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(LoginActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Status_handling> call, Throwable t) {
+                Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
-
         });
-
     }
 
-
-
-
+    public void save(String status) {
+        String text = status;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     private boolean CheckEmail() {
-        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+        String emailInput = textInputEmail.getEditText().getText().toString();
 
         if (emailInput.isEmpty()) {
             textInputEmail.setError("Υποχρεωτικό Πεδίο!");
@@ -106,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean CheckPassword() {
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+        String passwordInput = textInputPassword.getEditText().getText().toString();
 
         if (passwordInput.isEmpty()) {
             textInputPassword.setError("Υποχρεωτικό Πεδίο!");

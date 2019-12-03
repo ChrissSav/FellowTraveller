@@ -14,26 +14,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchOfferActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".SearchOfferActivity"
+
+            ></activity>
         <activity
             android:name=".NewOfferActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+             />
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+             />
         <activity
             android:name=".MainHomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+             />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+             />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+             />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

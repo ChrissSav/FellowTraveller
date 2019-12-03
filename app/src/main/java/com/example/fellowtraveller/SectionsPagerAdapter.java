@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+    private ProsforesFragment requestsFragment  = new ProsforesFragment();
+    private HomeFragment homeFragment  = new HomeFragment();
+    private SearchFragment searchFragment  = new SearchFragment();
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
 
@@ -18,17 +21,11 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                ProsforesFragment requestsFragment = new ProsforesFragment();
-                Log.e("case 0","case 0");
                 return requestsFragment;
             case 1:
-                HomeFragment chatsFragment = new HomeFragment();
-                Log.e("case 1","case 1");
-                return chatsFragment;
+                return homeFragment;
             case 2:
-                SearchFragment friendsFragment = new SearchFragment();
-                Log.e("case 2","case 2");
-                return friendsFragment;
+                return searchFragment;
             default:
                 return null;
         }

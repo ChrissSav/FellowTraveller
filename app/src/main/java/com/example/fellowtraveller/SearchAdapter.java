@@ -25,10 +25,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
+        public TextView name;
         public TextView from;
         public TextView to;
-        public TextView name;
-        public TextView number;
+        public TextView date;
+        public TextView time;
+        public TextView number_of_passengers;
+        public TextView number_of_bags;
         public Button btn;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -38,10 +41,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
             name = itemView.findViewById(R.id.search_items_container_textView_name);
             number = itemView.findViewById(R.id.search_items_container_textView_number);
             btn = itemView.findViewById((R.id.search_items_container_btn_approved));*/
+            date = itemView.findViewById(R.id.searchItem_textView_date);
+            time = itemView.findViewById(R.id.searchItem_textView_time);
             from = itemView.findViewById(R.id.searchItem_textView_from);
             to = itemView.findViewById(R.id.searchItem_textView_to);
             name = itemView.findViewById(R.id.searchItem_textView_name);
-            number = itemView.findViewById(R.id.searchItem_textView_seats);
+            number_of_passengers = itemView.findViewById(R.id.searchItem_textView_seats);
+            number_of_bags = itemView.findViewById(R.id.searchItem_textView_bags);
             btn = itemView.findViewById((R.id.searchItem_button_select));
 
             btn.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +82,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         Trip currentItem = mExampleList.get(position);
         holder.from.setText(currentItem.getFfrom());
         holder.to.setText(currentItem.getTto());
+        holder.date.setText(currentItem.getDate());
+        holder.time.setText(currentItem.getTime());
         holder.name.setText(currentItem.getCreator().getName());
-        holder.number.setText(currentItem.getPassengers().size()+"");
+        holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
+        holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
     }
 
     @Override

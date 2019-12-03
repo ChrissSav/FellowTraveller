@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             while ((text = br.readLine()) != null) {
                 sb.append(text);
             }
-            Toast.makeText(this, "sb: "+sb.toString(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "sb: "+sb.toString(),Toast.LENGTH_LONG).show();
             if (sb.toString().equals("true")){
                 Intent mainIntent = new Intent(MainActivity.this, MainHomeActivity.class);
                 startActivity(mainIntent);

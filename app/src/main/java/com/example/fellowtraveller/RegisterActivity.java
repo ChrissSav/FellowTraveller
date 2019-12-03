@@ -157,10 +157,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
-                    Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
                     save("true");
                     Intent intent = new Intent(RegisterActivity.this, MainHomeActivity.class);
                     startActivity(intent);
+                    finish();
                     return;
                 }
                 Toast.makeText(RegisterActivity.this,"Ανεπιτυχής καταχώρηση\n"+status.getMsg(),Toast.LENGTH_SHORT).show();

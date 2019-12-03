@@ -12,13 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainHomeActivity extends AppCompatActivity {
     private Dialog dia;
+    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn_popup_menu,btn2;
+    private TextView t ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +37,7 @@ public class MainHomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.home_bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
-
+        t = findViewById(R.id.home_textView3);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeContainerFragment()).commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -68,8 +76,43 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         });
 
+
+        t.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                save("false");
+                Intent intent = new Intent(MainHomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+
        // Intent intent = getIntent();
        // User user = intent.getParcelableExtra("user");
        // Toast.makeText(MainHomeActivity.this, "Name = "+user.getName()+"\n"+"Email = "+user.getEmail()+"\n"+"Password = "+user.getPassword()+"\n", Toast.LENGTH_SHORT).show();
+    }
+
+    public void save(String status) {
+        String text = status;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+           // Toast.makeText(this, "Saved to " + getFilesDir() + "/" + FILE_NAME,Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -8,6 +8,10 @@ import android.widget.Button;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,9 +67,11 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
 
                 break;
             case R.id.logout:
+                save("false");
                 Intent j = new Intent(Settings.this, MainActivity.class);
                 startActivity(j);
                 finish();
+
                 break;
         }
         return true;
@@ -83,5 +89,25 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     public void onBackPressed() {
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
             super.onBackPressed();
+    }
+    public void save(String status) {
+        String text = status;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -49,6 +49,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainhome);
 
+
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.home_bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
@@ -89,7 +90,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         } else {
             newString= (String) savedInstanceState.getSerializable("USER_NAME");
         }
-        HeaderDrawer headerDrawer = new HeaderDrawer(newString);
+        HeaderDrawer headerDrawer = new HeaderDrawer();
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
@@ -107,7 +108,12 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
     public boolean onNavigationItemSelected(MenuItem item) {
         closeDrawer();
         switch (item.getItemId()){
+            case R.id.home:
+
+                break;
+
             case R.id.profile:
+
                 break;
             case R.id.wallet:
                 Intent s = new Intent(MainHomeActivity.this, Wallet.class);
@@ -164,6 +170,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
             }
         }
     }
+
 
 
 }

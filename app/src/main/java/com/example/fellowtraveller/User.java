@@ -137,4 +137,5 @@ public class User implements Parcelable {
         dest.writeInt(num_of_travels_offered);
         dest.writeInt(num_of_travels_takespart);
     }
+
 }

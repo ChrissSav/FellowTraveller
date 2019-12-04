@@ -42,6 +42,8 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,19 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
 
 
 
+
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+                newString= extras.getString("USER_NAME");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("USER_NAME");
+        }
+        HeaderDrawer headerDrawer = new HeaderDrawer(newString);
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);

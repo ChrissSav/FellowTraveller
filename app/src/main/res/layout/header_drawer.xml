@@ -24,6 +24,7 @@
             android:background="@drawable/cylinder"
             />
         <TextView
+            android:id="@+id/user_name_drawer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Spuros Rantoglou"
@@ -32,6 +33,7 @@
             android:fontFamily="sans-serif"
             />
         <TextView
+            android:id="@+id/user_email_drawer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="spurakos98@gmail.com"

@@ -60,9 +60,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
                 finish();
                 break;
             case R.id.settings:
-                Intent i = new Intent(Settings.this, Settings.class);
-                startActivity(i);
-                finish();
+
                 break;
             case R.id.logout:
                 Intent j = new Intent(Settings.this, MainActivity.class);

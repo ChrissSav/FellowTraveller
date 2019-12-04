@@ -18,4 +18,5 @@
     <string name="api_key">AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="user_name">UserName</string>
 </resources>

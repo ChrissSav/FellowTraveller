@@ -50,7 +50,11 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.login_button_login);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent mainIntent = new Intent(LoginActivity.this,RegisterActivity.class);
+                String str = textInputEmail.getEditText().getText().toString();
+
+                mainIntent.putExtra( "USER_NAME",str);
                 startActivity(mainIntent);
             }
         });
@@ -137,4 +141,5 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }

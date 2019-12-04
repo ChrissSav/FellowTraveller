@@ -29,7 +29,19 @@ import java.io.IOException;
 
 public class MainHomeActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private static final String FILE_NAME = "fellow_login_state.txt";
+
     private DrawerLayout drawerLayout;
+
+    private Button btn_popup_menu, btn2;
+    private TextView t;
+
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +95,19 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
             case R.id.profile:
                 break;
             case R.id.wallet:
+                Intent s = new Intent(MainHomeActivity.this, Wallet.class);
+                startActivity(s);
+                finish();
                 break;
             case R.id.settings:
+                Intent i = new Intent(MainHomeActivity.this, Settings.class);
+                startActivity(i);
+                finish();
                 break;
             case R.id.logout:
-                save("false");
-                close();
+                Intent j = new Intent(MainHomeActivity.this, MainActivity.class);
+                startActivity(j);
+                finish();
                 break;
         }
         return true;
@@ -129,9 +148,5 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         }
     }
 
-    public void close(){
-        Intent intent = new Intent(MainHomeActivity.this,MainActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
+
 }

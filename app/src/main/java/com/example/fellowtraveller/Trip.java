@@ -2,6 +2,7 @@ package com.example.fellowtraveller;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.List;
 
@@ -159,6 +160,7 @@ public class Trip implements Parcelable {
 
     public String getSeatesStatus(){
         String s = current_num_of_seats+"/"+max_seats;
+        Log.i("makis",s);
         return s;
     }
     public String getbagsStatus(){

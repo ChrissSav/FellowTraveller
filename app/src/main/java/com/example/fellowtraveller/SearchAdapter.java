@@ -36,11 +36,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            /*from = itemView.findViewById(R.id.search_items_container_textView_from);
-            to = itemView.findViewById(R.id.search_items_container_textView_to);
-            name = itemView.findViewById(R.id.search_items_container_textView_name);
-            number = itemView.findViewById(R.id.search_items_container_textView_number);
-            btn = itemView.findViewById((R.id.search_items_container_btn_approved));*/
             date = itemView.findViewById(R.id.searchItem_textView_date);
             time = itemView.findViewById(R.id.searchItem_textView_time);
             from = itemView.findViewById(R.id.searchItem_textView_from);

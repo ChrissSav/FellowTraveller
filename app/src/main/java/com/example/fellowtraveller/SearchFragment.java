@@ -44,7 +44,7 @@ public class SearchFragment extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         textError = view.findViewById(R.id.SearchFragment_textView3);
         Listoftrips = new ArrayList<>();
-        createUser();
+        getTrips();
         buildRecyclerView(view);
         return view;
     }
@@ -70,7 +70,7 @@ public class SearchFragment extends Fragment {
 
 
 
-    private void createUser() {
+    private void getTrips() {
 
         Call<List<Trip>> call = jsonPlaceHolderApi.getTrips();
         call.enqueue(new Callback<List<Trip>>() {
@@ -81,15 +81,12 @@ public class SearchFragment extends Fragment {
                     return;
                 }
                 textError.setText("");
-
                 List<Trip> trips = response.body();
                 for (int i=0; i<trips.size(); i++){
-                    Log.i("RestAPI","i: "+i);
 
                     Listoftrips.add(trips.get(i));
                 }
             }
-
             @Override
             public void onFailure(Call<List<Trip>> call, Throwable t) {
                 textError.setText("t: "+t.getMessage());

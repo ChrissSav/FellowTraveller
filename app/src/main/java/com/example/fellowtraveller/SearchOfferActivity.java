@@ -41,9 +41,9 @@ public class SearchOfferActivity extends AppCompatActivity {
         String KEY = getString(R.string.api_key);
 
         autoCompleteTextViewFrom = findViewById(R.id.search_offer_autoComplete_editText_from);
-        autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(SearchOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
+        autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(SearchOfferActivity.this, android.R.layout.simple_list_item_1, KEY));
         autoCompleteTextViewTo = findViewById(R.id.search_offer_autoComplete_editText_to);
-        autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(SearchOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
+        autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(SearchOfferActivity.this, android.R.layout.simple_list_item_1, KEY));
 
 
         date_from = findViewById(R.id.search_offer_editText_date_from);
@@ -74,21 +74,19 @@ public class SearchOfferActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String mon,d;
-                if (month<=9){
-                    mon = "0"+month;
+                String mon, d;
+                if (month <= 9) {
+                    mon = "0" + month;
+                } else {
+                    mon = month + "";
                 }
-                else{
-                    mon = month+"";
-                }
-                if(day<=9){
-                    d = "0"+day;
-                }
-                else{
-                    d = day+"";
+                if (day <= 9) {
+                    d = "0" + day;
+                } else {
+                    d = day + "";
                 }
                 String date = d + "/" + mon + "/" + year;
-                date_from.setText(date+"");
+                date_from.setText(date + "");
             }
         };
 
@@ -115,21 +113,19 @@ public class SearchOfferActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String mon,d;
-                if (month<=9){
-                    mon = "0"+month;
+                String mon, d;
+                if (month <= 9) {
+                    mon = "0" + month;
+                } else {
+                    mon = month + "";
                 }
-                else{
-                    mon = month+"";
-                }
-                if(day<=9){
-                    d = "0"+day;
-                }
-                else{
-                    d = day+"";
+                if (day <= 9) {
+                    d = "0" + day;
+                } else {
+                    d = day + "";
                 }
                 String date = d + "/" + mon + "/" + year;
-                date_to.setText(date+"");
+                date_to.setText(date + "");
             }
         };
 
@@ -144,7 +140,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 TimePickerDialog dialog = new TimePickerDialog(
                         SearchOfferActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mTimeListener1, hour, minute,true);
+                        mTimeListener1, hour, minute, true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
                 dialog.show();
             }
@@ -152,21 +148,19 @@ public class SearchOfferActivity extends AppCompatActivity {
         mTimeListener1 = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String hour,min;
-                if (hourOfDay<=9){
-                    hour = "0"+hourOfDay;
+                String hour, min;
+                if (hourOfDay <= 9) {
+                    hour = "0" + hourOfDay;
+                } else {
+                    hour = hourOfDay + "";
                 }
-                else{
-                    hour = hourOfDay+"";
-                }
-                if(minute<=9){
-                    min = "0"+minute;
-                }
-                else{
-                    min = minute+"";
+                if (minute <= 9) {
+                    min = "0" + minute;
+                } else {
+                    min = minute + "";
                 }
                 String time = hour + ":" + min;
-                time_from.setText(time+"");
+                time_from.setText(time + "");
             }
         };
 
@@ -180,7 +174,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 TimePickerDialog dialog = new TimePickerDialog(
                         SearchOfferActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mTimeListener2, hour, minute,true);
+                        mTimeListener2, hour, minute, true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
                 dialog.show();
             }
@@ -188,41 +182,31 @@ public class SearchOfferActivity extends AppCompatActivity {
         mTimeListener2 = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String hour,min;
-                if (hourOfDay<=9){
-                    hour = "0"+hourOfDay;
+                String hour, min;
+                if (hourOfDay <= 9) {
+                    hour = "0" + hourOfDay;
+                } else {
+                    hour = hourOfDay + "";
                 }
-                else{
-                    hour = hourOfDay+"";
-                }
-                if(minute<=9){
-                    min = "0"+minute;
-                }
-                else{
-                    min = minute+"";
+                if (minute <= 9) {
+                    min = "0" + minute;
+                } else {
+                    min = minute + "";
                 }
                 String time = hour + ":" + min;
-                time_to.setText(time+"");
+                time_to.setText(time + "");
             }
         };
 
 
-
-
-
-
-
-
-
-
-
-
-
-    btn_search.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                Intent intnt = new Intent(SearchOfferActivity.this,ViewSearchOffersActivity.class);
-                startActivity(intnt);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Search_item_filter filter  = new Search_item_filter(autoCompleteTextViewFrom.getText().toString(),autoCompleteTextViewTo.getText().toString(),
+                        date_from.getText().toString(),date_to.getText().toString(),time_from.getText().toString(),time_to.getText().toString());
+                SearchOfferActivity.this.onBackPressed();
+                Intent intent = new Intent(SearchOfferActivity.this, ViewSearchOffersActivity.class);
+                intent.putExtra("Filter",filter);
+                startActivity(intent);
                 finish();
 
             }
@@ -231,7 +215,8 @@ public class SearchOfferActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                    SearchOfferActivity.this.onBackPressed();
+                onBackPressed();
+                finish();
 
             }
         });

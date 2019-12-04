@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_user">
+
+        <item
+            android:id="@+id/home"
+            android:checkable="true"
+            android:icon="@drawable/ic_home"
+            android:title="Αρχική" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_person"
+            android:title="Προφίλ"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/wallet"
+            android:icon="@drawable/ic_wallet"
+            android:title="Πορτοφόλι"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Ρυθμίσεις"
+            android:checkable="true"/>
+    </group>
+
+    <group android:id="@+id/group_support">
+        <item
+            android:id="@+id/help_center"
+            android:icon="@drawable/ic_help_center"
+            android:checkable="true"
+            android:title="Τεχνική Βοήθεια" />
+        <item
+            android:id="@+id/faq"
+            android:checkable="true"
+            android:icon="@drawable/ic_faq"
+            android:title="FAQ" />
+
+
+    </group>
+    <group android:id="@+id/group_logout">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_exit"
+            android:title="Αποσύνδεση"
+            android:checkable="true"/>
+    </group>
+
+</menu>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="#3157b1"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+
+        >
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/cylinder"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spuros Rantoglou"
+            android:textColor="#FFF"
+            android:textSize="30sp"
+            android:fontFamily="sans-serif"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="spurakos98@gmail.com"
+            android:textColor="#FFF"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif"
+            />
+    </LinearLayout>
+</RelativeLayout>

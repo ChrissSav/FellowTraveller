@@ -16,6 +16,4 @@
         <item>Ακριβά>Φθηνά</item>
     </string-array>
     <string name="api_key">AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
 </resources>

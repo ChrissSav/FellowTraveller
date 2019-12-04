@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -19,13 +20,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 
 public class SearchOfferActivity extends AppCompatActivity {
-    private Button btn_back;
+    private Button btn_back,btn_search;
     private DatePickerDialog.OnDateSetListener mDateListener1;
     private DatePickerDialog.OnDateSetListener mDateListener2;
     private TimePickerDialog.OnTimeSetListener mTimeListener1;
     private TimePickerDialog.OnTimeSetListener mTimeListener2;
-    private TextInputEditText from;
-    private TextInputEditText to;
     private TextInputEditText date_from;
     private TextInputEditText date_to;
     private TextInputEditText time_from;
@@ -37,7 +36,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_offer);
         btn_back = findViewById(R.id.search_offer_button_back);
-
+        btn_search = findViewById(R.id.new_offer_button_search);
 
         String KEY = getString(R.string.api_key);
 
@@ -219,7 +218,15 @@ public class SearchOfferActivity extends AppCompatActivity {
 
 
 
+    btn_search.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intnt = new Intent(SearchOfferActivity.this,ViewSearchOffersActivity.class);
+                startActivity(intnt);
+                finish();
 
+            }
+        });
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -231,7 +238,7 @@ public class SearchOfferActivity extends AppCompatActivity {
     }
 
     public void OutFocus(){
-        from.clearFocus();
-        to.clearFocus();
+        autoCompleteTextViewFrom.clearFocus();
+        autoCompleteTextViewTo.clearFocus();
     }
 }

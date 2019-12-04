@@ -105,9 +105,11 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
                 finish();
                 break;
             case R.id.logout:
+                save("false");
                 Intent j = new Intent(MainHomeActivity.this, MainActivity.class);
                 startActivity(j);
                 finish();
+
                 break;
         }
         return true;

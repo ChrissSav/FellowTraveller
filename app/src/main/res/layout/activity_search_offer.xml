@@ -251,7 +251,7 @@
 
 
     <Button
-        android:id="@+id/new_offer_button_next"
+        android:id="@+id/new_offer_button_search"
         android:layout_width="326dp"
         android:layout_height="60dp"
         android:layout_marginBottom="30dp"

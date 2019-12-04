@@ -24,7 +24,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+/*
+yourEditText.setTransformationMethod(new PasswordTransformationMethod());
+*/
 
 public class LoginActivity extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
 
 
 

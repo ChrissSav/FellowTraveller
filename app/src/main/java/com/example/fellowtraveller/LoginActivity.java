@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 User user = response.body();
                 if(user.getName()!=null){
-                    save("true",user.getName(),user.getEmail());
+                    save("true",user.getId()+"",user.getName(),user.getEmail());
                     Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -99,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void save(String status,String name,String email) {
-        String text = status+"\n"+name+"\n"+email;
+    public void save(String status,String id,String name,String email) {
+        String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

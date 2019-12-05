@@ -34,11 +34,8 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
     private static final String FILE_NAME = "fellow_login_state.txt";
 
     private DrawerLayout drawerLayout;
-
-    private Button btn_popup_menu, btn2;
-    private TextView t;
-
     private NavigationView navigationView;
+    private int id;
 
 
 
@@ -172,20 +169,23 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
             fis = openFileInput(FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
             String text;
             View header = navigationView.getHeaderView(0);
             TextView name = header.findViewById(R.id.user_name_drawer);
             TextView email = header.findViewById(R.id.user_email_drawer);
             int i = 0;
             while ((text = br.readLine()) != null) {
-                if (i==1){
+                if (i==2){
                     name.setText(text);
-                }else if(i==2){
+                }else if(i==3){
                     email.setText(text);
+                }else if(i==1){
+                    id = Integer.parseInt(text);
                 }
                 i++;
             }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

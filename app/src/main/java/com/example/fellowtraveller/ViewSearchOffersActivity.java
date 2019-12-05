@@ -27,14 +27,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ViewSearchOffersActivity extends AppCompatActivity {
 
-    private Button filter,back;
+    private Button btn_filter,btn_back,btn_refresh;
     private Search_item_filter filter_items;
     private TextInputEditText date_from;
     private TextInputEditText date_to;
     private TextInputEditText time_from;
     private TextInputEditText time_to;
     private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
-
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -50,8 +49,9 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_search_offers);
         Intent intent = getIntent();
         filter_items = intent.getParcelableExtra("Filter");
-        filter = findViewById(R.id.ViewSearchOffersActivity_button_filters);
-        back = findViewById(R.id.ViewSearchOffersActivity_button_back);
+        btn_filter = findViewById(R.id.ViewSearchOffersActivity_button_filters);
+        btn_back = findViewById(R.id.ViewSearchOffersActivity_button_back);
+        btn_refresh = findViewById(R.id.ViewSearchOffersActivity_button_refresh);
 
         autoCompleteTextViewFrom = findViewById(R.id.ViewSearchOffersActivity_autoComplete_editText_from);
         autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(ViewSearchOffersActivity.this, android.R.layout.simple_list_item_1, KEY));
@@ -67,9 +67,9 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Listoftrips = new ArrayList<>();
         FillFields();
-        getTrips();
+        getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
         buildRecyclerView();
-        filter.setOnClickListener(new View.OnClickListener() {
+        btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewSearchOffersActivity.this, SearchFiltersActivity.class);
@@ -78,11 +78,19 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
                 finish();
+            }
+        });
+
+
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
             }
         });
     }
@@ -112,7 +120,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         });
     }
 
-    private void getTrips() {
+    private void getTrips(AutoCompleteTextView autoCompleteTextViewFrom,AutoCompleteTextView autoCompleteTextViewTo) {
 
         String from =autoCompleteTextViewFrom.getText().toString();
         String to = autoCompleteTextViewTo.getText().toString();

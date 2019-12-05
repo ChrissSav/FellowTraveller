@@ -139,9 +139,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(){
-        String name = textInputName.getText().toString();
+        final String name = textInputName.getText().toString();
         String birth = textInputBirthday.getText().toString();
-        String email = textInputEmail.getText().toString();
+        final String email = textInputEmail.getText().toString();
         String password = textInputPassword.getText().toString();
         String phone = textInputPhone.getText().toString();
 
@@ -157,8 +157,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
-                   // Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
-                    save("true");
+                    Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
+                    save("true",status.getMsg(),name,email);
                     Intent intent = new Intent(RegisterActivity.this, MainHomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -175,14 +175,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    public void save(String status) {
-        String text = status;
+
+    public void save(String status,String id,String name,String email) {
+        String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(text.getBytes());
-            Toast.makeText(this, "Saved to " + getFilesDir() + "/" + FILE_NAME,
-                    Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -199,4 +199,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ViewSearchOffersActivity_spinner_sort" />
 
+    <Button
+        android:id="@+id/ViewSearchOffersActivity_button_refresh"
+        android:layout_width="33dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/refresh_button"
+        app:layout_constraintBottom_toBottomOf="@+id/ViewSearchOffersActivity_spinner_sort"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
+        app:layout_constraintTop_toTopOf="@+id/ViewSearchOffersActivity_spinner_sort" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

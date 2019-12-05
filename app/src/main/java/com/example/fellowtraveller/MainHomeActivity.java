@@ -23,9 +23,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainHomeActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private static final String FILE_NAME = "fellow_login_state.txt";
@@ -35,7 +38,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
     private Button btn_popup_menu, btn2;
     private TextView t;
 
-
+    private NavigationView navigationView;
 
 
 
@@ -79,28 +82,19 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
 
 
 
-        String newString;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                newString= null;
-            } else {
-                newString= extras.getString("USER_NAME");
-            }
-        } else {
-            newString= (String) savedInstanceState.getSerializable("USER_NAME");
-        }
-        HeaderDrawer headerDrawer = new HeaderDrawer();
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        navigationView =  findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+        loadUserInfo();
+
     }
 
 
@@ -126,7 +120,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
                 finish();
                 break;
             case R.id.logout:
-                save("false");
+                save();
                 Intent j = new Intent(MainHomeActivity.this, MainActivity.class);
                 startActivity(j);
                 finish();
@@ -150,8 +144,9 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
             super.onBackPressed();
     }
-    public void save(String status) {
-        String text = status;
+
+    public void save() {
+        String text = "false";
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
@@ -171,6 +166,39 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         }
     }
 
-
+    public void loadUserInfo() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            View header = navigationView.getHeaderView(0);
+            TextView name = header.findViewById(R.id.user_name_drawer);
+            TextView email = header.findViewById(R.id.user_email_drawer);
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i==1){
+                    name.setText(text);
+                }else if(i==2){
+                    email.setText(text);
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }

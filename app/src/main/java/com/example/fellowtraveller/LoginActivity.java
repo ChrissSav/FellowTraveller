@@ -69,37 +69,38 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void createUser(){
-        String email = textInputEmail.getEditText().getText().toString();
-        String password = textInputPassword.getEditText().getText().toString();
-        Call<Status_handling> call = jsonPlaceHolderApi.getUserAuth(email,password);
+        final String email = textInputEmail.getEditText().getText().toString();
+        final String password = textInputPassword.getEditText().getText().toString();
+        Call<User> call = jsonPlaceHolderApi.getUserAuth(email,password);
 
-        call.enqueue(new Callback<Status_handling> () {
+        call.enqueue(new Callback<User> () {
             @Override
-            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+            public void onResponse(Call<User> mcall, Response<User> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(LoginActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Status_handling status = response.body();
-                if(status.getStatus().equals("success")){
-                    save("true");
+                User user = response.body();
+                if(user.getName()!=null){
+                    save("true",user.getName(),user.getEmail());
                     Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);
                     startActivity(intent);
                     finish();
                     return;
                 }
                 Toast.makeText(LoginActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public void onFailure(Call<Status_handling> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void save(String status) {
-        String text = status;
+    public void save(String status,String name,String email) {
+        String text = status+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

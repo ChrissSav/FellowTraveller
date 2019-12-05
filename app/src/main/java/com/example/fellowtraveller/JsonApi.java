@@ -13,7 +13,7 @@ public interface JsonApi {
     Call<List<User>> getUsers();
 
     @GET("getuserauth/{email}/{password}")
-    Call<Status_handling> getUserAuth(
+    Call<User> getUserAuth(
             @Path("email") String email,
             @Path("password") String password
     );

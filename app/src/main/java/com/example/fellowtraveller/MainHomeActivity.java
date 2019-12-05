@@ -38,12 +38,6 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
     private int id;
 
 
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +85,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         loadUserInfo();
+        navigationView.getMenu().getItem(0).setChecked(true);
 
     }
 
@@ -100,11 +95,8 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
         closeDrawer();
         switch (item.getItemId()){
             case R.id.home:
-
                 break;
-
             case R.id.profile:
-
                 break;
             case R.id.wallet:
                 Intent s = new Intent(MainHomeActivity.this, Wallet.class);
@@ -121,7 +113,6 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
                 Intent j = new Intent(MainHomeActivity.this, MainActivity.class);
                 startActivity(j);
                 finish();
-
                 break;
         }
         return true;
@@ -200,5 +191,7 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
             }
         }
     }
+
+
 
 }

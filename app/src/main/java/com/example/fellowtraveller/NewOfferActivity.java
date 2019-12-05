@@ -13,12 +13,18 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.fellowtraveller.BetaAutocomplete.PlaceAutoSuggestAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,6 +35,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
+    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn_back,register;
     private DatePickerDialog.OnDateSetListener mDateListener;
     private TimePickerDialog.OnTimeSetListener mTimeListener;
@@ -152,11 +159,7 @@ public class NewOfferActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                try {
                     registerTrip();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }
@@ -171,8 +174,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
 
-    public void registerTrip() throws InterruptedException {
-
+    public void registerTrip(){
         String from = autoCompleteTextViewFrom.getText().toString();
         String to = autoCompleteTextViewTo.getText().toString();
         String date = date_trip.getText().toString();
@@ -181,34 +183,68 @@ public class NewOfferActivity extends AppCompatActivity {
         String des = description.getText().toString();
         int max_seats = Integer.parseInt(seats.getText().toString());
         int  max_bags = Integer.parseInt(bags.getText().toString());
+        int creator_id = loadUserId();
+        if (creator_id!=0) {
+            sendToAPi(from, to, date, time, creator_id, des, max_seats, max_bags);
+        }
+    }
 
-        Call<Status_handling> call = jsonPlaceHolderApi.createTrip(from,to,date,time,1,des,max_seats,max_bags);
+    public int loadUserId() {
+        int id =0;
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if(i==1){
+                    id =  Integer.parseInt(text);
+                   break;
+                }
+                i++;
+            }
+            return id;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return id;
+    }
+
+    public void sendToAPi(String from,String to,String date,String time,int creator_id,String des,int max_seats,int max_bags){
+        Call<Status_handling> call = jsonPlaceHolderApi.createTrip(from, to, date, time, creator_id, des, max_seats, max_bags);
         call.toString();
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(NewOfferActivity.this,"responseb "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewOfferActivity.this, "responseb " + response.errorBody() + "\n" + "responseb " + response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Status_handling status = response.body();
-                if(status.getStatus().equals("success")){
-                    Toast.makeText(NewOfferActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                if (status.getStatus().equals("success")) {
+                    Toast.makeText(NewOfferActivity.this, "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(NewOfferActivity.this, MainHomeActivity.class);
                     startActivity(intent);
                     return;
                 }
-                Toast.makeText(NewOfferActivity.this,"Ανεπιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewOfferActivity.this, "Ανεπιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status_handling> call, Throwable t) {
-                Toast.makeText(NewOfferActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewOfferActivity.this, "t: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

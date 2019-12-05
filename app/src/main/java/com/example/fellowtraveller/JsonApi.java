@@ -58,4 +58,9 @@ public interface JsonApi {
     @GET("gettrips")
     Call<List<Trip>> getTrips();
 
+    @GET("gettripstakespart/{id}")
+    Call<List<Trip>> getTripsTakesPart(
+            @Path("id") int id
+    );
+
 }

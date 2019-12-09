@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.fellowtraveller.BetaAutocomplete.PlaceAutoSuggestAdapter;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,9 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         KEY = getString(R.string.api_key);
         setContentView(R.layout.activity_view_search_offers);
+        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        Listoftrips = new ArrayList<>();
         Intent intent = getIntent();
         filter_items = intent.getParcelableExtra("Filter");
         btn_filter = findViewById(R.id.ViewSearchOffersActivity_button_filters);
@@ -61,12 +65,8 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
 
         date_from = findViewById(R.id.ViewSearchOffersActivity_editText_date_from);
         date_to = findViewById(R.id.ViewSearchOffersActivity_editText_date_to);
-
-        OutFocus();
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        Listoftrips = new ArrayList<>();
         FillFields();
+        OutFocus();
         getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
         buildRecyclerView();
         btn_filter.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +90,13 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         btn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Listoftrips = new ArrayList<>();
                 getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
             }
         });
+        autoCompleteTextViewFrom.clearFocus();
+        autoCompleteTextViewTo.clearFocus();
+
     }
 
     public void FillFields(){
@@ -121,7 +125,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     }
 
     private void getTrips(AutoCompleteTextView autoCompleteTextViewFrom,AutoCompleteTextView autoCompleteTextViewTo) {
-
+        Log.i("RestAPI trip","mpika");
         String from =autoCompleteTextViewFrom.getText().toString();
         String to = autoCompleteTextViewTo.getText().toString();
         Call<List<Trip>> call = jsonPlaceHolderApi.createTripByFilter(from,to);
@@ -134,7 +138,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
                 }
                 List<Trip> trips = response.body();
                 for (int i=0; i<trips.size(); i++){
-                    Log.i("RestAPI","i: "+i);
+                    Log.i("RestAPI trip","i: "+trips.get(i).getFfrom());
                     Listoftrips.add(trips.get(i));
                 }
             }
@@ -146,6 +150,9 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     }
 
     public void OutFocus(){
+        TextInputLayout t;
+        t = findViewById(R.id.textInputLayout7);
+        t.clearFocus();
         autoCompleteTextViewFrom.clearFocus();
         autoCompleteTextViewTo.clearFocus();
         date_from.clearFocus();

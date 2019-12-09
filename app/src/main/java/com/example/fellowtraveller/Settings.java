@@ -23,6 +23,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     private static final String FILE_NAME = "fellow_login_state.txt";
 
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
+        navigationView.getMenu().getItem(3).setChecked(true);
     
     }
 

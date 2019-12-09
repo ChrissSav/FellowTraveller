@@ -24,6 +24,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
     private static final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+        navigationView.getMenu().getItem(2).setChecked(true);
 
 
     }

@@ -45,7 +45,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return "Αρχική";
             case 2:
 
-                return "Αναζητήσεις";
+                return "Εμπλεκόμενες";
             default:
                 return null;
         }

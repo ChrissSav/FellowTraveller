@@ -25,6 +25,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FILE_NAME = "fellow_login_state.txt";
+    private int id;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;

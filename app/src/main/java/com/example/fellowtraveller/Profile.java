@@ -49,7 +49,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         drawerToggle.syncState();
 
 
-        navigationView.getMenu().getItem(2).setChecked(true);
+        navigationView.getMenu().getItem(1).setChecked(true);
 
 
     }

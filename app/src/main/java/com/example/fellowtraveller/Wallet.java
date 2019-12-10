@@ -60,6 +60,9 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
                 break;
 
             case R.id.profile:
+                Intent a = new Intent(Wallet.this, Profile.class);
+                startActivity(a);
+                finish();
                 break;
 
             case R.id.wallet:

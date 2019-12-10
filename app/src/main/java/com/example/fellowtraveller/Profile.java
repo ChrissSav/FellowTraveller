@@ -23,7 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FILE_NAME = "fellow_login_state.txt";
 
     private DrawerLayout drawerLayout;
@@ -33,7 +33,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.profile);
 
 
 
@@ -49,9 +49,9 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         drawerToggle.syncState();
 
 
-        navigationView.getMenu().getItem(3).setChecked(true);
+        navigationView.getMenu().getItem(2).setChecked(true);
 
-    
+
     }
 
     @Override
@@ -60,19 +60,16 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         closeDrawer();
         switch (item.getItemId()){
             case R.id.home:
-                Intent c = new Intent(Settings.this, MainHomeActivity.class);
+                Intent c = new Intent(Profile.this, MainHomeActivity.class);
                 startActivity(c);
                 finish();
                 break;
 
             case R.id.profile:
-                Intent a = new Intent(Settings.this, Profile.class);
-                startActivity(a);
-                finish();
                 break;
 
             case R.id.wallet:
-                Intent s = new Intent(Settings.this, Wallet.class);
+                Intent s = new Intent(Profile.this, Wallet.class);
                 startActivity(s);
                 finish();
                 break;
@@ -81,7 +78,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.logout:
                 save("false");
-                Intent j = new Intent(Settings.this, MainActivity.class);
+                Intent j = new Intent(Profile.this, MainActivity.class);
                 startActivity(j);
                 finish();
 

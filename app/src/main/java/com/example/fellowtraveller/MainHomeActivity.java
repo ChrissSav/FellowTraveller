@@ -97,6 +97,9 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
             case R.id.home:
                 break;
             case R.id.profile:
+                Intent a = new Intent(MainHomeActivity.this, Profile.class);
+                startActivity(a);
+                finish();
                 break;
             case R.id.wallet:
                 Intent s = new Intent(MainHomeActivity.this, Wallet.class);

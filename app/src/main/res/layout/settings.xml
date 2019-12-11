@@ -23,14 +23,190 @@
             app:theme="@style/Theme.AppCompat.Light.NoActionBar"   >
         </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="300dp"
-            android:textSize="18sp"
-            ></TextView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="94dp"
+                android:layout_marginStart="34dp"
+                android:text="Settings"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#000"/>
+
+            <GridLayout
+                android:rowCount="5"
+                android:orientation="vertical"
+                android:alignmentMode="alignMargins"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="34dp"
+                android:layout_marginRight="34dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:src="@drawable/person"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="55dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Personal Information"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
+
+                    <ImageView
+                        android:src="@drawable/arrow_forward"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:src="@drawable/person"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="55dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Security"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
+
+                    <ImageView
+                        android:src="@drawable/arrow_forward"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:src="@drawable/person"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="55dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notifications"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
+
+                    <ImageView
+                        android:src="@drawable/arrow_forward"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:src="@drawable/person"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="55dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Language"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
+
+                    <ImageView
+                        android:src="@drawable/arrow_forward"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:src="@drawable/person"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="55dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payment"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
+
+                    <ImageView
+                        android:src="@drawable/arrow_forward"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"/>
+
+                </RelativeLayout>
+
+
+            </GridLayout>
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>

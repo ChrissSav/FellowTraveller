@@ -34,4 +34,5 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:1.0.0'
     //Circle Image For Profile
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.android.support:cardview-v7:29.0.0'
 }

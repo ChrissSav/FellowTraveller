@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleViewHolder> {
-    private ArrayList<User> mExampleList;
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ExampleViewHolder> {
+    private ArrayList<Notification> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
 
-        void onItemClick(int position,int flag);
+        void onItemClick(int position);
     }
 
 
@@ -25,57 +25,44 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-        public Button btn_accept,btn_reject;
+        public TextView description,shape;
+
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            name = itemView.findViewById(R.id.request_item_textView_name);
-            btn_accept = itemView.findViewById(R.id.request_item_button_accept);
-            btn_reject = itemView.findViewById(R.id.request_item_button_reject);
+            description = itemView.findViewById(R.id.notification_item_description);
+            shape = itemView.findViewById(R.id.request_item_button_accept);
 
-            btn_accept.setOnClickListener(new View.OnClickListener() {
+            shape.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position,0);
+                            listener.onItemClick(position);
                         }
                     }
                 }
             });
-            btn_reject.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position,1);
-                        }
-                    }
 
-
-                }
-            });
         }
     }
 
-    public RequestAdapter(ArrayList<User> exampleList) {
+    public NotificationAdapter(ArrayList<Notification> exampleList) {
         mExampleList = exampleList;
     }
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, parent, false);
         ExampleViewHolder evh = new ExampleViewHolder(v,mListener);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        User currentItem = mExampleList.get(position);
-        holder.name.setText(currentItem.getName());
+        Notification currentItem = mExampleList.get(position);
+        holder.description.setText("Ο χρήστης "+  currentItem.getUser().getName()+" σας έκανε αίτημα.");
     }
 
     @Override

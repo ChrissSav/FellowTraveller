@@ -63,4 +63,10 @@ public interface JsonApi {
             @Path("id") int id
     );
 
+
+    @GET("getnotification/{id}")
+    Call<List<Notification>> getNotigicationOfUser(
+            @Path("id") int id
+    );
+
 }

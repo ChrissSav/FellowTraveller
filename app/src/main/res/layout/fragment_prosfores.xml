@@ -14,15 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-         <ImageView
+        <ImageView
             android:layout_width="423dp"
             android:layout_height="390dp"
-            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/ic_404" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewOffer"
             android:layout_width="fill_parent"
@@ -32,6 +33,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

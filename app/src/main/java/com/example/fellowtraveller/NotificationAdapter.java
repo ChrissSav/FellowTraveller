@@ -3,7 +3,6 @@ package com.example.fellowtraveller;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,8 +30,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             description = itemView.findViewById(R.id.notification_item_description);
-            shape = itemView.findViewById(R.id.request_item_button_accept);
-
+            shape = itemView.findViewById(R.id.textView3);
+            description.setText("ihuhuihg");
             shape.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

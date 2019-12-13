@@ -22,6 +22,23 @@ public class Trip implements Parcelable {
     private Double rate;
     private String state;
 
+    public Trip(String ffrom, String tto, String date, String time, User creator, List<User> passengers, String description, int max_seats,
+                int current_num_of_seats, int max_bags, int current_num_of_bags, Double rate, String state) {
+        this.ffrom = ffrom;
+        this.tto = tto;
+        this.date = date;
+        this.time = time;
+        this.creator = creator;
+        this.passengers = passengers;
+        this.description = description;
+        this.max_seats = max_seats;
+        this.current_num_of_seats = current_num_of_seats;
+        this.max_bags = max_bags;
+        this.current_num_of_bags = current_num_of_bags;
+        this.rate = rate;
+        this.state = state;
+    }
+
     protected Trip(Parcel in) {
         ffrom = in.readString();
         tto = in.readString();

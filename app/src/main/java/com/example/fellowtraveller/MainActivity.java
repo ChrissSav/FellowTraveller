@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -52,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         text1 = findViewById(R.id.main_textView11);
-
+        text1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save("true","96","Χρήστος Σαβ","uom@uom.gr");
+            }
+        });
         load();
 
         eisodos.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +71,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    public void save(String status,String id,String name,String email) {
+        String text = status+"\n"+id+"\n"+name+"\n"+email;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     public void load() {
         FileInputStream fis = null;

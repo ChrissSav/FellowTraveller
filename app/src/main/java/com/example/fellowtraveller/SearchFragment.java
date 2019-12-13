@@ -80,6 +80,7 @@ public class SearchFragment extends Fragment {
 
     private void getTrips() {
 
+
         Call<List<Trip>> call = jsonPlaceHolderApi.getTripsTakesPart(loadUserId());
         call.enqueue(new Callback<List<Trip>>() {
             @Override

@@ -6,6 +6,12 @@ public class Notification {
     private Trip trip;
 
 
+    public Notification(int id, User user, Trip trip) {
+        this.id = id;
+        this.user = user;
+        this.trip = trip;
+    }
+
     public int getId() {
         return id;
     }

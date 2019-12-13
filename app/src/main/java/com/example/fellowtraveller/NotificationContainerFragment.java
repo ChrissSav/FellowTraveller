@@ -89,31 +89,31 @@ public class NotificationContainerFragment extends Fragment {
     }
 
     public void getNotifications() {
-        /*int id = loadUserId();
-        Log.i("NotificationDev","id: "+id);
+        int id = loadUserId();
+       // Log.i("NotificationDev","id: "+id);
         Call<List<Notification>> call = jsonPlaceHolderApi.getNotigicationOfUser(id);
         call.enqueue(new Callback<List<Notification>>() {
             @Override
             public void onResponse(Call<List<Notification>> mcall, Response<List<Notification>> response) {
-                Log.i("NotificationDev","mpika");
+              //  Log.i("NotificationDev","mpika");
                 if (!response.isSuccessful()) {
                     Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<Notification> trips = response.body();
-                Log.i("NotificationDev","trip size "+trips.size()+"");
+               // Log.i("NotificationDev","trip size "+trips.size()+"");
                 t.setText("Notifications");
                 for (int i=0; i<trips.size(); i++){
-                    List.add(trips.get(i));
-                    Log.i("NotificationDev",trips.get(i).getUser().getName());
+                    mExampleList.add(trips.get(i));
+                    //Log.i("NotificationDev",trips.get(i).getUser().getName());
                 }
-                Log.i("NotificationDev","size "+List.size()+"");
+                //Log.i("NotificationDev","size "+List.size()+"");
             }
             @Override
             public void onFailure(Call<List<Notification>> call, Throwable t) {
                 Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
 

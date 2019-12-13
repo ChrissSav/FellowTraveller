@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".MainHomeActivity">
+    tools:context=".BetaActivity.NotificationActivity">
 
 
     <RelativeLayout
@@ -24,40 +24,40 @@
             app:theme="@style/Theme.AppCompat.Light.NoActionBar"   >
         </androidx.appcompat.widget.Toolbar>
 
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+        <TextView
+            android:id="@+id/NotificationActivity_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ειδοποιήσεις"
+            android:textColor="#000"
+            android:textSize="26dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="32dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/home_appBar"
-            android:layout_above="@+id/home_bottom_nav">
+           />
 
-            <view
-                android:id="@+id/view"
-                class="androidx.viewpager.widget.ViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                />
-        </FrameLayout>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/home_bottom_nav"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/NotificationActivity_RecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_alignParentRight="true"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_above="@+id/NotificationActivity_fragment_bottom"
+            android:layout_below="@+id/NotificationActivity_textView"
+            android:layout_alignParentEnd="true"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteY="43dp" />
+
+        <fragment
+            android:id="@+id/NotificationActivity_fragment_bottom"
+            android:name="com.example.fellowtraveller.BetaActivity.BottomFragment"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/border_top"
-            android:outlineProvider="none"
-            app:itemIconSize="30dp"
-            app:itemIconTint="@drawable/bottom_nav_color"
-            app:itemTextColor="@drawable/bottom_nav_color"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:labelVisibilityMode="unlabeled"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav"/>
+            app:layout_constraintStart_toStartOf="parent" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

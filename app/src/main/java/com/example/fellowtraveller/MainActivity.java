@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 save("true","96","Χρήστος Σαβ","uom@uom.gr");
+                Intent intent = new Intent(MainActivity.this, MainHomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         load();
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         eisodos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, ViewSearchOffersActivity.class);
+                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
                 startActivity(intent);
             }
         });

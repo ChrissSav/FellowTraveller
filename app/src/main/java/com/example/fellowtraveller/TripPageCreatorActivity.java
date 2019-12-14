@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,9 +48,8 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_page_creator);
         Intent intent = getIntent();
-        trip = intent.getParcelableExtra("Trip");
+        //trip = intent.getParcelableExtra("Trip");
 
-        requests = new ArrayList<>();
         textView_status = findViewById(R.id.TripPageCreatorActivity_textView_status);
         textView_creator_name = findViewById(R.id.TripPageCreatorActivity_textView_creator_name);
         textView_from  = findViewById(R.id.TripPageCreatorActivity_textView_from);
@@ -58,8 +59,13 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_seats  = findViewById(R.id.TripPageCreatorActivity_textView_seats);
         textView_suitcases  = findViewById(R.id.TripPageCreatorActivity_textView_suitcases);
         back = findViewById(R.id.TripPageCreatorActivity_button_back);
+        User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
 
-        FillFields();
+        requests = new ArrayList<>();
+        requests.add(user);
+        user = new User(96,"Takis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
+        requests.add(user);
+       // FillFields();
         buildRecyclerView();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +76,6 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     }
 
     public void buildRecyclerView() {
-        requests = new ArrayList<>();
         mRecyclerView = findViewById(R.id.TripPageCreatorActivity_RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(TripPageCreatorActivity.this);
@@ -82,15 +87,21 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             public void onItemClick(int position,int flag) {
                 //flag==0 accept
                 if(flag == 0){
-
+                    Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
+                    Delete(position);
                 }//flag==1 reject
                 else if(flag == 1){
-
+                    Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
+                    Delete(position);
                 }
             }
         });
     }
 
+    public void Delete(int pos){
+        requests.remove(pos);
+        mAdapter.notifyDataSetChanged();
+    }
     public void FillFields(){
         String status = trip.getState();
         if(status.equals("available")){

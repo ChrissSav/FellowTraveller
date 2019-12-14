@@ -19,7 +19,8 @@
         <activity
             android:name=".BetaActivity.NotificationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".TripPageCreatorActivity" />
+        <activity android:name=".TripPageCreatorActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".SearchFiltersActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

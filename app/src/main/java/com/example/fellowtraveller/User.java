@@ -43,6 +43,18 @@ public class User implements Parcelable {
         }
     };
 
+    public User(int id, String name, String birthday, String email, String password, String phone, Double rate, int num_of_travels_offered, int num_of_travels_takespart) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.rate = rate;
+        this.num_of_travels_offered = num_of_travels_offered;
+        this.num_of_travels_takespart = num_of_travels_takespart;
+    }
+
     public int getId() {
         return id;
     }

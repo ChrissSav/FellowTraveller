@@ -14,7 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TripPageCreatorActivity"></activity>
+        <activity android:name=".HomeBetaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" ></activity>
+        <activity
+            android:name=".BetaActivity.NotificationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".TripPageCreatorActivity" />
         <activity
             android:name=".SearchFiltersActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

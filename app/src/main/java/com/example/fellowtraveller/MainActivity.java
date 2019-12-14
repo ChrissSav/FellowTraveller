@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -52,20 +55,47 @@ public class MainActivity extends AppCompatActivity {
         });
 
         text1 = findViewById(R.id.main_textView11);
-
+        text1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save("true","96","Χρήστος Σαβ","uom@uom.gr");
+                Intent intent = new Intent(MainActivity.this, MainHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         load();
 
         eisodos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, ViewSearchOffersActivity.class);
+                Intent intent = new Intent(MainActivity.this, HomeBetaActivity.class);
                 startActivity(intent);
             }
         });
 
     }
 
-
+    public void save(String status,String id,String name,String email) {
+        String text = status+"\n"+id+"\n"+name+"\n"+email;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     public void load() {
         FileInputStream fis = null;

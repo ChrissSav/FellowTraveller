@@ -12,6 +12,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
     private ProsforesFragment requestsFragment  = new ProsforesFragment();
     private HomeFragment homeFragment  = new HomeFragment();
     private SearchFragment searchFragment  = new SearchFragment();
+
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
 
@@ -33,6 +34,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
+
         return 3;
     }
 

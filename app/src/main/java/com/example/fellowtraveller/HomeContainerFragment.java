@@ -34,7 +34,6 @@ public class HomeContainerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_container, container, false);
 
         mTabLayout = view.findViewById(R.id.home_container_main_tabs);
-
         mViewPager = view.findViewById(R.id.home_container_main_tabPager);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -42,6 +41,7 @@ public class HomeContainerFragment extends Fragment {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         TabLayout.Tab tab = mTabLayout.getTabAt(1);
         tab.select();
+
         return view;
     }
 

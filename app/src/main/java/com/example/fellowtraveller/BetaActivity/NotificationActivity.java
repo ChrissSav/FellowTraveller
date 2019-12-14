@@ -1,5 +1,6 @@
 package com.example.fellowtraveller.BetaActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,9 +17,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellowtraveller.HomeBetaActivity;
 import com.example.fellowtraveller.JsonApi;
 import com.example.fellowtraveller.MainActivity;
-import com.example.fellowtraveller.MainHomeActivity;
 import com.example.fellowtraveller.Notification;
 import com.example.fellowtraveller.NotificationAdapter;
 import com.example.fellowtraveller.Profile;
@@ -26,6 +28,7 @@ import com.example.fellowtraveller.Settings;
 import com.example.fellowtraveller.Trip;
 import com.example.fellowtraveller.User;
 import com.example.fellowtraveller.Wallet;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.BufferedReader;
@@ -53,13 +56,15 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private  BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+
+
         save("true","96","Χρήστος Σαβ","uom@uom.gr");
-
-
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
@@ -70,6 +75,16 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+        navigationView.getMenu().getItem(0).setChecked(true);
+
+
+
+        bottomNavigationView = findViewById(R.id.notificationActivity_Bottom_Nav);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_nav_notification);
+
+
+        BottonNav();
+
 
         loadUserInfo();
 
@@ -97,6 +112,37 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
             }
         });
     }
+
+
+
+    public void BottonNav(){
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.bottom_nav_chat:
+                                /*Intent a = new Intent(HomeBetaActivity.this, Profile.class);
+                                startActivity(a);
+                                finish();*/
+                                break;
+                            case R.id.bottom_nav_home:
+                                Intent a = new Intent(NotificationActivity.this, HomeBetaActivity.class);
+                                startActivity(a);
+                                overridePendingTransition(0,0);
+                                finish();
+                                break;
+                            case R.id.bottom_nav_notification:
+
+                                break;
+                        }
+                        return true;
+                    }
+                });
+
+    }
+
 
 
     private void p (){
@@ -194,10 +240,14 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         closeDrawer();
         switch (item.getItemId()){
             case R.id.home:
+                Intent a = new Intent(NotificationActivity.this, HomeBetaActivity.class);
+                startActivity(a);
+                overridePendingTransition(0,0);
+                finish();
                 break;
             case R.id.profile:
-                Intent a = new Intent(NotificationActivity.this, Profile.class);
-                startActivity(a);
+                Intent b = new Intent(NotificationActivity.this, Profile.class);
+                startActivity(b);
                 finish();
                 break;
             case R.id.wallet:

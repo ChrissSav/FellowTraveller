@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".BetaActivity.NotificationActivity">
+    tools:context=".HomeBetaActivity">
 
 
     <RelativeLayout
@@ -24,34 +24,35 @@
             app:theme="@style/Theme.AppCompat.Light.NoActionBar"   >
         </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/NotificationActivity_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ειδοποιήσεις"
-            android:textColor="#000"
-            android:textSize="26dp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="32dp"
+        <RelativeLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/home_appBar"
-           />
+            android:layout_above="@+id/homeBetaActivity_Bottom_Nav">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/NotificationActivity_RecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_above="@+id/notificationActivity_Bottom_Nav"
-            android:layout_below="@+id/NotificationActivity_textView"
-            android:layout_alignParentEnd="true"
-            android:scrollbars="vertical"
-            tools:layout_editor_absoluteY="43dp" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/homeBetaActivity_container_main_tabs"
+                app:tabTextAppearance="@style/MyCustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="fixed"
+                app:tabIndicatorColor="#889CFF">
+            </com.google.android.material.tabs.TabLayout>
+
+            <view
+                android:id="@+id/home_container_main_tabPager"
+                class="androidx.viewpager.widget.ViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homeBetaActivity_container_main_tabs"
+                android:layout_marginTop="0dp" />
+        </RelativeLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/notificationActivity_Bottom_Nav"
+            android:id="@+id/homeBetaActivity_Bottom_Nav"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:background="@drawable/bottom_nav_background"
@@ -74,8 +75,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_drawer"
-        app:menu="@menu/my_menu"
-        >
+        app:menu="@menu/my_menu">
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -24,8 +24,6 @@
         <item name="colorAccent">#171717</item>
         <item name="colorControlNormal">#171717</item>
         <item name="colorControlActivated">#171717</item>
-
-
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

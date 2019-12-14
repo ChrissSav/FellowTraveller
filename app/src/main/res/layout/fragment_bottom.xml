@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:background="@drawable/bottom_nav_background"
     tools:context=".BetaActivity.BottomFragment">
 
     <Button
         android:id="@+id/BottomFragment_button_chat"
-        android:layout_width="30dp"
+        android:layout_width="36dp"
         android:layout_height="30dp"
-        android:background="@drawable/nav_chat_default"
+        android:background="@drawable/bottom_nav_btn_chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/BottomFragment_button_home"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,9 +19,9 @@
 
     <Button
         android:id="@+id/BottomFragment_button_home"
-        android:layout_width="30dp"
+        android:layout_width="36dp"
         android:layout_height="30dp"
-        android:background="@drawable/nav_home_default"
+        android:background="@drawable/bottom_nav_btn_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +29,9 @@
 
     <Button
         android:id="@+id/BottomFragment_button_notification"
-        android:layout_width="30dp"
+        android:layout_width="36dp"
         android:layout_height="30dp"
-        android:background="@drawable/nav_notification_default"
+        android:background="@drawable/bottom_nav_btn_notification"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BottomFragment_button_home"

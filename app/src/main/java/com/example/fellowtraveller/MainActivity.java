@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         eisodos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
+                Intent intent = new Intent(MainActivity.this, HomeBetaActivity.class);
                 startActivity(intent);
             }
         });

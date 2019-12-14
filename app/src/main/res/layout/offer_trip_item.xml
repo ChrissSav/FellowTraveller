@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
@@ -10,8 +10,7 @@
         android:layout_width="375dp"
         android:layout_height="285dp"
         android:layout_margin="10dp"
-        android:background="@drawable/search_trip_page_backround"
-        >
+        android:background="@drawable/search_trip_page_backround">
 
         <TextView
             android:id="@+id/textView35"

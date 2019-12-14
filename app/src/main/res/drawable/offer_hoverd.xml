@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F9A960"/>
+            <item android:state_pressed="true"
+                android:drawable="@color/hoverOrange"/> <!-- pressed state -->
+            <item android:state_focused="true"
+                android:drawable="@color/hoverOrange"/> <!-- focused state -->
+            <item android:drawable="@android:color/transparent"/> <!-- default state -->
+            <corners android:radius="18dp"/>
+        </shape>
+    </item>
+
+</selector>

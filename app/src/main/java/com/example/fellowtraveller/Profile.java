@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.home:
                 Intent c = new Intent(Profile.this, MainHomeActivity.class);
                 startActivity(c);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
 
@@ -71,15 +72,21 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.wallet:
                 Intent s = new Intent(Profile.this, Wallet.class);
                 startActivity(s);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.settings:
+                Intent k = new Intent(Profile.this, Settings.class);
+                startActivity(k);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
 
                 break;
             case R.id.logout:
                 save("false");
                 Intent j = new Intent(Profile.this, MainActivity.class);
                 startActivity(j);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
 
                 break;

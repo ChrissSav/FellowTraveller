@@ -31,7 +31,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="9dp"
-                android:background="@drawable/main_shape" />
+                android:background="@drawable/main_shape"
+
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,7 +76,7 @@
                 android:layout_marginEnd="73dp"
                 android:layout_marginBottom="76dp"
                 android:fontFamily="sans-serif"
-                android:text="Ψάξε την ειδανική διαδρομή για σένα"
+                android:text="Ψάξε την ιδανική διαδρομή για σένα"
                 android:textColor="#FFF"
                 android:textSize="16sp"
 
@@ -114,7 +116,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="11dp"
-                android:background="@drawable/main_shape_orange" />
+
+                android:background="@drawable/main_shape_orange"
+
+                />
 
             <TextView
                 android:layout_width="wrap_content"

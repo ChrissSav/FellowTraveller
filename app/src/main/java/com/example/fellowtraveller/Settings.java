@@ -63,18 +63,21 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.home:
                 Intent c = new Intent(Settings.this, MainHomeActivity.class);
                 startActivity(c);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
 
             case R.id.profile:
                 Intent a = new Intent(Settings.this, Profile.class);
                 startActivity(a);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
 
             case R.id.wallet:
                 Intent s = new Intent(Settings.this, Wallet.class);
                 startActivity(s);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.settings:
@@ -84,6 +87,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
                 save("false");
                 Intent j = new Intent(Settings.this, MainActivity.class);
                 startActivity(j);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
 
                 break;

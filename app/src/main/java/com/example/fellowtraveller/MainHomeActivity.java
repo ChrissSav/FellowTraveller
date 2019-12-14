@@ -99,22 +99,26 @@ public class MainHomeActivity extends AppCompatActivity  implements NavigationVi
             case R.id.profile:
                 Intent a = new Intent(MainHomeActivity.this, Profile.class);
                 startActivity(a);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.wallet:
                 Intent s = new Intent(MainHomeActivity.this, Wallet.class);
                 startActivity(s);
                 finish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.settings:
                 Intent i = new Intent(MainHomeActivity.this, Settings.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.logout:
                 save();
                 Intent j = new Intent(MainHomeActivity.this, MainActivity.class);
                 startActivity(j);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
         }

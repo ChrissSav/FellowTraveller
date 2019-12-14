@@ -6,12 +6,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -29,6 +33,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     private ImageButton imgBtn1, imgBtn2;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
+
         drawerToggle.syncState();
 
         imgBtn1 = (ImageButton) findViewById(R.id.imageButton);
@@ -76,12 +82,14 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             case R.id.home:
                 Intent c = new Intent(Wallet.this, MainHomeActivity.class);
                 startActivity(c);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
 
             case R.id.profile:
                 Intent a = new Intent(Wallet.this, Profile.class);
                 startActivity(a);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
 
@@ -92,12 +100,14 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             case R.id.settings:
                 Intent i = new Intent(Wallet.this, Settings.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.logout:
                 save("false");
                 Intent j = new Intent(Wallet.this, MainActivity.class);
                 startActivity(j);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
         }
@@ -137,4 +147,5 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             }
         }
     }
+
 }

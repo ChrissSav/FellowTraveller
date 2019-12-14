@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:background="@mipmap/ic_drawer_bg"
+    android:background="#202540"
     >
     <LinearLayout
         android:layout_width="match_parent"

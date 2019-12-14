@@ -11,18 +11,22 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="15dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         android:paddingBottom="10dp"
 
         >
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/cylinder"
-            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/offerItem_user_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+
+
+
+            android:elevation="1dp"
+            android:src="@drawable/profile_pic" />
+
         <TextView
             android:id="@+id/user_name_drawer"
             android:layout_width="match_parent"

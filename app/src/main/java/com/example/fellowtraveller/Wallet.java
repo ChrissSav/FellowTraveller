@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,6 +26,8 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     private static final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ImageButton imgBtn1, imgBtn2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,23 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
+        imgBtn1 = (ImageButton) findViewById(R.id.imageButton);
+        imgBtn2 = (ImageButton) findViewById(R.id.imageButton2);
+        imgBtn1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(Wallet.this,NewOfferActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgBtn2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(Wallet.this,SearchOfferActivity.class);
+                startActivity(intent);
+            }
+        });
 
         navigationView.getMenu().getItem(2).setChecked(true);
 

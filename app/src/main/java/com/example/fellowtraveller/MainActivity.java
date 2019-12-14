@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;
     private Button btn1;
     private TextView text;
-    private TextView text1;
+    private TextView text1,text3;
     private TextView eisodos;
 
     @Override
@@ -60,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 save("true","96","Χρήστος Σαβ","uom@uom.gr");
                 Intent intent = new Intent(MainActivity.this, MainHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+        text3 = findViewById(R.id.main_textView3);
+        text3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TripPageCreatorActivity.class);
                 startActivity(intent);
                 finish();
             }

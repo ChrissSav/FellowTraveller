@@ -54,8 +54,6 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
                             listener.onItemClick(position,1);
                         }
                     }
-
-
                 }
             });
         }

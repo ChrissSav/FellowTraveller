@@ -1,14 +1,22 @@
 package com.example.fellowtraveller;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -18,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,7 +41,8 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ImageButton imgBtn1, imgBtn2;
-
+    private ImageView imgView;
+    private Uri mImageUri;
 
 
 
@@ -54,14 +65,13 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         drawerToggle.syncState();
 
 
-
+        imgView = findViewById(R.id.imageView2);
         imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
 
         imgBtn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent intent = new Intent(Wallet.this,SearchOfferActivity.class);
-                startActivity(intent);
+                onChooseFile(v);
             }
         });
 
@@ -143,6 +153,32 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             }
         }
     }
+
+    public void onChooseFile(View v){
+        CropImage.activity().start(Wallet.this);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE ) {
+
+             CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if (resultCode == RESULT_OK){
+                mImageUri = result.getUri();
+                imgView.setImageURI(mImageUri);
+            }
+            else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Exception e = result.getError();
+
+            }
+        }
+    }
+
 
 
 }

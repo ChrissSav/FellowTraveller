@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         >
 
         <androidx.appcompat.widget.Toolbar
@@ -24,41 +25,68 @@
             app:theme="@style/Theme.AppCompat.Light.NoActionBar"></androidx.appcompat.widget.Toolbar>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="#202540"
-        android:paddingTop="20dp"
-        android:paddingLeft="5dp">
+        λ
+
+        <RelativeLayout
+            android:id="@+id/Relative_crop"
+            android:layout_width="match_parent"
+            android:layout_height="202dp"
+            android:layout_below="@+id/home_appBar"
+            android:background="#202540"
+            android:paddingLeft="5dp"
+            android:paddingTop="20dp">
 
 
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="139dp"
-            android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="139dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="257dp"
+                android:background="@drawable/blackshape" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageButton3"
+                android:layout_alignEnd="@+id/imageButton3"
+                android:layout_alignBottom="@+id/imageButton3"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="69dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="-5dp"
+                android:background="@drawable/ic_plus"
+                android:backgroundTint="#FFF" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView_crop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/Relative_crop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/border_top" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="226dp"
+            android:layout_height="219dp"
+            android:layout_below="@+id/imageView_crop"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="257dp"
-            android:background="@drawable/blackshape" />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageButton3"
-            android:layout_alignEnd="@+id/imageButton3"
-            android:layout_alignBottom="@+id/imageButton3"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="74dp"
-            android:layout_marginTop="69dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="-5dp"
-            android:background="@drawable/ic_plus"
-            android:backgroundTint="#FFF" />
-
-
-    </RelativeLayout>
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="100dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_launcher_background" />
 
 
     </RelativeLayout>

@@ -42,7 +42,6 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ImageButton imgBtn1, imgBtn2;
-    private ImageView imgView;
     private Uri mImageUri;
     private CircleImageView circleImageView;
 
@@ -67,7 +66,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         drawerToggle.syncState();
 
 
-        imgView = findViewById(R.id.imageView2);
+
         imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
         circleImageView = findViewById(R.id.user_pic_new);
 

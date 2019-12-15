@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +59,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView =  findViewById(R.id.nav_view_wallet);
+        navigationView =  findViewById(R.id.nav_view_wallet);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -79,7 +80,46 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
         navigationView.getMenu().getItem(2).setChecked(true);
 
+        loadUserInfo();
+    }
 
+
+    public void loadUserInfo() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            View header = navigationView.getHeaderView(0);
+            TextView name = header.findViewById(R.id.user_name_drawer);
+            TextView email = header.findViewById(R.id.user_email_drawer);
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i==2){
+                    name.setText(text);
+                }else if(i==3){
+                    email.setText(text);
+                }else if(i==1){
+                    //id = Integer.parseInt(text);
+                }
+                i++;
+            }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
@@ -88,7 +128,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         closeDrawer();
         switch (item.getItemId()){
             case R.id.home:
-                Intent c = new Intent(Wallet.this, MainHomeActivity.class);
+                Intent c = new Intent(Wallet.this, HomeBetaActivity.class);
                 startActivity(c);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -159,6 +199,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     public void onChooseFile(View v){
         CropImage.activity().start(Wallet.this);
 
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -176,6 +217,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             }
             else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception e = result.getError();
+                Log.i("error",e.getMessage());
 
             }
         }

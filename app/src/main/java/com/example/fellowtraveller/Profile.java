@@ -50,7 +50,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
         navigationView.getMenu().getItem(1).setChecked(true);
-
+        loadUserInfo();
 
     }
 
@@ -121,6 +121,44 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             if (fos != null) {
                 try {
                     fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void loadUserInfo() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            View header = navigationView.getHeaderView(0);
+            TextView name = header.findViewById(R.id.user_name_drawer);
+            TextView email = header.findViewById(R.id.user_email_drawer);
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i==2){
+                    name.setText(text);
+                }else if(i==3){
+                    email.setText(text);
+                }else if(i==1){
+                    //id = Integer.parseInt(text);
+                }
+                i++;
+            }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(text);
             }
             if (!(sb.toString().equals("false"))){
-                Intent mainIntent = new Intent(MainActivity.this, MainHomeActivity.class);
+                Intent mainIntent = new Intent(MainActivity.this, HomeBetaActivity.class);
                 startActivity(mainIntent);
                 finish();
             }

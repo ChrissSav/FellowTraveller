@@ -42,7 +42,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -60,7 +60,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         closeDrawer();
         switch (item.getItemId()){
             case R.id.home:
-                Intent c = new Intent(Profile.this, MainHomeActivity.class);
+                Intent c = new Intent(Profile.this, HomeBetaActivity.class);
                 startActivity(c);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

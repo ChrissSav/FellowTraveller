@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Wallet extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +44,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     private ImageButton imgBtn1, imgBtn2;
     private ImageView imgView;
     private Uri mImageUri;
+    private CircleImageView circleImageView;
 
 
 
@@ -67,6 +69,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
         imgView = findViewById(R.id.imageView2);
         imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
+        circleImageView = findViewById(R.id.user_pic_new);
 
         imgBtn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -170,7 +173,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
             if (resultCode == RESULT_OK){
                 mImageUri = result.getUri();
-                imgView.setImageURI(mImageUri);
+                circleImageView.setImageURI(mImageUri);
             }
             else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception e = result.getError();

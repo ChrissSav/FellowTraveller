@@ -34,6 +34,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,22 +46,17 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view_wallet);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
 
         drawerToggle.syncState();
 
-        imgBtn1 = (ImageButton) findViewById(R.id.imageButton);
-        imgBtn2 = (ImageButton) findViewById(R.id.imageButton2);
-        imgBtn1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(Wallet.this,NewOfferActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
+        imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
+
         imgBtn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -147,5 +143,6 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             }
         }
     }
+
 
 }

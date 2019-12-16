@@ -10,7 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +36,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -40,6 +45,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +63,8 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private  BottomNavigationView bottomNavigationView;
+    private  CircleImageView circleImageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +102,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
         p();
         buildRecyclerView();
+        loadImageFromStorage();
     }
 
 
@@ -343,5 +352,22 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                 }
             }
         }
+    }
+
+    private void loadImageFromStorage()
+    {
+        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        try {
+            File f = new File(directory, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            circleImageView.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }

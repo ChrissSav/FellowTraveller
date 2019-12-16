@@ -2,10 +2,17 @@ package com.example.fellowtraveller;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,12 +26,17 @@ import com.google.android.material.navigation.NavigationView;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,13 +50,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Wallet extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    private static final String IMAGE_URI = "fellow_login_state.txt";
     private static final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ImageButton imgBtn1, imgBtn2;
     private Uri mImageUri;
-    private CircleImageView circleImageView;
+    private CircleImageView circleImageView,circleImageView2;
 
 
 
@@ -70,6 +82,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
         imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
         circleImageView = findViewById(R.id.user_pic_new);
+        circleImageView2 = findViewById(R.id.load_pic);
 
         imgBtn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -79,7 +92,13 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         });
 
         navigationView.getMenu().getItem(2).setChecked(true);
-
+        circleImageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Wallet.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
+                loadImageFromStorage();
+            }
+        });
         loadUserInfo();
     }
 
@@ -214,6 +233,17 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             if (resultCode == RESULT_OK){
                 mImageUri = result.getUri();
                 circleImageView.setImageURI(mImageUri);
+                Bitmap bit = result.getBitmap();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
+                    Log.i("Chris","Bit map "+bitmap.toString());
+                    saveToInternalStorage(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                circleImageView2.setImageBitmap(bit);
+               // saveToInternalStorage(result.getBitmap());
             }
             else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception e = result.getError();
@@ -221,6 +251,46 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
             }
         }
+    }
+
+
+
+    private void loadImageFromStorage()
+    {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        try {
+            File f = new File(directory, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            circleImageView2.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        File path = new File( directory,"profile.jpg");
+        Log.i("Chris","path : "+ path.getPath());
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(path);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
     }
 
 

@@ -15,7 +15,7 @@
         android:paddingBottom="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/offerItem_user_pic"
+            android:id="@+id/nav_user_pic"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="16dp"

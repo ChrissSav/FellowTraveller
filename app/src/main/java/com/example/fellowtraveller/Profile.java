@@ -1,6 +1,10 @@
 package com.example.fellowtraveller;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,11 +28,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FILE_NAME = "fellow_login_state.txt";
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private CircleImageView circleImageView;
+
 
 
     @Override
@@ -51,6 +60,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         navigationView.getMenu().getItem(1).setChecked(true);
         loadUserInfo();
+        loadImageFromStorage();
 
     }
 
@@ -164,6 +174,23 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 }
             }
         }
+    }
+
+    private void loadImageFromStorage()
+    {
+        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        try {
+            File f = new File(directory, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            circleImageView.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 }

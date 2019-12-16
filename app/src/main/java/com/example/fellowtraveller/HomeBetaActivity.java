@@ -9,7 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,11 +26,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeBetaActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -38,6 +45,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private int id;
     private BottomNavigationView bottomNavigationView;
+    private CircleImageView circleImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +81,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
 
         bottomNavigationView = findViewById(R.id.homeBetaActivity_Bottom_Nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
-
-
+        loadImageFromStorage();
         BottonNav();
 
 
@@ -213,6 +220,23 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                 }
             }
         }
+    }
+
+    private void loadImageFromStorage()
+    {
+        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        try {
+            File f = new File(directory, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            circleImageView.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 }

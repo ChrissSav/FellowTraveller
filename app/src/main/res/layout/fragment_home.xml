@@ -1,188 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#fff"
+    android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="200dp">
+
+        <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/relative_search"
-            android:layout_marginTop="30dp">
+            android:layout_height="match_parent"
+            android:background="@drawable/main_shape"/>
 
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/ic_anazitisi"/>
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="215dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="9dp"
-                android:background="@drawable/main_shape"
+        <TextView
+            android:id="@+id/textviewname"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Αναζήτηση Διαδρομής"
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-                />
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:text="Ψάξε την ιδανική διαδρομή για σένα"
+            android:textSize="16sp"
+            android:textColor="#FFF"
+            android:textStyle="normal"
+            android:lineHeight="20sp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="173dp"
-                android:layout_alignTop="@+id/imageButton"
-                android:layout_alignEnd="@+id/imageButton"
-                android:layout_alignBottom="@+id/imageButton"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="210dp"
-                android:layout_marginTop="31dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="11dp"
-                android:background="@drawable/ic_anazitisi" />
-
-            <TextView
-                android:layout_width="225dp"
-                android:layout_height="32dp"
-                android:id="@+id/textviewname"
-                android:layout_alignStart="@+id/imageButton"
-                android:layout_alignTop="@+id/imageButton"
-                android:layout_alignEnd="@+id/imageButton"
-                android:layout_alignBottom="@+id/imageButton"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginEnd="101dp"
-                android:layout_marginBottom="160dp"
-                android:fontFamily="sans-serif"
-                android:text="Αναζήτηση Διαδρομής"
-                android:textColor="#FFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="136dp"
-                android:layout_height="64dp"
-                android:layout_alignStart="@+id/imageButton"
-                android:layout_alignBottom="@+id/imageButton"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginEnd="73dp"
-                android:layout_marginBottom="76dp"
-                android:fontFamily="sans-serif"
-                android:text="Ψάξε την ιδανική διαδρομή για σένα"
-                android:textColor="#FFF"
-                android:textSize="16sp"
-
-                android:textStyle="normal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_alignStart="@+id/imageButton"
-                android:layout_alignBottom="@+id/imageButton"
-                android:layout_marginStart="108dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="126dp"
-                android:layout_marginBottom="57dp"
-
-                android:fontFamily="sans-serif"
-                android:text="Πάτησε εδώ..."
-                android:textColor="#FFF"
-                android:textStyle="italic" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/relative_search"
-            android:layout_marginTop="40dp"
-
-            >
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="match_parent"
-                android:layout_height="215dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="11dp"
-
-                android:background="@drawable/main_shape_orange"
-
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="173dp"
-                android:layout_alignTop="@+id/imageButton2"
-                android:layout_alignEnd="@+id/imageButton2"
-                android:layout_alignBottom="@+id/imageButton2"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="210dp"
-                android:layout_marginTop="31dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="11dp"
-                android:background="@drawable/ic_prosfora" />
-            <TextView
-                android:layout_width="225dp"
-                android:layout_height="32dp"
-                android:layout_alignStart="@+id/imageButton2"
-                android:layout_alignTop="@+id/imageButton2"
-                android:layout_alignEnd="@+id/imageButton2"
-                android:layout_alignBottom="@+id/imageButton2"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginEnd="101dp"
-                android:layout_marginBottom="160dp"
-                android:fontFamily="sans-serif"
-                android:text="Προσφορά Διαδρομής"
-                android:textColor="#FFF"
-
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="158dp"
-                android:layout_height="92dp"
-
-                android:layout_alignStart="@+id/imageButton2"
-                android:layout_alignBottom="@+id/imageButton2"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginEnd="73dp"
-                android:layout_marginBottom="55dp"
-                android:fontFamily="sans-serif"
-                android:text="Μοιράσου την διαδρομή σου και βρες τους ιδανικούς συνταξιδιώτες σου"
-                android:textColor="#FFF"
-                android:textSize="16sp"
-
-                android:textStyle="normal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_alignStart="@+id/imageButton2"
-                android:layout_alignBottom="@+id/imageButton2"
-                android:layout_marginStart="108dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="126dp"
-                android:layout_marginBottom="34dp"
-
-                android:fontFamily="sans-serif"
-                android:text="Πάτησε εδώ..."
-                android:textColor="#FFF"
-                android:textStyle="italic" />
-
-
-        </RelativeLayout>
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="Πάτησε εδώ..."
+            android:textSize="14sp"
+            android:textColor="#CFD7FF"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
-</FrameLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="200dp">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_shape_orange"/>
+
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/ic_prosfora"/>
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Αναζήτηση Διαδρομής"
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:text="Μοιράσου  την διαδρομή σου και βρες τους ιδανικους συνταξιδιώτες σου"
+            android:textSize="16sp"
+            android:textColor="#FFF"
+            android:textStyle="normal"
+            android:lineHeight="20sp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="Πάτησε εδώ..."
+            android:textSize="14sp"
+            android:textColor="#FFDFC1"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

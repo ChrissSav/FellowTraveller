@@ -28,14 +28,14 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         btn1 = v.findViewById(R.id.imageButton);
         btn2 = v.findViewById(R.id.imageButton2);
-        btn1.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 Intent intent = new Intent(getActivity(),NewOfferActivity.class);
                 startActivity(intent);
             }
         });
-        btn2.setOnClickListener(new View.OnClickListener() {
+        btn1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 Intent intent = new Intent(getActivity(),SearchOfferActivity.class);

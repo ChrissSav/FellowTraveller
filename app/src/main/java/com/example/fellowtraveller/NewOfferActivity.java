@@ -128,6 +128,7 @@ public class NewOfferActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
         mTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -159,7 +160,11 @@ public class NewOfferActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
+                if(CheckFields()) {
                     registerTrip();
+                }else {
+                    Toast.makeText(NewOfferActivity.this, "Ανεπιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -247,6 +252,88 @@ public class NewOfferActivity extends AppCompatActivity {
                 Toast.makeText(NewOfferActivity.this, "t: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public boolean CheckFields(){
+        if(validateFrom() & validateTo() & validateDate_trip() &
+                validateTime_trip()& validateSeats() & validateBags() & validateDescription() ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean validateFrom(){
+        if(autoCompleteTextViewFrom.getText().length()<1){
+            autoCompleteTextViewFrom.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            autoCompleteTextViewFrom.setError(null);
+            return true;
+        }
+    }
+    public boolean validateTo(){
+        if(autoCompleteTextViewTo.getText().length()<1) {
+            autoCompleteTextViewTo.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }else{
+            autoCompleteTextViewTo.setError(null);
+            return true;
+        }
+    }
+    public boolean validateDate_trip(){
+        if(date_trip.getText().length()<1) {
+            date_trip.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            date_trip.setError(null);
+            return true;
+        }
+    }
+    public boolean validateTime_trip(){
+        if(time_trip.getText().length()<1) {
+            time_trip.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            time_trip.setError(null);
+            return true;
+        }
+    }
+    public boolean validateSeats(){
+        if(seats.getText().length()<1){
+            seats.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            seats.setError(null);
+            return true;
+        }
+
+    }
+    public boolean validateBags(){
+        if(bags.getText().length()<1){
+            bags.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            bags.setError(null);
+            return true;
+        }
+
+    }
+    public boolean validateDescription(){
+        if(description.getText().length()<1) {
+            description.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            description.setError(null);
+            return true;
+        }
     }
 
 }

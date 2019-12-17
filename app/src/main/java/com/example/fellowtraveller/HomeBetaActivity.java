@@ -202,6 +202,8 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                     email.setText(text);
                 }else if(i==1){
                     id = Integer.parseInt(text);
+                    Log.i("NotificationDev","id: "+id);
+
                 }
                 i++;
             }

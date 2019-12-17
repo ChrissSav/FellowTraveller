@@ -2,15 +2,9 @@ package com.example.fellowtraveller;
 
 public class Notification {
     private int id;
-    private User user;
+    private UserB user;
     private Trip trip;
 
-
-    public Notification(int id, User user, Trip trip) {
-        this.id = id;
-        this.user = user;
-        this.trip = trip;
-    }
 
     public int getId() {
         return id;
@@ -20,11 +14,11 @@ public class Notification {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserB getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserB user) {
         this.user = user;
     }
 

@@ -41,8 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
 
-
-
         setContentView(R.layout.activity_login);
         textInputEmail = findViewById(R.id.login_editText_email);
         textInputPassword = findViewById(R.id.login_editText_password);
@@ -83,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 User user = response.body();
                 if(user.getName()!=null){
                     save("true",user.getId()+"",user.getName(),user.getEmail());
-                    Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     finish();
                     return;

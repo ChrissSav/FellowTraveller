@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private NavigationView navigationView;
     private  BottomNavigationView bottomNavigationView;
     private  CircleImageView circleImageView;
+    private int id;
 
 
     @Override
@@ -72,7 +74,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         setContentView(R.layout.activity_notification);
 
 
-        save("true","96","Χρήστος Σαβ","uom@uom.gr");
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
@@ -99,8 +100,8 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         mExampleList = new ArrayList<>();
-
-        p();
+        getNotifications();
+       // p();
         buildRecyclerView();
         loadImageFromStorage();
     }
@@ -155,37 +156,33 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
 
     private void p (){
-        User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
+        /*User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
         List<User> pa = new ArrayList<>();
         Trip trip = new Trip("iu","ijr","22-02-2019","22:00",user,pa,"ojoj",10,0,10,0,
                 10.0,"va");
         Notification not = new Notification(1,user,trip);
-        mExampleList.add(not);
+        mExampleList.add(not);*/
     }
 
     public void getNotifications() {
         int id = loadUserId();
-        // Log.i("NotificationDev","id: "+id);
-        Call<List<Notification>> call = jsonPlaceHolderApi.getNotigicationOfUser(id);
+        Log.i("NotificationDev","id: "+id);
+        Call<List<Notification>> call = jsonPlaceHolderApi.getNotificationOfUser(id);
         call.enqueue(new Callback<List<Notification>>() {
             @Override
             public void onResponse(Call<List<Notification>> mcall, Response<List<Notification>> response) {
-                //  Log.i("NotificationDev","mpika");
                 if (!response.isSuccessful()) {
                     Toast.makeText(NotificationActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<Notification> trips = response.body();
-                // Log.i("NotificationDev","trip size "+trips.size()+"");
                 for (int i=0; i<trips.size(); i++){
                     mExampleList.add(trips.get(i));
-                    //Log.i("NotificationDev",trips.get(i).getUser().getName());
                 }
-                //Log.i("NotificationDev","size "+List.size()+"");
             }
             @Override
             public void onFailure(Call<List<Notification>> call, Throwable t) {
-                Toast.makeText(NotificationActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(NotificationActivity.this,"Δεν υπάρχουν ειδοποιήσεις",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -312,7 +309,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                 }else if(i==3){
                     email.setText(text);
                 }else if(i==1){
-                    //id = Integer.parseInt(text);
+                    id = Integer.parseInt(text);
                 }
                 i++;
             }

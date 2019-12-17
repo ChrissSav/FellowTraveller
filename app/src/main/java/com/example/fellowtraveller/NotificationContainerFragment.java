@@ -53,16 +53,16 @@ public class NotificationContainerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_notification_container, container, false);
-        t = view.findViewById(R.id.NotificationContainerFragment_textView);
+        /*t = view.findViewById(R.id.NotificationContainerFragment_textView);
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         mExampleList = new ArrayList<>();
         p();
-        buildRecyclerView(view);
+        buildRecyclerView(view);*/
         return view;
 
     }
-    public void buildRecyclerView(View v) {
+    /*public void buildRecyclerView(View v) {
         mRecyclerView = v.findViewById(R.id.NotificationContainerFragment_RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -148,5 +148,5 @@ public class NotificationContainerFragment extends Fragment {
             }
         }
         return id;
-    }
+    }*/
 }

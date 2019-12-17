@@ -31,7 +31,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             super(itemView);
             description = itemView.findViewById(R.id.notification_item_description);
             shape = itemView.findViewById(R.id.textView3);
-            description.setText("ihuhuihg");
             shape.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

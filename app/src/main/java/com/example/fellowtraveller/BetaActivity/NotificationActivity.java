@@ -31,6 +31,7 @@ import com.example.fellowtraveller.Profile;
 import com.example.fellowtraveller.R;
 import com.example.fellowtraveller.Settings;
 import com.example.fellowtraveller.Trip;
+import com.example.fellowtraveller.TripPageCreatorActivity;
 import com.example.fellowtraveller.User;
 import com.example.fellowtraveller.Wallet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -119,6 +120,11 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
             public void onItemClick(int position) {
                 Toast.makeText(NotificationActivity.this, position+1+"",
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
+                intent.putExtra("Trip",mExampleList.get(position).getTrip());
+                startActivity(intent);
+                mExampleList.remove(position);
+                mAdapter.notifyDataSetChanged();
             }
         });
     }

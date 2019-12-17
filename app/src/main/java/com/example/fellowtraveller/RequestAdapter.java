@@ -9,9 +9,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleViewHolder> {
-    private ArrayList<User> mExampleList;
+    private List<UserB> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -59,7 +60,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
         }
     }
 
-    public RequestAdapter(ArrayList<User> exampleList) {
+    public RequestAdapter(List<UserB> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -72,7 +73,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        User currentItem = mExampleList.get(position);
+        UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
     }
 

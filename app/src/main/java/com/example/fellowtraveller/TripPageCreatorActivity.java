@@ -26,7 +26,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TripPageCreatorActivity extends AppCompatActivity {
-    private Trip trip;
+    private TripB trip;
     private TextView textView_status;
     private TextView textView_creator_name;
     private EditText textView_from;
@@ -36,7 +36,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private TextView textView_seats;
     private TextView textView_suitcases;
     private Button back;
-    private ArrayList<User> requests;
+    private List<UserB> requests ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
 
@@ -50,8 +50,8 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_page_creator);
         Intent intent = getIntent();
-        //trip = intent.getParcelableExtra("Trip");
-
+        trip = intent.getParcelableExtra("Trip");
+        requests = trip.getRequests();
         textView_status = findViewById(R.id.TripPageCreatorActivity_textView_status);
         textView_creator_name = findViewById(R.id.TripPageCreatorActivity_textView_creator_name);
         textView_from  = findViewById(R.id.TripPageCreatorActivity_textView_from);
@@ -61,12 +61,13 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_seats  = findViewById(R.id.TripPageCreatorActivity_textView_seats);
         textView_suitcases  = findViewById(R.id.TripPageCreatorActivity_textView_suitcases);
         back = findViewById(R.id.TripPageCreatorActivity_button_back);
-        User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
+        FillFields();
+       /* User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
 
         requests = new ArrayList<>();
         requests.add(user);
         user = new User(96,"Takis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
-        requests.add(user);
+        requests.add(user);*/
        // FillFields();
         buildRecyclerView();
         back.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +92,9 @@ public class TripPageCreatorActivity extends AppCompatActivity {
                 if(flag == 0){
                     Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
                     Delete(position);
+                    int num = trip.getCurrent_num_of_seats()+1;
+                    trip.setCurrent_num_of_seats(num);
+                    textView_seats.setText(trip.getSeatesStatus());
                 }//flag==1 reject
                 else if(flag == 1){
                     Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();

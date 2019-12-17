@@ -3,7 +3,7 @@ package com.example.fellowtraveller;
 public class Notification {
     private int id;
     private UserB user;
-    private Trip trip;
+    private TripB trip;
 
 
     public int getId() {
@@ -22,11 +22,11 @@ public class Notification {
         this.user = user;
     }
 
-    public Trip getTrip() {
+    public TripB getTrip() {
         return trip;
     }
 
-    public void setTrip(Trip trip) {
+    public void setTrip(TripB trip) {
         this.trip = trip;
     }
 }

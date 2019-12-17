@@ -53,7 +53,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/notificationActivity_Bottom_Nav"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="60dp"
             android:background="@drawable/bottom_nav_background"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"

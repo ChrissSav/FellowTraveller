@@ -92,8 +92,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
                 if(flag == 0){
                     Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
                     Delete(position);
-                    int num = trip.getCurrent_num_of_seats()+1;
-                    trip.setCurrent_num_of_seats(num);
+                    trip.setCurrent_num_of_seats(trip.getCurrent_num_of_seats()+1);
                     textView_seats.setText(trip.getSeatesStatus());
                 }//flag==1 reject
                 else if(flag == 1){
@@ -124,6 +123,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_seats.setText(trip.getSeatesStatus());
         textView_suitcases.setText(trip.getbagsStatus());
     }
+
 
 
 

@@ -17,7 +17,7 @@ public class ChatContainerFragment extends Fragment {
 
 
     public ChatContainerFragment() {
-        // Required empty public constructor
+
     }
 
 

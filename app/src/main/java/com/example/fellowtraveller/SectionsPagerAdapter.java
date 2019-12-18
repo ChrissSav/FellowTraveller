@@ -15,6 +15,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
+        Log.i("SectionsPagerAdapter","SectionsPagerAdapter");
 
     }
 
@@ -22,10 +23,14 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
+                Log.i("SectionsPagerAdapter","requestsFragment");
                 return requestsFragment;
+
             case 1:
+                Log.i("SectionsPagerAdapter","homeFragment");
                 return homeFragment;
             case 2:
+                Log.i("SectionsPagerAdapter","searchFragment");
                 return searchFragment;
             default:
                 return null;

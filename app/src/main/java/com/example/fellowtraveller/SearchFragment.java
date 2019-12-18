@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class SearchFragment extends Fragment {
     private Retrofit retrofit ;
     private TextView textError;
     private final String FILE_NAME = "fellow_login_state.txt";
+    private View mMainView;
 
     public SearchFragment() {
     }
@@ -47,16 +50,21 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        mMainView = inflater.inflate(R.layout.fragment_search, container, false);
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        textError = view.findViewById(R.id.SearchFragment_textView3);
+        textError = mMainView.findViewById(R.id.SearchFragment_textView3);
         Listoftrips = new ArrayList<>();
         getTrips();
-        buildRecyclerView(view);
-        return view;
+        buildRecyclerView(mMainView);
+        return mMainView;
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+
+    }
 
     public void buildRecyclerView(View v) {
         mRecyclerView = v.findViewById(R.id.recyclerView);

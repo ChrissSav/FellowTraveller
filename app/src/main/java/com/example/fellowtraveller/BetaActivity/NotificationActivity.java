@@ -103,7 +103,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         mExampleList = new ArrayList<>();
         getNotifications();
-       // p();
         buildRecyclerView();
         loadImageFromStorage();
     }
@@ -161,16 +160,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     }
 
 
-
-    private void p (){
-        /*User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
-        List<User> pa = new ArrayList<>();
-        Trip trip = new Trip("iu","ijr","22-02-2019","22:00",user,pa,"ojoj",10,0,10,0,
-                10.0,"va");
-        Notification not = new Notification(1,user,trip);
-        mExampleList.add(not);*/
-    }
-
     public void getNotifications() {
         int id = loadUserId();
         Log.i("NotificationDev","id: "+id);
@@ -182,9 +171,9 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                     Toast.makeText(NotificationActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<Notification> trips = response.body();
-                for (int i=0; i<trips.size(); i++){
-                    mExampleList.add(trips.get(i));
+                List<Notification> notifications = response.body();
+                for (int i=0; i<notifications.size(); i++){
+                    mExampleList.add(notifications.get(i));
                 }
             }
             @Override
@@ -196,9 +185,8 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
 
 
-    public void ReadNot(int v,int pos){
-        final int  not_id = v;
-        final int  position = pos;
+    public void ReadNot(int id){
+        final int  not_id = id;
         Call<Status_handling> call = jsonPlaceHolderApi.NotificationRead(not_id);
         call.enqueue(new Callback<Status_handling>() {
             @Override
@@ -207,8 +195,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                     Toast.makeText(NotificationActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mExampleList.remove(position);
-                mAdapter.notifyDataSetChanged();
                 Log.i("NotificationDev","not_id: "+not_id);
             }
             @Override

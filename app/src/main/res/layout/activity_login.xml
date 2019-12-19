@@ -9,123 +9,159 @@
 
 
     <TextView
-        android:id="@+id/login_textView"
-        android:layout_width="328dp"
-        android:layout_height="248dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/main_shape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_header" />
-
-    <TextView
         android:id="@+id/login_header"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Είσοδος"
-        android:textColor="#000000"
-        android:textSize="22sp"
+        android:gravity="center"
+        android:text="Χρόνια πολλά μωρό μου!"
+        android:textSize="26sp"
+        android:textColor="#000"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-    <TextView
-        android:id="@+id/login_textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="19sp"
-        android:layout_marginStart="68dp"
-        android:text="Δεν έχεις λογαριασμό; Κάνε"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="16dp"
+        android:background="#FFAA5E"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
-
-
-    <Button
-        android:id="@+id/login_button_register"
-        android:layout_width="73dp"
-        android:layout_height="19dp"
-        android:background="@android:color/transparent"
-        android:text="Εγγραφή"
-        android:textAllCaps="false"
-        android:textColor="#889CFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/login_textView3"
-        app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
-
-
-    <Button
-        android:id="@+id/login_button_login"
-        android:layout_width="326dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/main_btn_login"
-        android:text="Είσοδος"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_editText_password" />
+        app:layout_constraintTop_toBottomOf="@+id/login_header" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_editText_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:paddingTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/text_view_search_add_offer"
+        android:paddingTop="8dp"
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_textView">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="326dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@null"
             android:backgroundTint="#FFC088"
             android:hint="Email"
             android:inputType="text"
-            android:paddingLeft="20dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:textColor="#817F7F"
             android:textColorHint="#000"
-            android:textSize="20dp" />
+            android:textSize="16sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_editText_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/text_view_search_add_offer"
         android:paddingTop="8dp"
         android:textColorHint="#000"
         app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
         app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/login_editText_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="326dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@null"
-            android:textSize="20dp"
             android:backgroundTint="#FFC088"
             android:hint="Κωδικός"
-            android:paddingLeft="20dp"
-            android:paddingRight="15dp"
+            android:inputType="textPassword"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:textColor="#817F7F"
             android:textColorHint="#000"
-            android:inputType="textPassword" />
+            android:textSize="16sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="8dp"
+        android:text="Ξέσαχα τον κωδικό πρόσβασης"
+        android:textSize="14sp"
+        android:textColor="#8297FF"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@id/login_editText_password"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Switch
+        android:id="@+id/login_remember_me_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="48dp"
+        android:text="Να με θυμάσαι"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textColorHint="#000"
+        app:layout_constraintTop_toBottomOf="@id/login_editText_password"/>
+
+    <Button
+        android:id="@+id/login_button_login"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/main_btn_login"
+        android:text="Είσοδος"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/login_textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Δεν έχεις λογαριασμό; Κάνε "
+            android:textSize="14sp"
+            android:textColor="#C9C9C9"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/login_button_register"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="60dp"
+            android:layout_height="19dp"
+            android:background="@android:color/transparent"
+            android:text="Εγγραφή"
+            android:textAllCaps="false"
+            android:textColor="#889CFF"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

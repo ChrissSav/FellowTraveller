@@ -7,133 +7,150 @@
     android:background="#fff"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/main_textView"
-        android:layout_width="362dp"
-        android:layout_height="305dp"
-        android:layout_marginTop="28dp"
+    <ImageView
+        android:id="@+id/main_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/main_shape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/main_textView2"
-        android:layout_width="152dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Καλώς ήρθατε"
         android:textAllCaps="false"
         android:textColor="#000"
-        android:textSize="22sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView" />
-
-    <Button
-        android:id="@+id/main_button1"
-        android:layout_width="155dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="52dp"
-        android:textSize="16sp"
-        android:background="@drawable/main_btn_login"
-        android:text="Σύνδεση"
-        android:textColor="#ffffff"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView3" />
-
-    <Button
-        android:id="@+id/main_button2"
-        android:layout_width="155dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="52dp"
-        android:textSize="16sp"
-        android:background="@drawable/main_btn_sigin"
-        android:layout_marginEnd="32dp"
-        android:textColor="#000000"
-        android:text="Εγγραφή"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"/>
 
     <TextView
         android:id="@+id/main_textView3"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#C9C9C9"
         app:layout_constraintTop_toBottomOf="@+id/main_textView2" />
 
-    <TextView
-        android:id="@+id/main_textView5"
-        android:layout_width="104dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/main_line"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_button1" />
+    <LinearLayout
+        android:id="@+id/main_linearLayout"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/main_textView3"
+        app:layout_constraintBottom_toTopOf="@+id/main_linearLayout2"
+        app:layout_constraintVertical_bias="0.4">
 
-    <TextView
-        android:id="@+id/main_textView4"
-        android:layout_width="104dp"
-        android:layout_height="2dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/main_line"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_button1" />
+        <Button
+            android:id="@+id/main_button1"
+            android:background="@drawable/main_btn_login"
+            android:layout_marginEnd="8dp"
+            android:text="Σύνδεση"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
 
-    <TextView
-        android:id="@+id/main_textView9"
+        <Button
+            android:id="@+id/main_button2"
+            android:background="@drawable/main_btn_sigin"
+            android:layout_marginStart="8dp"
+            android:text="Εγγραφή"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textAllCaps="false"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_linearLayout2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/main_linearLayout3">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/main_line" />
+
+        <TextView
+            android:id="@+id/main_textView9"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Είσοδος με"
+            android:textColor="#C9C9C9"
+            android:textSize="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/main_line" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Είσοδος με"
-        android:textColor="#C9C9C9"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/main_textView5"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toEndOf="@+id/main_textView4"
-        app:layout_constraintTop_toBottomOf="@+id/main_button1" />
-
-    <TextView
-        android:id="@+id/main_textView10"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/main_f_b"
-        android:gravity="center"
-        android:text="F"
-        android:textColor="#FFC088"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView9"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/main_textView11"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="128dp"
-        android:background="@drawable/main_f_b"
-        android:gravity="center"
-        android:text="G"
-        android:textColor="#FFC088"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView9"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95">
+
+        <TextView
+            android:id="@+id/main_textView10"
+            android:layout_marginEnd="16dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/main_f_b"
+            android:gravity="center"
+            android:text="F"
+            android:textColor="#FFC088" />
+
+        <TextView
+            android:id="@+id/main_textView11"
+            android:layout_marginStart="16dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/main_f_b"
+            android:gravity="center"
+            android:text="G"
+            android:textColor="#FFC088" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

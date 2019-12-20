@@ -28,17 +28,10 @@
             android:elevation="1dp"
             android:src="@drawable/blackshape" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_appBar"
+        <include
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="#fff"
-            android:minHeight="?attr/actionBarSize"
-            app:theme="@style/Theme.AppCompat.Light.NoActionBar"></androidx.appcompat.widget.Toolbar>
-
-
-        λ
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
             android:id="@+id/Relative_crop"

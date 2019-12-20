@@ -65,9 +65,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#202540"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:theme="@style/NavigationTheme"
         app:headerLayout="@layout/header_drawer"
         app:menu="@menu/my_menu"
-        >
-    </com.google.android.material.navigation.NavigationView>
+        app:itemIconTint="#fff"
+        app:itemTextColor="#fff"
+        app:itemBackground="@drawable/nav_item_active_background"
+        app:itemIconPadding="20dp"
+        app:itemHorizontalPadding="25dp" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

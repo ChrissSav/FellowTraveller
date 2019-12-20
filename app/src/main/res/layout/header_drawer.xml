@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="120dp"
     android:background="#202540"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp">
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="25dp"
+    android:paddingEnd="0dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/nav_user_pic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="16dp"
-            android:elevation="1dp"
-            android:src="@drawable/profile_picture" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_user_pic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/profile_picture"
+        android:layout_marginEnd="15dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/user_name_drawer"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Spuros Rantoglou"
-            android:textColor="#FFF"
-            android:textSize="30sp"
-            android:fontFamily="sans-serif"
-            />
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/user_email_drawer"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="spurakos98@gmail.com"
-            android:textColor="#FFF"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif"
-            />
+            android:textSize="14sp"
+            android:textColor="#C9C9C9" />
+
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>

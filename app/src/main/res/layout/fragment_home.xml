@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <RelativeLayout
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="350dp"
-        android:layout_height="200dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_home_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:maxHeight="200dp"
+        android:layout_weight="1"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.2">
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -19,59 +31,71 @@
             android:background="@drawable/main_shape"/>
 
         <ImageView
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
+            android:id="@+id/fragment_home_imageView"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@drawable/ic_anazitisi"/>
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/ic_anazitisi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:id="@+id/textviewname"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:id="@+id/fragment_home_textView"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:text="Αναζήτηση Διαδρομής"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="#FFF"
             android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_marginEnd="150dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:text="Ψάξε την ιδανική διαδρομή για σένα"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="#FFF"
             android:textStyle="normal"
             android:lineHeight="20sp"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_textView" />
 
         <TextView
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="30dp"
             android:text="Πάτησε εδώ..."
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#CFD7FF"
             android:textStyle="italic"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="350dp"
-        android:layout_height="200dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_home_relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:maxHeight="200dp"
+        android:layout_weight="1"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8">
 
         <ImageButton
             android:id="@+id/imageButton2"
@@ -82,49 +106,53 @@
         <ImageView
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@drawable/ic_prosfora"/>
+            android:background="@drawable/ic_prosfora"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:id="@+id/fragment_home_textView2"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="Αναζήτηση Διαδρομής"
-            android:textSize="18sp"
+            android:text="Προσφορά Διαδρομής"
+            android:textSize="16sp"
             android:textColor="#FFF"
             android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_marginEnd="150dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:text="Μοιράσου  την διαδρομή σου και βρες τους ιδανικους συνταξιδιώτες σου"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="#FFF"
             android:textStyle="normal"
             android:lineHeight="20sp"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_textView2" />
 
         <TextView
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="30dp"
             android:text="Πάτησε εδώ..."
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#FFDFC1"
             android:textStyle="italic"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

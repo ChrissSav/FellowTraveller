@@ -42,7 +42,7 @@ public interface JsonApi {
 
 
     @GET("gettripbyfilter/{from}/{to}")
-    Call<List<Trip>> createTripByFilter(
+    Call<List<TripB>> createTripByFilter(
             @Path("from") String from,
             @Path("to") String to
     );
@@ -59,7 +59,7 @@ public interface JsonApi {
     Call<List<Trip>> getTrips();
 
     @GET("gettripstakespart/{id}")
-    Call<List<Trip>> getTripsTakesPart(
+    Call<List<TripB>> getTripsTakesPart(
             @Path("id") int id
     );
 
@@ -73,4 +73,12 @@ public interface JsonApi {
     Call<Status_handling> NotificationRead(
             @Path("id") int id
     );
+
+
+    @GET("registertotrip/{user_id}/{trip_id}")
+    Call<Status_handling> registerToTrip(
+            @Path("trip_id") int trip_id,
+            @Path("user_id") int user_id
+    );
+
 }

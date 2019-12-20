@@ -38,7 +38,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Trip> Listoftrips ;
+    private ArrayList<TripB> Listoftrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private String KEY;
@@ -128,22 +128,22 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         Log.i("RestAPI trip","mpika");
         String from =autoCompleteTextViewFrom.getText().toString();
         String to = autoCompleteTextViewTo.getText().toString();
-        Call<List<Trip>> call = jsonPlaceHolderApi.createTripByFilter(from,to);
-        call.enqueue(new Callback<List<Trip>>() {
+        Call<List<TripB>> call = jsonPlaceHolderApi.createTripByFilter(from,to);
+        call.enqueue(new Callback<List<TripB>>() {
             @Override
-            public void onResponse(Call<List<Trip>> mcall, Response<List<Trip>> response) {
+            public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(ViewSearchOffersActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<Trip> trips = response.body();
+                List<TripB> trips = response.body();
                 for (int i=0; i<trips.size(); i++){
                     Log.i("RestAPI trip","i: "+trips.get(i).getFfrom());
                     Listoftrips.add(trips.get(i));
                 }
             }
             @Override
-            public void onFailure(Call<List<Trip>> call, Throwable t) {
+            public void onFailure(Call<List<TripB>> call, Throwable t) {
                 Toast.makeText(ViewSearchOffersActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });

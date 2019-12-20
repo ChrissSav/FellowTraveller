@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleViewHolder> {
-    private ArrayList<Trip> mExampleList;
+    private ArrayList<TripB> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -61,7 +61,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         }
     }
 
-    public SearchAdapter(ArrayList<Trip> exampleList) {
+    public SearchAdapter(ArrayList<TripB> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -74,7 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        Trip currentItem = mExampleList.get(position);
+        TripB currentItem = mExampleList.get(position);
         holder.from.setText(currentItem.getFfrom());
         holder.to.setText(currentItem.getTto());
         holder.date.setText(currentItem.getDate());

@@ -60,12 +60,11 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        //mViewPager.setOffscreenPageLimit(3);
+
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         TabLayout.Tab tab = mTabLayout.getTabAt(1);
         tab.select();
-
 
 
 
@@ -89,26 +88,6 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
 
     }
 
-    @Override
-    public void onStart() {
-        Log.i("Chris","onStart");
-        mViewPager.setOffscreenPageLimit(3);
-        super.onStart();
-        mViewPager.getAdapter().notifyDataSetChanged();
-    }
-
-    @Override
-    public void onResume() {
-        Log.i("Chris","onResume");
-        mViewPager.setOffscreenPageLimit(3);
-        super.onResume();
-    }
-    @Override
-    public void onRestart() {
-        Log.i("Chris","onRestart");
-        mViewPager.setOffscreenPageLimit(3);
-        super.onRestart();
-    }
     public void BottonNav(){
 
         bottomNavigationView.setOnNavigationItemSelectedListener(

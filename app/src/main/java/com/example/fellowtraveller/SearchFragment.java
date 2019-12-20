@@ -37,7 +37,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Trip> Listoftrips ;
+    private ArrayList<TripB> Listoftrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private TextView textError;
@@ -89,22 +89,22 @@ public class SearchFragment extends Fragment {
     private void getTrips() {
 
         if(CheckInternetConnection()){
-            Call<List<Trip>> call = jsonPlaceHolderApi.getTripsTakesPart(loadUserId());
-            call.enqueue(new Callback<List<Trip>>() {
+            Call<List<TripB>> call = jsonPlaceHolderApi.getTripsTakesPart(loadUserId());
+            call.enqueue(new Callback<List<TripB>>() {
                 @Override
-                public void onResponse(Call<List<Trip>> mcall, Response<List<Trip>> response) {
+                public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
                     if (!response.isSuccessful()) {
                         Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                         return;
                     }
                     textError.setText("");
-                    List<Trip> trips = response.body();
+                    List<TripB> trips = response.body();
                     for (int i=0; i<trips.size(); i++){
                         Listoftrips.add(trips.get(i));
                     }
                 }
                 @Override
-                public void onFailure(Call<List<Trip>> call, Throwable t) {
+                public void onFailure(Call<List<TripB>> call, Throwable t) {
                     //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });

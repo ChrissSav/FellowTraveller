@@ -80,7 +80,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
 
 
-        imgBtn2 = findViewById(R.id.imageButton3);
+        imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
         circleImageView = findViewById(R.id.user_pic_new);
         circleImageView2 = findViewById(R.id.load_pic);
 
@@ -96,7 +96,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             @Override
             public void onClick(View v) {
                 Toast.makeText(Wallet.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
-                //loadImageFromStorage();
+                loadImageFromStorage();
             }
         });
         loadUserInfo();
@@ -237,7 +237,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
                     Log.i("Chris","Bit map "+bitmap.toString());
-                    //saveToInternalStorage(bitmap);
+                    saveToInternalStorage(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -255,7 +255,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
 
 
-    /*private void loadImageFromStorage()
+    private void loadImageFromStorage()
     {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -269,7 +269,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             e.printStackTrace();
         }
 
-    }*/
+    }
 
 
     private String saveToInternalStorage(Bitmap bitmapImage){

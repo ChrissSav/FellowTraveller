@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +22,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +40,7 @@ public class ProsforesFragment extends Fragment {
     private ArrayList<TripB> Listoftrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
+    private TextView textError;
     private final String FILE_NAME = "fellow_login_state.txt";
     private View mMainView;
     private int id;
@@ -49,21 +48,30 @@ public class ProsforesFragment extends Fragment {
     public ProsforesFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_prosfores, container, false);
 
         loadUserId();
-
+        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        textError = mMainView.findViewById(R.id.frag_prosf_textView);
         Listoftrips = new ArrayList<>();
 
 
         getUserTrips();
+        buildRecyclerView(mMainView);
 
         return mMainView;
     }
 
+    @Override
+    public void onStart(){
+        Log.i("onStart","ProsforesFragment onStart");
+
+        super.onStart();
+
+    }
 
     public  void loadUserId() {
         id = 0;
@@ -98,12 +106,10 @@ public class ProsforesFragment extends Fragment {
 
     }
 
-    public void buildRecyclerView() {
-        mRecyclerView = mMainView.findViewById(R.id.recyclerViewOffer);
+    public void buildRecyclerView(View v) {
+        mRecyclerView = v.findViewById(R.id.recyclerViewOffer);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        Log.i("buildRecyclerView","size :"+Listoftrips.size());
-
         mAdapter = new OfferFragAdapter(Listoftrips);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -122,8 +128,6 @@ public class ProsforesFragment extends Fragment {
     private void getUserTrips() {
 
         if(CheckInternetConnection()){
-            retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-            jsonPlaceHolderApi = retrofit.create(JsonApi.class);
             Call<List<TripB>> call = jsonPlaceHolderApi.getTripsCreated(id);
             call.enqueue(new Callback<List<TripB>>() {
                 @Override
@@ -132,11 +136,11 @@ public class ProsforesFragment extends Fragment {
                         Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    textError.setText("");
                     List<TripB> trips = response.body();
                     for (int i=0; i<trips.size(); i++){
                         Listoftrips.add(trips.get(i));
                     }
-                    buildRecyclerView();
                 }
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {
@@ -163,6 +167,5 @@ public class ProsforesFragment extends Fragment {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-
 
 }

@@ -35,7 +35,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private CircleImageView circleImageView, profilePicture;
+    private CircleImageView circleImageView;
 
 
 
@@ -51,8 +51,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        profilePicture = findViewById(R.id.profile_picture);
+        navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -186,7 +185,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             File f = new File(directory, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             circleImageView.setImageBitmap(b);
-            profilePicture.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
         {

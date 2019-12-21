@@ -185,25 +185,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
 
 
-    public void ReadNot(int id){
-        final int  not_id = id;
-        Call<Status_handling> call = jsonPlaceHolderApi.NotificationRead(not_id);
-        call.enqueue(new Callback<Status_handling>() {
-            @Override
-            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(NotificationActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Log.i("NotificationDev","not_id: "+not_id);
-            }
-            @Override
-            public void onFailure(Call<Status_handling> call, Throwable t) {
-                Toast.makeText(NotificationActivity.this,"Δεν υπάρχουν ειδοποιήσεις",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     public int loadUserId() {
         int id =0;
         FileInputStream fis = null;

@@ -69,10 +69,6 @@ public interface JsonApi {
             @Path("id") int id
     );
 
-    @GET("changestatusnotification/{id}")
-    Call<Status_handling> NotificationRead(
-            @Path("id") int id
-    );
 
 
     @GET("registertotrip/{user_id}/{trip_id}")

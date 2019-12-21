@@ -33,7 +33,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 
-
 public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
@@ -41,7 +40,6 @@ public class SearchFragment extends Fragment {
     private ArrayList<TripB> Listoftrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
-    private TextView textError;
     private final String FILE_NAME = "fellow_login_state.txt";
     private View mMainView;
 
@@ -54,10 +52,8 @@ public class SearchFragment extends Fragment {
         mMainView = inflater.inflate(R.layout.fragment_search, container, false);
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        textError = mMainView.findViewById(R.id.SearchFragment_textView3);
         Listoftrips = new ArrayList<>();
         getTrips();
-        buildRecyclerView(mMainView);
         return mMainView;
     }
 
@@ -98,11 +94,12 @@ public class SearchFragment extends Fragment {
                         Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    textError.setText("");
                     List<TripB> trips = response.body();
                     for (int i=0; i<trips.size(); i++){
                         Listoftrips.add(trips.get(i));
                     }
+                    buildRecyclerView(mMainView);
+
                 }
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {

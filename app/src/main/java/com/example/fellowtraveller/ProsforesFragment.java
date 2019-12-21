@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -102,17 +104,15 @@ public class ProsforesFragment extends Fragment {
         mRecyclerView = mMainView.findViewById(R.id.recyclerViewOffer);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        Log.i("buildRecyclerView","size :"+Listoftrips.size());
-
         mAdapter = new OfferFragAdapter(Listoftrips);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new OfferFragAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // Intent intent = new Intent(getActivity(), TripPageActivity.class);
-                //intent.putExtra("Trip", Listoftrips.get(position));
-                //startActivity(intent);
+                Intent intent = new Intent(getActivity(), TripPageCreatorActivity.class);
+                intent.putExtra("Trip",Listoftrips.get(position));
+                startActivity(intent);
 
             }
         });

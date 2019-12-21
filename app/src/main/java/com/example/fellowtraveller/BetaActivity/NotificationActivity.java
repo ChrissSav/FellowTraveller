@@ -118,8 +118,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(NotificationActivity.this, position+1+"",
-                        Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
                 intent.putExtra("Trip",mExampleList.get(position).getTrip());
                 startActivity(intent);

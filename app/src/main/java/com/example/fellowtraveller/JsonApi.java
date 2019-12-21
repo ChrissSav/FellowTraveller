@@ -82,4 +82,11 @@ public interface JsonApi {
             @Path("id") int id
     );
 
+    @GET("changerequeststatus/{user_id}/{trip_id}/{status}")
+    Call<Status_handling> ChangeRequestStatus(
+            @Path("user_id") int user_id,
+            @Path("trip_id") int trip_id,
+            @Path("status") String status
+    );
+
 }

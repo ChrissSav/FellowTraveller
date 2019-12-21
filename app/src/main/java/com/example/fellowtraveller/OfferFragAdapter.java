@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ProforesFragAdapter extends RecyclerView.Adapter<ProforesFragAdapter.ExampleViewHolder> {
-    private ArrayList<Trip> mExampleList;
+public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.ExampleViewHolder> {
+    private ArrayList<TripB> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -32,20 +32,21 @@ public class ProforesFragAdapter extends RecyclerView.Adapter<ProforesFragAdapte
         public TextView time;
         public TextView number_of_passengers;
         public TextView number_of_bags;
-        public Button btn;
+        public Button btnEdit, btnReq;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            date = itemView.findViewById(R.id.searchItem_textView_date);
-            time = itemView.findViewById(R.id.searchItem_textView_time);
-            from = itemView.findViewById(R.id.searchItem_textView_from);
-            to = itemView.findViewById(R.id.searchItem_textView_to);
-            name = itemView.findViewById(R.id.searchItem_textView_name);
-            number_of_passengers = itemView.findViewById(R.id.searchItem_textView_seats);
-            number_of_bags = itemView.findViewById(R.id.searchItem_textView_bags);
-            btn = itemView.findViewById((R.id.searchItem_button_select));
+            date = itemView.findViewById(R.id.offerItem_textView_date);
+            time = itemView.findViewById(R.id.offerItem_textView_time);
+            from = itemView.findViewById(R.id.offerItem_textView_from);
+            to = itemView.findViewById(R.id.offerItem_textView_to);
+            name = itemView.findViewById(R.id.offerItem_textView_name);
+            number_of_passengers = itemView.findViewById(R.id.offerItem_textView_seats);
+            number_of_bags = itemView.findViewById(R.id.offerItem_textView_bags);
+            btnEdit = itemView.findViewById(R.id.offerItem_button_select);
+            btnReq = itemView.findViewById(R.id.offerItem_request_button);
 
-            btn.setOnClickListener(new View.OnClickListener() {
+            btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
@@ -61,20 +62,20 @@ public class ProforesFragAdapter extends RecyclerView.Adapter<ProforesFragAdapte
         }
     }
 
-    public ProforesFragAdapter(ArrayList<Trip> exampleList) {
+    public OfferFragAdapter(ArrayList<TripB> exampleList) {
         mExampleList = exampleList;
     }
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_trip_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_trip_item, parent, false);
         ExampleViewHolder evh = new ExampleViewHolder(v,mListener);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        Trip currentItem = mExampleList.get(position);
+        TripB currentItem = mExampleList.get(position);
         holder.from.setText(currentItem.getFfrom());
         holder.to.setText(currentItem.getTto());
         holder.date.setText(currentItem.getDate());

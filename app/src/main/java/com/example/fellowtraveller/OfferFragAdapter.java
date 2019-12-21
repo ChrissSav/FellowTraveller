@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.ExampleViewHolder> {
     private ArrayList<TripB> mExampleList;
     private OnItemClickListener mListener;
+
 
     public interface OnItemClickListener {
 
@@ -33,6 +36,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         public TextView number_of_passengers;
         public TextView number_of_bags;
         public Button btnEdit, btnReq;
+        public CircleImageView circleImageView;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -43,6 +47,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
             name = itemView.findViewById(R.id.offerItem_textView_name);
             number_of_passengers = itemView.findViewById(R.id.offerItem_textView_seats);
             number_of_bags = itemView.findViewById(R.id.offerItem_textView_bags);
+            circleImageView = itemView.findViewById(R.id.profile_picture);
             btnEdit = itemView.findViewById(R.id.offerItem_button_select);
             btnReq = itemView.findViewById(R.id.offerItem_request_button);
 
@@ -89,4 +94,6 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
     public int getItemCount() {
         return mExampleList.size();
     }
+
+
 }

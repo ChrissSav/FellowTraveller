@@ -54,7 +54,7 @@ public class ProsforesFragment extends Fragment {
 
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        
+
         Listoftrips = new ArrayList<>();
 
         getUserTrips();
@@ -76,7 +76,7 @@ public class ProsforesFragment extends Fragment {
         mRecyclerView = v.findViewById(R.id.recyclerViewOffer);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new OfferFragAdapter(Listoftrips);
+        mAdapter = new OfferFragAdapter(Listoftrips );
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new OfferFragAdapter.OnItemClickListener() {

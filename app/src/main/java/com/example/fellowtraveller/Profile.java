@@ -60,7 +60,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         navigationView.getMenu().getItem(1).setChecked(true);
         loadUserInfo();
-        loadImageFromStorage();
+        //loadImageFromStorage();
 
     }
 

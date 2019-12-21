@@ -59,7 +59,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
 
         navigationView.getMenu().getItem(3).setChecked(true);
         loadUserInfo();
-        loadImageFromStorage();
+      //  loadImageFromStorage();
     
     }
 

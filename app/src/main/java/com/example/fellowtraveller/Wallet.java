@@ -56,7 +56,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     private NavigationView navigationView;
     private ImageButton imgBtn1, imgBtn2;
     private Uri mImageUri;
-    private CircleImageView circleImageView,circleImageView2, circleImageView3;
+    private CircleImageView circleImageView,circleImageView2;
 
 
 
@@ -71,7 +71,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView =  findViewById(R.id.nav_view);
+        navigationView =  findViewById(R.id.nav_view_wallet);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -81,7 +81,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
 
         imgBtn2 = (ImageButton) findViewById(R.id.imageButton3);
-        circleImageView3 = findViewById(R.id.user_pic_new);
+        circleImageView = findViewById(R.id.user_pic_new);
         circleImageView2 = findViewById(R.id.load_pic);
 
         imgBtn2.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +100,6 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             }
         });
         loadUserInfo();
-        loadImageFromStorage();
     }
 
 
@@ -195,8 +194,6 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
             super.onBackPressed();
     }
-
-
     public void save(String status) {
         String text = status;
         FileOutputStream fos = null;
@@ -220,6 +217,8 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
     public void onChooseFile(View v){
         CropImage.activity().start(Wallet.this);
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -237,7 +236,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
                 Bitmap bit = result.getBitmap();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
-                    Log.i("Chris","Bit map " + bitmap.toString());
+                    Log.i("Chris","Bit map "+bitmap.toString());
                     saveToInternalStorage(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -258,13 +257,12 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
     private void loadImageFromStorage()
     {
-        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         try {
             File f = new File(directory, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            circleImageView.setImageBitmap(b);
+            circleImageView2.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
         {

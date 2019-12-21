@@ -104,7 +104,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         mExampleList = new ArrayList<>();
         getNotifications();
         buildRecyclerView();
-        loadImageFromStorage();
+       // loadImageFromStorage();
     }
 
 

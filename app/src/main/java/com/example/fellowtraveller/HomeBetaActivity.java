@@ -78,7 +78,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
 
         bottomNavigationView = findViewById(R.id.homeBetaActivity_Bottom_Nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
-        loadImageFromStorage();
+       // loadImageFromStorage();
         BottonNav();
 
 
@@ -221,7 +221,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         }
     }
 
-    private void loadImageFromStorage()
+    /*private void loadImageFromStorage()
     {
         circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -236,6 +236,6 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 }

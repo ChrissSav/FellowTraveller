@@ -118,11 +118,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
-                intent.putExtra("Trip",mExampleList.get(position).getTrip());
-                startActivity(intent);
-                mExampleList.remove(position);
-                mAdapter.notifyDataSetChanged();
+                SetNotificationsRead(mExampleList.get(position).getId(),position);
             }
         });
     }
@@ -176,6 +172,31 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
             }
             @Override
             public void onFailure(Call<List<Notification>> call, Throwable t) {
+                Toast.makeText(NotificationActivity.this,"Δεν υπάρχουν ειδοποιήσεις",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void SetNotificationsRead(final int not_id,final  int position) {
+        Call<Status_handling> call = jsonPlaceHolderApi.ChangeNotificationStatus(not_id);
+        call.enqueue(new Callback<Status_handling>() {
+            @Override
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(NotificationActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Status_handling status_han = response.body();
+                if(status_han.getStatus().equals("success")){
+                    Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
+                    intent.putExtra("Trip",mExampleList.get(position).getTrip());
+                    startActivity(intent);
+                    mExampleList.remove(position);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onFailure(Call<Status_handling> call, Throwable t) {
                 Toast.makeText(NotificationActivity.this,"Δεν υπάρχουν ειδοποιήσεις",Toast.LENGTH_SHORT).show();
             }
         });

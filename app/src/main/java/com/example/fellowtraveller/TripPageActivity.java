@@ -107,7 +107,7 @@ public class TripPageActivity extends AppCompatActivity {
 
 
     public void Register(){
-        Call<Status_handling> call = jsonPlaceHolderApi.registerToTrip(id,trip.getId());
+        Call<Status_handling> call = jsonPlaceHolderApi.sendRequest(id, trip.getCreator().getId(),trip.getId());
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
@@ -116,7 +116,7 @@ public class TripPageActivity extends AppCompatActivity {
                     return;
                 }
                 Status_handling status = response.body();
-                if(status.getStatus()!="succes"){
+                if(status.getStatus().equals("success")){
                     Toast.makeText(TripPageActivity.this,"Επιτυχής επιλογή",Toast.LENGTH_SHORT).show();
                     onBackPressed();
                     finish();

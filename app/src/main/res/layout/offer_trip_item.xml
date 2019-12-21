@@ -41,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:elevation="1dp"
-            android:src="@drawable/profile_pic" />
+            android:src="@drawable/profile_picture" />
 
 
         <TextView

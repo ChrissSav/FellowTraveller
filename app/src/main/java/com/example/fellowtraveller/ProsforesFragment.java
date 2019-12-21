@@ -52,13 +52,15 @@ public class ProsforesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_prosfores, container, false);
 
+        loadUserId();
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-
+        textError = mMainView.findViewById(R.id.frag_prosf_textView);
         Listoftrips = new ArrayList<>();
 
-        getUserTrips();
 
+        getUserTrips();
+        buildRecyclerView(mMainView);
 
         return mMainView;
     }
@@ -71,56 +73,8 @@ public class ProsforesFragment extends Fragment {
 
     }
 
-
-     public void buildRecyclerView(View v) {
-        mRecyclerView = v.findViewById(R.id.recyclerViewOffer);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new OfferFragAdapter(Listoftrips );
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new OfferFragAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-               Intent intent = new Intent(getActivity(), TripPageActivity.class);
-                intent.putExtra("Trip", Listoftrips.get(position));
-                startActivity(intent);
-
-            }
-        });
-
-
-    }
-    private void getUserTrips() {
-
-        if(CheckInternetConnection()){
-            Call<List<TripB>> call = jsonPlaceHolderApi.getTripsCreated(loadUserId());
-            call.enqueue(new Callback<List<TripB>>() {
-                @Override
-                public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(getActivity(),"responsed "+response.message(),Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    List<TripB> trips = response.body();
-                    for (int i=0; i<trips.size(); i++){
-                        Listoftrips.add(trips.get(i));
-                    }
-                    buildRecyclerView(mMainView);
-
-                }
-                @Override
-                public void onFailure(Call<List<TripB>> call, Throwable t) {
-                    //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else {
-            Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT).show();
-        }
-    }
-    public int loadUserId() {
-        int id =0;
+    public  void loadUserId() {
+        id = 0;
         FileInputStream fis = null;
         try {
             fis = getActivity().openFileInput(FILE_NAME);
@@ -135,7 +89,7 @@ public class ProsforesFragment extends Fragment {
                 }
                 i++;
             }
-            return id;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -149,9 +103,54 @@ public class ProsforesFragment extends Fragment {
                 }
             }
         }
-        return id;
+
     }
 
+    public void buildRecyclerView(View v) {
+        mRecyclerView = v.findViewById(R.id.recyclerViewOffer);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new OfferFragAdapter(Listoftrips);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new OfferFragAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+               // Intent intent = new Intent(getActivity(), TripPageActivity.class);
+                //intent.putExtra("Trip", Listoftrips.get(position));
+                //startActivity(intent);
+
+            }
+        });
+
+
+    }
+    private void getUserTrips() {
+
+        if(CheckInternetConnection()){
+            Call<List<TripB>> call = jsonPlaceHolderApi.getTripsCreated(id);
+            call.enqueue(new Callback<List<TripB>>() {
+                @Override
+                public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    textError.setText("");
+                    List<TripB> trips = response.body();
+                    for (int i=0; i<trips.size(); i++){
+                        Listoftrips.add(trips.get(i));
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<TripB>> call, Throwable t) {
+                    //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT).show();
+        }
+    }
     public boolean CheckInternetConnection(){
         boolean haveConnectedWifi = false;
         boolean haveConnectedMobile = false;

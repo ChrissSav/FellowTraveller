@@ -56,7 +56,7 @@ public class SearchFragment extends Fragment {
         textError = mMainView.findViewById(R.id.SearchFragment_textView3);
         Listoftrips = new ArrayList<>();
         getTrips();
-
+        buildRecyclerView(mMainView);
         return mMainView;
     }
 
@@ -102,7 +102,6 @@ public class SearchFragment extends Fragment {
                     for (int i=0; i<trips.size(); i++){
                         Listoftrips.add(trips.get(i));
                     }
-                    buildRecyclerView(mMainView);
                 }
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {

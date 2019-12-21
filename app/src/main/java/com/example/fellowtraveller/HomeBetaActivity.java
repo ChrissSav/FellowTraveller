@@ -60,13 +60,9 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
-
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         TabLayout.Tab tab = mTabLayout.getTabAt(1);
         tab.select();
-
-
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);

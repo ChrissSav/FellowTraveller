@@ -33,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 
+
 public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;

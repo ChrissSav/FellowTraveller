@@ -103,7 +103,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         mExampleList = new ArrayList<>();
         getNotifications();
-        buildRecyclerView();
+
        // loadImageFromStorage();
     }
 
@@ -159,7 +159,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
     }
 
-
     public void getNotifications() {
         int id = loadUserId();
         Log.i("NotificationDev","id: "+id);
@@ -175,6 +174,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                 for (int i=0; i<notifications.size(); i++){
                     mExampleList.add(notifications.get(i));
                 }
+                buildRecyclerView();
             }
             @Override
             public void onFailure(Call<List<Notification>> call, Throwable t) {

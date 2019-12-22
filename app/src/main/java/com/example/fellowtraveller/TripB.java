@@ -24,6 +24,8 @@ public class TripB implements Parcelable {
     private int current_num_of_bags;
     private Double rate;
     private String state;
+    private int price;
+
 
     protected TripB(Parcel in) {
         id = in.readInt();
@@ -45,6 +47,7 @@ public class TripB implements Parcelable {
             rate = in.readDouble();
         }
         state = in.readString();
+        price = in.readInt();
     }
 
     public static final Creator<TripB> CREATOR = new Creator<TripB>() {
@@ -189,6 +192,14 @@ public class TripB implements Parcelable {
     }
 
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -216,5 +227,6 @@ public class TripB implements Parcelable {
             dest.writeDouble(rate);
         }
         dest.writeString(state);
+        dest.writeInt(price);
     }
 }

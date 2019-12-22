@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class ProsforesFragment extends Fragment {
     private final String FILE_NAME = "fellow_login_state.txt";
     private View mMainView;
     private int id;
+    private ImageView noResultsImage;
 
     public ProsforesFragment() {
         // Required empty public constructor
@@ -60,7 +62,7 @@ public class ProsforesFragment extends Fragment {
 
         Listoftrips = new ArrayList<>();
 
-
+        noResultsImage = mMainView.findViewById(R.id.no_results);
         getUserTrips();
 
         return mMainView;
@@ -133,10 +135,16 @@ public class ProsforesFragment extends Fragment {
                         return;
                     }
                     List<TripB> trips = response.body();
-                    for (int i=0; i<trips.size(); i++){
-                        Listoftrips.add(trips.get(i));
+                    if(trips.size()==0){
+
                     }
-                    buildRecyclerView();
+                    else {
+                        noResultsImage.setVisibility(View.GONE);
+                        for (int i = 0; i < trips.size(); i++) {
+                            Listoftrips.add(trips.get(i));
+                        }
+                        buildRecyclerView();
+                    }
                 }
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {

@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
+        circleImageView = findViewById(R.id.profile_picture);
         imageButtonUpload = findViewById(R.id.profile_image_upload_button);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);

@@ -62,7 +62,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/ic_add"
-                        android:backgroundTint="#5A5858"
+                        android:backgroundTint="#395483"
                         android:elevation="1.1dp"
                         android:layout_centerHorizontal="true"
                         android:layout_alignBottom="@id/profile_picture"

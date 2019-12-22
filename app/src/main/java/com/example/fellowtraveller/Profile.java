@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -43,10 +44,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private CircleImageView circleImageView,circleImageViewNav ;
-    private ImageButton imageButtonUpload;
+    private ImageButton imageButtonUpload,imageButtonEdit,imageButtonAccept,imageButtonCancel;
     private Uri mImageUri;
-
-
+    private TextView textViewAboutMe;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +63,28 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
+
         circleImageView = findViewById(R.id.profile_picture);
+
         imageButtonUpload = findViewById(R.id.profile_image_upload_button);
+        imageButtonEdit = findViewById(R.id.profile_edit_button);
+        imageButtonAccept = findViewById(R.id.profile_button_accept);
+        imageButtonCancel = findViewById(R.id.profile_button_cancel);
+
+        editText = (EditText) findViewById(R.id.profile_editText);
+        textViewAboutMe = findViewById(R.id.profile_about_me);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
 
+
         navigationView.getMenu().getItem(1).setChecked(true);
+
+        imageButtonAccept.setVisibility(View.GONE);
+        imageButtonCancel.setVisibility(View.GONE);
+
 
         loadUserInfo();
         //loadImageFromStorage();
@@ -79,6 +93,51 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             public void onClick(View v)
             {
                 onChooseFile(v);
+            }
+        });
+        imageButtonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewAboutMe.setVisibility(View.GONE);
+                editText.setVisibility(View.VISIBLE);
+
+                imageButtonEdit.setVisibility(View.GONE);
+
+                imageButtonAccept.setVisibility(View.VISIBLE);
+                imageButtonCancel.setVisibility(View.VISIBLE);
+
+                imageButtonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        textViewAboutMe.setVisibility(View.VISIBLE);
+                        editText.setVisibility(View.GONE);
+
+                        imageButtonEdit.setVisibility(View.VISIBLE);
+
+                        imageButtonAccept.setVisibility(View.GONE);
+                        imageButtonCancel.setVisibility(View.GONE);
+                    }
+                });
+
+                imageButtonAccept.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String aboutInfo = editText.getText().toString();
+                        if(aboutInfo != null && !aboutInfo.isEmpty())
+                        {
+                            textViewAboutMe.setText(aboutInfo);
+                        }
+
+                        textViewAboutMe.setVisibility(View.VISIBLE);
+                        editText.setVisibility(View.GONE);
+
+                        imageButtonEdit.setVisibility(View.VISIBLE);
+
+                        imageButtonAccept.setVisibility(View.GONE);
+                        imageButtonCancel.setVisibility(View.GONE);
+                    }
+                });
             }
         });
 

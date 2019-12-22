@@ -10,14 +10,19 @@
     tools:context=".Profile">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+       <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -76,6 +81,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_cardview_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="85dp"
@@ -84,7 +90,7 @@
                             app:contentPaddingLeft="15dp"
                             app:contentPaddingBottom="15dp"
                             app:cardCornerRadius="10dp"
-                            app:cardBackgroundColor="#DDD5CC"
+                            app:cardBackgroundColor="#F8F7F3"
                             >
 
                             <LinearLayout
@@ -107,34 +113,67 @@
                                     app:layout_constraintRight_toRightOf="parent"
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    android:layout_marginTop="50dp"
+                                    android:layout_marginTop="72dp"
                                     android:layout_gravity="center"/>
-
-                                    <TextView
-                                        android:id="@+id/profile_age"
+                                    <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        app:layout_constraintTop_toBottomOf="@+id/profile_name"
-                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        android:id="@+id/profile_rate"
+                                        android:orientation="horizontal"
+                                        android:layout_marginTop="15dp"
+                                        app:layout_constraintTop_toBottomOf="@id/profile_name"
                                         app:layout_constraintRight_toRightOf="parent"
-                                        android:layout_marginTop="12dp"
-                                        android:text="21 Χρονών"
-                                        android:textSize="14sp"
-                                        />
+                                        app:layout_constraintLeft_toLeftOf="parent">
 
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:background="@drawable/ic_star"
+                                            android:layout_marginEnd="10dp"/>
 
-                                    <TextView
-                                    android:id="@+id/profile_info"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintRight_toRightOf="parent"
-                                    app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/profile_age"
-                                    android:text="Είμαι 21 χρονών σπουδάζω πληροφορική και έχω αγάπη για την φωτογραφία και το βίντεο."
-                                    android:textSize="18sp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                        <TextView
+                                            android:id="@+id/user_rating"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="4.5"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold" />
 
+                                        <ImageView
+                                            android:layout_width="4dp"
+                                            android:layout_height="4dp"
+                                            android:background="#C9C9C9"
+                                            android:layout_marginStart="15dp"
+                                            android:layout_marginEnd="15dp"/>
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:background="@drawable/ic_review"
+                                            android:layout_gravity="bottom"
+                                            android:layout_marginEnd="10dp"/>
+
+                                        <TextView
+                                            android:id="@+id/reviews_count"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="125"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                   <LinearLayout
+                                       android:id="@+id/profile_location_linear"
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:orientation="horizontal"
+                                       app:layout_constraintTop_toBottomOf="@id/profile_rate"
+                                       app:layout_constraintLeft_toLeftOf="parent"
+                                       app:layout_constraintRight_toRightOf="parent"
+                                       android:layout_marginTop="20dp">
                                     <TextView
                                         android:id="@+id/profile_mark"
                                         android:layout_width="wrap_content"
@@ -142,94 +181,202 @@
                                         android:background="@drawable/ic_location_mark"
                                         android:backgroundTint="#5F5050"
                                         app:layout_constraintLeft_toLeftOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/profile_info"
-                                        android:layout_marginTop="15dp"
+                                        app:layout_constraintTop_toBottomOf="@+id/profile_rate"
+
                                         />
 
                                     <TextView
-                                    android:id="@+id/profile_location"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Φιλώτας, Φλώρινας"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintLeft_toLeftOf="@id/profile_mark"
+                                        android:id="@+id/profile_location"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Φιλώτας, Φλώρινας"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:layout_marginTop="3dp"
+                                        app:layout_constraintLeft_toLeftOf="@id/profile_mark"
                                         app:layout_constraintTop_toTopOf="@id/profile_mark"
                                         app:layout_constraintBottom_toBottomOf="@id/profile_mark"
                                         app:layout_constraintStart_toEndOf="@id/profile_mark"
                                         android:layout_marginStart="5dp"/>
-                                    <TextView
-                                        android:id="@+id/profile_phone"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/ic_smartphone"
-                                        android:backgroundTint="#5F5050"
-                                        android:layout_marginEnd="5dp"
-                                        app:layout_constraintLeft_toLeftOf="@id/profile_location"
-                                        app:layout_constraintTop_toTopOf="@id/profile_location"
-                                        app:layout_constraintBottom_toBottomOf="@id/profile_location"
-                                       app:layout_constraintEnd_toStartOf="@+id/profile_number"/>
+                                   </LinearLayout>
 
 
 
-                                <TextView
-                                    android:id="@+id/profile_number"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="6974590287"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintRight_toRightOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="@+id/profile_phone"
-                                    app:layout_constraintTop_toTopOf="@+id/profile_phone" />
 
-
-                                   <TextView
-                                       android:id="@+id/profile_edit_tV"
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       android:textSize="14sp"
-                                       android:text="Edit"
-                                       android:textStyle="italic"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       app:layout_constraintLeft_toLeftOf="parent"
-                                       />
-                                    <ImageButton
-                                        android:id="@+id/profile_edit_button"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
-                                        app:layout_constraintTop_toTopOf="@id/profile_edit_tV"
-                                        app:layout_constraintBottom_toBottomOf="@+id/profile_edit_tV"
-                                        app:layout_constraintStart_toEndOf="@+id/profile_edit_tV"
-                                        android:layout_marginStart="5dp"
-                                        android:background="@drawable/ic_edit"
-                                        android:backgroundTint="#5F5050"
-                                        />
-                                    <TextView
-                                        android:id="@+id/profile_stars"
-                                        android:layout_width="80dp"
-                                        android:layout_height="15dp"
-                                        android:background="@drawable/star_4_half"
-                                        app:layout_constraintTop_toBottomOf="@+id/profile_mark"
-                                        app:layout_constraintLeft_toLeftOf="parent"
-                                        app:layout_constraintRight_toRightOf="parent"
-                                        android:layout_marginTop="20dp"
-                                        />
-                                    <TextView
-                                        android:id="@+id/profile_rating"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        app:layout_constraintTop_toBottomOf="@+id/profile_stars"
-                                        app:layout_constraintRight_toRightOf="parent"
-                                        app:layout_constraintLeft_toLeftOf="parent"
-                                        android:layout_marginTop="5dp"
-                                        android:text="Rating"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold"/>
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_cardview_aboutMe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:contentPaddingTop="15dp"
+                            app:contentPaddingRight="15dp"
+                            app:contentPaddingLeft="15dp"
+                            app:contentPaddingBottom="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="#F8F7F3"
+                            app:layout_constraintTop_toBottomOf="@id/profile_cardview_info"
+                            android:layout_marginTop="25dp"
+                            >
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginTop="0dp"
+
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            >
+                            <ImageButton
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_edit"
+                                android:backgroundTint="#5F5050"
+
+
+                                />
+
+                            <TextView
+                                android:id="@+id/profile_about_me_tV"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Σχετικά με εμένα"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="16sp"
+                                android:textColor="#5A5858"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="15dp" />
+
+                            <TextView
+                                android:id="@+id/profile_about_me"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                app:layout_constraintTop_toBottomOf="@id/profile_about_me_tV"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent
+"
+                                android:text="Πες μας λίγα λόγια για σένα έτσι ώστε να βοηθήσεις τους άλλους χρήστες να σε γνωρίσουν καλύτερα"
+                                android:textSize="14sp"
+                                android:textColor="#726F6F"
+                                android:textStyle="normal"
+                                android:lineHeight="20dp"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_cardview_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:contentPaddingTop="15dp"
+                            app:contentPaddingRight="15dp"
+                            app:contentPaddingLeft="15dp"
+                            app:contentPaddingBottom="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="#F8F7F3"
+                            app:layout_constraintTop_toBottomOf="@id/profile_cardview_aboutMe"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="15dp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                               >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Αξιολογήσεις"
+                                    android:textSize="16sp"
+                                    android:textColor="#5A5858"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="25dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp">
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/reviewer_profile_pic"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/profile_picture" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="50dp">
+
+                                        <TextView
+                                            android:id="@+id/reviewer_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Martijn Garritsen"
+                                            android:textSize="14sp"
+                                            android:textColor="#5A5858"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/review_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Μάρτιος 2018"
+                                            android:textSize="14sp"
+                                            android:textColor="@color/grey"
+                                            android:textStyle="normal"
+                                            android:layout_marginTop="20dp"/>
+
+                                    </RelativeLayout>
+                                    <ImageView
+                                        android:id="@+id/rating"
+                                        android:layout_width="80dp"
+                                        android:layout_height="24dp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentEnd="true" />
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/review"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Πολύ καλός οδηγός, προσεκτικός και πολύ ευγενικός. Τ"
+                                    android:textSize="14sp"
+                                    android:textColor="#726F6F"
+                                    android:textStyle="normal"
+                                    android:lineHeight="20dp" />
+
+                                <Button
+                                    android:id="@+id/profile_all_reviews_btn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Read all reviews"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/orange"
+                                    android:textStyle="normal"
+                                    android:textAllCaps="false"
+                                    android:background="@null"
+                                    style="?android:attr/borderlessButtonStyle" />
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
 
 
 
@@ -244,7 +391,8 @@
             </LinearLayout>
 
         </RelativeLayout>
-    </RelativeLayout>
+       </ScrollView>
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

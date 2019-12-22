@@ -72,7 +72,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navigationView.getMenu().getItem(1).setChecked(true);
 
         loadUserInfo();
-        loadImageFromStorage();
+        //loadImageFromStorage();
 
         imageButtonUpload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -168,10 +168,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             View header = navigationView.getHeaderView(0);
             TextView name = header.findViewById(R.id.user_name_drawer);
             TextView email = header.findViewById(R.id.user_email_drawer);
+            TextView name2 = findViewById(R.id.profile_name);
             int i = 0;
             while ((text = br.readLine()) != null) {
                 if (i==2){
                     name.setText(text);
+                    name2.setText(text);
                 }else if(i==3){
                     email.setText(text);
                 }else if(i==1){

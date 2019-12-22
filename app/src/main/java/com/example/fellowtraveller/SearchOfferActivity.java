@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
@@ -18,7 +20,9 @@ import android.widget.TimePicker;
 import com.example.fellowtraveller.BetaAutocomplete.PlaceAutoSuggestAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class SearchOfferActivity extends AppCompatActivity {
     private Button btn_back,btn_search;
@@ -67,6 +71,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                         mDateListener1, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
                 dialog.show();
+
             }
         });
 
@@ -106,7 +111,8 @@ public class SearchOfferActivity extends AppCompatActivity {
                         mDateListener2, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
                 dialog.show();
-            }
+                }
+
         });
 
 
@@ -134,7 +140,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         time_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OutFocus();
+
                 Calendar cal = Calendar.getInstance();
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
@@ -144,6 +150,9 @@ public class SearchOfferActivity extends AppCompatActivity {
                         mTimeListener1, hour, minute, true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
                 dialog.show();
+
+                OutFocus();
+
             }
         });
         mTimeListener1 = new TimePickerDialog.OnTimeSetListener() {
@@ -168,16 +177,16 @@ public class SearchOfferActivity extends AppCompatActivity {
         time_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    Calendar cal = Calendar.getInstance();
+                    int hour = cal.get(Calendar.HOUR_OF_DAY);
+                    int minute = cal.get(Calendar.MINUTE);
+                    TimePickerDialog dialog = new TimePickerDialog(
+                            SearchOfferActivity.this,
+                            android.R.style.Theme_Holo_Dialog_MinWidth,
+                            mTimeListener2, hour, minute, true);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                    dialog.show();
                 OutFocus();
-                Calendar cal = Calendar.getInstance();
-                int hour = cal.get(Calendar.HOUR_OF_DAY);
-                int minute = cal.get(Calendar.MINUTE);
-                TimePickerDialog dialog = new TimePickerDialog(
-                        SearchOfferActivity.this,
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mTimeListener2, hour, minute, true);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
             }
         });
         mTimeListener2 = new TimePickerDialog.OnTimeSetListener() {
@@ -202,13 +211,14 @@ public class SearchOfferActivity extends AppCompatActivity {
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Search_item_filter filter  = new Search_item_filter(autoCompleteTextViewFrom.getText().toString(),autoCompleteTextViewTo.getText().toString(),
+                /*Search_item_filter filter  = new Search_item_filter(autoCompleteTextViewFrom.getText().toString(),autoCompleteTextViewTo.getText().toString(),
                         date_from.getText().toString(),date_to.getText().toString(),time_from.getText().toString(),time_to.getText().toString());
                 SearchOfferActivity.this.onBackPressed();
                 Intent intent = new Intent(SearchOfferActivity.this, ViewSearchOffersActivity.class);
                 intent.putExtra("Filter",filter);
                 startActivity(intent);
-                finish();
+                finish();*/
+                CheckTime();
 
             }
         });
@@ -224,10 +234,143 @@ public class SearchOfferActivity extends AppCompatActivity {
 
         getWindow().getDecorView().clearFocus();
 
+        time_to.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                time_to.setCursorVisible(false);
+                time_to.setText(null);
+                return true;
+            }
+        });
+
+        time_from.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                time_from.setCursorVisible(false);
+                time_from.setText(null);
+                return true;
+            }
+        });
+
+
+        date_from.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                date_from.setCursorVisible(false);
+                date_from.setText(null);
+                return true;
+            }
+        });
+
+
+        date_to.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                date_to.setCursorVisible(false);
+                date_to.setText(null);
+                return true;
+            }
+        });
+
+
+
     }
 
     public void OutFocus(){
         autoCompleteTextViewFrom.clearFocus();
         autoCompleteTextViewTo.clearFocus();
+    }
+
+
+    /*date_from;
+    date_to;
+    time_from;
+    time_to;
+    autoCompleteTextViewFrom autoCompleteTextViewTo;*/
+    public void CheckFieldes(){
+
+    }
+
+    public boolean CheckAutoCompleteTextViewFrom(){
+        String from_Input = autoCompleteTextViewFrom.getText().toString().trim();
+        if (from_Input.isEmpty()) {
+            autoCompleteTextViewFrom.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        } else {
+            autoCompleteTextViewFrom.setError(null);
+            return true;
+        }
+    }
+    public boolean CheckAutoCompleteTextViewTo(){
+        String to_Input = autoCompleteTextViewTo.getText().toString().trim();
+        if (to_Input.isEmpty()) {
+            autoCompleteTextViewTo.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        } else {
+            autoCompleteTextViewTo.setError(null);
+            return true;
+        }
+    }
+
+    public boolean CheckDate_to(){
+        String date_from_Input = date_from.getText().toString().trim();
+        if (date_from_Input.isEmpty()) {
+            date_from.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        } else {
+            date_from.setError(null);
+            return true;
+        }
+    }
+    public boolean CheckTime(){
+        String time_from_Input = time_from.getText().toString().trim();
+        String time_to_Input = time_to.getText().toString().trim();
+        if(!time_to_Input.isEmpty()){
+            if(!time_from_Input.isEmpty()){
+                if(Compare(time_from_Input,time_to_Input)){
+                    Log.i("CheckTime","1");
+                    time_from.setError(null);
+                    time_to.setError(null);
+                    return  true;
+                }else {
+                    Log.i("CheckTime","2");
+                    time_from.setError("");
+                    time_to.setError("");
+                    return  false;
+                }
+            }else{
+                Log.i("CheckTime","3");
+                time_from.setError("");
+                time_to.setError("");
+                return  false;
+            }
+        }else{
+            Log.i("CheckTime","4");
+            time_from.setError(null);
+            time_to.setError(null);
+            return true;
+        }
+    }
+
+
+    public boolean Compare(String time1,String time2){
+        String str[] = time1.split(":");
+        String str2[] = time2.split(":");
+        int hour1,hour2,minute1,minute2;
+        List<String> d;
+        d = Arrays.asList(str);
+        hour1 = Integer.parseInt(d.get(0));
+        minute1 = Integer.parseInt(d.get(1));
+        d = Arrays.asList(str2);
+        hour2 = Integer.parseInt(d.get(0));
+        minute2 = Integer.parseInt(d.get(1));
+        if(hour1<hour2){
+            if(minute1<=minute2)
+                return true;
+        }else if(hour1==hour2){
+            if(minute1<minute2)
+                return true;
+        }
+        return false;
     }
 }

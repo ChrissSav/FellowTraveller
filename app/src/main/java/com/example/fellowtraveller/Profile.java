@@ -5,7 +5,11 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,8 +42,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private CircleImageView circleImageView;
-    private ImageButton imageButton;
+    private CircleImageView circleImageView,circleImageViewNav ;
+    private ImageButton imageButtonUpload;
+    private Uri mImageUri;
 
 
 
@@ -52,9 +59,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
+
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
-        imageButton = findViewById(R.id.profile_image_upload_button);
+        imageButtonUpload = findViewById(R.id.profile_image_upload_button);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -62,17 +70,16 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
         navigationView.getMenu().getItem(1).setChecked(true);
-        loadUserInfo();
-        //loadImageFromStorage();
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Profile.this,Wallet.class);
-                startActivity(intent);
+        loadUserInfo();
+        loadImageFromStorage();
+
+        imageButtonUpload.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                onChooseFile(v);
             }
         });
-
 
     }
 
@@ -129,6 +136,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
             super.onBackPressed();
     }
+
     public void save(String status) {
         String text = status;
         FileOutputStream fos = null;
@@ -190,13 +198,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private void loadImageFromStorage()
     {
-        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        circleImageView = findViewById(R.id.profile_picture);
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         try {
             File f = new File(directory, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             circleImageView.setImageBitmap(b);
+            circleImageViewNav.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
         {
@@ -204,5 +214,66 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
 
     }
+    public void onChooseFile(View v){
+        CropImage.activity().start(Profile.this);
+
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE ) {
+
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if (resultCode == RESULT_OK){
+                mImageUri = result.getUri();
+                circleImageView.setImageURI(mImageUri);
+                Bitmap bit = result.getBitmap();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
+                    Log.i("Chris","Bit map "+bitmap.toString());
+                    saveToInternalStorage(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                 saveToInternalStorage(result.getBitmap());
+            }
+            else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Exception e = result.getError();
+                Log.i("error",e.getMessage());
+
+            }
+        }
+    }
+
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        File path = new File( directory,"profile.jpg");
+        Log.i("Chris","path : "+ path.getPath());
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(path);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
+
 
 }

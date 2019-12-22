@@ -96,7 +96,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             @Override
             public void onClick(View v) {
                 Toast.makeText(Wallet.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
-                //loadImageFromStorage();
+                loadImageFromStorage();
             }
         });
         loadUserInfo();
@@ -243,7 +243,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
                 }
 
                 circleImageView2.setImageBitmap(bit);
-                // saveToInternalStorage(result.getBitmap());
+                saveToInternalStorage(result.getBitmap());
             }
             else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception e = result.getError();
@@ -255,7 +255,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
 
 
-    /*private void loadImageFromStorage()
+    private void loadImageFromStorage()
     {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -268,7 +268,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         {
             e.printStackTrace();
         }
-    }*/
+    }
 
 
     private String saveToInternalStorage(Bitmap bitmapImage){

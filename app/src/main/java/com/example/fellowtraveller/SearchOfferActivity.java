@@ -219,6 +219,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();*/
                 CheckTime();
+                CheckDate();
 
             }
         });
@@ -327,7 +328,7 @@ public class SearchOfferActivity extends AppCompatActivity {
         String time_to_Input = time_to.getText().toString().trim();
         if(!time_to_Input.isEmpty()){
             if(!time_from_Input.isEmpty()){
-                if(Compare(time_from_Input,time_to_Input)){
+                if(CompareTime(time_from_Input,time_to_Input)){
                     Log.i("CheckTime","1");
                     time_from.setError(null);
                     time_to.setError(null);
@@ -352,8 +353,38 @@ public class SearchOfferActivity extends AppCompatActivity {
         }
     }
 
+    public boolean CheckDate(){
+        String date_from_Input = date_from.getText().toString().trim();
+        String date_to_Input = date_to.getText().toString().trim();
+        if(!date_to_Input.isEmpty()){
+            if(!date_from_Input.isEmpty()){
+                if(CompareDate(date_from_Input,date_to_Input)){
+                    Log.i("CheckTime","1");
+                    date_from.setError(null);
+                    date_to.setError(null);
+                    return  true;
+                }else {
+                    Log.i("CheckTime","2");
+                    date_from.setError("");
+                    date_to.setError("");
+                    return  false;
+                }
+            }else{
+                Log.i("CheckTime","3");
+                date_from.setError("");
+                date_to.setError("");
+                return  false;
+            }
+        }else{
+            Log.i("CheckTime","4");
+            date_from.setError(null);
+            date_to.setError(null);
+            return true;
+        }
+    }
 
-    public boolean Compare(String time1,String time2){
+
+    public boolean CompareTime(String time1,String time2){
         String str[] = time1.split(":");
         String str2[] = time2.split(":");
         int hour1,hour2,minute1,minute2;
@@ -371,6 +402,33 @@ public class SearchOfferActivity extends AppCompatActivity {
             if(minute1<minute2)
                 return true;
         }
+        return false;
+    }
+
+    public boolean CompareDate(String date1,String date2){
+        String str[] = date1.split("/");
+        String str2[] = date2.split("/");
+
+        int day1,day2,month1,month2,year1,year2;
+        List<String> d;
+        d = Arrays.asList(str);
+        day1 = Integer.parseInt(d.get(0));
+        month1 = Integer.parseInt(d.get(1));
+        year1 = Integer.parseInt(d.get(2));
+        d = Arrays.asList(str2);
+        day2 = Integer.parseInt(d.get(0));
+        month2 = Integer.parseInt(d.get(1));
+        year2 = Integer.parseInt(d.get(2));
+        if (year1 < year2)
+            return true;
+        if (year1 > year2)
+            return false;
+        if (month1 > month2)
+            return false;
+        if (month1 < month2)
+            return true;
+        if (day1 < day2)
+            return true;
         return false;
     }
 }

@@ -218,8 +218,7 @@ public class SearchOfferActivity extends AppCompatActivity {
                 intent.putExtra("Filter",filter);
                 startActivity(intent);
                 finish();*/
-                CheckTime();
-                CheckDate();
+                CheckFieldes();
 
             }
         });
@@ -283,13 +282,12 @@ public class SearchOfferActivity extends AppCompatActivity {
     }
 
 
-    /*date_from;
-    date_to;
-    time_from;
-    time_to;
-    autoCompleteTextViewFrom autoCompleteTextViewTo;*/
-    public void CheckFieldes(){
 
+    public boolean CheckFieldes(){
+        if(CheckTime() & CheckDate() & CheckAutoCompleteTextViewFrom() & CheckAutoCompleteTextViewTo ()){
+            return true;
+        }
+        return false;
     }
 
     public boolean CheckAutoCompleteTextViewFrom(){

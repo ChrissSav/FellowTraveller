@@ -412,24 +412,10 @@
                                     style="?android:attr/borderlessButtonStyle" />
 
                             </LinearLayout>
-
-
                         </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
-
-                    </LinearLayout>
-
+                  </LinearLayout>
                 </RelativeLayout>
-
-
-            </LinearLayout>
-
+          </LinearLayout>
         </RelativeLayout>
        </ScrollView>
     </LinearLayout>

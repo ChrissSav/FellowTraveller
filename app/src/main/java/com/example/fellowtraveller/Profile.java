@@ -48,6 +48,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private Uri mImageUri;
     private TextView textViewAboutMe;
     private EditText editText;
+    private Button readReviewsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navigationView =  findViewById(R.id.nav_view);
 
         circleImageView = findViewById(R.id.profile_picture);
+
+        readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
 
         imageButtonUpload = findViewById(R.id.profile_image_upload_button);
         imageButtonEdit = findViewById(R.id.profile_edit_button);
@@ -138,6 +141,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                         imageButtonCancel.setVisibility(View.GONE);
                     }
                 });
+            }
+        });
+
+        readReviewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent r = new Intent(Profile.this, ReviewsActivity.class);
+                startActivity(r);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

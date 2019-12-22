@@ -102,7 +102,7 @@ public class TripPageActivity extends AppCompatActivity {
         textView_seats.setText(trip.getSeatesStatus());
         textView_suitcases.setText(trip.getbagsStatus());
         textView_description.setText(trip.getDescription());
-        textView_price.setText("100 €");
+        textView_price.setText(trip.getPrice()+" ευρώ");
     }
 
 

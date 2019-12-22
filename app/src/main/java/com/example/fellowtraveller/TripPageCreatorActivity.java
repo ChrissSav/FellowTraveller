@@ -50,7 +50,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private final String FILE_NAME = "fellow_login_state.txt";
     private final String ACCEPT = "accept";
     private final String REJECT = "reject";
-
+    private TextView textView_price;
     private RecyclerView mRecyclerView;
     private RequestAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -72,15 +72,10 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_time  = findViewById(R.id.TripPageCreatorActivity_textView_time);
         textView_seats  = findViewById(R.id.TripPageCreatorActivity_textView_seats);
         textView_suitcases  = findViewById(R.id.TripPageCreatorActivity_textView_suitcases);
+        textView_price  = findViewById(R.id.TripPageCreatorActivity_textView_price);
         back = findViewById(R.id.TripPageCreatorActivity_button_back);
         FillFields();
-       /* User user = new User(96,"Makis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
 
-        requests = new ArrayList<>();
-        requests.add(user);
-        user = new User(96,"Takis","22-02-2019","uygygy","uygyy","6934567891",2.0,0,0);
-        requests.add(user);*/
-       // FillFields();
         buildRecyclerView();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +131,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_time.setText(trip.getTime());
         textView_seats.setText(trip.getSeatesStatus());
         textView_suitcases.setText(trip.getbagsStatus());
+        textView_price.setText(trip.getPrice()+" ευρώ");
     }
 
 

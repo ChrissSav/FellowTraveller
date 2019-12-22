@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -36,6 +37,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private CircleImageView circleImageView;
+    private ImageButton imageButton;
 
 
 
@@ -52,6 +54,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
+        imageButton = findViewById(R.id.profile_image_upload_button);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -61,6 +64,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navigationView.getMenu().getItem(1).setChecked(true);
         loadUserInfo();
         //loadImageFromStorage();
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this,Wallet.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

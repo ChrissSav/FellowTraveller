@@ -25,7 +25,7 @@ public interface JsonApi {
             @Path("phone") String phone
     );
 
-    @GET("trips/{from}/{to}/{date}/{time}/{creator_id}/{description}/{max_seats}/{max_bags}")
+    @GET("trips/{from}/{to}/{date}/{time}/{creator_id}/{description}/{max_seats}/{max_bags}/{price}")
     Call<Status_handling> createTrip(
             @Path("from") String from,
             @Path("to") String to,
@@ -34,7 +34,8 @@ public interface JsonApi {
             @Path("creator_id") int creator_id,
             @Path("description") String description,
             @Path("max_seats") int max_seats,
-            @Path("max_bags") int max_bags
+            @Path("max_bags") int max_bags,
+            @Path("price") int price
 
     );
 

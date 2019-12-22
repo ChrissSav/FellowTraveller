@@ -32,6 +32,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         public TextView time;
         public TextView number_of_passengers;
         public TextView number_of_bags;
+        private TextView price;
         public Button btn;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -43,8 +44,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
             name = itemView.findViewById(R.id.searchItem_textView_name);
             number_of_passengers = itemView.findViewById(R.id.searchItem_textView_seats);
             number_of_bags = itemView.findViewById(R.id.searchItem_textView_bags);
-            btn = itemView.findViewById((R.id.searchItem_button_select));
-
+            btn = itemView.findViewById(R.id.searchItem_button_select);
+            price = itemView.findViewById(R.id.searchItem_textView_price);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,6 +83,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         holder.name.setText(currentItem.getCreator().getName());
         holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
         holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
+        holder.price.setText(currentItem.getPrice()+" ευρώ");
     }
 
     @Override

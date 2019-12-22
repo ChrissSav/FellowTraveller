@@ -36,6 +36,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         public TextView number_of_passengers;
         public TextView number_of_bags;
         public Button btnEdit, btnReq;
+        private TextView price;
         public CircleImageView circleImageView;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -49,6 +50,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
             number_of_bags = itemView.findViewById(R.id.offerItem_textView_bags);
             btnEdit = itemView.findViewById(R.id.offerItem_button_select);
             btnReq = itemView.findViewById(R.id.offerItem_request_button);
+            price = itemView.findViewById(R.id.offerItem_textView_price);
 
             btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,6 +89,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         holder.name.setText(currentItem.getCreator().getName());
         holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
         holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
+        holder.price.setText(currentItem.getPrice()+" ευρώ");
     }
 
     @Override

@@ -44,6 +44,7 @@ public class NewOfferActivity extends AppCompatActivity {
     private TextInputEditText description;
     private TextInputEditText seats;
     private TextInputEditText bags;
+    private TextInputEditText price;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
@@ -69,8 +70,7 @@ public class NewOfferActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.new_offer_button_back);
         date_trip = findViewById(R.id.new_offer_editText_date);
         time_trip = findViewById(R.id.new_offer_editText_time);
-
-
+        price = findViewById(R.id.new_offer_editText_price);
         date_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,11 +186,12 @@ public class NewOfferActivity extends AppCompatActivity {
         date = date.replaceAll("/","-");
         String time = time_trip.getText().toString();
         String des = description.getText().toString();
+        int price_trip = Integer.parseInt(price.getText().toString());
         int max_seats = Integer.parseInt(seats.getText().toString());
         int  max_bags = Integer.parseInt(bags.getText().toString());
         int creator_id = loadUserId();
         if (creator_id!=0) {
-            sendToAPi(from, to, date, time, creator_id, des, max_seats, max_bags);
+            sendToAPi(from, to, date, time, creator_id, des, max_seats, max_bags,price_trip);
         }
     }
 
@@ -227,8 +228,8 @@ public class NewOfferActivity extends AppCompatActivity {
         return id;
     }
 
-    public void sendToAPi(String from,String to,String date,String time,int creator_id,String des,int max_seats,int max_bags){
-        Call<Status_handling> call = jsonPlaceHolderApi.createTrip(from, to, date, time, creator_id, des, max_seats, max_bags);
+    public void sendToAPi(String from,String to,String date,String time,int creator_id,String des,int max_seats,int max_bags, int price_trip){
+        Call<Status_handling> call = jsonPlaceHolderApi.createTrip(from, to, date, time, creator_id, des, max_seats, max_bags,price_trip);
         call.toString();
         call.enqueue(new Callback<Status_handling>() {
             @Override
@@ -257,7 +258,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
     public boolean CheckFields(){
         if(validateFrom() & validateTo() & validateDate_trip() &
-                validateTime_trip()& validateSeats() & validateBags() & validateDescription() ){
+                validateTime_trip()& validateSeats() & validateBags() & validateDescription() & validatePrice() ){
             return true;
         }else{
             return false;
@@ -293,6 +294,19 @@ public class NewOfferActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    public boolean validatePrice(){
+        if(price.getText().length()<1) {
+            price.setError("Υποχρεωτικό Πεδίο!");
+            return false;
+        }
+        else {
+            price.setError(null);
+            return true;
+        }
+    }
+
+
     public boolean validateTime_trip(){
         if(time_trip.getText().length()<1) {
             time_trip.setError("Υποχρεωτικό Πεδίο!");

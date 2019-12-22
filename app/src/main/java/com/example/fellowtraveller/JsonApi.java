@@ -9,8 +9,6 @@ import retrofit2.http.Path;
 
 public interface JsonApi {
 
-    @GET("getusers")
-    Call<List<User>> getUsers();
 
     @GET("getuserauth/{email}/{password}")
     Call<User> getUserAuth(
@@ -46,17 +44,6 @@ public interface JsonApi {
             @Path("from") String from,
             @Path("to") String to
     );
-    @GET("gettrip/{id}")
-    Call<Trip> getTripById(
-            @Path("id") String id
-    );
-
-    @GET("gettrip/{id}")
-    Call<List<Trip>> getTrip(
-            @Path("id") String id
-    );
-    @GET("gettrips")
-    Call<List<Trip>> getTrips();
 
     @GET("gettripstakespart/{id}")
     Call<List<TripB>> getTripsTakesPart(
@@ -115,6 +102,5 @@ public interface JsonApi {
             @Path("rate_to") Double rate_to,
             @Path("price_from") int price_from,
             @Path("price_to") int price_to
-
     );
 }

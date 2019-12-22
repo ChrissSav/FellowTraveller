@@ -240,7 +240,7 @@ public class NewOfferActivity extends AppCompatActivity {
                 Status_handling status = response.body();
                 if (status.getStatus().equals("success")) {
                     Toast.makeText(NewOfferActivity.this, "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(NewOfferActivity.this, MainHomeActivity.class);
+                    Intent intent = new Intent(NewOfferActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     return;
                 }

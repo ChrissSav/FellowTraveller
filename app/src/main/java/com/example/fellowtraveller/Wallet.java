@@ -87,7 +87,9 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         imgBtn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                onChooseFile(v);
+                Intent q = new Intent(Wallet.this, WriteReviewActivity.class);
+                startActivity(q);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

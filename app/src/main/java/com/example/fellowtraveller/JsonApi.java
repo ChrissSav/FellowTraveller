@@ -40,12 +40,6 @@ public interface JsonApi {
     );
 
 
-    @GET("gettripbyfilter/{from}/{to}")
-    Call<List<TripB>> createTripByFilter(
-            @Path("from") String from,
-            @Path("to") String to
-    );
-
     @GET("gettripstakespart/{id}")
     Call<List<TripB>> getTripsTakesPart(
             @Path("id") int id

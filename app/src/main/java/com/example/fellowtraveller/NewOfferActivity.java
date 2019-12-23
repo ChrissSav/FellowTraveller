@@ -231,6 +231,7 @@ public class NewOfferActivity extends AppCompatActivity {
     public void sendToAPi(String from,String to,String date,String time,int creator_id,String des,int max_seats,int max_bags, int price_trip){
         Call<Status_handling> call = jsonPlaceHolderApi.createTrip(from, to, date, time, creator_id, des, max_seats, max_bags,price_trip);
         call.toString();
+
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {

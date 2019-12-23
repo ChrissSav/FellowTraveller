@@ -60,13 +60,13 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (CheckEmail() | CheckPassword()) {
-                    createUser();
+                    LoginUser();
                 }
 
             }
         });
     }
-    private void createUser(){
+    private void LoginUser(){
         final String email = textInputEmail.getEditText().getText().toString();
         final String password = textInputPassword.getEditText().getText().toString();
         Call<User> call = jsonPlaceHolderApi.getUserAuth(email,password);

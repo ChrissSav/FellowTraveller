@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -158,8 +159,8 @@ public class RegisterActivity extends AppCompatActivity {
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
                     Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
-                    save("true",status.getMsg(),name,email);
-                    Intent intent = new Intent(RegisterActivity.this, MainHomeActivity.class);
+                    save("true",Integer.parseInt(status.getMsg())+"",name,email);
+                    Intent intent = new Intent(RegisterActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     finish();
                     return;
@@ -173,6 +174,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
 
 

@@ -22,8 +22,8 @@ public class Search_item_filter implements Parcelable {
 
 
     public Search_item_filter() {
-        this.date_from = null;
-        this.date_to = null;
+        this.date_from = 0+"";
+        this.date_to = 0+"";
         this.time_from = 0+"";
         this.time_to = 0+"";
         this.seats_from = 0;
@@ -87,7 +87,7 @@ public class Search_item_filter implements Parcelable {
     }
 
     public void setDate_from(String date_from) {
-        this.date_from = date_from;
+        this.date_from = date_from.replace('/','-');
     }
 
     public String getDate_to() {
@@ -95,7 +95,7 @@ public class Search_item_filter implements Parcelable {
     }
 
     public void setDate_to(String date_to) {
-        this.date_to = date_to;
+        this.date_to = date_to.replace('/','-');
     }
 
     public String getTime_from() {

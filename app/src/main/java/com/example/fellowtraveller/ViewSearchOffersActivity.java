@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,6 +37,8 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private Search_item_filter filter_items;
     private TextInputEditText date_from;
     private TextInputEditText date_to;
+    private DatePickerDialog.OnDateSetListener mDateListener1;
+    private DatePickerDialog.OnDateSetListener mDateListener2;
     private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
@@ -46,8 +53,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         KEY = getString(R.string.api_key);
         setContentView(R.layout.activity_view_search_offers);
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
         ListOfTrips = new ArrayList<>();
         Intent intent = getIntent();
         filter_items = intent.getParcelableExtra("Filter");
@@ -69,7 +75,8 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewSearchOffersActivity.this, SearchFiltersActivity.class);
-                startActivity(intent);
+                intent.putExtra("Filter",filter_items);
+                startActivityForResult(intent, 2);
                 overridePendingTransition(R.anim.enter_from_right,R.anim.exit_to_left);
             }
         });
@@ -87,7 +94,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ListOfTrips = new ArrayList<>();
-                getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
+                getTrips();
             }
         });
         autoCompleteTextViewFrom.clearFocus();
@@ -96,22 +103,118 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
 
 
         FillFields();
+        getTrips();
         OutFocus();
-        getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
+
+        date_from.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OutFocus();
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        ViewSearchOffersActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateListener1, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                dialog.show();
+
+            }
+        });
+
+        mDateListener1 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String mon, d;
+                if (month <= 9) {
+                    mon = "0" + month;
+                } else {
+                    mon = month + "";
+                }
+                if (day <= 9) {
+                    d = "0" + day;
+                } else {
+                    d = day + "";
+                }
+                String date = d + "/" + mon + "/" + year;
+                date_from.setText(date + "");
+            }
+        };
 
 
 
+        date_to.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OutFocus();
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        ViewSearchOffersActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateListener2, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                dialog.show();
+            }
+
+        });
 
 
+        mDateListener2 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String mon, d;
+                if (month <= 9) {
+                    mon = "0" + month;
+                } else {
+                    mon = month + "";
+                }
+                if (day <= 9) {
+                    d = "0" + day;
+                } else {
+                    d = day + "";
+                }
+                String date = d + "/" + mon + "/" + year;
+                date_to.setText(date + "");
+            }
+        };
 
+        date_from.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                date_from.setCursorVisible(false);
+                date_from.setText(null);
+                return true;
+            }
+        });
+
+
+        date_to.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                date_to.setCursorVisible(false);
+                date_to.setText(null);
+                return true;
+            }
+        });
 
     }
 
     public void FillFields(){
         autoCompleteTextViewFrom.setText(filter_items.getFrom());
         autoCompleteTextViewTo.setText(filter_items.getTo());
-        date_from.setText(filter_items.getDate_from());
-        date_to.setText(filter_items.getDate_to());
+        if(date_from.getText().toString().trim()=="0")
+            date_from.setText(filter_items.getDate_from());
+        if(date_to.getText().toString().trim()=="0")
+            date_to.setText(filter_items.getDate_to());
+
+
     }
 
     public void buildRecyclerView() {
@@ -133,23 +236,14 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         });
     }
 
-    private void getTrips(AutoCompleteTextView autoCompleteTextViewFrom,AutoCompleteTextView autoCompleteTextViewTo) {
-        Log.i("RestAPI trip","mpika");
-        String from =autoCompleteTextViewFrom.getText().toString();
-        String to = autoCompleteTextViewTo.getText().toString();
-        String dateFrom,dateTo;
-        if(date_from.getText().toString().trim().isEmpty())
-            dateFrom =0+"";
-        else{
-            dateFrom = date_from.getText().toString();
-        }
-        if(date_to.getText().toString().trim().isEmpty())
-            dateTo =0+"";
-        else{
-            dateTo = date_to.getText().toString();
-        }
-
-        Call<List<TripB>> call = jsonPlaceHolderApi.getTripsfilter(from,to,dateFrom,dateTo,filter_items.getTime_from(),filter_items.getTime_to(),
+    private void getTrips() {
+        RefreshFilter();
+        ListOfTrips.clear();
+        Log.i("RefreshFilter", "To : "+filter_items.getDate_to());
+        Log.i("RefreshFilter", "From : "+filter_items.getDate_from());
+        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        Call<List<TripB>> call = jsonPlaceHolderApi.getTripsfilter(filter_items.getFrom(),filter_items.getTo(),filter_items.getDate_from(),filter_items.getDate_to(),filter_items.getTime_from(),filter_items.getTime_to(),
                 filter_items.getSeats_from(),filter_items.getSeats_to(),filter_items.getBags_from(),filter_items.getBags_to(),
                 filter_items.getRate_from(),filter_items.getRate_to(),filter_items.getPrice_from(),filter_items.getPrice_to());
         call.enqueue(new Callback<List<TripB>>() {
@@ -190,6 +284,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
+
             if (resultCode == RESULT_OK) {
                 int result = data.getIntExtra("result", 0);
                 ListOfTrips.remove(result);
@@ -198,6 +293,34 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
             if (resultCode == RESULT_CANCELED) {
 
             }
+        }
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                filter_items = data.getParcelableExtra("filter");
+                if(data.getBooleanExtra("flag",false))
+                   getTrips();
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
+    }
+
+    public void RefreshFilter(){
+        String from = autoCompleteTextViewFrom.getText().toString();
+        String to = autoCompleteTextViewTo.getText().toString();
+        filter_items.setFrom(from);
+        filter_items.setTo(to);
+        if(!date_from.getText().toString().trim().isEmpty())
+            filter_items.setDate_from(date_from.getText().toString());
+        else{
+            filter_items.setDate_from(0+"");
+        }
+        if(!date_to.getText().toString().trim().isEmpty())
+            filter_items.setDate_to(date_to.getText().toString());
+        else{
+            filter_items.setDate_to(0+"");
         }
     }
 }

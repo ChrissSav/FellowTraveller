@@ -28,7 +28,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Αξιολογήστε τον χρήστη"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         />
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tyler Joseph"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/circle_image"
             app:layout_constraintBottom_toBottomOf="@id/circle_image"
             app:layout_constraintTop_toTopOf="@id/circle_image"
@@ -59,9 +59,9 @@
         android:id="@+id/friendly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/userName"
+        app:layout_constraintStart_toStartOf="@id/circle_image"
         app:layout_constraintTop_toBottomOf="@id/userName"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:text="Φιλικός"
         android:layout_marginTop="30dp"
         android:textStyle="bold"
@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="@id/friendly"
         app:layout_constraintTop_toBottomOf="@id/friendly"
         android:text="Αξιόπιστος"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textStyle="bold"
         android:textSize="16sp"
         />
@@ -85,116 +85,43 @@
         app:layout_constraintStart_toStartOf="@id/reliable"
         app:layout_constraintTop_toBottomOf="@id/reliable"
         android:text="Προσεκτικός"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textStyle="bold"
         android:textSize="16sp"
         />
-    <ImageButton
-        android:id="@+id/friendly_sad_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="40dp"
-        app:layout_constraintTop_toTopOf="@id/friendly"
-        app:layout_constraintBottom_toBottomOf="@id/friendly"
-        android:background="@drawable/ic_sad_face_outlined"
-        android:backgroundTint="#CC3636"
-        />
-    <ImageButton
-        android:id="@+id/friendly_neutral_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/friendly_sad_btn"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/friendly"
-        app:layout_constraintBottom_toBottomOf="@id/friendly"
-        android:background="@drawable/ic_neutral_face_outlined"
-        android:backgroundTint="#CE823F"
-        />
 
-    <ImageButton
-        android:id="@+id/friendly_happy_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/friendly_neutral_btn"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/friendly"
-        app:layout_constraintBottom_toBottomOf="@id/friendly"
-        android:background="@drawable/ic_neutral_face_outlined"
-        android:backgroundTint="#44B840"
-        />
+            <com.hsalf.smilerating.SmileRating
+                android:id="@+id/smileRatingFriendly"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/friendly"
+                app:layout_constraintBottom_toBottomOf="@id/friendly"
+                app:layout_constraintStart_toStartOf="@+id/smileRatingCarefull"
+                android:layout_marginTop="10dp"
 
-    <ImageButton
-        android:id="@+id/reliable_sad_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="40dp"
-        app:layout_constraintTop_toTopOf="@id/reliable"
-        app:layout_constraintBottom_toBottomOf="@id/reliable"
-        android:background="@drawable/ic_sad_face_outlined"
-        android:backgroundTint="#CC3636"
-        />
+                />
+            <com.hsalf.smilerating.SmileRating
+                android:id="@+id/smileRatingReliable"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/reliable"
+                app:layout_constraintBottom_toBottomOf="@id/reliable"
+                app:layout_constraintStart_toStartOf="@+id/smileRatingCarefull"
+                android:layout_marginTop="10dp"
 
-    <ImageButton
-        android:id="@+id/reliable_neutral_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/reliable_sad_btn"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/reliable"
-        app:layout_constraintBottom_toBottomOf="@id/reliable"
-        android:background="@drawable/ic_neutral_face_outlined"
-        android:backgroundTint="#CE823F"
-        />
 
-    <ImageButton
-        android:id="@+id/reliable_happy_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/reliable_neutral_btn"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/reliable"
-        app:layout_constraintBottom_toBottomOf="@id/reliable"
-        android:background="@drawable/ic_neutral_face_outlined"
-        android:backgroundTint="#44B840"
-        />
-    <ImageButton
-        android:id="@+id/carefull_sad_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="40dp"
-        app:layout_constraintTop_toTopOf="@id/carefull"
-        app:layout_constraintBottom_toBottomOf="@id/carefull"
-        android:background="@drawable/ic_sad_face_outlined"
-        android:backgroundTint="#CC3636"
-        />
-    <ImageButton
-        android:id="@+id/carefull_neutral_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/carefull_sad_btn"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/carefull"
-        app:layout_constraintBottom_toBottomOf="@id/carefull"
-        android:background="@drawable/ic_neutral_face_outlined"
-        android:backgroundTint="#CE823F"
-        />
+                />
+            <com.hsalf.smilerating.SmileRating
+                android:id="@+id/smileRatingCarefull"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/carefull"
+                app:layout_constraintBottom_toBottomOf="@id/carefull"
+                app:layout_constraintStart_toEndOf="@+id/carefull"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
 
-    <ImageButton
-        android:id="@+id/carefull_happy_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/carefull_neutral_btn"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/carefull"
-        app:layout_constraintBottom_toBottomOf="@id/carefull"
-        android:background="@drawable/ic_neutral_face_outlined"
-        android:backgroundTint="#44B840"
-
-        />
-            
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

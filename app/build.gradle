@@ -38,6 +38,6 @@ dependencies {
     //Import Image
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
     //Smiley RatingBar
-    implementation 'com.github.sujithkanna:smileyrating:1.4'
+    implementation 'com.github.sujithkanna:smileyrating:1.6.8'
 
 }

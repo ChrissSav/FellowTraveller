@@ -8,7 +8,6 @@
     tools:context=".NewOfferActivity">
 
 
-
     <Button
         android:id="@+id/new_offer_button_back"
         android:layout_width="20dp"

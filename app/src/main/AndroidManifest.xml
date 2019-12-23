@@ -16,9 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".WriteReviewActivity"></activity>
         <activity
             android:name=".ReviewsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".HomeBetaActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

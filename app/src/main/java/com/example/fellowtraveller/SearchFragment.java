@@ -75,6 +75,7 @@ public class SearchFragment extends Fragment {
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), TripPageActivity.class);
                 intent.putExtra("Trip",Listoftrips.get(position));
+                intent.putExtra("F",false);
                 startActivity(intent);
 
             }

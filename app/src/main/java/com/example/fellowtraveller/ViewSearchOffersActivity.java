@@ -32,13 +32,11 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private Search_item_filter filter_items;
     private TextInputEditText date_from;
     private TextInputEditText date_to;
-    private TextInputEditText time_from;
-    private TextInputEditText time_to;
     private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<TripB> Listoftrips ;
+    private ArrayList<TripB> ListOfTrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private String KEY;
@@ -50,7 +48,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_search_offers);
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        Listoftrips = new ArrayList<>();
+        ListOfTrips = new ArrayList<>();
         Intent intent = getIntent();
         filter_items = intent.getParcelableExtra("Filter");
         btn_filter = findViewById(R.id.ViewSearchOffersActivity_button_filters);
@@ -65,10 +63,8 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
 
         date_from = findViewById(R.id.ViewSearchOffersActivity_editText_date_from);
         date_to = findViewById(R.id.ViewSearchOffersActivity_editText_date_to);
-        FillFields();
-        OutFocus();
-        getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
-        buildRecyclerView();
+
+
         btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,35 +86,48 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         btn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Listoftrips = new ArrayList<>();
+                ListOfTrips = new ArrayList<>();
                 getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
             }
         });
         autoCompleteTextViewFrom.clearFocus();
         autoCompleteTextViewTo.clearFocus();
 
+
+
+        FillFields();
+        OutFocus();
+        getTrips(autoCompleteTextViewFrom,autoCompleteTextViewTo);
+
+
+
+
+
+
+
     }
 
     public void FillFields(){
         autoCompleteTextViewFrom.setText(filter_items.getFrom());
         autoCompleteTextViewTo.setText(filter_items.getTo());
-        date_from.setText(filter_items.getDate_start());
-        date_to.setText(filter_items.getDate_end());
+        date_from.setText(filter_items.getDate_from());
+        date_to.setText(filter_items.getDate_to());
     }
 
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.ViewSearchOffersActivity_RecyclerView_items);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(ViewSearchOffersActivity.this);
-        mAdapter = new SearchAdapter(Listoftrips);
+        mAdapter = new SearchAdapter(ListOfTrips);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(ViewSearchOffersActivity.this, TripPageActivity.class);
-                intent.putExtra("Trip",Listoftrips.get(position));
-                startActivity(intent);
+                intent.putExtra("Trip",ListOfTrips.get(position));
+                intent.putExtra("position",position);
+                startActivityForResult(intent, 1);
 
             }
         });
@@ -128,7 +137,21 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         Log.i("RestAPI trip","mpika");
         String from =autoCompleteTextViewFrom.getText().toString();
         String to = autoCompleteTextViewTo.getText().toString();
-        Call<List<TripB>> call = jsonPlaceHolderApi.createTripByFilter(from,to);
+        String dateFrom,dateTo;
+        if(date_from.getText().toString().trim().isEmpty())
+            dateFrom =0+"";
+        else{
+            dateFrom = date_from.getText().toString();
+        }
+        if(date_to.getText().toString().trim().isEmpty())
+            dateTo =0+"";
+        else{
+            dateTo = date_to.getText().toString();
+        }
+
+        Call<List<TripB>> call = jsonPlaceHolderApi.getTripsfilter(from,to,dateFrom,dateTo,filter_items.getTime_from(),filter_items.getTime_to(),
+                filter_items.getSeats_from(),filter_items.getSeats_to(),filter_items.getBags_from(),filter_items.getBags_to(),
+                filter_items.getRate_from(),filter_items.getRate_to(),filter_items.getPrice_from(),filter_items.getPrice_to());
         call.enqueue(new Callback<List<TripB>>() {
             @Override
             public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
@@ -139,8 +162,9 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
                 List<TripB> trips = response.body();
                 for (int i=0; i<trips.size(); i++){
                     Log.i("RestAPI trip","i: "+trips.get(i).getFfrom());
-                    Listoftrips.add(trips.get(i));
+                    ListOfTrips.add(trips.get(i));
                 }
+                buildRecyclerView();
             }
             @Override
             public void onFailure(Call<List<TripB>> call, Throwable t) {
@@ -159,5 +183,21 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         date_to.clearFocus();
        // time_from.clearFocus();
         //time_to.clearFocus();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                int result = data.getIntExtra("result", 0);
+                ListOfTrips.remove(result);
+                mAdapter.notifyDataSetChanged();
+            }
+            if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@ public class SearchOfferActivity extends AppCompatActivity {
     private TextInputEditText time_from;
     private TextInputEditText time_to;
     private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
-
+    private  Search_item_filter filter  = new Search_item_filter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,14 +211,13 @@ public class SearchOfferActivity extends AppCompatActivity {
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*Search_item_filter filter  = new Search_item_filter(autoCompleteTextViewFrom.getText().toString(),autoCompleteTextViewTo.getText().toString(),
-                        date_from.getText().toString(),date_to.getText().toString(),time_from.getText().toString(),time_to.getText().toString());
-                SearchOfferActivity.this.onBackPressed();
-                Intent intent = new Intent(SearchOfferActivity.this, ViewSearchOffersActivity.class);
-                intent.putExtra("Filter",filter);
-                startActivity(intent);
-                finish();*/
-                CheckFieldes();
+                if (CheckFieldes()){
+                    FilFilter();
+                    Intent intent = new Intent(SearchOfferActivity.this, ViewSearchOffersActivity.class);
+                    intent.putExtra("Filter",filter);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
@@ -428,5 +427,22 @@ public class SearchOfferActivity extends AppCompatActivity {
         if (day1 < day2)
             return true;
         return false;
+    }
+    public void FilFilter(){
+        filter.setFrom(autoCompleteTextViewFrom.getText().toString());
+        filter.setTo(autoCompleteTextViewTo.getText().toString());
+        if(!date_from.getText().toString().trim().isEmpty()){
+            filter.setDate_from(date_from.getText().toString());
+        }
+        if(!date_to.getText().toString().trim().isEmpty()){
+            filter.setDate_from(date_to.getText().toString());
+        }
+        if(!time_from.getText().toString().trim().isEmpty()){
+            filter.setDate_from(time_from.getText().toString());
+        }
+        if(!time_to.getText().toString().trim().isEmpty()){
+            filter.setDate_from(time_to.getText().toString());
+        }
+
     }
 }

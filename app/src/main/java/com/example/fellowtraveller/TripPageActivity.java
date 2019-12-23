@@ -40,12 +40,14 @@ public class TripPageActivity extends AppCompatActivity {
     private TextView textView_price;
     private Button select,back;
     private int id;
+    private boolean flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_page);
         Intent intent = getIntent();
-        trip = intent.getParcelableExtra("Trip");
+        trip =  intent.getParcelableExtra("Trip");
+        flag =  intent.getBooleanExtra("F", true);
 
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
@@ -61,6 +63,9 @@ public class TripPageActivity extends AppCompatActivity {
         textView_price  = findViewById(R.id.tripPage_textView_price);
         select = findViewById(R.id.tripPage_button_select);
         back = findViewById(R.id.tripPage_button_back);
+
+        if(!flag)
+            select.setVisibility(View.GONE);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +123,9 @@ public class TripPageActivity extends AppCompatActivity {
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
                     Toast.makeText(TripPageActivity.this,"Επιτυχής επιλογή",Toast.LENGTH_SHORT).show();
-                    onBackPressed();
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("result",  getIntent().getParcelableExtra("position"));
+                    setResult(RESULT_OK, resultIntent);
                     finish();
                     return;
                 }

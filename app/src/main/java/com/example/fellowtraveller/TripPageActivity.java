@@ -79,6 +79,7 @@ public class TripPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Register();
+
             }
         });
         FillFields();
@@ -124,7 +125,7 @@ public class TripPageActivity extends AppCompatActivity {
                 if(status.getStatus().equals("success")){
                     Toast.makeText(TripPageActivity.this,"Επιτυχής επιλογή",Toast.LENGTH_SHORT).show();
                     Intent resultIntent = new Intent();
-                    resultIntent.putExtra("result",  getIntent().getParcelableExtra("position"));
+                    resultIntent.putExtra("result",  getIntent().getIntExtra("position",-1));
                     setResult(RESULT_OK, resultIntent);
                     finish();
                     return;

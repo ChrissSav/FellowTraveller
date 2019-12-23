@@ -87,7 +87,7 @@ public interface JsonApi {
 
 
     @GET("getTripsFilter/{from}/{to}/{date_from}/{date_to}/{time_from}/{time_to}/{seats_from}/{seats_to}/{bags_from}/{bags_to}/" +
-            "{rate_from}/{rate_to}/{price_from}/{price_to}")
+            "{rate_from}/{rate_to}/{price_from}/{price_to}/{id}")
     Call<List<TripB>> getTripsfilter(
             @Path("from") String from,
             @Path("to") String to,
@@ -102,6 +102,7 @@ public interface JsonApi {
             @Path("rate_from") Double rate_from,
             @Path("rate_to") Double rate_to,
             @Path("price_from") int price_from,
-            @Path("price_to") int price_to
+            @Path("price_to") int price_to,
+            @Path("id") int id
     );
 }

@@ -21,6 +21,11 @@ import com.example.fellowtraveller.BetaAutocomplete.PlaceAutoSuggestAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,7 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ViewSearchOffersActivity extends AppCompatActivity {
-
+    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn_filter,btn_back,btn_refresh;
     private Search_item_filter filter_items;
     private TextInputEditText date_from;
@@ -47,11 +52,13 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private String KEY;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         KEY = getString(R.string.api_key);
+        loadUserId();
         setContentView(R.layout.activity_view_search_offers);
 
         ListOfTrips = new ArrayList<>();
@@ -245,7 +252,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Call<List<TripB>> call = jsonPlaceHolderApi.getTripsfilter(filter_items.getFrom(),filter_items.getTo(),filter_items.getDate_from(),filter_items.getDate_to(),filter_items.getTime_from(),filter_items.getTime_to(),
                 filter_items.getSeats_from(),filter_items.getSeats_to(),filter_items.getBags_from(),filter_items.getBags_to(),
-                filter_items.getRate_from(),filter_items.getRate_to(),filter_items.getPrice_from(),filter_items.getPrice_to());
+                filter_items.getRate_from(),filter_items.getRate_to(),filter_items.getPrice_from(),filter_items.getPrice_to(),id);
         call.enqueue(new Callback<List<TripB>>() {
             @Override
             public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
@@ -286,9 +293,13 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         if (requestCode == 1) {
 
             if (resultCode == RESULT_OK) {
-                int result = data.getIntExtra("result", 0);
-                ListOfTrips.remove(result);
-                mAdapter.notifyDataSetChanged();
+                int result = data.getIntExtra("result", -1);
+                Log.i("resultCode","result :" +result);
+                if(result!=(-1)) {
+                    Log.i("resultCode"," if result :" +result);
+                    ListOfTrips.remove(result);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
             if (resultCode == RESULT_CANCELED) {
 
@@ -321,6 +332,37 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
             filter_items.setDate_to(date_to.getText().toString());
         else{
             filter_items.setDate_to(0+"");
+        }
+    }
+
+
+    public void loadUserId() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if(i==1){
+                    id = Integer.parseInt(text);
+                    break;
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

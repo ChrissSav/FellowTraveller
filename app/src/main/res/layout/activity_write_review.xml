@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".WriteReviewActivity">
     <androidx.cardview.widget.CardView
+        android:id="@+id/rate_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -124,5 +125,144 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/feedback_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPaddingTop="15dp"
+        app:contentPaddingRight="15dp"
+        app:contentPaddingLeft="15dp"
+        app:contentPaddingBottom="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#F8F7F3"
+        app:layout_constraintTop_toBottomOf="@id/rate_cardview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
+        android:layout_marginEnd="10dp"
+
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            >
+            <ImageButton
+                android:id="@+id/edit_button"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_edit"
+                android:backgroundTint="#5F5050"
+
+
+                />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Πείτε μας λίγα λόγια για αυτόν"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="16sp"
+                android:textColor="#5A5858"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:id="@+id/textView_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:lineHeight="20dp"
+                android:text="Πείτε μας λίγα λόγια για τον χρήστη έτσι ώστε να μπορούν οι επόμενοι χρήστες να βρουν τον ιδανικό τους συνταξιδιώτη με βάση τις δικιές τους προτιμήσεις "
+                android:textColor="#726F6F"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:visibility="visible"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintEnd_toStartOf="@id/edit_button"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintTop_toBottomOf="@id/textView" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Πες μας λίγα λόγια για σένα"
+                android:visibility="gone"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_cancel"
+                android:layout_marginEnd="20dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView" />
+            <ImageButton
+                android:id="@+id/button_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/ic_check2"
+                android:backgroundTint="#5F5050"
+                android:layout_marginTop="5dp"
+                />
+            <ImageButton
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/ic_cancel"
+                android:backgroundTint="#5F5050"
+                android:layout_marginBottom="5dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/review_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/submit_rate_btn"
+        android:text="blabla"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <Button
+        android:id="@+id/submit_rate_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Αξιολογήση"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="20dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+
+        android:textColor="@color/orange"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

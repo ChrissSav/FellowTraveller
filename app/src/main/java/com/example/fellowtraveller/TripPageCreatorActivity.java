@@ -44,7 +44,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private TextView textView_suitcases;
     private Button back;
     private List<UserB> requests ;
-    private List<UserB> passsengers ;
+    private List<UserB> passengers ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private int id =0 ;
@@ -68,7 +68,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         trip = intent.getParcelableExtra("Trip");
         requests = trip.getRequests();
-        passsengers = trip.getPassengers();
+        passengers = trip.getPassengers();
         textView_status = findViewById(R.id.TripPageCreatorActivity_textView_status);
         textView_creator_name = findViewById(R.id.TripPageCreatorActivity_textView_creator_name);
         textView_from  = findViewById(R.id.TripPageCreatorActivity_textView_from);
@@ -120,12 +120,11 @@ public class TripPageCreatorActivity extends AppCompatActivity {
 
 
     public void buildRecyclerViewPassengers() {
-        if(passsengers.size()!=0) {
-            Log.i("Makis","SIze : "+passsengers.size());
+        if(passengers.size()!=0) {
             mRecyclerViewPassengers = findViewById(R.id.TripPageCreatorActivity_RecyclerView_passengers);
             mRecyclerViewPassengers.setHasFixedSize(true);
             mLayoutManagerP = new LinearLayoutManager(TripPageCreatorActivity.this);
-            mAdapterPassengers = new PassengerAdapter(passsengers);
+            mAdapterPassengers = new PassengerAdapter(passengers);
             mRecyclerViewPassengers.setLayoutManager(mLayoutManagerP);
             mRecyclerViewPassengers.setAdapter(mAdapterPassengers);
         }

@@ -1,6 +1,8 @@
 package com.example.fellowtraveller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +44,12 @@ public class TripPageActivity extends AppCompatActivity {
     private Button select,back;
     private int id;
     private boolean flag;
+    private List<UserB> passengers ;
+    private RecyclerView mRecyclerViewPassengers;
+    private PassengerAdapter mAdapterPassengers;
+    private RecyclerView.LayoutManager mLayoutManagerP;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +57,7 @@ public class TripPageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         trip =  intent.getParcelableExtra("Trip");
         flag =  intent.getBooleanExtra("F", true);
-
+        passengers = trip.getPassengers();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
         textView_status = findViewById(R.id.tripPage_textView_status);
@@ -84,11 +93,21 @@ public class TripPageActivity extends AppCompatActivity {
         });
         FillFields();
         loadUserInfo();
+        buildRecyclerViewPassengers();
 
     }
 
 
-
+    public void buildRecyclerViewPassengers() {
+        if(passengers.size()!=0) {
+            mRecyclerViewPassengers = findViewById(R.id.tripPage_RecyclerView_passengers);
+            mRecyclerViewPassengers.setHasFixedSize(true);
+            mLayoutManagerP = new LinearLayoutManager(TripPageActivity.this);
+            mAdapterPassengers = new PassengerAdapter(passengers);
+            mRecyclerViewPassengers.setLayoutManager(mLayoutManagerP);
+            mRecyclerViewPassengers.setAdapter(mAdapterPassengers);
+        }
+    }
 
 
     public void FillFields(){

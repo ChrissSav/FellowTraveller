@@ -15,7 +15,7 @@
         android:layout_marginTop="24dp"
         android:text="Φίλτρα"
         android:textColor="#000"
-        android:textSize="20dp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,26 +27,31 @@
         android:layout_height="20dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/btn_popup_close"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintBottom_toBottomOf="@+id/SearchFiltersActivity_textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/SearchFiltersActivity_textView6" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
-        android:layout_width="359dp"
+        android:layout_width="match_parent"
         android:layout_height="71dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/text_view_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SearchFiltersActivity_textView6">
+        app:layout_constraintTop_toBottomOf="@+id/SearchFiltersActivity_textView6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="15dp"
             android:text="Θέσεις"
             android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +59,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="4dp"
             android:textColorHint="#000"
@@ -70,10 +75,11 @@
                 android:background="@null"
                 android:hint="Από"
                 android:inputType="number"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -99,10 +105,11 @@
                 android:background="@null"
                 android:hint="Εώς"
                 android:inputType="number"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -112,9 +119,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
-        android:layout_width="359dp"
+        android:layout_width="match_parent"
         android:layout_height="71dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/text_view_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,9 +132,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="15dp"
             android:text="Αποσκευές"
             android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -134,7 +144,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="4dp"
             android:textColorHint="#000"
@@ -150,10 +160,11 @@
                 android:background="@null"
                 android:hint="Από"
                 android:inputType="number"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -179,10 +190,11 @@
                 android:background="@null"
                 android:hint="Εώς"
                 android:inputType="number"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -190,9 +202,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="359dp"
+        android:layout_width="match_parent"
         android:layout_height="71dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/text_view_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -202,9 +216,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="15dp"
             android:text="Αξιολόγηση"
             android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -212,7 +227,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="4dp"
             android:textColorHint="#000"
@@ -228,10 +243,11 @@
                 android:background="@null"
                 android:hint="Από"
                 android:inputType="numberDecimal"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -256,10 +272,11 @@
                 android:background="@null"
                 android:hint="Εώς"
                 android:inputType="numberDecimal"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -267,9 +284,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="359dp"
+        android:layout_width="match_parent"
         android:layout_height="71dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/text_view_search_add_offer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -278,9 +297,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="15dp"
             android:text="Τιμή"
             android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -288,7 +308,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="4dp"
             android:textColorHint="#000"
@@ -305,10 +325,11 @@
                 android:background="@null"
                 android:hint="Από"
                 android:inputType="numberDecimal"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -333,10 +354,11 @@
                 android:background="@null"
                 android:hint="Εώς"
                 android:inputType="numberDecimal"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="85dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -344,14 +366,16 @@
 
     <Button
         android:id="@+id/SearchFiltersActivity_button_apply"
-        android:layout_width="326dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="27dp"
         android:background="@drawable/search_offer_btn"
         android:text="Εφαρμογή"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

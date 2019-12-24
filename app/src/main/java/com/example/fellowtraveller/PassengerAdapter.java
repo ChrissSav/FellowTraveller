@@ -1,5 +1,6 @@
 package com.example.fellowtraveller;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
+        Log.i("Chriss",currentItem.getBag());
         if(currentItem.getBag().equals("no"))
             holder.bag.setVisibility(View.GONE);
     }

@@ -53,10 +53,11 @@ public interface JsonApi {
 
 
 
-    @GET("registerrequesttotrip/{user_id}/{target_id}/{trip_id}")
+    @GET("registerrequesttotrip/{user_id}/{bag}/{target_id}/{trip_id}")
     Call<Status_handling> sendRequest(
             @Path("user_id") int user_id,
-             @Path("target_id") int target_id,
+            @Path("bag") String bag,
+            @Path("target_id") int target_id,
             @Path("trip_id") int trip_id
 
 
@@ -67,9 +68,10 @@ public interface JsonApi {
             @Path("id") int id
     );
 
-    @GET("changerequeststatus/{user_id}/{trip_id}/{status}")
+    @GET("changerequeststatus/{user_id}/{bag}/{trip_id}/{status}")
     Call<Status_handling> ChangeRequestStatus(
             @Path("user_id") int user_id,
+            @Path("bag") String bag,
             @Path("trip_id") int trip_id,
             @Path("status") String status
     );

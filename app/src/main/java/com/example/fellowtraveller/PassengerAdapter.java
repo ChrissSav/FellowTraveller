@@ -25,11 +25,12 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
+        public TextView name,bag;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             name = itemView.findViewById(R.id.passenger_item_textView_name);
+            bag = itemView.findViewById(R.id.passenger_item_textView_bag);
         }
     }
 
@@ -48,6 +49,8 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
+        if(currentItem.getBag().equals("no"))
+            holder.bag.setVisibility(View.GONE);
     }
 
     @Override

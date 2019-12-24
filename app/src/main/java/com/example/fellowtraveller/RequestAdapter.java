@@ -26,7 +26,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
+        public TextView name,bag;
         public Button btn_accept,btn_reject;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -34,7 +34,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
             name = itemView.findViewById(R.id.request_item_textView_name);
             btn_accept = itemView.findViewById(R.id.request_item_button_accept);
             btn_reject = itemView.findViewById(R.id.request_item_button_reject);
-
+            bag = itemView.findViewById(R.id.request_item_textView_bag);
             btn_accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,6 +75,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
+        if(currentItem.getBag().equals("no"))
+            holder.bag.setVisibility(View.GONE);
     }
 
     @Override

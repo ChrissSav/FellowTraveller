@@ -18,10 +18,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:addStatesFromChildren="true"
-            android:background="#fff"
-            >
+            android:background="#fff">
 
             <Button
                 android:id="@+id/tripPage_button_back"
@@ -295,26 +294,26 @@
         android:layout_height="79dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="-10dp"
         android:background="@drawable/trip_page_constraint_layout">
 
         <TextView
             android:id="@+id/tripPage_textView_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
+            android:text="500 Ευρώ"
             android:textColor="#000"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tripPage_button_select"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/tripPage_button_select"
-            android:layout_width="140dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="33dp"
+            android:layout_width="135dp"
+            android:layout_height="50dp"
             android:background="@drawable/main_btn_login"
             android:text="Επιλογή"
             android:textAllCaps="false"
@@ -323,6 +322,20 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/tripPage_checkBox_bag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Σακίδιο"
+            android:textColor="#000"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tripPage_button_select"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

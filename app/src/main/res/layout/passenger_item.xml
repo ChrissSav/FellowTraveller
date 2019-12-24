@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -45,6 +46,16 @@
             android:background="@drawable/star_4"
             app:layout_constraintBottom_toBottomOf="@+id/passenger_item_textView"
             app:layout_constraintStart_toEndOf="@+id/passenger_item_textView" />
+
+        <TextView
+            android:id="@+id/passenger_item_textView_bag"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/black_suitcase"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

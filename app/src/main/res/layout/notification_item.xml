@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="wrap_content"
     android:background="#fff"
     android:orientation="vertical">
 
@@ -12,6 +12,8 @@
         android:layout_width="376dp"
         android:layout_height="110dp"
         android:background="@drawable/notification_item_backround"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

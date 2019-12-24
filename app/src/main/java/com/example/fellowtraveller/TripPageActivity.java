@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class TripPageActivity extends AppCompatActivity {
     private Button select,back;
     private int id;
     private boolean flag;
+    private CheckBox bag;
     private List<UserB> passengers ;
     private RecyclerView mRecyclerViewPassengers;
     private PassengerAdapter mAdapterPassengers;
@@ -60,6 +62,8 @@ public class TripPageActivity extends AppCompatActivity {
         passengers = trip.getPassengers();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
+
+        bag= findViewById(R.id.tripPage_checkBox_bag);
         textView_status = findViewById(R.id.tripPage_textView_status);
         textView_creator_name = findViewById(R.id.tripPage_textView_creator_name);
         textView_from  = findViewById(R.id.tripPage_textView_from);
@@ -87,7 +91,11 @@ public class TripPageActivity extends AppCompatActivity {
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Register();
+                if(bag.isChecked()){
+                    Register("yes");
+                }else {
+                    Register("no");
+                }
 
             }
         });
@@ -131,8 +139,8 @@ public class TripPageActivity extends AppCompatActivity {
     }
 
 
-    public void Register(){
-        Call<Status_handling> call = jsonPlaceHolderApi.sendRequest(id, trip.getCreator().getId(),trip.getId());
+    public void Register(String bag){
+        Call<Status_handling> call = jsonPlaceHolderApi.sendRequest(id,bag,trip.getCreator().getId(),trip.getId());
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {

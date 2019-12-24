@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".WriteReviewActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ReviewsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

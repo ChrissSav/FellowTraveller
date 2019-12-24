@@ -7,6 +7,7 @@ public class UserB  implements Parcelable {
 
     private int id;
     private String name;
+    private String bag;
     private Double rate;
     private int num_of_travels_offered;
     private int num_of_travels_takespart;
@@ -15,6 +16,7 @@ public class UserB  implements Parcelable {
     protected UserB(Parcel in) {
         id = in.readInt();
         name = in.readString();
+        bag = in.readString();
         if (in.readByte() == 0) {
             rate = null;
         } else {
@@ -52,6 +54,14 @@ public class UserB  implements Parcelable {
         this.name = name;
     }
 
+    public String getBag() {
+        return bag;
+    }
+
+    public void setBag(String bag) {
+        this.bag = bag;
+    }
+
     public Double getRate() {
         return rate;
     }
@@ -85,6 +95,7 @@ public class UserB  implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
+        dest.writeString(bag);
         if (rate == null) {
             dest.writeByte((byte) 0);
         } else {

@@ -102,21 +102,24 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             public void onItemClick(int position,int flag) {
                 //flag==0 accept
                 if(flag == 0){
-                    /*Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
-                    Delete(position);
+                    Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
                     trip.setCurrent_num_of_seats(trip.getCurrent_num_of_seats()+1);
-                    textView_seats.setText(trip.getSeatesStatus());*/
+                    textView_seats.setText(trip.getSeatesStatus());
                     getUserTrips(requests.get(position).getId(),trip.getId(),ACCEPT,position);
+
                 }//flag==1 reject
                 else if(flag == 1){
-                    /*Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
-                    Delete(position);*/
+                    Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
                     getUserTrips(requests.get(position).getId(),trip.getId(),REJECT,position);
                 }
             }
         });
     }
 
+    public void Addpassenger(int position){
+        passengers.add(requests.get(position));
+        mAdapterPassengers.notifyDataSetChanged();
+    }
 
 
     public void buildRecyclerViewPassengers() {
@@ -201,9 +204,11 @@ public class TripPageCreatorActivity extends AppCompatActivity {
                     if(status_han.getStatus().equals("success")){
                         if(st.equals(ACCEPT)){
                             Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
+                            Addpassenger(position);
                             Delete(position);
                             trip.setCurrent_num_of_seats(trip.getCurrent_num_of_seats()+1);
                             textView_seats.setText(trip.getSeatesStatus());
+
                         }else{
                             Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
                             Delete(position);

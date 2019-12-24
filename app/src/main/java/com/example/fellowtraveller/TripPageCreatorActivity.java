@@ -44,6 +44,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private TextView textView_suitcases;
     private Button back;
     private List<UserB> requests ;
+    private List<UserB> passsengers ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private int id =0 ;
@@ -54,6 +55,9 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RequestAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView mRecyclerViewPassengers;
+    private PassengerAdapter mAdapterPassengers;
+    private RecyclerView.LayoutManager mLayoutManagerP;
 
 
 
@@ -64,6 +68,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         trip = intent.getParcelableExtra("Trip");
         requests = trip.getRequests();
+        passsengers = trip.getPassengers();
         textView_status = findViewById(R.id.TripPageCreatorActivity_textView_status);
         textView_creator_name = findViewById(R.id.TripPageCreatorActivity_textView_creator_name);
         textView_from  = findViewById(R.id.TripPageCreatorActivity_textView_from);
@@ -75,7 +80,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_price  = findViewById(R.id.TripPageCreatorActivity_textView_price);
         back = findViewById(R.id.TripPageCreatorActivity_button_back);
         FillFields();
-
+        buildRecyclerViewPassengers();
         buildRecyclerView();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +117,20 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         });
     }
 
+
+
+    public void buildRecyclerViewPassengers() {
+        if(passsengers.size()!=0) {
+            Log.i("Makis","SIze : "+passsengers.size());
+            mRecyclerViewPassengers = findViewById(R.id.TripPageCreatorActivity_RecyclerView_passengers);
+            mRecyclerViewPassengers.setHasFixedSize(true);
+            mLayoutManagerP = new LinearLayoutManager(TripPageCreatorActivity.this);
+            mAdapterPassengers = new PassengerAdapter(passsengers);
+            mRecyclerViewPassengers.setLayoutManager(mLayoutManagerP);
+            mRecyclerViewPassengers.setAdapter(mAdapterPassengers);
+        }
+    }
+
     public void Delete(int pos){
         requests.remove(pos);
         mAdapter.notifyDataSetChanged();
@@ -131,7 +150,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         textView_time.setText(trip.getTime());
         textView_seats.setText(trip.getSeatesStatus());
         textView_suitcases.setText(trip.getbagsStatus());
-        textView_price.setText(trip.getPrice()+" ευρώ");
+        textView_price.setText("Τιμή : "+trip.getPrice()+" ευρώ");
     }
 
 
@@ -218,7 +237,5 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-
-
 
 }

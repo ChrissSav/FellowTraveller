@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,260 +9,302 @@
     android:scrollbars="vertical"
     tools:context=".TripPageCreatorActivity">
 
-
-    <Button
-        android:id="@+id/TripPageCreatorActivity_button_back"
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/new_offer_button_back"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_creator_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toTopOf="@+id/TripPageCreatorActivity_textView_adminImage" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_adminImage"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/blackshape"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_button_back" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_stars"
-        android:layout_width="81dp"
-        android:layout_height="14dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/star_4"
-        app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_textView_creator_name" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="32dp"
-        android:text="Άπο"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="4dp"
-        android:text="Πρός"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
-
-    <EditText
-        android:id="@+id/TripPageCreatorActivity_textView_from"
-        android:layout_width="300dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="28dp"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView24"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toTopOf="@+id/textView24"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/TripPageCreatorActivity_textView_to"
-        android:layout_width="300dp"
-        android:layout_height="20dp"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_from"
-        app:layout_constraintTop_toTopOf="@+id/textView25" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_status"
-        android:layout_width="110dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/trip_page_btn_state"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:textColor="#FFAA5E"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/TripPageCreatorActivity_textView_adminImage" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/date_icon"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Ημερομηνία"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView26"
-        app:layout_constraintTop_toTopOf="@+id/textView26" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_date"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView26"
-        app:layout_constraintStart_toEndOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/seats_icon"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_status"
-        app:layout_constraintTop_toTopOf="@+id/textView26" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Θέσεις"
-        android:textColor="#000"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/textView28" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_seats"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView28"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/hour_icon"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Ώρα"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toTopOf="@+id/textView30" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_time"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView30"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/suitcase_icon"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_status"
-        app:layout_constraintTop_toTopOf="@+id/textView30" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Αποσκεύες"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintTop_toTopOf="@+id/textView32" />
-
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_suitcases"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView32"
-        app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-    <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Αιτήματα"
-        android:textSize="22dp"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/TripPageCreatorActivity_RecyclerView"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        android:layout_height="fill_parent"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="760dp">
 
-    <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/TripPageCreatorActivity_RecyclerView"
-        app:layout_constraintStart_toStartOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:addStatesFromChildren="true"
+            android:background="#fff"
+            android:scrollbars="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/TripPageCreatorActivity_button_back"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/new_offer_button_back"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_creator_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toTopOf="@+id/TripPageCreatorActivity_textView_adminImage" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_adminImage"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/blackshape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_button_back" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_stars"
+                android:layout_width="81dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/star_4"
+                app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_textView_creator_name" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="24dp"
+                android:text="Άπο"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:text="Πρός"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+            <EditText
+                android:id="@+id/TripPageCreatorActivity_textView_from"
+                android:layout_width="300dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="28dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                app:layout_constraintStart_toEndOf="@+id/textView24"
+                app:layout_constraintTop_toTopOf="@+id/textView24"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/TripPageCreatorActivity_textView_to"
+                android:layout_width="300dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_from"
+                app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_status"
+                android:layout_width="110dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/trip_page_btn_state"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#FFAA5E"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/TripPageCreatorActivity_textView_adminImage" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/date_icon"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Ημερομηνία"
+                android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView26"
+                app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView26"
+                app:layout_constraintStart_toEndOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/seats_icon"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_status"
+                app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Θέσεις"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView28"
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_seats"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView28"
+                app:layout_constraintStart_toEndOf="@+id/textView28"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/hour_icon"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Ώρα"
+                android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView30"
+                app:layout_constraintTop_toTopOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_time"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView30"
+                app:layout_constraintStart_toEndOf="@+id/textView30"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/suitcase_icon"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_status"
+                app:layout_constraintTop_toTopOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Αποσκεύες"
+                android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView32"
+                app:layout_constraintTop_toTopOf="@+id/textView32" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_suitcases"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView32"
+                app:layout_constraintStart_toEndOf="@+id/textView32"
+                app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Αιτήματα"
+                android:textColor="#000"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/TripPageCreatorActivity_textView_adminImage"
+                app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_RecyclerView_passengers" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/TripPageCreatorActivity_RecyclerView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/TripPageCreatorActivity_textView_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="#000"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView32"
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="Επιβάτες"
+                android:textColor="#000"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView30"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/TripPageCreatorActivity_RecyclerView_passengers"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout>

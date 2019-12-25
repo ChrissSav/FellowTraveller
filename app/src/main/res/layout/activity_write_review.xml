@@ -56,15 +56,58 @@
             android:layout_marginStart="10dp"
             android:textStyle="bold"
             />
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/userName"
+                app:layout_constraintStart_toStartOf="@id/circle_image"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="20dp"
+                android:text="Από:"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Θεσσαλονίκη"
+                android:id="@+id/cityFrom"
+                app:layout_constraintStart_toEndOf="@+id/from"
+                app:layout_constraintTop_toTopOf="@+id/from"
+                app:layout_constraintBottom_toBottomOf="@id/from"
+                android:layout_marginStart="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Αθήνα"
+                app:layout_constraintStart_toEndOf="@id/to"
+                app:layout_constraintTop_toTopOf="@+id/from"
+                app:layout_constraintBottom_toBottomOf="@id/from"
+                android:layout_marginStart="10dp"
+                />
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@+id/from"
+                    app:layout_constraintBottom_toBottomOf="@id/from"
+                    android:text="Προς:"
+                    app:layout_constraintStart_toEndOf="@id/cityFrom"
+                     android:layout_marginStart="20dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
     <TextView
         android:id="@+id/friendly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/circle_image"
-        app:layout_constraintTop_toBottomOf="@id/userName"
+        app:layout_constraintTop_toBottomOf="@id/from"
         android:layout_marginStart="20dp"
         android:text="Φιλικός"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:textStyle="bold"
         android:textSize="16sp"
         />

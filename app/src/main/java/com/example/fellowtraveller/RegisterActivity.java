@@ -1,5 +1,6 @@
 package com.example.fellowtraveller;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -13,8 +14,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -45,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
             .baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
         button_register = findViewById(R.id.RegisterActivity_button_register);
         button_login = findViewById(R.id.RegisterActivity_button_login);
 
-
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         textInputBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = textInputPassword.getText().toString();
         String phone = textInputPhone.getText().toString();
 
+        FireBaseRegister(name, email, password, birth, phone);
 
         Call<Status_handling> call = jsonPlaceHolderApi.createUser(name,birth,email,password,phone);
 
@@ -242,6 +249,18 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         }
     }
+    public void FireBaseRegister (String name, String email, String password, String birth, String phone){
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    //send to main main home activiy
+                }else{
+                    //error
+                }
+            }
+        });
 
+    }
 
 }

@@ -35,6 +35,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private ImageButton imageButtonEdit,imageButtonAccept,imageButtonCancel;
     private TextView textViewReview;
     private EditText editText;
+    private TextView username;
     private SmileRating smileRatingFriendly;
     private SmileRating smileRatingReliable;
     private SmileRating smileRatingCareful;
@@ -42,18 +43,23 @@ public class WriteReviewActivity extends AppCompatActivity {
     private int id;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit;
+    private TripB trip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent intent = getIntent();
+        trip =  intent.getParcelableExtra("Trip");
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         setContentView(R.layout.activity_write_review);
 
+
+        username = findViewById(R.id.WriteReviewActivity_userName);
         textView = findViewById(R.id.review_text);
         btn_submit = findViewById(R.id.submit_rate_btn);
 
-
+        username.setText(trip.getCreator().getName());
         smileRatingFriendly = (SmileRating) findViewById(R.id.smileRatingFriendly);
         smileRatingReliable = (SmileRating) findViewById(R.id.smileRatingReliable);
         smileRatingCareful = (SmileRating) findViewById(R.id.smileRatingCarefull);
@@ -157,14 +163,10 @@ public class WriteReviewActivity extends AppCompatActivity {
                 if(CheckRate()){
                     RegisterRateUser();
                 }
-               /* if (friendlyScore == 0) {
-                    textView.setText("Δεν αξιολογήθηκε ο χρήστης ως προς την φιλικότητα του");
-                } else {
-                    textView.setText("Ο χρήτης αξιολογήθηκε ως προς την φιλικότητα του με " + friendlyScore + " αστέρια"+"       Συνολικό score " + overallScore);
-                }*/
-
             }
         });
+
+        loadUserInfo();
 
     }
 
@@ -204,7 +206,7 @@ public class WriteReviewActivity extends AppCompatActivity {
 
     private void RegisterRateUser(){
 
-        Call<Status_handling> call = jsonPlaceHolderApi.RegisterRate(1,10,friendlyScore, reliableScore,
+        Call<Status_handling> call = jsonPlaceHolderApi.RegisterRate(id,trip.getCreator().getId(),friendlyScore, reliableScore,
                 carefulScore,consistentScore,editText.getText().toString()+" ");
         call.enqueue(new Callback<Status_handling>() {
             @Override
@@ -216,9 +218,7 @@ public class WriteReviewActivity extends AppCompatActivity {
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
                     Toast.makeText(WriteReviewActivity.this,"Ο χρήτης αξιολογήθηκε με επιτυχία",Toast.LENGTH_SHORT).show();
-                  //  Intent intent = new Intent(WriteReviewActivity.this,MainActivity.class);
-                  //  startActivity(intent);
-                  //  finish();
+                    onBackPressed();
                     return;
                 }
                 Toast.makeText(WriteReviewActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
@@ -242,7 +242,7 @@ public class WriteReviewActivity extends AppCompatActivity {
             while ((text = br.readLine()) != null) {
                 if(i==1){
                     id = Integer.parseInt(text);
-                    Log.i("NotificationDev","id: "+id);
+                    Log.i("loadUserInfo","id: "+id);
                     break;
                 }
                 i++;

@@ -89,7 +89,6 @@ public interface JsonApi {
             @Path("type") String type
     );
 
-
     @GET("getTripsFilter/{from}/{to}/{date_from}/{date_to}/{time_from}/{time_to}/{seats_from}/{seats_to}/{bags_from}/{bags_to}/" +
             "{rate_from}/{rate_to}/{price_from}/{price_to}/{id}")
     Call<List<TripB>> getTripsfilter(

@@ -35,6 +35,7 @@ import com.example.fellowtraveller.Trip;
 import com.example.fellowtraveller.TripPageCreatorActivity;
 import com.example.fellowtraveller.User;
 import com.example.fellowtraveller.Wallet;
+import com.example.fellowtraveller.WriteReviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -68,6 +69,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private  BottomNavigationView bottomNavigationView;
     private  CircleImageView circleImageView;
     private int id;
+    private boolean read = false;
 
 
     @Override
@@ -119,11 +121,48 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
             @Override
             public void onItemClick(int position) {
                 SetNotificationsRead(mExampleList.get(position).getId(),position);
+
             }
         });
     }
 
+    public void IntentStarter(int position){
+        Log.i("ChrisSav","getType "+mExampleList.get(position).getType());
+        switch ((mExampleList.get(position).getType())){
+            case "accept":
+                Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
+                intent.putExtra("Trip",mExampleList.get(position).getTrip());
+                intent.putExtra("F",false);
+                startActivity(intent);
+                // Toast.makeText(NotificationActivity.this,"accept",Toast.LENGTH_SHORT).show();
+                break;
+            case "reject":
+                Toast.makeText(NotificationActivity.this,"reject ",Toast.LENGTH_SHORT).show();
+                break;
+            case "rate":
+                Log.i("ChrisSav","rate");
+                Intent intentRate = new Intent(NotificationActivity.this, WriteReviewActivity.class);
+                intentRate.putExtra("Trip",mExampleList.get(position).getTrip());
+                startActivity(intentRate);
+                //Toast.makeText(NotificationActivity.this,"rate ",Toast.LENGTH_SHORT).show();
+                break;
+            case "request":
+                Intent intentRequest = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
+                intentRequest.putExtra("Trip",mExampleList.get(position).getTrip());
+                startActivity(intentRequest);
+                break;
+            default:
+                break;
 
+        }
+        Refresh(position);
+
+    }
+
+    public void Refresh(int position){
+        mExampleList.remove(position);
+        mAdapter.notifyDataSetChanged();
+    }
 
     public void BottonNav(){
 
@@ -183,16 +222,12 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(NotificationActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NotificationActivity.this,"response "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Status_handling status_han = response.body();
                 if(status_han.getStatus().equals("success")){
-                    Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
-                    intent.putExtra("Trip",mExampleList.get(position).getTrip());
-                    startActivity(intent);
-                    mExampleList.remove(position);
-                    mAdapter.notifyDataSetChanged();
+                    IntentStarter(position);
                 }
             }
             @Override
@@ -329,8 +364,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                 }
                 i++;
             }
-            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

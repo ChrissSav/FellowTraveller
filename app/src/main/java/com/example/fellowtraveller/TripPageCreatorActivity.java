@@ -214,6 +214,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         }
     }
 
+
     private void getUserTrips(int user_id, int trip_id, final String status, final int position) {
         final String st = status;
         if(CheckInternetConnection()){

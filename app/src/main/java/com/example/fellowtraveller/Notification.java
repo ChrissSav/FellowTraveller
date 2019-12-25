@@ -4,7 +4,7 @@ public class Notification {
     private int id;
     private UserB user;
     private TripB trip;
-
+    private String type;
 
     public int getId() {
         return id;
@@ -28,5 +28,13 @@ public class Notification {
 
     public void setTrip(TripB trip) {
         this.trip = trip;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

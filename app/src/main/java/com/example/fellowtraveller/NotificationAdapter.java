@@ -60,7 +60,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         Notification currentItem = mExampleList.get(position);
-        holder.description.setText("Ο χρήστης "+  currentItem.getUser().getName()+" σας έκανε αίτημα.");
+        if(currentItem.getType().equals("request")) {
+            holder.description.setText("Ο χρήστης " + currentItem.getUser().getName() + " σας έκανε αίτημα.");
+        }else if(currentItem.getType().equals("accept")){
+            holder.description.setText("Ο χρήστης " + currentItem.getTrip().getCreator().getName() + " σας αποδέχτηκε.");
+        }else if(currentItem.getType().equals("reject")){
+            holder.description.setText("Ο χρήστης " + currentItem.getTrip().getCreator().getName() + " σας απέρριψε.");
+        }else if(currentItem.getType().equals("rate")){
+            holder.description.setText("Ήρθε η ώρα της αξιολογήσης του χρήστη " + currentItem.getTrip().getCreator().getName());
+        }
     }
 
     @Override

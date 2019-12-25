@@ -101,4 +101,13 @@ public interface JsonApi {
             @Path("price_to") int price_to,
             @Path("id") int id
     );
+    //friendlyScore, reliableScore, carefullScore
+
+    @GET("registerRate/{friendlyScore}/{reliableScore}/{carefulScore}/{description}")
+    Call<Status_handling> RegisterRate(
+            @Path("friendlyScore") int friendlyScore,
+            @Path("reliableScore") int reliableScore,
+            @Path("carefulScore") int carefulScore,
+            @Path("description") String description
+    );
 }

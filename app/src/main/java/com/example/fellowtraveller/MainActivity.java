@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TripPageCreatorActivity.class);
+                Intent intent = new Intent(MainActivity.this, WriteReviewActivity.class);
                 startActivity(intent);
                 finish();
             }

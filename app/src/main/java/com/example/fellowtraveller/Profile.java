@@ -64,7 +64,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
-
         circleImageView = findViewById(R.id.profile_picture);
 
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
@@ -91,6 +90,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         loadUserInfo();
         //loadImageFromStorage();
+
 
         imageButtonUpload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)

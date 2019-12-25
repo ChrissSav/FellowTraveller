@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="@+id/UserProfileActivity_textView1_desc"
         app:layout_constraintTop_toBottomOf="@+id/UserProfileActivity_textView_prodfores" />
 
-    <TextView
+    <TextsView
         android:id="@+id/UserProfileActivity_textView1_desc"
         android:layout_width="328dp"
         android:layout_height="95dp"

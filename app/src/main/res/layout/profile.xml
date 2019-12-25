@@ -314,106 +314,6 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/profile_cardview_rate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:contentPaddingTop="15dp"
-                            app:contentPaddingRight="15dp"
-                            app:contentPaddingLeft="15dp"
-                            app:contentPaddingBottom="15dp"
-                            app:cardCornerRadius="10dp"
-                            app:cardBackgroundColor="#F8F7F3"
-                            app:layout_constraintTop_toBottomOf="@id/profile_cardview_aboutMe"
-                            android:layout_marginTop="15dp"
-
-                            >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                               >
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Αξιολογήσεις"
-                                    android:textSize="16sp"
-                                    android:textColor="#5A5858"
-                                    android:textStyle="bold"
-                                    android:layout_marginBottom="25dp" />
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="10dp">
-                                    <de.hdodenhof.circleimageview.CircleImageView
-                                        android:id="@+id/reviewer_profile_pic"
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_centerVertical="true"
-                                        android:src="@drawable/profile_picture" />
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginStart="50dp">
-
-                                        <TextView
-                                            android:id="@+id/reviewer_name"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Martijn Garritsen"
-                                            android:textSize="14sp"
-                                            android:textColor="#5A5858"
-                                            android:textStyle="bold" />
-
-                                        <TextView
-                                            android:id="@+id/review_date"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Μάρτιος 2018"
-                                            android:textSize="14sp"
-                                            android:textColor="@color/grey"
-                                            android:textStyle="normal"
-                                            android:layout_marginTop="20dp"/>
-
-                                    </RelativeLayout>
-                                    <ImageView
-                                        android:id="@+id/rating"
-                                        android:layout_width="80dp"
-                                        android:layout_height="24dp"
-                                        android:layout_centerVertical="true"
-                                        android:layout_alignParentEnd="true" />
-                                </RelativeLayout>
-
-                                <TextView
-                                    android:id="@+id/review"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Πολύ καλός οδηγός, προσεκτικός και πολύ ευγενικός. Τ"
-                                    android:textSize="14sp"
-                                    android:textColor="#726F6F"
-                                    android:textStyle="normal"
-                                    android:lineHeight="20dp" />
-
-                                <Button
-                                    android:id="@+id/profile_all_reviews_btn"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:layout_marginTop="20dp"
-                                    android:text="Read all reviews"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/orange"
-                                    android:textStyle="normal"
-                                    android:textAllCaps="false"
-                                    android:background="@null"
-                                    style="?android:attr/borderlessButtonStyle" />
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                        <androidx.cardview.widget.CardView
 
                             android:id="@+id/profile_cardview_overall"
                             android:layout_width="match_parent"
@@ -424,7 +324,7 @@
                             app:contentPaddingBottom="15dp"
                             app:cardCornerRadius="10dp"
                             app:cardBackgroundColor="#F8F7F3"
-                            app:layout_constraintTop_toBottomOf="@id/profile_cardview_rate"
+                            app:layout_constraintTop_toBottomOf="@id/profile_cardview_aboutMe"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="15dp"
                             >
@@ -548,7 +448,108 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                         </androidx.cardview.widget.CardView>
-                  </LinearLayout>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_cardview_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:contentPaddingTop="15dp"
+                            app:contentPaddingRight="15dp"
+                            app:contentPaddingLeft="15dp"
+                            app:contentPaddingBottom="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="#F8F7F3"
+                            app:layout_constraintTop_toBottomOf="@id/profile_cardview_overall"
+                            android:layout_marginTop="15dp"
+
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Αξιολογήσεις"
+                                    android:textSize="16sp"
+                                    android:textColor="#5A5858"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="25dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp">
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/reviewer_profile_pic"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/profile_picture" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="50dp">
+
+                                        <TextView
+                                            android:id="@+id/reviewer_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Martijn Garritsen"
+                                            android:textSize="14sp"
+                                            android:textColor="#5A5858"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/review_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Μάρτιος 2018"
+                                            android:textSize="14sp"
+                                            android:textColor="@color/grey"
+                                            android:textStyle="normal"
+                                            android:layout_marginTop="20dp"/>
+
+                                    </RelativeLayout>
+                                    <ImageView
+                                        android:id="@+id/rating"
+                                        android:layout_width="80dp"
+                                        android:layout_height="24dp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentEnd="true" />
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/review"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Πολύ καλός οδηγός, προσεκτικός και πολύ ευγενικός. Τ"
+                                    android:textSize="14sp"
+                                    android:textColor="#726F6F"
+                                    android:textStyle="normal"
+                                    android:lineHeight="20dp" />
+
+                                <Button
+                                    android:id="@+id/profile_all_reviews_btn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Read all reviews"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/orange"
+                                    android:textStyle="normal"
+                                    android:textAllCaps="false"
+                                    android:background="@null"
+                                    style="?android:attr/borderlessButtonStyle" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
                 </RelativeLayout>
           </LinearLayout>
         </RelativeLayout>

@@ -15,6 +15,12 @@ import android.widget.Toast;
 import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,20 +28,26 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WriteReviewActivity extends AppCompatActivity {
-    private int friendlyScore, reliableScore, carefullScore;
+    private static final String FILE_NAME = "fellow_login_state.txt";
+    private int friendlyScore, reliableScore, carefulScore,consistentScore;
     private TextView textView;
     private Button btn_submit;
-    private int overallScore;
     private ImageButton imageButtonEdit,imageButtonAccept,imageButtonCancel;
     private TextView textViewReview;
     private EditText editText;
     private SmileRating smileRatingFriendly;
     private SmileRating smileRatingReliable;
-    private SmileRating smileRatingCarefull;
-
+    private SmileRating smileRatingCareful;
+    private SmileRating smileRatingConsistent;
+    private int id;
+    private JsonApi jsonPlaceHolderApi;
+    private Retrofit retrofit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         setContentView(R.layout.activity_write_review);
 
         textView = findViewById(R.id.review_text);
@@ -44,7 +56,8 @@ public class WriteReviewActivity extends AppCompatActivity {
 
         smileRatingFriendly = (SmileRating) findViewById(R.id.smileRatingFriendly);
         smileRatingReliable = (SmileRating) findViewById(R.id.smileRatingReliable);
-        smileRatingCarefull = (SmileRating) findViewById(R.id.smileRatingCarefull);
+        smileRatingCareful = (SmileRating) findViewById(R.id.smileRatingCarefull);
+        smileRatingConsistent =findViewById(R.id.smileRatingConsistent);
 
         imageButtonEdit = findViewById(R.id.edit_button);
         imageButtonAccept = findViewById(R.id.button_accept);
@@ -55,11 +68,12 @@ public class WriteReviewActivity extends AppCompatActivity {
 
         setEmojiNames(smileRatingFriendly);
         setEmojiNames(smileRatingReliable);
-        setEmojiNames(smileRatingCarefull);
+        setEmojiNames(smileRatingCareful);
 
         smileRatingFriendly.setShowLine(false);
         smileRatingReliable.setShowLine(false);
-        smileRatingCarefull.setShowLine(false);
+        smileRatingCareful.setShowLine(false);
+        smileRatingConsistent.setShowLine(false);
 
         imageButtonAccept.setVisibility(View.GONE);
         imageButtonCancel.setVisibility(View.GONE);
@@ -77,10 +91,16 @@ public class WriteReviewActivity extends AppCompatActivity {
                 reliableScore = level;
             }
         });
-        smileRatingCarefull.setOnRatingSelectedListener(new SmileRating.OnRatingSelectedListener() {
+        smileRatingCareful.setOnRatingSelectedListener(new SmileRating.OnRatingSelectedListener() {
             @Override
             public void onRatingSelected(int level, boolean reselected) {
-                carefullScore = level;
+                carefulScore = level;
+            }
+        });
+        smileRatingConsistent.setOnRatingSelectedListener(new SmileRating.OnRatingSelectedListener() {
+            @Override
+            public void onRatingSelected(int level, boolean reselected) {
+                consistentScore = level;
             }
         });
         //overallScore = getOverall(friendlyScore, reliableScore, carefullScore );
@@ -134,13 +154,8 @@ public class WriteReviewActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Rate","friendlyScore :"+friendlyScore);
-                Log.i("Rate","reliableScore :"+reliableScore);
-                Log.i("Rate","carefullScore :"+carefullScore);
-                Log.i("Rate", "editText :"+editText.length());
-
                 if(CheckRate()){
-                    //RegisterRateUser();
+                    RegisterRateUser();
                 }
                /* if (friendlyScore == 0) {
                     textView.setText("Δεν αξιολογήθηκε ο χρήστης ως προς την φιλικότητα του");
@@ -172,8 +187,12 @@ public class WriteReviewActivity extends AppCompatActivity {
             Toast.makeText(WriteReviewActivity.this,"Δεν αξιολογήθηκε ο χρήστης ως προς την αξιοπιστία του",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(carefullScore<1) {
+        if(carefulScore<1) {
             Toast.makeText(WriteReviewActivity.this,"Δεν αξιολογήθηκε ο χρήστης ως προς την προσεκτικότητα του",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(consistentScore<1) {
+            Toast.makeText(WriteReviewActivity.this,"Δεν αξιολογήθηκε ο χρήστης ως προς την συνέπεια του",Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -181,35 +200,12 @@ public class WriteReviewActivity extends AppCompatActivity {
 
 
 
-    public int getOverall(int a,int b, int c){
-        int overall = 0;
-        int count = 0;
-
-        if(a > 0){
-            overall = overall + a;
-            count++;
-        }
-        if(b > 0){
-            overall = overall + b;
-            count++;
-        }
-        if(c > 0){
-            overall = overall + c;
-            count++;
-        }
-        if(count>0){
-            overall = overall / count;
-        }
-
-        return overall;
-    }
 
 
     private void RegisterRateUser(){
-        JsonApi jsonPlaceHolderApi;
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        Call<Status_handling> call = jsonPlaceHolderApi.RegisterRate(friendlyScore, reliableScore, carefullScore,editText.getText().toString());
+
+        Call<Status_handling> call = jsonPlaceHolderApi.RegisterRate(1,10,friendlyScore, reliableScore,
+                carefulScore,consistentScore,editText.getText().toString()+" ");
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
@@ -220,9 +216,9 @@ public class WriteReviewActivity extends AppCompatActivity {
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
                     Toast.makeText(WriteReviewActivity.this,"Ο χρήτης αξιολογήθηκε με επιτυχία",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(WriteReviewActivity.this, HomeBetaActivity.class);
-                    startActivity(intent);
-                    finish();
+                  //  Intent intent = new Intent(WriteReviewActivity.this,MainActivity.class);
+                  //  startActivity(intent);
+                  //  finish();
                     return;
                 }
                 Toast.makeText(WriteReviewActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
@@ -233,5 +229,36 @@ public class WriteReviewActivity extends AppCompatActivity {
                 // Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void loadUserInfo() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if(i==1){
+                    id = Integer.parseInt(text);
+                    Log.i("NotificationDev","id: "+id);
+                    break;
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

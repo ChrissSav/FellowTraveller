@@ -130,41 +130,60 @@
         android:text="Προσεκτικός"
         android:layout_marginTop="30dp"
         android:textStyle="bold"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp"/>
 
             <com.hsalf.smilerating.SmileRating
                 android:id="@+id/smileRatingFriendly"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/friendly"
-                app:layout_constraintBottom_toBottomOf="@id/friendly"
-                app:layout_constraintStart_toStartOf="@+id/smileRatingCarefull"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/friendly"
 
-                />
+                app:layout_constraintStart_toEndOf="@+id/friendly"
+                app:layout_constraintTop_toTopOf="@+id/friendly" />
+
             <com.hsalf.smilerating.SmileRating
                 android:id="@+id/smileRatingReliable"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/reliable"
-                app:layout_constraintBottom_toBottomOf="@id/reliable"
-                app:layout_constraintStart_toStartOf="@+id/smileRatingCarefull"
                 android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/reliable"
+                app:layout_constraintStart_toStartOf="@+id/smileRatingFriendly"
 
 
-                />
+                app:layout_constraintTop_toTopOf="@+id/reliable" />
+
             <com.hsalf.smilerating.SmileRating
                 android:id="@+id/smileRatingCarefull"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/carefull"
-                app:layout_constraintBottom_toBottomOf="@id/carefull"
-                app:layout_constraintStart_toEndOf="@+id/carefull"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/carefull"
+                app:layout_constraintStart_toStartOf="@+id/smileRatingFriendly"
 
-                />
+                app:layout_constraintTop_toTopOf="@+id/carefull" />
+
+            <TextView
+                android:id="@+id/textView_Consistent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Συνεπής"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/carefull"
+                app:layout_constraintTop_toBottomOf="@+id/carefull" />
+
+            <com.hsalf.smilerating.SmileRating
+                android:id="@+id/smileRatingConsistent"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/textView_Consistent"
+                app:layout_constraintStart_toStartOf="@+id/smileRatingFriendly"
+
+                app:layout_constraintTop_toTopOf="@+id/textView_Consistent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

@@ -103,11 +103,15 @@ public interface JsonApi {
     );
     //friendlyScore, reliableScore, carefullScore
 
-    @GET("registerRate/{friendlyScore}/{reliableScore}/{carefulScore}/{description}")
+    @GET("registerRate/{user_id}/{target_id}/{friendlyScore}/{reliableScore}/{carefulScore}/{consistentScore}/{description}")
     Call<Status_handling> RegisterRate(
+            @Path("user_id") int user_id,
+            @Path("target_id") int target_id,
             @Path("friendlyScore") int friendlyScore,
             @Path("reliableScore") int reliableScore,
             @Path("carefulScore") int carefulScore,
+            @Path("consistentScore") int consistentScore,
             @Path("description") String description
     );
 }
+

@@ -49,6 +49,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private TextView textViewAboutMe;
     private EditText editText;
     private Button readReviewsButton;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +149,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             public void onClick(View v) {
                 Intent r = new Intent(Profile.this, ReviewsActivity.class);
+                r.putExtra("Target_id",id);
                 startActivity(r);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
@@ -249,12 +251,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 }else if(i==3){
                     email.setText(text);
                 }else if(i==1){
-                    //id = Integer.parseInt(text);
+                    id = Integer.parseInt(text);
                 }
                 i++;
             }
-            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

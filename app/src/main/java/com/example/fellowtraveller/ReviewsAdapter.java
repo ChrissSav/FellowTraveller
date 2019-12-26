@@ -20,18 +20,20 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
         public CircleImageView circleImageView;
         public ImageView rating;
-        public TextView nameTV;
-        public TextView dateTV;
-        public TextView reviewTV;
+        public TextView name;
+        public TextView date;
+        public TextView review;
+        public TextView num;
 
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.reviewer_profile_pic);
             rating = itemView.findViewById(R.id.rating);
-            nameTV = itemView.findViewById(R.id.reviewer_name);
-            dateTV = itemView.findViewById(R.id.review_date);
-            reviewTV = itemView.findViewById(R.id.review);
+            name = itemView.findViewById(R.id.reviewer_name);
+            date = itemView.findViewById(R.id.review_date);
+            review = itemView.findViewById(R.id.review);
+            num = itemView.findViewById(R.id.rating_num);
         }
     }
     public ReviewsAdapter (ArrayList<ReviewItem> reviewsList){
@@ -48,13 +50,28 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ReviewItem curr = mReviewsList.get(position);
-
-        holder.nameTV.setText(curr.getName());
+        /*holder.nameTV.setText(curr.getName());
         holder.dateTV.setText(curr.getDate());
-        holder.reviewTV.setText(curr.getReview());
+        holder.reviewTV.setText(curr.getReview());*/
+        holder.name.setText(curr.getUser().getName());
+        holder.date.setText(curr.getDate());
+        holder.num.setText(round(curr.getRate(),1)+"");
+        if(curr.getDescription().equals("") || curr.getDescription().equals(" "))
+            holder.review.setText("Δεν υπάρχει περιγραφή");
+        else
+            holder.review.setText(curr.getDescription());
 
 
 
+
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
     @Override

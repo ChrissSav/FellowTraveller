@@ -4,6 +4,9 @@ public class ReviewItem {
     private String name;
     private String date;
     private String review;
+    private UserB user;
+    private Double rate;
+    private String description;
 
     public ReviewItem(String aName, String aDate, String aReview){
 
@@ -29,5 +32,30 @@ public class ReviewItem {
     }
     public void setReview(String aReview) {
         this.review = aReview;
+    }
+
+
+    public UserB getUser() {
+        return user;
+    }
+
+    public void setUser(UserB user) {
+        this.user = user;
+    }
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public void Double(Double rate) {
+        this.rate = rate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

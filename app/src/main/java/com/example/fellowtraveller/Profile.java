@@ -15,7 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -37,6 +39,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FILE_NAME = "fellow_login_state.txt";
@@ -46,17 +53,24 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private CircleImageView circleImageView,circleImageViewNav ;
     private ImageButton imageButtonUpload,imageButtonEdit,imageButtonAccept,imageButtonCancel;
     private Uri mImageUri;
-    private TextView textViewAboutMe;
+    private TextView textViewAboutMe,tV_user_rating;
+    private ImageView Img_friendly,Img_reliable,Img_careful,Img_consistent;
     private EditText editText;
     private Button readReviewsButton;
     private int id;
+    private JsonApi jsonPlaceHolderApi;
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-
-
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        tV_user_rating = findViewById(R.id.user_rating);
+        Img_friendly = findViewById(R.id.profile_img_friendly);
+        Img_reliable = findViewById(R.id.profile_img_reliable);
+        Img_careful= findViewById(R.id.profile_img_careful);
+        Img_consistent = findViewById(R.id.profile_img_consistent);
 
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
@@ -89,7 +103,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         imageButtonCancel.setVisibility(View.GONE);
 
 
-        loadUserInfo();
         //loadImageFromStorage();
 
 
@@ -154,7 +167,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
-
+        loadUserInfoFromStoarge();
+        LoadUserInfoFromServer();
     }
 
     @Override
@@ -211,6 +225,127 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             super.onBackPressed();
     }
 
+
+
+    private void LoadUserInfoFromServer(){
+        Log.i("Chriss","id : "+id);
+        Call<RateUserContainerItem> call = jsonPlaceHolderApi.getUserInfo(id);
+        call.enqueue(new Callback<RateUserContainerItem>() {
+            @Override
+            public void onResponse(Call<RateUserContainerItem> mcall, Response<RateUserContainerItem> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(Profile.this,"response "+response.errorBody()+"\n"+"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                RateUserContainerItem container = response.body();
+                tV_user_rating.setText(container.getUser().getRate()+"");
+                SetImgToFriendly(container.getFriendly());
+                SetImgToReliable(container.getReliable());
+                SetImgToCareful(container.getCareful());
+                SetImgToConsistent(container.getConsistent());
+
+               /* Img_friendly = findViewById(R.id.profile_img_friendly);
+                Img_reliable = findViewById(R.id.profile_img_reliable);
+                Img_careful= findViewById(R.id.profile_img_careful);
+                Img_consistent = findViewById(R.id.profile_img_consistent);*/
+
+            }
+
+            @Override
+            public void onFailure(Call<RateUserContainerItem> call, Throwable t) {
+               // Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void SetImgToFriendly(int pos){
+        switch (pos){
+            case 1:
+                Img_friendly.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_friendly.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_friendly.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_friendly.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_friendly.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+    public void SetImgToReliable(int pos){
+        switch (pos){
+            case 1:
+                Img_reliable.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_reliable.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_reliable.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_reliable.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_reliable.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+    public void SetImgToCareful(int pos){
+        switch (pos){
+            case 1:
+                Img_careful.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_careful.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_careful.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_careful.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_careful.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+    public void SetImgToConsistent(int pos){
+        switch (pos){
+            case 1:
+                Img_consistent.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_consistent.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_consistent.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_consistent.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_consistent.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
     public void save(String status) {
         String text = status;
         FileOutputStream fos = null;
@@ -232,7 +367,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    public void loadUserInfo() {
+    public void loadUserInfoFromStoarge() {
         FileInputStream fis = null;
         try {
             fis = openFileInput(FILE_NAME);
@@ -252,9 +387,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     email.setText(text);
                 }else if(i==1){
                     id = Integer.parseInt(text);
+                    Log.i("Chriss","id: "+id);
+
                 }
                 i++;
             }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(HomeBetaActivity.this,"id : "+id, Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

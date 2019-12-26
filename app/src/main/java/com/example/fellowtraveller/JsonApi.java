@@ -125,5 +125,10 @@ public interface JsonApi {
             @Path("user_id") int user_id
 
     );
+
+    @GET("getUserInfo/{user_id}")
+    Call<RateUserContainerItem> getUserInfo(
+            @Path("user_id") int user_id
+    );
 }
 

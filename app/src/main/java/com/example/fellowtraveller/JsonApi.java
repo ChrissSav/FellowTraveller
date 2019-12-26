@@ -108,7 +108,6 @@ public interface JsonApi {
             @Path("price_to") int price_to,
             @Path("id") int id
     );
-    //friendlyScore, reliableScore, carefullScore
 
     @GET("registerRate/{user_id}/{target_id}/{friendlyScore}/{reliableScore}/{carefulScore}/{consistentScore}/{description}")
     Call<Status_handling> RegisterRate(

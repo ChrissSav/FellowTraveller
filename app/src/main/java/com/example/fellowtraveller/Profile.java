@@ -16,8 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
@@ -27,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -50,6 +57,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private EditText editText;
     private Button readReviewsButton;
 
+    //Firabase Storage Profile Image
+    private StorageReference mImageStorage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +75,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
         circleImageView = findViewById(R.id.profile_picture);
+
+        mImageStorage = FirebaseStorage.getInstance().getReference();
 
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
 
@@ -306,6 +318,22 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             if (resultCode == RESULT_OK){
                 mImageUri = result.getUri();
                 circleImageView.setImageURI(mImageUri);
+
+                //FireBase Image Storage
+                StorageReference filepath = mImageStorage.child("profile_images").child(random() + ".jpg");
+                filepath.putFile(mImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            Toast.makeText(Profile.this ,"Image Storaged",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Profile.this ,"Error Uploading Image",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                //Finished Image Storage
+
                 Bitmap bit = result.getBitmap();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
@@ -347,7 +375,17 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
         return directory.getAbsolutePath();
     }
-
+    public static String random() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(20);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++){
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
+    }
 
 
 }

@@ -203,7 +203,7 @@ public class RegisterActivity extends AppCompatActivity {
         userMap.put("image","default");
 
         userDatabase.setValue(userMap);
-        
+
 
         String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;

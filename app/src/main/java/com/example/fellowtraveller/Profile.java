@@ -1,10 +1,12 @@
 package com.example.fellowtraveller;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,12 +20,20 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
@@ -40,6 +50,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -56,9 +67,14 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private TextView textViewAboutMe;
     private EditText editText;
     private Button readReviewsButton;
+    private String id;
 
+    private DatabaseReference userDatabase;
     //Firabase Storage Profile Image
     private StorageReference mImageStorage;
+    //Progress Dialog
+    private ProgressDialog mProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +87,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
+        id = getId();
+        userDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView =  findViewById(R.id.nav_view);
-        circleImageView = findViewById(R.id.profile_picture);
+        circleImageView = (CircleImageView) findViewById(R.id.profile_picture);
 
+        id = getId();
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
@@ -99,6 +119,24 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         imageButtonAccept.setVisibility(View.GONE);
         imageButtonCancel.setVisibility(View.GONE);
 
+
+        userDatabase.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O_MR1)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String image = dataSnapshot.child("Users").child(id).child("image").getValue().toString();
+
+
+               // Picasso.get().load(image).into(circleImageView);
+                Picasso.get().load(image)
+                        .into(circleImageView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         loadUserInfo();
         //loadImageFromStorage();
@@ -261,7 +299,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 }else if(i==3){
                     email.setText(text);
                 }else if(i==1){
-                    //id = Integer.parseInt(text);
+                   // id = Integer.parseInt(text);
                 }
                 i++;
             }
@@ -284,15 +322,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private void loadImageFromStorage()
     {
-        circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        circleImageView = findViewById(R.id.profile_picture);
+        //circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        //circleImageView = findViewById(R.id.profile_picture);
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         try {
             File f = new File(directory, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            circleImageView.setImageBitmap(b);
-            circleImageViewNav.setImageBitmap(b);
+            //circleImageView.setImageBitmap(b);
+            //circleImageViewNav.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
         {
@@ -316,43 +354,59 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
             if (resultCode == RESULT_OK){
+
+                mProgressDialog = new ProgressDialog(Profile.this);
+                mProgressDialog.setTitle("Uploading Image..");
+                mProgressDialog.setMessage("Please wait while we process the image.");
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
+
+
                 mImageUri = result.getUri();
-                circleImageView.setImageURI(mImageUri);
+
 
                 //FireBase Image Storage
-                StorageReference filepath = mImageStorage.child("profile_images").child(random() + ".jpg");
-                filepath.putFile(mImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                StorageReference filepath = mImageStorage.child("profile_images").child(id + ".jpg");
+                filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Task<Uri> downloaduri = taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if(task.isSuccessful()){
+                                    mProgressDialog.dismiss();
+                                    Uri download = task.getResult();
+                                    userDatabase.child("Users").child(id).child("image").setValue(download.toString());
+                                }
+                                else{
 
-                        if(task.isSuccessful()){
-                            Toast.makeText(Profile.this ,"Image Storaged",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(Profile.this ,"Error Uploading Image",Toast.LENGTH_SHORT).show();
-                        }
+                                }
+                            }
+                        });
                     }
                 });
+            }
                 //Finished Image Storage
 
-                Bitmap bit = result.getBitmap();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
-                    Log.i("Chris","Bit map "+bitmap.toString());
-                    saveToInternalStorage(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+               // Bitmap bit = result.getBitmap();
+               // try {
+                  //  Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
+                    //Log.i("Chris","Bit map "+bitmap.toString());
+                    //saveToInternalStorage(bitmap);
+              //  } catch (IOException e) {
+                    //e.printStackTrace();
+                //}
 
 
-                 saveToInternalStorage(result.getBitmap());
+                 //saveToInternalStorage(result.getBitmap());
             }
             else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Exception e = result.getError();
-                Log.i("error",e.getMessage());
+               // Exception e = result.getError();
+                //Log.i("error",e.getMessage());
 
             }
         }
-    }
+
 
 
     private String saveToInternalStorage(Bitmap bitmapImage){
@@ -375,6 +429,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
         return directory.getAbsolutePath();
     }
+
     public static String random() {
         Random generator = new Random();
         StringBuilder randomStringBuilder = new StringBuilder();
@@ -387,5 +442,41 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         return randomStringBuilder.toString();
     }
 
+
+    public String getId(){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            String id ="-1";
+
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i==1){
+                    id = text;
+                    return id;
+
+                }
+                i++;
+            }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return id;
+    }
 
 }

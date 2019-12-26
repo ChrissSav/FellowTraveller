@@ -43,5 +43,9 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
     //Smiley RatingBar
     implementation 'com.github.sujithkanna:smileyrating:1.6.8'
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 
 }

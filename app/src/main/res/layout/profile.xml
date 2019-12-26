@@ -402,6 +402,7 @@
                                     />
 
                                 <ImageView
+                                    android:id="@+id/profile_img_friendly"
                                     android:layout_width="150dp"
                                     android:layout_height="15dp"
                                     android:layout_marginEnd="5dp"
@@ -413,6 +414,7 @@
                                     />
 
                                 <ImageView
+                                    android:id="@+id/profile_img_reliable"
                                     android:layout_width="150dp"
                                     android:layout_height="15dp"
                                     android:layout_marginEnd="5dp"
@@ -424,6 +426,7 @@
                                     />
 
                                 <ImageView
+                                    android:id="@+id/profile_img_careful"
                                     android:layout_width="150dp"
                                     android:layout_height="15dp"
                                     android:layout_marginEnd="5dp"
@@ -436,6 +439,7 @@
 
 
                                 <ImageView
+                                    android:id="@+id/profile_img_consistent"
                                     android:layout_width="150dp"
                                     android:layout_height="15dp"
                                     android:layout_marginEnd="5dp"

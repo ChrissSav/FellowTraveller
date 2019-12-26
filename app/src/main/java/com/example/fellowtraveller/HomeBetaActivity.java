@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellowtraveller.BetaActivity.NotificationActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -205,7 +206,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                 i++;
             }
             //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(HomeBetaActivity.this,"id : "+id, Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

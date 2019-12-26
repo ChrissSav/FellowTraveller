@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
@@ -17,71 +18,95 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="vertical">
 
 
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
+
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/reviewer_profile_pic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/profile_picture" />
+                android:src="@drawable/profile_picture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/reviewer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="50dp">
+                android:layout_marginStart="8dp"
+                android:text="Σπύρος Ράντογλου"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/reviewer_profile_pic"
+                app:layout_constraintTop_toTopOf="@+id/reviewer_profile_pic" />
 
-                <TextView
-                    android:id="@+id/reviewer_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Σπύρος Ράντογλου"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/review_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Μάρτιος 2018"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
-
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/review_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Μάρτιος 2018"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/reviewer_profile_pic"
+                app:layout_constraintStart_toEndOf="@+id/reviewer_profile_pic" />
 
             <ImageView
                 android:id="@+id/rating"
-                android:layout_width="75dp"
-                android:layout_height="15dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/star_4"/>
-        </RelativeLayout>
+                android:background="@drawable/ic_star"
+                app:layout_constraintBottom_toBottomOf="@+id/review_date"
+                app:layout_constraintEnd_toStartOf="@+id/rating_num"
+                app:layout_constraintTop_toTopOf="@+id/reviewer_name" />
 
-        <TextView
-            android:id="@+id/review"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineHeight="15dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in augue id sem facilisis ultrices."
-            android:textColor="@color/grey"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            <TextView
+                android:id="@+id/rating_num"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/rating"
+                android:text="4.5333"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rating" />
+
+            <TextView
+                android:id="@+id/review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineHeight="15dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in augue id sem facilisis ultrices."
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/review_date" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </LinearLayout>

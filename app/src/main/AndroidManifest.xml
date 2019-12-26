@@ -44,7 +44,6 @@
         <activity
             android:name=".TripPageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".UserProfileActivity" />
         <activity
             android:name=".SearchOfferActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

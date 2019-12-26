@@ -20,6 +20,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -28,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private FirebaseAuth mAuth;
+    private DatabaseReference userDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +171,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if(status.getStatus().equals("success")){
                     Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
                     save("true",Integer.parseInt(status.getMsg())+"",name,email);
+                    //we have to get the id of user and this id save it to the database
+                    //Or we have to send the email of user as unique object
                     Intent intent = new Intent(RegisterActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     finish();
@@ -188,6 +194,17 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void save(String status,String id,String name,String email) {
+        //FireBase Database for storing the id of users
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        HashMap<String, String> userMap = new HashMap<>();
+        userMap.put("name",name);
+        userMap.put("email", email);
+        userMap.put("status", status);
+        userMap.put("image","default");
+
+        userDatabase.setValue(userMap);
+        
+
         String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
@@ -255,6 +272,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     //send to main main home activiy
+                    //we have to get the id of user and this id save it to the database
                 }else{
                     //error
                 }

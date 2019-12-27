@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/message_pic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/profile_picture"
+        app:layout_constraintBottom_toBottomOf="@+id/message_shape"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/message_shape"
+        app:layout_constraintStart_toStartOf="@id/message_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Αλέξανδρος"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="12sp"
+
+        />
+    <TextView
+        android:id="@+id/message_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toEndOf="@+id/message_pic"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/message_shape"
+        android:text="Καλησπέρα.. τι κάνεις;"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

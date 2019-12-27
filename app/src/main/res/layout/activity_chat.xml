@@ -42,9 +42,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/chat_user_name"
             app:layout_constraintTop_toBottomOf="@id/chat_user_name"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:text="Τελευταία σύνδεση"
+            android:text="5 λεπτά πριν"
 
             />
         <ImageButton
@@ -89,16 +89,17 @@
             android:id="@+id/ask_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:background="@null"
             android:hint="Ρωτήστε κάτι τον χρήστη"
-            android:inputType="textShortMessage"
-            android:singleLine="true"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
             app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
-            app:layout_constraintStart_toEndOf="@id/conv_plus_button"
+            app:layout_constraintLeft_toLeftOf="@id/conv_plus_button"
+            app:layout_constraintRight_toRightOf="@+id/chat_send"
             app:layout_constraintTop_toTopOf="@+id/conv_plus_button" />
 
         <ImageButton
+            android:id="@+id/chat_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/conv_plus_button"

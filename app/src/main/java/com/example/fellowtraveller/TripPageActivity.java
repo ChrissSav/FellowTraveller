@@ -42,7 +42,7 @@ public class TripPageActivity extends AppCompatActivity {
     private TextView textView_suitcases;
     private TextView textView_description;
     private TextView textView_price;
-    private Button select,back;
+    private Button select,back,messega_btn;
     private int id;
     private boolean flag;
     private CheckBox bag;
@@ -56,13 +56,13 @@ public class TripPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_page);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         trip =  intent.getParcelableExtra("Trip");
         flag =  intent.getBooleanExtra("F", true);
         passengers = trip.getPassengers();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
-
+        messega_btn = findViewById(R.id.tripPage_button_sendMessage);
         bag= findViewById(R.id.tripPage_checkBox_bag);
         textView_status = findViewById(R.id.tripPage_textView_status);
         textView_creator_name = findViewById(R.id.tripPage_textView_creator_name);
@@ -96,6 +96,15 @@ public class TripPageActivity extends AppCompatActivity {
                 }else {
                     Register("no");
                 }
+
+            }
+        });
+        messega_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(TripPageActivity.this,ChatConversation.class);
+                intent1.putExtra("Creator_id",trip.getCreator().getId());
+                startActivity(intent1);
 
             }
         });

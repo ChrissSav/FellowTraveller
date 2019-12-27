@@ -207,6 +207,9 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                 for (int i=0; i<notifications.size(); i++){
                     mExampleList.add(notifications.get(i));
                 }
+                if(notifications.size()==0){
+                    Toast.makeText(NotificationActivity.this,"Δεν υπάρχουν ειδοποιήσεις",Toast.LENGTH_SHORT).show();
+                }
                 buildRecyclerView();
             }
             @Override

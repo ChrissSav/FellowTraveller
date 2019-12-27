@@ -45,7 +45,9 @@ dependencies {
     implementation 'com.github.sujithkanna:smileyrating:1.6.8'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    //SiliCompressor
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.2'
+    implementation 'id.zelory:compressor:2.1.0'
 
 
 }

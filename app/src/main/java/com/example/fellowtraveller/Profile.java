@@ -37,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -55,6 +56,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FILE_NAME = "fellow_login_state.txt";
@@ -127,9 +129,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 String image = dataSnapshot.child("Users").child(id).child("image").getValue().toString();
 
 
-                // Picasso.get().load(image).into(circleImageView);
-                Picasso.get().load(image)
-                        .into(circleImageView);
+                if(!image.equals("default")) {
+                    Picasso.get().load(image).placeholder(R.drawable.cylinder).into(circleImageView);
+                }
             }
 
             @Override
@@ -363,6 +365,25 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
                 mImageUri = result.getUri();
+
+                File thumb_filePath = new File(result.getUri().getPath());
+
+
+                Bitmap thumb_bitmap = null;
+                try {
+                    thumb_bitmap = new Compressor(this)
+                            .setMaxWidth(200)
+                            .setMaxHeight(200)
+                            .setQuality(75)
+                            .compressToBitmap(thumb_filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] thumb_byte= baos.toByteArray();
 
 
                 //FireBase Image Storage

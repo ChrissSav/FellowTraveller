@@ -4,14 +4,17 @@ public class ChatMessages {
     private String message, type;
     private boolean seen;
     private long time;
+    private String from;
 
 
-    public ChatMessages(String aMessage, boolean aSeen, long aTime, String aType){
+
+    public ChatMessages(String aMessage, boolean aSeen, long aTime, String aType, String aFrom){
 
         this.message = aMessage;
         this.seen = aSeen;
         this.time = aTime;
         this.type = aType;
+        this.from = aFrom;
     }
 
     public String getMessage() {
@@ -44,6 +47,13 @@ public class ChatMessages {
 
     public void setType(String type) {
         this.type = type;
+    }
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
     public ChatMessages(){
 

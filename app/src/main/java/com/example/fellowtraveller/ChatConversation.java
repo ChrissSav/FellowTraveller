@@ -212,10 +212,13 @@ public class ChatConversation extends AppCompatActivity {
                 messageMap.put("seen", false);
                 messageMap.put("type", "text");
                 messageMap.put("time", ServerValue.TIMESTAMP);
+                messageMap.put("from", userId);
 
                 Map messageUserMap = new HashMap();
                 messageUserMap.put(current_user_ref+"/"+push_id,messageMap);
                 messageUserMap.put(chat_user_ref+"/"+push_id,messageMap);
+                //To delete the text when the user text someone
+                chatEditText.setText("");
 
                 chatDatabase.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                     @Override

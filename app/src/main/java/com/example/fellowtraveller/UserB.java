@@ -11,6 +11,7 @@ public class UserB  implements Parcelable {
     private Double rate;
     private int num_of_travels_offered;
     private int num_of_travels_takespart;
+    private String picture;
 
 
     protected UserB(Parcel in) {
@@ -24,6 +25,28 @@ public class UserB  implements Parcelable {
         }
         num_of_travels_offered = in.readInt();
         num_of_travels_takespart = in.readInt();
+        picture = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(bag);
+        if (rate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(rate);
+        }
+        dest.writeInt(num_of_travels_offered);
+        dest.writeInt(num_of_travels_takespart);
+        dest.writeString(picture);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<UserB> CREATOR = new Creator<UserB>() {
@@ -40,6 +63,14 @@ public class UserB  implements Parcelable {
 
     public int getId() {
         return id;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public void setId(int id) {
@@ -86,23 +117,5 @@ public class UserB  implements Parcelable {
         this.num_of_travels_takespart = num_of_travels_takespart;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(name);
-        dest.writeString(bag);
-        if (rate == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(rate);
-        }
-        dest.writeInt(num_of_travels_offered);
-        dest.writeInt(num_of_travels_takespart);
-    }
 }

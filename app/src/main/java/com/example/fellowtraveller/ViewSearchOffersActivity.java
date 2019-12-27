@@ -253,6 +253,12 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         Call<List<TripB>> call = jsonPlaceHolderApi.getTripsfilter(filter_items.getFrom(),filter_items.getTo(),filter_items.getDate_from(),filter_items.getDate_to(),filter_items.getTime_from(),filter_items.getTime_to(),
                 filter_items.getSeats_from(),filter_items.getSeats_to(),filter_items.getBags_from(),filter_items.getBags_to(),
                 filter_items.getRate_from(),filter_items.getRate_to(),filter_items.getPrice_from(),filter_items.getPrice_to(),id);
+
+
+
+        Log.i("RefreshFilter", "fefewlkfheugfewhewg : "+call.request().url());
+
+        Toast.makeText(ViewSearchOffersActivity.this,call.request().url().toString(),Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<List<TripB>>() {
             @Override
             public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {

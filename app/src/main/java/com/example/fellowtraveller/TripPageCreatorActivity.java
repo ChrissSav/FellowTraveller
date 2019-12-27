@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +22,16 @@ import android.widget.Toast;
 import com.example.fellowtraveller.BetaActivity.NotificationActivity;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,10 +49,12 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private TextView textView_seats;
     private TextView textView_bags;
     private Button back;
+    private TextView textView_rate;
     private List<UserB> requests ;
     private List<UserB> passengers ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
+    private CircleImageView img;
     private int id =0 ;
     private final String FILE_NAME = "fellow_login_state.txt";
     private final String ACCEPT = "accept";
@@ -70,6 +78,8 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         requests = trip.getRequests();
         passengers = new ArrayList<>();
         passengers = trip.getPassengers();
+        textView_rate = findViewById(R.id.TripPageCreatorActivity_textView_rate);
+        img = findViewById(R.id.TripPageCreatorActivity_textView_adminImage);
         textView_status = findViewById(R.id.TripPageCreatorActivity_textView_status);
         textView_creator_name = findViewById(R.id.TripPageCreatorActivity_textView_creator_name);
         textView_from  = findViewById(R.id.TripPageCreatorActivity_textView_from);
@@ -89,6 +99,11 @@ public class TripPageCreatorActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        textView_rate.setText(trip.getCreator().getRate()+"");
+        if(!trip.getCreator().getPicture().equals("null")){
+            img.setImageBitmap(StringToBitMap(trip.getCreator().getPicture()));
+        }
     }
 
     public void buildRecyclerView() {
@@ -269,4 +284,16 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         return haveConnectedWifi || haveConnectedMobile;
     }
 
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
 }

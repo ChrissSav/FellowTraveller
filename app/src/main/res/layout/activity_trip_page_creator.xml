@@ -36,25 +36,25 @@
         app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
         app:layout_constraintTop_toTopOf="@+id/TripPageCreatorActivity_textView_adminImage" />
 
-        <TextView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/TripPageCreatorActivity_textView_adminImage"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/blackshape"
+            android:src="@drawable/blackshape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_button_back" />
 
         <TextView
-        android:id="@+id/TripPageCreatorActivity_textView_stars"
-        android:layout_width="81dp"
-        android:layout_height="14dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/star_4"
-        app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
-        app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_textView_creator_name" />
+            android:id="@+id/TripPageCreatorActivity_textView_stars"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_adminImage"
+            app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"
+            app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_textView_creator_name" />
 
     <TextView
         android:id="@+id/textView24"
@@ -109,12 +109,14 @@
 
     <TextView
         android:id="@+id/TripPageCreatorActivity_textView_status"
-        android:layout_width="110dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/trip_page_btn_state"
         android:gravity="center"
         android:textAlignment="center"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
         android:textColor="#FFAA5E"
         android:textSize="14dp"
         android:textStyle="bold"
@@ -250,6 +252,19 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView32"
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <TextView
+            android:id="@+id/TripPageCreatorActivity_textView_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/TripPageCreatorActivity_textView_stars"
+            app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_stars"
+            app:layout_constraintTop_toTopOf="@+id/TripPageCreatorActivity_textView_stars" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

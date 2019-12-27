@@ -3,9 +3,12 @@ package com.example.fellowtraveller;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +29,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -37,21 +43,36 @@ public class ChatConversation extends AppCompatActivity {
     private ImageButton sendImageButton;
     private EditText chatEditText;
     private String chatUser;
+    private RecyclerView mMessagesList;
+    private final List<ChatMessages> messagesList = new ArrayList<>();
+    private LinearLayoutManager mLinearLayout;
+    private ChatMessageAdapter mAdapter;
+    private DatabaseReference mMessageDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_conversation);
 
-        chatUser = "127";
-        userId = getId();
+        chatUser = "128"; //user for examples
+        userId = getId(); //your id
 
         chatDatabase = FirebaseDatabase.getInstance().getReference();
 
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
 
-        //Create Chats.. one for you and the chatter.. and the chatter and you
+        mAdapter = new ChatMessageAdapter(messagesList);
+        mMessagesList = findViewById(R.id.messages_List);
+        mLinearLayout = new LinearLayoutManager(this);
+        mMessagesList.setHasFixedSize(true);
+        mMessagesList.setLayoutManager(mLinearLayout);
+        mMessagesList.setAdapter(mAdapter);
+
+        loadMessages();
+
+
+        //Create Chats.. one for you and the chatter.. and one for the chatter and you
         chatDatabase.child("Chat").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,7 +111,43 @@ public class ChatConversation extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+    private void loadMessages() {
+
+        chatDatabase.child("Messages").child(userId).child(chatUser).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
+                messagesList.add(message);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
         public String getId () {
             FileInputStream fis = null;
             try {
@@ -126,6 +183,7 @@ public class ChatConversation extends AppCompatActivity {
             }
             return id;
         }
+
         public static String random () {
             Random generator = new Random();
             StringBuilder randomStringBuilder = new StringBuilder();
@@ -137,6 +195,7 @@ public class ChatConversation extends AppCompatActivity {
             }
             return randomStringBuilder.toString();
         }
+
         public void sendMessage(){
             String getMessage = chatEditText.getText().toString();
             if(!TextUtils.isEmpty(getMessage)){
@@ -166,9 +225,9 @@ public class ChatConversation extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
             }
         }
+
+
 }
+

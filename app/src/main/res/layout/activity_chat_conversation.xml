@@ -125,10 +125,18 @@
 
         >
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/messages_List"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="110dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

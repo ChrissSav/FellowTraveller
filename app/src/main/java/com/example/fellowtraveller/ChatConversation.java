@@ -123,6 +123,8 @@ public class ChatConversation extends AppCompatActivity {
                 ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
                 messagesList.add(message);
                 mAdapter.notifyDataSetChanged();
+
+                mMessagesList.scrollToPosition(messagesList.size()-1);
             }
 
             @Override

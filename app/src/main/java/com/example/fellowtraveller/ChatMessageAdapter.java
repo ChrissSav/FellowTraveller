@@ -1,5 +1,7 @@
 package com.example.fellowtraveller;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.MessageViewHolder> {
     private List<ChatMessages> mMessageList;
+    private String currentId;
+    private String id;
+  //  private static final String FILE_NAME = "fellow_login_state.txt";
 
     public ChatMessageAdapter(List<ChatMessages> aMessageList){
         this.mMessageList = aMessageList;
@@ -30,9 +40,23 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
 
 
+    //@SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(MessageViewHolder viewHolder, int position) {
+        //currentId = getId();
+
         ChatMessages c = mMessageList.get(position);
+        String from_user = c.getFrom();
+
+//        if(from_user.equals(currentId)){
+//            viewHolder.messageText.setBackgroundColor(Color.WHITE);
+//            viewHolder.messageText.setTextColor(R.color.grey);
+//
+//        }else{
+//            viewHolder.messageText.setBackgroundColor(Color.BLACK);
+//            viewHolder.messageText.setTextColor(R.color.grey);
+//
+//        }
         viewHolder.messageText.setText(c.getMessage());
 
     }
@@ -57,4 +81,6 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
 
     }
+
+
 }

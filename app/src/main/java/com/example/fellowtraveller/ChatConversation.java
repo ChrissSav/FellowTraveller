@@ -53,8 +53,8 @@ public class ChatConversation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_conversation);
-
-        chatUser = "128"; //user for examples
+        Intent intent= getIntent();
+        chatUser = intent.getIntExtra("Creator_id",0)+""; //creator trip id
         userId = getId(); //your id
 
         chatDatabase = FirebaseDatabase.getInstance().getReference();

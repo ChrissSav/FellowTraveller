@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +18,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,9 +45,11 @@ public class TripPageActivity extends AppCompatActivity {
     private TextView textView_date;
     private TextView textView_time;
     private TextView textView_seats;
+    private TextView textView_rate;
     private TextView textView_suitcases;
     private TextView textView_description;
     private TextView textView_price;
+    private CircleImageView img;
     private Button select,back,messega_btn;
     private int id;
     private boolean flag;
@@ -61,9 +69,10 @@ public class TripPageActivity extends AppCompatActivity {
         flag =  intent.getBooleanExtra("F", true);
         passengers = trip.getPassengers();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-
+        img = findViewById(R.id.tripPage_textView_adminImage);
         messega_btn = findViewById(R.id.tripPage_button_sendMessage);
         bag= findViewById(R.id.tripPage_checkBox_bag);
+        textView_rate= findViewById(R.id.tripPage_textView_rate);
         textView_status = findViewById(R.id.tripPage_textView_status);
         textView_creator_name = findViewById(R.id.tripPage_textView_creator_name);
         textView_from  = findViewById(R.id.tripPage_textView_from);
@@ -76,6 +85,12 @@ public class TripPageActivity extends AppCompatActivity {
         textView_price  = findViewById(R.id.tripPage_textView_price);
         select = findViewById(R.id.tripPage_button_select);
         back = findViewById(R.id.tripPage_button_back);
+
+
+        textView_rate.setText(trip.getCreator().getRate()+"");
+        if(!trip.getCreator().getPicture().equals("null")){
+            img.setImageBitmap(StringToBitMap(trip.getCreator().getPicture()));
+        }
 
         if(!flag)
             select.setVisibility(View.GONE);
@@ -205,6 +220,18 @@ public class TripPageActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
         }
     }
 }

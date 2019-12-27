@@ -1,5 +1,10 @@
 package com.example.fellowtraveller;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +13,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleViewHolder> {
     private ArrayList<TripB> mExampleList;
@@ -29,10 +38,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         public TextView from;
         public TextView to;
         public TextView date;
-        public TextView time;
+        public TextView time,rate;
         public TextView number_of_passengers;
         public TextView number_of_bags;
         private TextView price;
+        private CircleImageView img;
         public Button btn;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -41,10 +51,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
             time = itemView.findViewById(R.id.searchItem_textView_time);
             from = itemView.findViewById(R.id.searchItem_textView_from);
             to = itemView.findViewById(R.id.searchItem_textView_to);
+            rate = itemView.findViewById(R.id.searchItem_textView_rate);
             name = itemView.findViewById(R.id.searchItem_textView_name);
             number_of_passengers = itemView.findViewById(R.id.searchItem_textView_seats);
             number_of_bags = itemView.findViewById(R.id.searchItem_textView_bags);
             btn = itemView.findViewById(R.id.searchItem_button_select);
+            img = itemView.findViewById(R.id.searchItem_textView_adminImage);
             price = itemView.findViewById(R.id.searchItem_textView_price);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,10 +96,29 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
         holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
         holder.price.setText(currentItem.getPrice()+" ευρώ");
+        holder.rate.setText(currentItem.getRate()+"");
+        if(!currentItem.getCreator().getPicture().equals("null")){
+            holder.img.setImageBitmap(StringToBitMap(currentItem.getCreator().getPicture()));
+        }
+
     }
 
     @Override
     public int getItemCount() {
         return mExampleList.size();
+    }
+
+
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 }

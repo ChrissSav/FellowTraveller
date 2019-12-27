@@ -1,5 +1,8 @@
 package com.example.fellowtraveller;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,7 +37,8 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         public TextView from;
         public TextView to;
         public TextView date;
-        public TextView time;
+        public TextView time,rate;
+        private CircleImageView img;
         public TextView number_of_passengers;
         public TextView number_of_bags;
         public Button btnEdit, btnReq;
@@ -51,6 +57,8 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
             btnEdit = itemView.findViewById(R.id.offerItem_button_select);
             btnReq = itemView.findViewById(R.id.offerItem_request_button);
             price = itemView.findViewById(R.id.offerItem_textView_price);
+            img = itemView.findViewById(R.id.offerItem_user_pic);
+            rate = itemView.findViewById(R.id.offerItem_textView_rate);
 
             btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,6 +102,11 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         if(currentItem.getRequests().size()==0){
             holder.btnReq.setVisibility(View.GONE);
         }
+
+        holder.rate.setText(currentItem.getRate()+"");
+        if(!currentItem.getCreator().getPicture().equals("null")){
+            holder.img.setImageBitmap(StringToBitMap(currentItem.getCreator().getPicture()));
+        }
     }
 
     @Override
@@ -101,5 +114,16 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         return mExampleList.size();
     }
 
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
 
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
 }

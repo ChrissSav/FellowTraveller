@@ -49,16 +49,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:elevation="1dp"
-                android:src="@drawable/profile_picture" />
+                android:src="@drawable/blackshape" />
 
 
             <TextView
                 android:id="@+id/offerItem_textView_stars"
-                android:layout_width="81dp"
-                android:layout_height="14dp"
-                android:background="@drawable/star_4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_star"
                 app:layout_constraintBottom_toBottomOf="@+id/offerItem_user_pic"
-                app:layout_constraintStart_toStartOf="@+id/offerItem_textView_name" />
+                app:layout_constraintStart_toStartOf="@+id/offerItem_textView_name"
+                app:layout_constraintTop_toBottomOf="@+id/offerItem_textView_name" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -258,6 +259,19 @@
                 app:layout_constraintBottom_toBottomOf="@+id/offerItem_textView_to"
                 app:layout_constraintEnd_toEndOf="@+id/offerItem_textView_price"
                 app:layout_constraintTop_toTopOf="@+id/offerItem_textView_from" />
+
+            <TextView
+                android:id="@+id/offerItem_textView_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="4.5"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/offerItem_textView_stars"
+                app:layout_constraintStart_toEndOf="@+id/offerItem_textView_stars"
+                app:layout_constraintTop_toTopOf="@+id/offerItem_textView_stars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

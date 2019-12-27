@@ -63,8 +63,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private CircleImageView circleImageView,circleImageViewNav ;
-    private ImageButton imageButtonUpload,imageButtonEdit,imageButtonAccept,imageButtonCancel;
+    private CircleImageView circleImageView, circleImageViewNav;
+    private ImageButton imageButtonUpload, imageButtonEdit, imageButtonAccept, imageButtonCancel;
     private Uri mImageUri;
     private TextView textViewAboutMe;
     private EditText editText;
@@ -84,9 +84,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.profile);
 
 
-
-
-        Toolbar toolbar =  findViewById(R.id.home_appBar);
+        Toolbar toolbar = findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
         id = getId();
@@ -94,7 +92,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView =  findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         circleImageView = (CircleImageView) findViewById(R.id.profile_picture);
 
         id = getId();
@@ -115,7 +113,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         drawerToggle.syncState();
 
 
-
         navigationView.getMenu().getItem(1).setChecked(true);
 
         imageButtonAccept.setVisibility(View.GONE);
@@ -129,7 +126,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 String image = dataSnapshot.child("Users").child(id).child("image").getValue().toString();
 
 
-                if(!image.equals("default")) {
+                if (!image.equals("default")) {
                     Picasso.get().load(image).placeholder(R.drawable.cylinder).into(circleImageView);
                 }
             }
@@ -145,8 +142,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
         imageButtonUpload.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 onChooseFile(v);
             }
         });
@@ -179,8 +175,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     public void onClick(View v) {
 
                         String aboutInfo = editText.getText().toString();
-                        if(aboutInfo != null && !aboutInfo.isEmpty())
-                        {
+                        if (aboutInfo != null && !aboutInfo.isEmpty()) {
                             textViewAboutMe.setText(aboutInfo);
                         }
 
@@ -208,10 +203,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public boolean onNavigationItemSelected( MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         closeDrawer();
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.home:
                 Intent c = new Intent(Profile.this, HomeBetaActivity.class);
                 startActivity(c);
@@ -246,18 +241,19 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
         return true;
     }
+
     private void closeDrawer() {
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
 
-    private void openDrawer(){
+    private void openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
             super.onBackPressed();
     }
 
@@ -295,12 +291,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             TextView name2 = findViewById(R.id.profile_name);
             int i = 0;
             while ((text = br.readLine()) != null) {
-                if (i==2){
+                if (i == 2) {
                     name.setText(text);
                     name2.setText(text);
-                }else if(i==3){
+                } else if (i == 3) {
                     email.setText(text);
-                }else if(i==1){
+                } else if (i == 1) {
                     // id = Integer.parseInt(text);
                 }
                 i++;
@@ -322,8 +318,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    private void loadImageFromStorage()
-    {
+    private void loadImageFromStorage() {
         //circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
         //circleImageView = findViewById(R.id.profile_picture);
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -333,14 +328,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             //circleImageView.setImageBitmap(b);
             //circleImageViewNav.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
     }
-    public void onChooseFile(View v){
+
+    public void onChooseFile(View v) {
         CropImage.activity().start(Profile.this);
 
 
@@ -351,11 +345,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE ) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            if (resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
 
                 mProgressDialog = new ProgressDialog(Profile.this);
                 mProgressDialog.setTitle("Uploading Image..");
@@ -383,7 +377,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] thumb_byte= baos.toByteArray();
+                byte[] thumb_byte = baos.toByteArray();
 
 
                 //FireBase Image Storage
@@ -394,12 +388,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                         Task<Uri> downloaduri = taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     mProgressDialog.dismiss();
                                     Uri download = task.getResult();
                                     userDatabase.child("Users").child(id).child("image").setValue(download.toString());
-                                }
-                                else{
+                                } else {
 
                                 }
                             }
@@ -420,8 +413,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
             //saveToInternalStorage(result.getBitmap());
-        }
-        else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+        } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
             // Exception e = result.getError();
             //Log.i("error",e.getMessage());
 
@@ -429,12 +421,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
 
-
-    private String saveToInternalStorage(Bitmap bitmapImage){
+    private String saveToInternalStorage(Bitmap bitmapImage) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        File path = new File( directory,"profile.jpg");
-        Log.i("Chris","path : "+ path.getPath());
+        File path = new File(directory, "profile.jpg");
+        Log.i("Chris", "path : " + path.getPath());
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(path);
@@ -456,7 +447,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         StringBuilder randomStringBuilder = new StringBuilder();
         int randomLength = generator.nextInt(20);
         char tempChar;
-        for (int i = 0; i < randomLength; i++){
+        for (int i = 0; i < randomLength; i++) {
             tempChar = (char) (generator.nextInt(96) + 32);
             randomStringBuilder.append(tempChar);
         }
@@ -464,18 +455,18 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
 
-    public String getId(){
+    public String getId() {
         FileInputStream fis = null;
         try {
             fis = openFileInput(FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
-            String id ="-1";
+            String id = "-1";
 
             int i = 0;
             while ((text = br.readLine()) != null) {
-                if (i==1){
+                if (i == 1) {
                     id = text;
                     return id;
 
@@ -498,6 +489,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
         }
         return id;
-    }
 
+
+    }
 }

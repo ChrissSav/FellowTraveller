@@ -93,7 +93,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.bottom_nav_chat:
-                                Intent b = new Intent(HomeBetaActivity.this, Chat.class);
+                                Intent b = new Intent(HomeBetaActivity.this, ChatConversation.class);
                                 startActivity(b);
                                 finish();
                                 break;

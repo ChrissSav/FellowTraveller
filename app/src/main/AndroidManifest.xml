@@ -16,8 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChatConversation"></activity>
+
         <activity android:name=".ChatUsers" />
+        <activity
+            android:name=".ChatConversation"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Chat"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

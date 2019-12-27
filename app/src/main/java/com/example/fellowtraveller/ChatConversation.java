@@ -1,6 +1,7 @@
 package com.example.fellowtraveller;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,10 +46,42 @@ public class ChatConversation extends AppCompatActivity {
         chatUser = "127";
         userId = getId();
 
-        chatDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(userId).child(chatUser).child("Messages").child("Message " + random());;
+        chatDatabase = FirebaseDatabase.getInstance().getReference();
 
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
+
+        //Create Chats.. one for you and the chatter.. and the chatter and you
+        chatDatabase.child("Chat").child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.hasChild(chatUser)){
+                    Map myChatMap = new HashMap();
+                    myChatMap.put("seen", false);
+                    myChatMap.put("timestamp", ServerValue.TIMESTAMP);
+
+                    //Pass the values to both chatters
+                    Map storeMap = new HashMap();
+                    storeMap.put("Chat/"+userId+"/"+chatUser, myChatMap);
+                    storeMap.put("Chat/"+chatUser+"/"+userId ,myChatMap);
+
+                    chatDatabase.updateChildren(storeMap, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            if(databaseError != null){
+                                //error
+                            }
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         sendImageButton.setOnClickListener(new View.OnClickListener() {
             @Override

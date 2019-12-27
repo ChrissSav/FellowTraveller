@@ -18,7 +18,9 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ChatConversation"></activity>
         <activity android:name=".ChatUsers" />
-        <activity android:name=".Chat" />
+        <activity
+            android:name=".Chat"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".UsersProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

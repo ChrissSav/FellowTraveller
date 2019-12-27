@@ -1,9 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Chat">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/conv_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:id="@+id/chat_conv_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/profile_picture"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="20dp"/>
+        <TextView
+            android:id="@+id/chat_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/chat_conv_pic"
+            app:layout_constraintBottom_toBottomOf="@+id/chat_conv_pic"
+            android:text="Tyler Joseph"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/chat_back_button"
+            android:layout_marginStart="20dp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/chat_user_name"
+            app:layout_constraintTop_toBottomOf="@id/chat_user_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="Τελευταία σύνδεση"
+
+            />
+        <ImageButton
+            android:id="@+id/chat_back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_back_button"
+            app:layout_constraintTop_toTopOf="@id/chat_user_name"
+            app:layout_constraintBottom_toBottomOf="@id/chat_user_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="15dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/conv_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#fff"
+        android:elevation="2dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        >
+        <ImageButton
+            android:id="@+id/conv_plus_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_plus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/grey"
+
+
+            />
+
+        <EditText
+            android:id="@+id/ask_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@null"
+            android:hint="Ρωτήστε κάτι τον χρήστη"
+            android:inputType="textShortMessage"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
+            app:layout_constraintStart_toEndOf="@id/conv_plus_button"
+            app:layout_constraintTop_toTopOf="@+id/conv_plus_button" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/conv_plus_button"
+            app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/ic_send"
+            android:backgroundTint="@color/grey"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/conv_bottom_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/grey"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conv_appbar"
+
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

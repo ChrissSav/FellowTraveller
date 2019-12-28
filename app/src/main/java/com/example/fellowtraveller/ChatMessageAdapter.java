@@ -1,6 +1,7 @@
 package com.example.fellowtraveller;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DatabaseReference;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -23,14 +26,25 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     private List<ChatMessages> mMessageList;
     private String currentId;
     private String id;
-  //  private static final String FILE_NAME = "fellow_login_state.txt";
+    private int i;
+    private static final String FILE_NAME = "fellow_login_state.txt";
+    private Context context;
+    private DatabaseReference messagesDatabase;
 
-    public ChatMessageAdapter(List<ChatMessages> aMessageList){
+    public ChatMessageAdapter(List<ChatMessages> aMessageList, Context aContext){
         this.mMessageList = aMessageList;
+        this.context = aContext;
     }
 
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        for(i=0;i<mMessageList.size();i++){
+
+            if(true){
+
+            }
+        }
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received, parent, false);
 
         return new MessageViewHolder(v);
@@ -80,6 +94,41 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
 
 
+    }
+    public String getId () {
+        FileInputStream fis = null;
+        try {
+            fis = context.openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            String id = "-1";
+
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    id = text;
+                    return id;
+
+                }
+                i++;
+            }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return id;
     }
 
 

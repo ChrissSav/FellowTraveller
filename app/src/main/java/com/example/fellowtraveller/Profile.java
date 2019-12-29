@@ -539,7 +539,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             public void onFailure(Call<Status_handling> call, Throwable t) {
                 Toast.makeText(Profile.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
-        })
+        });
 
     }
     public Bitmap StringToBitMap(String image){

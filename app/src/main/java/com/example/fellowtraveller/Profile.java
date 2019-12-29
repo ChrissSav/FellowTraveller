@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,16 +34,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
 
@@ -57,6 +61,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FILE_NAME = "fellow_login_state.txt";
@@ -491,5 +500,58 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         return id;
 
 
+    }
+
+    public void UploadFile(byte[] thumb_byte){
+        JsonApi jsonPlaceHolderApi;
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        String temp = Base64.encodeToString(thumb_byte, Base64.DEFAULT);
+
+        JsonObject jsonObject = new JsonObject();
+        getId();
+        jsonObject.addProperty("id", id);
+        jsonObject.addProperty("icon", temp);
+        Call<Status_handling> call = jsonPlaceHolderApi.uploadImage(jsonObject);
+
+        call.enqueue(new Callback<Status_handling>() {
+            @Override
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+                if (!response.isSuccessful()) {
+                    Status_handling st = response.body();
+                    Toast.makeText(Profile.this,"msg "+st.getMsg(),Toast.LENGTH_SHORT).show();
+
+
+                    return;
+                }
+                Status_handling status = response.body();
+                if(status.getStatus().equals("success")){
+                    //   Toast.makeText(MainActivity.this,status.getMsg(),Toast.LENGTH_SHORT).show();
+                    //  img2.setImageBitmap(StringToBitMap(status.getMsg()));
+                    return;
+                }else{
+                    Toast.makeText(Profile.this,status.getMsg(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Status_handling> call, Throwable t) {
+                Toast.makeText(Profile.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        })
+
+    }
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 }

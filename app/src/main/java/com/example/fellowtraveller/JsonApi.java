@@ -1,8 +1,11 @@
 package com.example.fellowtraveller;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -130,5 +133,8 @@ public interface JsonApi {
     Call<RateUserContainerItem> getUserInfo(
             @Path("user_id") int user_id
     );
+
+    @POST("uploadimage/")
+    Call<Status_handling> uploadImage(@Body JsonObject image);
 }
 

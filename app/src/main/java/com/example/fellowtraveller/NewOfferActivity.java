@@ -177,7 +177,7 @@ public class NewOfferActivity extends AppCompatActivity {
     }
 
     public void registerTrip(){
-        Toast.makeText(NewOfferActivity.this, "rgregerg καταχώρηση", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(NewOfferActivity.this, "rgregerg καταχώρηση", Toast.LENGTH_SHORT).show();
 
         String from =stage1.GetFrom();
         String to = stage1.GetTo();

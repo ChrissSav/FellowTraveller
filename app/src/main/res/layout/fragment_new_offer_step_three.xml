@@ -202,7 +202,7 @@
                 android:background="@null"
                 android:ems="3"
                 android:inputType="number"
-                android:text="0"
+                android:hint="0"
                 android:textAlignment="textEnd"
                 android:textSize="24sp"
                 android:textStyle="bold"

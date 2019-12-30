@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -69,6 +71,7 @@ public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversati
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
         ChatConversationItem currItem = convList.get(position);
 
+        Picasso.get().load(convList.get(position).getImageUrl()).into(holder.conversationImage);
         holder.nameTV.setText(currItem.getName());
         if(!currItem.isNewMessage()){
             holder.lastMessageTV.setVisibility(View.GONE);

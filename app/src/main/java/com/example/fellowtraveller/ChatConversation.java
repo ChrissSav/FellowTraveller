@@ -334,7 +334,7 @@ public class ChatConversation extends AppCompatActivity {
                 sfxButton.start();
 
                 String current_user_ref = "Messages/"+userId+"/"+chatUser;
-                String chat_user_ref = "Messages/"+chatUser+"/"+userId;
+                final String chat_user_ref = "Messages/"+chatUser+"/"+userId;
 
                 DatabaseReference userMessagePush = chatDatabase.child("Messages").child(userId).child(chatUser).push();
                 String push_id = userMessagePush.getKey();
@@ -343,7 +343,38 @@ public class ChatConversation extends AppCompatActivity {
                 chatDatabase.child("Chat").child(chatUser).child(userId).child("sendMessage").setValue("true");
                 chatDatabase.child("Chat").child(userId).child(chatUser).child("lastMessage").setValue(ServerValue.TIMESTAMP);
                 chatDatabase.child("Chat").child(chatUser).child(userId).child("lastMessage").setValue(ServerValue.TIMESTAMP);
+                chatDatabase.child("Chat").child(userId).child(chatUser).child("chatterId").setValue(chatUser);
+                chatDatabase.child("Chat").child(chatUser).child(userId).child("chatterId").setValue(userId);
+                chatDatabase.child("Users").child(chatUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String image = dataSnapshot.child("image").getValue(String.class);
+                        String name =  dataSnapshot.child("name").getValue(String.class);
+                        chatDatabase.child("Chat").child(userId).child(chatUser).child("image").setValue(image);
+                        chatDatabase.child("Chat").child(userId).child(chatUser).child("name").setValue(name);
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                chatDatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String image = dataSnapshot.child("image").getValue(String.class);
+                        String name =  dataSnapshot.child("name").getValue(String.class);
+                        chatDatabase.child("Chat").child(chatUser).child(userId).child("image").setValue(image);
+                        chatDatabase.child("Chat").child(chatUser).child(userId).child("name").setValue(name);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
                 Map messageMap = new HashMap();
                 messageMap.put("message", getMessage);

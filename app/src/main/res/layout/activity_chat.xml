@@ -57,6 +57,7 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@id/conv_appbar"
         android:padding="5dp"
+        android:layout_marginTop="80dp"
         android:scrollbars="vertical"
         android:elevation="1dp"
         />

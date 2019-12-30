@@ -50,7 +50,7 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
-        Log.i("Chriss",currentItem.getBag());
+       // Log.i("Chriss",currentItem.getBag());
         if(currentItem.getBag().equals("no"))
             holder.bag.setVisibility(View.GONE);
     }

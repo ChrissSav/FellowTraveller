@@ -238,14 +238,14 @@
                 android:id="@+id/searchItem_textView_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:text="10€"
                 android:textColor="#000"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginEnd="30dp"
-                app:layout_constraintTop_toTopOf="@+id/searchItem_user_pic"
                 app:layout_constraintBottom_toBottomOf="@+id/searchItem_user_pic"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchItem_textView_name" />
 
             <TextView
                 android:id="@+id/searchItem_textView_rate"

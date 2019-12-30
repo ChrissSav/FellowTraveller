@@ -97,7 +97,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         holder.name.setText(currentItem.getCreator().getName());
         holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
         holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
-        holder.price.setText(currentItem.getPrice()+" ευρώ");
+        holder.price.setText(currentItem.getPrice()+" €");
 
         if(currentItem.getRequests().size()==0){
             holder.btnReq.setVisibility(View.GONE);

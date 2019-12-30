@@ -339,6 +339,11 @@ public class ChatConversation extends AppCompatActivity {
                 DatabaseReference userMessagePush = chatDatabase.child("Messages").child(userId).child(chatUser).push();
                 String push_id = userMessagePush.getKey();
 
+                chatDatabase.child("Chat").child(userId).child(chatUser).child("sendMessage").setValue("true");
+                chatDatabase.child("Chat").child(chatUser).child(userId).child("sendMessage").setValue("true");
+                chatDatabase.child("Chat").child(userId).child(chatUser).child("lastMessage").setValue(ServerValue.TIMESTAMP);
+                chatDatabase.child("Chat").child(chatUser).child(userId).child("lastMessage").setValue(ServerValue.TIMESTAMP);
+
 
                 Map messageMap = new HashMap();
                 messageMap.put("message", getMessage);

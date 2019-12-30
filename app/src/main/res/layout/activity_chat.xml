@@ -30,23 +30,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/chat_conv_pic"
             app:layout_constraintBottom_toBottomOf="@+id/chat_conv_pic"
-            android:text="Tyler Joseph"
+            android:text="Συνομιλίες"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/chat_back_button"
             android:layout_marginStart="20dp"
 
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/chat_user_name"
-            app:layout_constraintTop_toBottomOf="@id/chat_user_name"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:text="5 λεπτά πριν"
 
-            />
         <ImageButton
             android:id="@+id/chat_back_button"
             android:layout_width="30dp"
@@ -59,79 +50,16 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/conv_bottom_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="#fff"
-        android:elevation="2dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        >
-        <ImageButton
-            android:id="@+id/conv_plus_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_plus"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="20dp"
-            android:backgroundTint="@color/grey"
 
-
-            />
-
-        <EditText
-            android:id="@+id/ask_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="Ρωτήστε κάτι τον χρήστη"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp"
-            app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
-            app:layout_constraintLeft_toLeftOf="@id/conv_plus_button"
-            app:layout_constraintRight_toRightOf="@+id/chat_send"
-            app:layout_constraintTop_toTopOf="@+id/conv_plus_button" />
-
-        <ImageButton
-            android:id="@+id/chat_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/conv_plus_button"
-            app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/ic_send"
-            android:backgroundTint="@color/grey"
-            />
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_convs_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@id/conv_bottom_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@color/grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/conv_appbar"
-
-        >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@id/conv_appbar"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:elevation="1dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,12 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     private int i;
     private static final String FILE_NAME = "fellow_login_state.txt";
     private Context context;
+    private String userId;
     private DatabaseReference messagesDatabase;
+    private static final int MSG_TYPE_RIGHT = 0;
+    private static final int MSG_TYPE_LEFT = 1;
+    private String ImageUrl;
+
 
     public ChatMessageAdapter(List<ChatMessages> aMessageList, Context aContext){
         this.mMessageList = aMessageList;
@@ -39,17 +44,16 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        for(i=0;i<mMessageList.size();i++){
+        userId = getId();
 
-            if(true){
 
-            }
+        if(viewType==MSG_TYPE_RIGHT){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_send, parent, false);
+            return new ChatMessageAdapter.MessageViewHolder(view);
+        }else{
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received, parent, false);
+            return new ChatMessageAdapter.MessageViewHolder(view);
         }
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received, parent, false);
-
-        return new MessageViewHolder(v);
-
-
     }
 
 
@@ -95,6 +99,18 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
 
     }
+    //Αν θα γυρισει layout ως sender ή receiver
+
+    @Override
+    public int getItemViewType(int position) {
+        id = getId();
+        if(mMessageList.get(position).getFrom().equals(id)){
+            return MSG_TYPE_RIGHT;
+        }else{
+            return MSG_TYPE_LEFT;
+        }
+    }
+
     public String getId () {
         FileInputStream fis = null;
         try {
@@ -133,3 +149,4 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
 
 }
+

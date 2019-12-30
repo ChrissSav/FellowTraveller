@@ -3,6 +3,7 @@ package com.example.fellowtraveller;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -30,7 +36,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     private static final String FILE_NAME = "fellow_login_state.txt";
     private Context context;
     private String userId;
-    private DatabaseReference messagesDatabase;
+    private DatabaseReference messagesDatabase,profileDatabase;
     private static final int MSG_TYPE_RIGHT = 0;
     private static final int MSG_TYPE_LEFT = 1;
     private static final int MSG_TYPE_LEFT_NO_IMG = 2;
@@ -65,11 +71,26 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
     //@SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(MessageViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final MessageViewHolder viewHolder, int position) {
         //currentId = getId();
 
         ChatMessages c = mMessageList.get(position);
         String from_user = c.getFrom();
+        profileDatabase = FirebaseDatabase.getInstance().getReference();
+        profileDatabase.child("Users").child(from_user).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String imageUrl = dataSnapshot.child("image").getValue(String.class);
+
+                    Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(viewHolder.profileImage);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         viewHolder.messageText.setText(c.getMessage());
 

@@ -2,6 +2,8 @@ package com.example.fellowtraveller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -41,13 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
-    private Button button_login,button_register,button_back;
-    private TextInputEditText textInputName;
-    private TextInputEditText textInputEmail;
-    private TextInputEditText textInputPassword;
-    private DatePickerDialog.OnDateSetListener mDateListener;
-    private TextInputEditText textInputBirthday;
-    private TextInputEditText textInputPhone;
+    private Button btn_next_stage,button_back;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/")
@@ -55,6 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
             .build();
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
+    private Fragment fra;
+    private RegisterStage1Fragment stage1 = new RegisterStage1Fragment() ;
+    private RegisterStage2Fragment stage2 = new RegisterStage2Fragment();
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,103 +62,64 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-
-        textInputName = findViewById(R.id.RegisterActivity_editText_name);
-        textInputEmail = findViewById(R.id.RegisterActivity_editText_email);
-        textInputBirthday = findViewById(R.id.RegisterActivity_editText_date);
-        textInputPhone = findViewById(R.id.RegisterActivity_editText_phone);
-        textInputPassword = findViewById(R.id.RegisterActivity_editText_password);
-
-        button_back = findViewById(R.id.RegisterActivity_button_back);
-        button_register = findViewById(R.id.RegisterActivity_button_register);
-        button_login = findViewById(R.id.RegisterActivity_button_login);
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        textInputBirthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OutFocus();
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(
-                        RegisterActivity.this,
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mDateListener, year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
-            }
-        });
 
-        mDateListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String mon,d;
-                if (month<=9){
-                    mon = "0"+month;
+        fragmentManager = getSupportFragmentManager();
+        btn_next_stage = findViewById(R.id.RegisterActivity_button_next);
+        button_back = findViewById(R.id.RegisterActivity_button_back);
+
+
+        fra = stage1;
+        fragmentManager.beginTransaction().replace(R.id.register_stages_container,fra).commit();
+        btn_next_stage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                if(fra.toString().equals("stage1") && stage1.Check()){
+                    fra = stage2;
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.register_stages_container,fra).commit();
                 }
-                else{
-                    mon = month+"";
-                }
-                if(day<=9){
-                    d = "0"+day;
-                }
-                else{
-                    d = day+"";
-                }
-                String date = d + "/" + mon + "/" + year;
-                textInputBirthday.setText(date+"");
-            }
-        };
-
-        button_login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-
-
-
-        button_back.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
-
-
-        button_register.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (CheckEmail() | CheckName() | CheckPassword()) {
+                else if(fra.toString().equals("stage2") && stage2.Check()){
                     createUser();
                 }
             }
         });
+
+        button_back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                if(fra.toString().equals("stage1")){
+                    RegisterActivity.this.onBackPressed();
+                }
+                else if(fra.toString().equals("stage2") ){
+                    fra = stage1;
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.register_stages_container,fra).commit();
+                }
+            }
+        });
+    }
+    public void onBackPressed(){
+        if(fra.toString().equals("stage1")){
+            RegisterActivity.this.onBackPressed();
+        }
+        else if(fra.toString().equals("stage2") ){
+            fra = stage1;
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.register_stages_container,fra).commit();
+        }
     }
 
-
-    public void OutFocus(){
-        textInputName.clearFocus();
-        textInputEmail.clearFocus();
-        textInputPhone.clearFocus();
-        textInputPassword.clearFocus();
-    }
 
     private void createUser(){
-        final String name = textInputName.getText().toString();
-        String birth = textInputBirthday.getText().toString();
-        final String email = textInputEmail.getText().toString();
-        String password = textInputPassword.getText().toString();
-        String phone = textInputPhone.getText().toString();
+        final String name = stage1.getName();
+        String birth = stage2.getDate();
+        final String email =  stage1.getEmail();
+        String password = stage1.getPassword();
+        String phone = stage2.getNumber();
 
-        FireBaseRegister(name, email, password, birth, phone);
 
         Call<Status_handling> call = jsonPlaceHolderApi.createUser(name,birth,email,password,phone);
+        FireBaseRegister(name, email, password, birth, phone);
 
         call.enqueue(new Callback<Status_handling> () {
             @Override
@@ -173,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                     save("true",Integer.parseInt(status.getMsg())+"",name,email);
                     //we have to get the id of user and this id save it to the database
                     //Or we have to send the email of user as unique object
+
                     Intent intent = new Intent(RegisterActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     finish();
@@ -187,10 +149,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
 
     public void save(String status,String id,String name,String email) {
@@ -225,47 +183,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-    private boolean CheckEmail() {
-        String emailInput = textInputEmail.getText().toString().trim();
-
-        if (emailInput.isEmpty()) {
-            textInputEmail.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        } else {
-            textInputEmail.setError(null);
-            return true;
-        }
-    }
-
-    private boolean CheckName() {
-        String usernameInput = textInputName.getText().toString().trim();
-
-        if (usernameInput.isEmpty()) {
-            textInputName.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        } else {
-            textInputName.setError(null);
-            return true;
-        }
-    }
-
-    private boolean CheckPassword() {
-        String passwordInput = textInputPassword.getText().toString().trim();
-
-        if (passwordInput.isEmpty()) {
-            textInputPassword.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        } else {
-            textInputPassword.setError(null);
-            return true;
-        }
-    }
     public void FireBaseRegister (String name, String email, String password, String birth, String phone){
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

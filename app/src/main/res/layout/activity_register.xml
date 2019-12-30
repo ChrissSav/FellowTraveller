@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,194 +8,93 @@
     android:background="#fff"
     tools:context=".RegisterActivity">
 
-    <Button
-        android:id="@+id/RegisterActivity_button_back"
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="32dp"
-        android:background="@drawable/new_offer_button_back"
-        app:layout_constraintBottom_toBottomOf="@+id/RegisterActivity_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/RegisterActivity_header" />
-
-    <TextView
-        android:id="@+id/RegisterActivity_header"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RegisterActivity_ConstraintLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Εγγραφή"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="674dp">
 
-    <Button
-        android:id="@+id/RegisterActivity_button_register"
-        android:layout_width="326dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="51dp"
-        android:background="@drawable/main_btn_login"
-        android:text="Εγγραφή"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout17" />
+        <Button
+            android:id="@+id/RegisterActivity_button_back"
+            android:layout_width="42dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/RegisterActivity_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="19sp"
-        android:layout_marginStart="108dp"
-        android:text="Έχεις ήδη λογαριασμό; "
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Καλώς ήρθες στην παρέα μας"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_button_back" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/register_stages_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/RegisterActivity_ConstraintLayout"
+        android:layout_above="@+id/RegisterActivity_ConstraintLayout2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp">
+
+        <view
+            android:id="@+id/vv"
+            class="androidx.viewpager.widget.ViewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RegisterActivity_ConstraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_button_register" />
-
-
-    <Button
-        android:id="@+id/RegisterActivity_button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:text="Είσοδος"
-        android:textAllCaps="false"
-        android:textColor="#889CFF"
-        app:layout_constraintBottom_toBottomOf="@+id/RegisterActivity_textView"
-        app:layout_constraintStart_toEndOf="@+id/RegisterActivity_textView"
-        app:layout_constraintTop_toTopOf="@+id/RegisterActivity_textView" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/RegisterActivity_textInputLayout9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:textSize="20dp"
-        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_header">
+        app:layout_constraintStart_toStartOf="parent">>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/RegisterActivity_editText_name"
+        <Button
+            android:id="@+id/RegisterActivity_button_next"
             android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:backgroundTint="#FFC088"
-            android:hint="Όνομα"
-            android:inputType="text"
-            android:textColor="#000"
-            android:textColorHint="#FFC088"
-            android:textSize="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/RegisterActivity_textInputLayout14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20dp"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout9">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/RegisterActivity_editText_email"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:backgroundTint="#FFC088"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="#000"
-            android:textColorHint="#FFC088"
-            android:textSize="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/RegisterActivity_textInputLayout15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20dp"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout14"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/RegisterActivity_editText_password"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:backgroundTint="#FFC088"
-            android:hint="Κωδικός"
-            android:inputType="textPassword"
-            android:textColor="#000"
-            android:textColorHint="#FFC088"
-            android:textSize="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/RegisterActivity_textInputLayout16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20dp"
-        app:errorEnabled="true"
-        android:focusable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout15">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/RegisterActivity_editText_date"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:backgroundTint="#FFC088"
-            android:focusable="false"
-            android:hint="Ημερομηνία γέννησης"
-            android:inputType="text"
-            android:textColor="#000"
-            android:textColorHint="#FFC088"
-            android:textSize="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/RegisterActivity_textInputLayout17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20dp"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textInputLayout16">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/RegisterActivity_editText_phone"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:backgroundTint="#FFC088"
-            android:hint="Τηλέφωνο"
-            android:inputType="number"
-            android:textColor="#000"
-            android:textColorHint="#FFC088"
-            android:textSize="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/main_btn_login"
+            android:text=" Επόμενο"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

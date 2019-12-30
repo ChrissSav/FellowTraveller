@@ -100,6 +100,14 @@ public class Chat extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent a = new Intent(Chat.this, HomeBetaActivity.class);
+        startActivity(a);
+        finish();
+    }
+
     public void loadConversations(){
         DatabaseReference convs = FirebaseDatabase.getInstance().getReference();
         convs.child("Chat").child("109").addValueEventListener(new ValueEventListener() {

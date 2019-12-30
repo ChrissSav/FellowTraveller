@@ -258,7 +258,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
 
         Log.i("RefreshFilter", "fefewlkfheugfewhewg : "+call.request().url());
 
-        Toast.makeText(ViewSearchOffersActivity.this,call.request().url().toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ViewSearchOffersActivity.this,call.request().url().toString(),Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<List<TripB>>() {
             @Override
             public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {

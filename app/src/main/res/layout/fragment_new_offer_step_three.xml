@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,241 +8,271 @@
     android:background="#fff"
     tools:context=".NewOfferActivity">
 
-    <ImageButton
-        android:id="@+id/new_offer_button_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_arrow_back"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/new_offer_textView"
+        android:id="@+id/fragment_new_offer_step_three_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:text="Ωρε μια στροφαρα ελα γιωργη"
+        android:textColor="@color/black"
         android:textSize="26sp"
-        android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_button_back"/>
-
-    <TextView
-        android:id="@+id/new_offer_textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Θέσεις"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_textView"/>
-
-    <RelativeLayout
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/new_offer_textView4"
-        app:layout_constraintBottom_toBottomOf="@+id/new_offer_textView4">
-
-        <Button
-            android:id="@+id/new_offer_seat_minus"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/lightGrey"
-            android:text="-"
-            android:textSize="26sp"
-            android:textColor="@color/grey"
-            android:textStyle="normal"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:id="@+id/new_offer_seats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textSize="28sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_centerInParent="true" />
-
-        <Button
-            android:id="@+id/new_offer_seat_plus"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/lightGrey"
-            android:text="+"
-            android:textSize="26sp"
-            android:textColor="@color/grey"
-            android:textStyle="normal"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_alignParentEnd="true"/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/new_offer_textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Αποσκευές"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_textView4"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="150dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/new_offer_textView5"
-        app:layout_constraintBottom_toBottomOf="@+id/new_offer_textView5">
-
-        <Button
-            android:id="@+id/new_offer_baggage_minus"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/lightGrey"
-            android:text="-"
-            android:textSize="26sp"
-            android:textColor="@color/grey"
-            android:textStyle="normal"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:id="@+id/new_offer_baggage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="28sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_centerInParent="true" />
-
-        <Button
-            android:id="@+id/new_offer_baggage_plus"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/lightGrey"
-            android:text="+"
-            android:textSize="26sp"
-            android:textColor="@color/grey"
-            android:textStyle="normal"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_alignParentEnd="true"/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/new_offer_textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Τιμή Ταξιδιού"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_textView5"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <RelativeLayout
-        android:id="@+id/new_offer_relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/new_offer_textView6">
 
         <TextView
+            android:id="@+id/fragment_new_offer_step_three_textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ανά άτομο"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:text="Θέσεις"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_centerVertical="true" />
-
-        <EditText
-            android:id="@+id/new_offer_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="3"
-            android:inputType="number"
-            android:text="0$"
-            android:textSize="24sp"
             android:textStyle="bold"
-            android:textAlignment="textEnd"
-            android:layout_alignParentEnd="true"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_three_textView" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_new_offer_step_three_textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_new_offer_step_three_textView4">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grey"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_relativeLayout"/>
+            <Button
+                android:id="@+id/fragment_new_offer_step_three_seat_minus"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:background="@color/lightGrey"
+                android:text="-"
+                android:textColor="@color/grey"
+                android:textSize="26sp"
+                android:textStyle="normal" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_relativeLayout">
+            <TextView
+                android:id="@+id/fragment_new_offer_step_three_seats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/fragment_new_offer_step_three_seat_plus"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/lightGrey"
+                android:text="+"
+                android:textColor="@color/grey"
+                android:textSize="26sp"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/fragment_new_offer_step_three_textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Σύνολο"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:text="Αποσκευές"
             android:textColor="@color/black"
-            android:layout_centerVertical="true" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_three_textView4" />
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_new_offer_step_three_textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_new_offer_step_three_textView5">
+
+            <Button
+                android:id="@+id/fragment_new_offer_step_three_baggage_minus"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:background="@color/lightGrey"
+                android:text="-"
+                android:textColor="@color/grey"
+                android:textSize="26sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/fragment_new_offer_step_three_baggage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/fragment_new_offer_step_three_baggage_plus"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/lightGrey"
+                android:text="+"
+                android:textColor="@color/grey"
+                android:textSize="26sp"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/new_offer_total"
+            android:id="@+id/fragment_new_offer_step_three_textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0$"
-            android:textSize="28sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:text="Τιμή Ταξιδιού"
             android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textAlignment="textEnd"
-            android:layout_alignParentEnd="true"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_three_textView5" />
 
-    </RelativeLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_new_offer_step_three_relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_new_offer_step_three_textView6">
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="65dp"
-        android:text="Ολοκλήρωση"
-        android:textSize="18sp"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/main_shape_orange"
-        style="?android:attr/borderlessButtonStyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:text="Ανά άτομο"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="15dp"
+                android:layout_height="33dp"
+                android:layout_marginEnd="30dp"
+                android:inputType="number"
+                android:text="€"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/fragment_fragment_new_offer_step_three_step_three_editText_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="3"
+                android:inputType="number"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_three_relativeLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_three_relativeLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:text="Σύνολο"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:text="€"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_new_offer_step_three_editText_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:ems="3"
+                android:inputType="number"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

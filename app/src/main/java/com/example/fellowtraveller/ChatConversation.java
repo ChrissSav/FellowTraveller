@@ -59,6 +59,7 @@ public class ChatConversation extends AppCompatActivity {
     private String lastKey = "";
     private String prevKey = "";
     private Context context = ChatConversation.this;
+    private MediaPlayer sfxButton;
 
 
     @Override
@@ -74,7 +75,7 @@ public class ChatConversation extends AppCompatActivity {
 
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
-        final MediaPlayer sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
+        sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
 
         mAdapter = new ChatMessageAdapter(messagesList,context);
         mMessagesList = findViewById(R.id.messages_List);
@@ -123,7 +124,6 @@ public class ChatConversation extends AppCompatActivity {
         sendImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sfxButton.start();
                 sendMessage();
 
             }
@@ -295,6 +295,8 @@ public class ChatConversation extends AppCompatActivity {
         public void sendMessage(){
             String getMessage = chatEditText.getText().toString();
             if(!TextUtils.isEmpty(getMessage)){
+
+                sfxButton.start();
 
                 String current_user_ref = "Messages/"+userId+"/"+chatUser;
                 String chat_user_ref = "Messages/"+chatUser+"/"+userId;

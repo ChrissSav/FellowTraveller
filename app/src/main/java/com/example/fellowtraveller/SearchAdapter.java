@@ -56,7 +56,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
             number_of_passengers = itemView.findViewById(R.id.searchItem_textView_seats);
             number_of_bags = itemView.findViewById(R.id.searchItem_textView_bags);
             btn = itemView.findViewById(R.id.searchItem_button_select);
-            img = itemView.findViewById(R.id.searchItem_textView_adminImage);
+            img = itemView.findViewById(R.id.searchItem_user_pic);
             price = itemView.findViewById(R.id.searchItem_textView_price);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override

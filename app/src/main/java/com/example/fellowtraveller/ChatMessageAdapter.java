@@ -33,6 +33,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     private DatabaseReference messagesDatabase;
     private static final int MSG_TYPE_RIGHT = 0;
     private static final int MSG_TYPE_LEFT = 1;
+    private static final int MSG_TYPE_LEFT_NO_IMG = 2;
     private String ImageUrl;
 
 
@@ -50,9 +51,13 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         if(viewType==MSG_TYPE_RIGHT){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_send, parent, false);
             return new ChatMessageAdapter.MessageViewHolder(view);
+        }else if(viewType==MSG_TYPE_LEFT_NO_IMG){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received_no_picture, parent, false);
+            return new ChatMessageAdapter.MessageViewHolder(view);
         }else{
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received, parent, false);
             return new ChatMessageAdapter.MessageViewHolder(view);
+
         }
     }
 
@@ -66,15 +71,6 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         ChatMessages c = mMessageList.get(position);
         String from_user = c.getFrom();
 
-//        if(from_user.equals(currentId)){
-//            viewHolder.messageText.setBackgroundColor(Color.WHITE);
-//            viewHolder.messageText.setTextColor(R.color.grey);
-//
-//        }else{
-//            viewHolder.messageText.setBackgroundColor(Color.BLACK);
-//            viewHolder.messageText.setTextColor(R.color.grey);
-//
-//        }
         viewHolder.messageText.setText(c.getMessage());
 
     }
@@ -106,10 +102,15 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         id = getId();
         if(mMessageList.get(position).getFrom().equals(id)){
             return MSG_TYPE_RIGHT;
-        }else{
+        }else if((!mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position+1).getFrom().equals(id)))
+        {
+            return MSG_TYPE_LEFT_NO_IMG;
+        }
+        else{
             return MSG_TYPE_LEFT;
         }
-    }
+        }
+
 
     public String getId () {
         FileInputStream fis = null;

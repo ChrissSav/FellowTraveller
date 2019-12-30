@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp"
-    android:layout_margin="10dp"
-    android:elevation="1dp"
+    android:padding="10dp"
+    android:layout_margin="4dp"
+    android:elevation="0dp"
     app:cardCornerRadius="5dp"
     app:cardBackgroundColor="#F8F7F3"
 
@@ -52,7 +52,8 @@
         android:background="@drawable/blackshape"
         app:layout_constraintTop_toTopOf="@id/conv_profile_pic"
         app:layout_constraintBottom_toBottomOf="@id/conv_profile_pic"
-        app:layout_constraintStart_toEndOf="@+id/conv_user_name"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="12dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
 

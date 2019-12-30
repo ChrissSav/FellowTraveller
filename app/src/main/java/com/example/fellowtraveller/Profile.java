@@ -132,12 +132,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @RequiresApi(api = Build.VERSION_CODES.O_MR1)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String image = dataSnapshot.child("Users").child(id).child("image").getValue().toString();
+                String image = dataSnapshot.child("Users").child(id).child("image").getValue(String.class);
 
 
-                if (!image.equals("default")) {
-                    Picasso.get().load(image).placeholder(R.drawable.cylinder).into(circleImageView);
-                }
+
+                    Picasso.get().load(image).placeholder(R.drawable.cylinder).error(R.drawable.profile_pic).into(circleImageView);
+
             }
 
             @Override

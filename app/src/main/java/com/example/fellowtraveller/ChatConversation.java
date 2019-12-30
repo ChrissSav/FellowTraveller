@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.example.fellowtraveller.BetaActivity.NotificationActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,6 +67,7 @@ public class ChatConversation extends AppCompatActivity {
     private MediaPlayer sfxButton;
     private TextView chatUserName;
     private CircleImageView chatProfilePicture;
+    private ImageButton backToConvButton;
 
 
     @Override
@@ -78,7 +80,7 @@ public class ChatConversation extends AppCompatActivity {
 
         chatDatabase = FirebaseDatabase.getInstance().getReference();
 
-
+        backToConvButton = findViewById(R.id.chat_back_to_conv);
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
         chatUserName = findViewById(R.id.chat_user_name);
@@ -86,7 +88,7 @@ public class ChatConversation extends AppCompatActivity {
         sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
 
         mAdapter = new ChatMessageAdapter(messagesList,context);
-        mMessagesList = findViewById(R.id.messages_List);
+        mMessagesList = findViewById(R.id.messages_List);   
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe);
 
         mLinearLayout = new LinearLayoutManager(this);
@@ -96,6 +98,15 @@ public class ChatConversation extends AppCompatActivity {
 
         loadMessages();
         changeConversationStatus();
+
+        backToConvButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(ChatConversation.this, Chat.class);
+                startActivity(a);
+                finish();
+            }
+        });
 
 
         //Create Chats.. one for you and the chatter.. and one for the chatter and you

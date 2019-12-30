@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
+import com.example.fellowtraveller.BetaActivity.NotificationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -32,6 +35,7 @@ public class Chat extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private String id, yourId;
     private ArrayList<ChatConversationItem> conversations = new ArrayList<>();
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class Chat extends AppCompatActivity {
         loadConversations();
 
         yourId = getId();
+        backButton = findViewById(R.id.chat_back_button);
         recyclerView = findViewById(R.id.chat_convs_recycler_view);
         recyclerView.setHasFixedSize(true);
 
@@ -77,6 +82,16 @@ public class Chat extends AppCompatActivity {
                 finish();
             }
         });
+
+     backButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent a = new Intent(Chat.this, HomeBetaActivity.class);
+             startActivity(a);
+             finish();
+         }
+     });
+
     }
 
     @Override
@@ -90,13 +105,15 @@ public class Chat extends AppCompatActivity {
         convs.child("Chat").child("109").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                    String chatterId = childDataSnapshot.child("chatterId").getValue().toString();
-                    long timestamp = childDataSnapshot.child("lastMessage").getValue(Long.class);
-                    String image = childDataSnapshot.child("image").getValue(String.class);
-                    String name = childDataSnapshot.child("name").getValue(String.class);
+                if(dataSnapshot.getChildrenCount()>0) {
+                    for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                        String chatterId = childDataSnapshot.child("chatterId").getValue().toString();
+                        long timestamp = childDataSnapshot.child("lastMessage").getValue(Long.class);
+                        String image = childDataSnapshot.child("image").getValue(String.class);
+                        String name = childDataSnapshot.child("name").getValue(String.class);
 
-                    conversations.add(new ChatConversationItem(image, name, true, true, timestamp, yourId, chatterId));
+                        conversations.add(new ChatConversationItem(image, name, true, true, timestamp, yourId, chatterId));
+                    }
                 }
                 mAdapter.notifyDataSetChanged();
             }

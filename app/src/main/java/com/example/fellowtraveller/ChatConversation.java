@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -38,6 +40,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatConversation extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
@@ -52,7 +56,7 @@ public class ChatConversation extends AppCompatActivity {
     private final List<ChatMessages> messagesList = new ArrayList<>();
     private LinearLayoutManager mLinearLayout;
     private ChatMessageAdapter mAdapter;
-    private DatabaseReference mMessageDatabase;
+    private DatabaseReference mMessageDatabase,userDatabase;
     private static final int TOTAL_ITEMS_TO_LOAD = 10;
     private int mCurrentPage = 1;
     private int itemPos = 0;
@@ -60,6 +64,8 @@ public class ChatConversation extends AppCompatActivity {
     private String prevKey = "";
     private Context context = ChatConversation.this;
     private MediaPlayer sfxButton;
+    private TextView chatUserName;
+    private CircleImageView chatProfilePicture;
 
 
     @Override
@@ -75,6 +81,8 @@ public class ChatConversation extends AppCompatActivity {
 
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
+        chatUserName = findViewById(R.id.chat_user_name);
+        chatProfilePicture = findViewById(R.id.chat_conv_pic);
         sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
 
         mAdapter = new ChatMessageAdapter(messagesList,context);
@@ -87,6 +95,7 @@ public class ChatConversation extends AppCompatActivity {
         mMessagesList.setAdapter(mAdapter);
 
         loadMessages();
+        changeConversationStatus();
 
 
         //Create Chats.. one for you and the chatter.. and one for the chatter and you
@@ -137,6 +146,32 @@ public class ChatConversation extends AppCompatActivity {
                 loadMoreMessages();
             }
         });
+
+
+
+    }
+
+    private void changeConversationStatus() {
+        userDatabase = FirebaseDatabase.getInstance().getReference();
+        userDatabase.child("Users").child(chatUser).addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               String name = dataSnapshot.child("name").getValue(String.class);
+               chatUserName.setText(name);
+
+               String imageUrl = dataSnapshot.child("image").getValue().toString();
+               if (!imageUrl.equals("default")) {
+                   Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(chatProfilePicture);
+               }
+
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
+
 
 
 

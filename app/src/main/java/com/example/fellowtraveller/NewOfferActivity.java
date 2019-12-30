@@ -1,6 +1,8 @@
 package com.example.fellowtraveller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -36,196 +38,80 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
-    private Button btn_back,register;
-    private DatePickerDialog.OnDateSetListener mDateListener;
-    private TimePickerDialog.OnTimeSetListener mTimeListener;
-    private TextInputEditText date_trip;
-    private TextInputEditText time_trip;
-    private TextInputEditText description;
-    private TextInputEditText seats;
-    private TextInputEditText bags;
-    private TextInputEditText price;
-    private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit ;
-    private AutoCompleteTextView autoCompleteTextViewFrom,autoCompleteTextViewTo;
+    private Button btn_back;
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+    private JsonApi jsonPlaceHolderApi= retrofit.create(JsonApi.class);
+    private Button btn_next_stage;
+    private Fragment fra;
+    private TextView tvStage1,tvStage2,tvStage3;
+    private FragmentNewOfferStepOne stage1 = new FragmentNewOfferStepOne() ;
+    private FragmentNewOfferStepTwo stage2 = new FragmentNewOfferStepTwo();
+    private FragmentNewOfferStepThree stage3 = new FragmentNewOfferStepThree() ;
+    private FragmentManager fragmentManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_offer);
-        String KEY = getString(R.string.api_key);
 
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        description = findViewById(R.id.new_offer_editText_description);
-        seats = findViewById(R.id.new_offer_editText_seats);
-        bags = findViewById(R.id.new_offer_editText_cases);
-        autoCompleteTextViewFrom = findViewById(R.id.new_offer_autoComplete_editText_from);
-        autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(NewOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
-        autoCompleteTextViewTo = findViewById(R.id.new_offer_autoComplete_editText_to);
-        autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(NewOfferActivity.this,android.R.layout.simple_list_item_1,KEY));
-
-        register = findViewById(R.id.new_offer_button_register);
+        fragmentManager = getSupportFragmentManager();
+        btn_next_stage = findViewById(R.id.new_offer_button_next_fragment);
         btn_back = findViewById(R.id.new_offer_button_back);
-        date_trip = findViewById(R.id.new_offer_editText_date);
-        time_trip = findViewById(R.id.new_offer_editText_time);
-        price = findViewById(R.id.new_offer_editText_price);
-        date_trip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OutFocus();
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(
-                        NewOfferActivity.this,
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mDateListener, year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
+        tvStage1 = findViewById(R.id.new_offer_textView_stage1);
+        tvStage2 = findViewById(R.id.new_offer_textView_stage2);
+        tvStage3 = findViewById(R.id.new_offer_textView_stage3);
+
+
+
+        fra = stage1;
+        fragmentManager.beginTransaction().replace(R.id.new_offer_container,fra).commit();
+        btn_next_stage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                if(fra.toString().equals("stage1") && stage1.Check()){
+                    Log.i("IsStatment","satage1"+stage1.Check());
+                    fra = stage2;
+                    tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
+                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.new_offer_container,fra).commit();
+                }
+                else if(fra.toString().equals("stage2") && stage2.Check()){
+                    fra = stage3;
+                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
+                    tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.new_offer_container,fra).commit();
+                    btn_next_stage.setText("Καταχώρηση");
+                }else if(fra.toString().equals("stage3") && stage3.Check()){
+                    registerTrip();
+                    Log.i("IsStatment","registerTrip");
+                   // from,String to,String date,String time,int creator_id,String des,int max_seats,int max_bags, int price_trip
+                }
             }
         });
-
-
-        mDateListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String mon,d;
-                if (month<=9){
-                    mon = "0"+month;
-                }
-                else{
-                    mon = month+"";
-                }
-                if(day<=9){
-                    d = "0"+day;
-                }
-                else{
-                    d = day+"";
-                }
-                String date = d + "/" + mon + "/" + year;
-                date_trip.setText(date+"");
-            }
-        };
-
-
-
-        time_trip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OutFocus();
-                Calendar cal = Calendar.getInstance();
-                int hour = cal.get(Calendar.HOUR_OF_DAY);
-                int minute = cal.get(Calendar.MINUTE);
-                TimePickerDialog dialog = new TimePickerDialog(
-                        NewOfferActivity.this,
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mTimeListener, hour, minute,true);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
-            }
-        });
-
-        mTimeListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String hour,min;
-                if (hourOfDay<=9){
-                    hour = "0"+hourOfDay;
-                }
-                else{
-                    hour = hourOfDay+"";
-                }
-                if(minute<=9){
-                    min = "0"+minute;
-                }
-                else{
-                    min = minute+"";
-                }
-                String time = hour + ":" + min;
-                time_trip.setText(time+"");
-            }
-        };
 
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                NewOfferActivity.this.onBackPressed();
-            }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                if(CheckFields()) {
-                    registerTrip();
-                }else {
-                    Toast.makeText(NewOfferActivity.this, "Ανεπιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
+                if(fra.toString().equals("stage1")){
+                    NewOfferActivity.this.onBackPressed();
+                }
+                else if(fra.toString().equals("stage2") ){
+                    fra = stage1;
+                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
+                    tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
+                }
+                else if(fra.toString().equals("stage3")){
+                    fra = stage2;
+                    tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
+                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
                 }
             }
         });
-    }
 
-    public void OutFocus(){
-        autoCompleteTextViewFrom.clearFocus();
-        autoCompleteTextViewTo.clearFocus();
-        description.clearFocus();
-        seats.clearFocus();
-        bags.clearFocus();
-    }
-
-
-
-    public void registerTrip(){
-        String from = autoCompleteTextViewFrom.getText().toString();
-        String to = autoCompleteTextViewTo.getText().toString();
-        String date = date_trip.getText().toString();
-        date = date.replaceAll("/","-");
-        String time = time_trip.getText().toString();
-        String des = description.getText().toString();
-        int price_trip = Integer.parseInt(price.getText().toString());
-        int max_seats = Integer.parseInt(seats.getText().toString());
-        int  max_bags = Integer.parseInt(bags.getText().toString());
-        int creator_id = loadUserId();
-        if (creator_id!=0) {
-            sendToAPi(from, to, date, time, creator_id, des, max_seats, max_bags,price_trip);
-        }
-    }
-
-    public int loadUserId() {
-        int id =0;
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id =  Integer.parseInt(text);
-                   break;
-                }
-                i++;
-            }
-            return id;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return id;
     }
 
     public void sendToAPi(String from,String to,String date,String time,int creator_id,String des,int max_seats,int max_bags, int price_trip){
@@ -236,7 +122,7 @@ public class NewOfferActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(NewOfferActivity.this, "responseb " + response.errorBody() + "\n" + "responseb " + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewOfferActivity.this, "response " + response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Status_handling status = response.body();
@@ -257,98 +143,75 @@ public class NewOfferActivity extends AppCompatActivity {
     }
 
 
-    public boolean CheckFields(){
-        if(validateFrom() & validateTo() & validateDate_trip() &
-                validateTime_trip()& validateSeats() & validateBags() & validateDescription() & validatePrice() ){
-            return true;
-        }else{
-            return false;
+    public int loadUserId() {
+        int id =0;
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if(i==1){
+                    id =  Integer.parseInt(text);
+                    break;
+                }
+                i++;
+            }
+            return id;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return id;
+    }
+
+    public void registerTrip(){
+        Toast.makeText(NewOfferActivity.this, "rgregerg καταχώρηση", Toast.LENGTH_SHORT).show();
+
+        String from =stage1.GetFrom();
+        String to = stage1.GetTo();
+        String date = stage2.GetDate();
+        date = date.replaceAll("/","-");
+        String time = stage2.GetTime();
+        String des =stage2.getDec()+ " ";
+        int price_trip = Integer.parseInt(stage3.getPrice());
+        int max_seats = Integer.parseInt(stage3.getSeats());
+        int  max_bags = Integer.parseInt(stage3.getBags());
+        int creator_id = loadUserId();
+        if (creator_id!=0) {
+            sendToAPi(from, to, date, time, creator_id, des, max_seats, max_bags,price_trip);
         }
     }
 
-    public boolean validateFrom(){
-        if(autoCompleteTextViewFrom.getText().length()<1){
-            autoCompleteTextViewFrom.setError("Υποχρεωτικό Πεδίο!");
-            return false;
+    public void onBackPressed(){
+        if(fra.toString().equals("stage1")){
+            NewOfferActivity.this.onBackPressed();
         }
-        else {
-            autoCompleteTextViewFrom.setError(null);
-            return true;
+        else if(fra.toString().equals("stage2") ){
+            fra = stage1;
+            tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
+            tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
         }
-    }
-    public boolean validateTo(){
-        if(autoCompleteTextViewTo.getText().length()<1) {
-            autoCompleteTextViewTo.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }else{
-            autoCompleteTextViewTo.setError(null);
-            return true;
+        else if(fra.toString().equals("stage3")){
+            fra = stage2;
+            tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
+            tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
         }
     }
-    public boolean validateDate_trip(){
-        if(date_trip.getText().length()<1) {
-            date_trip.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }
-        else {
-            date_trip.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validatePrice(){
-        if(price.getText().length()<1) {
-            price.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }
-        else {
-            price.setError(null);
-            return true;
-        }
-    }
-
-
-    public boolean validateTime_trip(){
-        if(time_trip.getText().length()<1) {
-            time_trip.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }
-        else {
-            time_trip.setError(null);
-            return true;
-        }
-    }
-    public boolean validateSeats(){
-        if(seats.getText().length()<1){
-            seats.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }
-        else {
-            seats.setError(null);
-            return true;
-        }
-
-    }
-    public boolean validateBags(){
-        if(bags.getText().length()<1){
-            bags.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }
-        else {
-            bags.setError(null);
-            return true;
-        }
-
-    }
-    public boolean validateDescription(){
-        if(description.getText().length()<1) {
-            description.setError("Υποχρεωτικό Πεδίο!");
-            return false;
-        }
-        else {
-            description.setError(null);
-            return true;
-        }
-    }
-
 }
+
+
+

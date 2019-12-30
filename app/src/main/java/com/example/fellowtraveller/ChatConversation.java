@@ -9,6 +9,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -59,6 +60,7 @@ public class ChatConversation extends AppCompatActivity {
     private String prevKey = "";
     private Context context = ChatConversation.this;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +71,10 @@ public class ChatConversation extends AppCompatActivity {
 
         chatDatabase = FirebaseDatabase.getInstance().getReference();
 
+
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
+        final MediaPlayer sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
 
         mAdapter = new ChatMessageAdapter(messagesList,context);
         mMessagesList = findViewById(R.id.messages_List);
@@ -119,6 +123,7 @@ public class ChatConversation extends AppCompatActivity {
         sendImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfxButton.start();
                 sendMessage();
 
             }

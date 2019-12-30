@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class Chat extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ChatConversationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -24,21 +25,21 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         ArrayList<ChatConversationItem> conversations = new ArrayList<>();
-        conversations.add(new ChatConversationItem("default","Γιώργος Ανδρεου", true, true, 542346363));
-        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363));
-        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563));
-        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363));
-        conversations.add(new ChatConversationItem("default","Μάκης Ανδρεου", true, true, 542345333));
-        conversations.add(new ChatConversationItem("default","Γιώργος Ανδρεου", true, true, 542346363));
-        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363));
-        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563));
-        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363));
-        conversations.add(new ChatConversationItem("default","Μάκης Ανδρεου", true, true, 542345333));
-        conversations.add(new ChatConversationItem("default","Γιώργος Ανδρεου", true, true, 542346363));
-        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363));
-        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563));
-        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363));
-        conversations.add(new ChatConversationItem("default","Μάκης Ανδρεου", true, true, 542345333));
+        conversations.add(new ChatConversationItem("default","Γιώργος Ανδρεου", true, true, 542346363, "131", "132"));
+        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Μάκης Ανδρεου", true, true, 542345333,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Γιώργος Ανδρεου", true, true, 542346363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Μάκης Ανδρεου", true, true, 542345333,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Γιώργος Ανδρεου", true, true, 542346363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363,"131", "132"));
+        conversations.add(new ChatConversationItem("default","Μάκης Ανδρεου", true, true, 542345333,"131", "132"));
 
 
         recyclerView = findViewById(R.id.chat_convs_recycler_view);
@@ -49,6 +50,14 @@ public class Chat extends AppCompatActivity {
 
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new ChatConversationAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent a = new Intent(Chat.this, ChatConversation.class);
+                startActivity(a);
+                finish();
+            }
+        });
     }
 
     @Override

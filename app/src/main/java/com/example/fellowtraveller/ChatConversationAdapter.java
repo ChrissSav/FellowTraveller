@@ -14,6 +14,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversationAdapter.ConversationViewHolder> {
     private ArrayList<ChatConversationItem> convList;
+    private onItemClickListener mListener;
+
+    public interface onItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener){
+        mListener = listener;
+
+    }
 
     public static class ConversationViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView conversationImage;
@@ -21,13 +31,26 @@ public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversati
         private TextView lastMessageTV;
         private TextView onlineStatusTV;
 
-        public ConversationViewHolder(View itemView){
+        public ConversationViewHolder(View itemView, final onItemClickListener listener){
             super(itemView);
 
             conversationImage = itemView.findViewById(R.id.conv_profile_pic);
             nameTV = itemView.findViewById(R.id.conv_user_name);
             lastMessageTV = itemView.findViewById(R.id.conv_new_message);
             onlineStatusTV = itemView.findViewById(R.id.conv_online_status);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
 
         }
     }
@@ -38,7 +61,7 @@ public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversati
     @Override
     public ConversationViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation_item, parent,false);
-        ConversationViewHolder cvh = new ConversationViewHolder(v);
+        ConversationViewHolder cvh = new ConversationViewHolder(v, mListener);
         return  cvh;
     }
 

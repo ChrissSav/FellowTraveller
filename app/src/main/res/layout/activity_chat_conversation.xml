@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -61,48 +61,55 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_below="@id/conv_appbar"
+        android:layout_above="@id/conv_bottom_view"
+        android:id="@+id/chat_messages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
         android:id="@+id/message_swipe"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        app:layout_constraintTop_toBottomOf="@id/conv_appbar"
-        app:layout_constraintBottom_toTopOf="@id/conv_bottom_view"
+        android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messages_List"
-        app:layout_constraintTop_toBottomOf="@id/conv_appbar"
-        app:layout_constraintBottom_toTopOf="@id/conv_bottom_view"
 
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/conv_bottom_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_alignParentBottom="true"
         android:background="#fff"
         android:elevation="2dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        >
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
         <ImageButton
             android:id="@+id/conv_plus_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/ic_plus"
-            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="20dp"
-            android:backgroundTint="@color/grey"
+            app:layout_constraintTop_toTopOf="parent"
 
 
             />
@@ -124,14 +131,12 @@
             android:id="@+id/chat_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/conv_plus_button"
-            app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
-            app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="30dp"
             android:background="@drawable/ic_send"
             android:backgroundTint="@color/grey"
-            />
-
+            app:layout_constraintBottom_toBottomOf="@id/conv_plus_button"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/conv_plus_button" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,4 +145,4 @@
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

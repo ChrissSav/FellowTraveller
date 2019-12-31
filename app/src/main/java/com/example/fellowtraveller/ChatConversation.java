@@ -88,7 +88,7 @@ public class ChatConversation extends AppCompatActivity {
         sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
 
         mAdapter = new ChatMessageAdapter(messagesList,context);
-        mMessagesList = findViewById(R.id.messages_List);   
+        mMessagesList = findViewById(R.id.messages_List);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe);
 
         mLinearLayout = new LinearLayoutManager(this);
@@ -393,6 +393,7 @@ public class ChatConversation extends AppCompatActivity {
                 messageMap.put("type", "text");
                 messageMap.put("time", ServerValue.TIMESTAMP);
                 messageMap.put("from", userId);
+
 
                 Map messageUserMap = new HashMap();
                 messageUserMap.put(current_user_ref+"/"+push_id,messageMap);

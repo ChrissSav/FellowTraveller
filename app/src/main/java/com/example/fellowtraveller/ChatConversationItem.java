@@ -5,11 +5,11 @@ public class ChatConversationItem {
     private String name;
     private boolean newMessage;
     private boolean onlineStatus;
-    private long timestamp;
+    private Long timestamp;
     private String yourId;
     private String senderId;
 
-    public ChatConversationItem(String aImage, String aName, boolean sendMessage,boolean online,long aTimestamp, String yourId, String aId){
+    public ChatConversationItem(String aImage, String aName, boolean sendMessage,boolean online,Long aTimestamp, String yourId, String aId){
 
         this.imageUrl = aImage;
         this.name = aName;
@@ -52,11 +52,11 @@ public class ChatConversationItem {
         this.onlineStatus = onlineStatus;
     }
 
-    public long getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 

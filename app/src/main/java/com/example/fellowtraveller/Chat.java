@@ -58,9 +58,10 @@ public class Chat extends AppCompatActivity {
 //        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563,"131", "132"));
 //        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363,"131", "132"));
 
+        yourId = getId();
         loadConversations();
 
-        yourId = getId();
+
         backButton = findViewById(R.id.chat_back_button);
         recyclerView = findViewById(R.id.chat_convs_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -110,13 +111,13 @@ public class Chat extends AppCompatActivity {
 
     public void loadConversations(){
         DatabaseReference convs = FirebaseDatabase.getInstance().getReference();
-        convs.child("Chat").child("109").addValueEventListener(new ValueEventListener() {
+        convs.child("Chat").child(yourId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getChildrenCount()>0) {
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                        String chatterId = childDataSnapshot.child("chatterId").getValue().toString();
-                        long timestamp = childDataSnapshot.child("lastMessage").getValue(Long.class);
+                        String chatterId = childDataSnapshot.child("chatterId").getValue(String.class);
+                        Long timestamp = childDataSnapshot.child("lastMessage").getValue(Long.class);
                         String image = childDataSnapshot.child("image").getValue(String.class);
                         String name = childDataSnapshot.child("name").getValue(String.class);
 

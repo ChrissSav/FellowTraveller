@@ -36,14 +36,14 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     private static final String FILE_NAME = "fellow_login_state.txt";
     private Context context;
     private String userId;
-    private DatabaseReference messagesDatabase,profileDatabase;
+    private DatabaseReference messagesDatabase, profileDatabase;
     private static final int MSG_TYPE_RIGHT = 0;
     private static final int MSG_TYPE_LEFT = 1;
     private static final int MSG_TYPE_LEFT_NO_IMG = 2;
     private String ImageUrl;
 
 
-    public ChatMessageAdapter(List<ChatMessages> aMessageList, Context aContext){
+    public ChatMessageAdapter(List<ChatMessages> aMessageList, Context aContext) {
         this.mMessageList = aMessageList;
         this.context = aContext;
     }
@@ -54,19 +54,18 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         userId = getId();
 
 
-        if(viewType==MSG_TYPE_RIGHT){
+        if (viewType == MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_send, parent, false);
             return new ChatMessageAdapter.MessageViewHolder(view);
-        }else if(viewType==MSG_TYPE_LEFT_NO_IMG){
+        } else if (viewType == MSG_TYPE_LEFT_NO_IMG) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received_no_picture, parent, false);
             return new ChatMessageAdapter.MessageViewHolder(view);
-        }else{
+        } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received, parent, false);
             return new ChatMessageAdapter.MessageViewHolder(view);
 
         }
     }
-
 
 
     //@SuppressLint("ResourceAsColor")
@@ -82,7 +81,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String imageUrl = dataSnapshot.child("image").getValue(String.class);
 
-                    Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(viewHolder.profileImage);
+                Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(viewHolder.profileImage);
 
             }
 
@@ -105,7 +104,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         public TextView messageText;
         public CircleImageView profileImage;
 
-        public MessageViewHolder(View view){
+        public MessageViewHolder(View view) {
             super(view);
 
             messageText = (TextView) view.findViewById(R.id.message_shape);
@@ -114,23 +113,28 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         }
 
 
-
     }
     //Αν θα γυρισει layout ως sender ή receiver
 
     @Override
     public int getItemViewType(int position) {
         id = getId();
-        if(mMessageList.get(position).getFrom().equals(id)){
+        if (mMessageList.get(position).getFrom().equals(id)) {
             return MSG_TYPE_RIGHT;
-        }else if((!mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position+1).getFrom().equals(id)))
-        {
-            return MSG_TYPE_LEFT_NO_IMG;
         }
-        else{
-            return MSG_TYPE_LEFT;
+        if(position + 1 < mMessageList.size()) {
+            if ((!mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position + 1).getFrom().equals(id))) {
+                return MSG_TYPE_LEFT_NO_IMG;
+            }
         }
-        }
+        return MSG_TYPE_LEFT;
+    }
+
+
+
+
+
+
 
 
     public String getId () {

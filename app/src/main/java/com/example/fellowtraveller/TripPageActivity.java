@@ -99,6 +99,8 @@ public class TripPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
 
             }
         });
@@ -127,6 +129,11 @@ public class TripPageActivity extends AppCompatActivity {
         loadUserInfo();
         buildRecyclerViewPassengers();
 
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 

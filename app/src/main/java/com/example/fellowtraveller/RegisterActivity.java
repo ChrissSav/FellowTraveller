@@ -89,19 +89,17 @@ public class RegisterActivity extends AppCompatActivity {
         button_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                if(fra.toString().equals("stage1")){
-                    RegisterActivity.this.onBackPressed();
-                }
-                else if(fra.toString().equals("stage2") ){
-                    fra = stage1;
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.register_stages_container,fra).commit();
-                }
+                onBackPressed();
+
             }
         });
     }
     public void onBackPressed(){
         if(fra.toString().equals("stage1")){
-            RegisterActivity.this.onBackPressed();
+            Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            finish();
         }
         else if(fra.toString().equals("stage2") ){
             fra = stage1;

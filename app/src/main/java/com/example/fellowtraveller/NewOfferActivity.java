@@ -94,21 +94,7 @@ public class NewOfferActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                if(fra.toString().equals("stage1")){
-                    NewOfferActivity.this.onBackPressed();
-                }
-                else if(fra.toString().equals("stage2") ){
-                    fra = stage1;
-                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
-                    tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
-                }
-                else if(fra.toString().equals("stage3")){
-                    fra = stage2;
-                    tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
-                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
-                }
+                onBackPressed();
             }
         });
 
@@ -196,7 +182,10 @@ public class NewOfferActivity extends AppCompatActivity {
 
     public void onBackPressed(){
         if(fra.toString().equals("stage1")){
-            NewOfferActivity.this.onBackPressed();
+            Intent intent = new Intent(NewOfferActivity.this,HomeBetaActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            finish();
         }
         else if(fra.toString().equals("stage2") ){
             fra = stage1;

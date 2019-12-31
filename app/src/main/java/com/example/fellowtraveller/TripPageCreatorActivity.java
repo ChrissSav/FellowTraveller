@@ -97,6 +97,8 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
             }
         });
 
@@ -106,6 +108,10 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         }
     }
 
+    public void onBackPressed(){
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.TripPageCreatorActivity_RecyclerView);
         mRecyclerView.setHasFixedSize(true);

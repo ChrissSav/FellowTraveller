@@ -115,6 +115,8 @@ public class ProsforesFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), TripPageCreatorActivity.class);
                 intent.putExtra("Trip",Listoftrips.get(position));
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
 
             }
         });

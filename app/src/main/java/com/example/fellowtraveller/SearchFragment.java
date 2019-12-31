@@ -77,6 +77,7 @@ public class SearchFragment extends Fragment {
                 intent.putExtra("Trip",Listoftrips.get(position));
                 intent.putExtra("F",false);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
             }
         });

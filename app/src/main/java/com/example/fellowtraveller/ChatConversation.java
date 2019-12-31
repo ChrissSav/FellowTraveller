@@ -76,6 +76,16 @@ public class ChatConversation extends AppCompatActivity {
         setContentView(R.layout.activity_chat_conversation);
         Intent intent= getIntent();
         chatUser = intent.getIntExtra("Creator_id",0)+""; //creator trip id
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        if(b!=null)
+        {
+            String j =(String) b.get("id");
+            chatUser = j;
+        }
+
+
         userId = getId(); //your id
 
         chatDatabase = FirebaseDatabase.getInstance().getReference();

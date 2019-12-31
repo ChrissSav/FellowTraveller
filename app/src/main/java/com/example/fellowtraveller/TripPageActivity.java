@@ -117,12 +117,12 @@ public class TripPageActivity extends AppCompatActivity {
         messega_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(TripPageActivity.this,ChatConversation.class);
-                intent1.putExtra("Creator_id",trip.getCreator().getId());
-                startActivity(intent1);
-
+                Intent ii = new Intent(TripPageActivity.this, ChatConversation.class);
+                ii.putExtra("id", String.valueOf(trip.getCreator().getId()));
+                startActivity(ii);
             }
         });
+
         FillFields();
         loadUserInfo();
         buildRecyclerViewPassengers();

@@ -76,9 +76,13 @@ public class Chat extends AppCompatActivity {
             public void onItemClick(int position) {
                 String senderId = conversations.get(position).getSenderId();
 
-                Intent intent1 = new Intent(Chat.this,ChatConversation.class);
-                intent1.putExtra("Creator_id",senderId);
-                startActivity(intent1);
+                Intent ii = new Intent(Chat.this, ChatConversation.class);
+                ii.putExtra("id", senderId);
+                startActivity(ii);
+
+                //Intent intent2 = new Intent(Chat.this,ChatConversation.class);
+                //intent2.putExtra("Creator_id",senderId);
+                startActivity(ii);
 
                 finish();
             }

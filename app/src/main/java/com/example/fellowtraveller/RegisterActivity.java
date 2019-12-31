@@ -79,8 +79,10 @@ public class RegisterActivity extends AppCompatActivity {
                 if(fra.toString().equals("stage1") && stage1.Check()){
                     fra = stage2;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.register_stages_container,fra).commit();
+                    btn_next_stage.setText("Καταχώρηση");
                 }
                 else if(fra.toString().equals("stage2") && stage2.Check()){
+
                     createUser();
                 }
             }
@@ -102,6 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         }
         else if(fra.toString().equals("stage2") ){
+            btn_next_stage.setText("Επόμενο");
+
             fra = stage1;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.register_stages_container,fra).commit();
         }

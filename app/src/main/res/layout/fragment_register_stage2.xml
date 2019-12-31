@@ -102,7 +102,7 @@
                 android:layout_height="45dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
-                android:hint="Αριθμός Ταυτότητας"
+                android:hint="Αριθμός Διπλώματος *"
                 android:inputType="text"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
@@ -111,6 +111,21 @@
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="*  Στην περίπτωση που το πεδίο «Αριθ Διπλώματος» μείνει κενό δεν θα μπορείτε να προσφέρεται διαδρομή. Υπάρχει και η δυνατότητα συμπλήρωσης του στην σελίδα του προφίλ σας *_*."
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage2Fragment__editText_id" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

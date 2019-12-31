@@ -195,6 +195,8 @@ public class NewOfferActivity extends AppCompatActivity {
         }
         else if(fra.toString().equals("stage3")){
             fra = stage2;
+            btn_next_stage.setText("Επόμενο");
+
             tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
             tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();

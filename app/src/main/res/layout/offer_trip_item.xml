@@ -224,13 +224,13 @@
 
         <Button
             android:id="@+id/offerItem_button_select"
-            android:layout_width="116dp"
-            android:layout_height="wrap_content"
+            android:layout_width="117dp"
+            android:layout_height="41dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/main_btn_login"
+            android:background="@drawable/trip_page_btn_message"
+            android:textColor="#8297FF"
             android:text="Επεξεργασία"
             android:textAllCaps="false"
-            android:textColor="#fff"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

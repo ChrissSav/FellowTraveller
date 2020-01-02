@@ -9,16 +9,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="290dp"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:maxWidth="375dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/search_trip_page_backround">
+            android:background="@drawable/search_trip_page_backround"
+            android:maxWidth="375dp">
 
             <TextView
                 android:id="@+id/textView35"
@@ -44,12 +44,12 @@
                 android:id="@+id/searchItem_user_pic"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:elevation="1dp"
-                android:src="@drawable/blackshape" />
+                android:src="@drawable/blackshape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -67,8 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Άπο"
-                android:textSize="14sp"
                 android:textColor="@color/grey"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/searchItem_user_pic"
                 app:layout_constraintTop_toBottomOf="@+id/searchItem_user_pic" />
 
@@ -78,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Πρός"
-                android:textSize="14sp"
                 android:textColor="@color/grey"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/searchItem_user_pic"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -89,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:text="Αθήνα"
-                android:textSize="14sp"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView24"
                 app:layout_constraintStart_toEndOf="@+id/textView24"
@@ -102,8 +102,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Θεσσαλονίκη"
-                android:textSize="14sp"
                 android:textColor="#000"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView25"
                 app:layout_constraintStart_toStartOf="@+id/searchItem_textView_from"
@@ -114,8 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
                 android:gravity="center_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/textView25">
 
@@ -129,12 +129,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:text="Λεπτομέρειες"
                     android:textColor="#FFAA5E"
                     android:textSize="12sp"
-                    android:textStyle="normal"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"/>
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textView37"
@@ -149,7 +149,7 @@
                 android:id="@+id/textView21"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/black_calendar"
                 app:layout_constraintStart_toStartOf="@+id/searchItem_user_pic"
                 app:layout_constraintTop_toBottomOf="@+id/search_trip_item_linearLayout" />
@@ -170,7 +170,7 @@
                 android:id="@+id/textView22"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/black_clock"
                 app:layout_constraintEnd_toEndOf="@+id/textView21"
                 app:layout_constraintStart_toStartOf="@+id/textView21"
@@ -191,8 +191,8 @@
                 android:id="@+id/textView23"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/black_seat"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/black_seat"
                 app:layout_constraintBottom_toBottomOf="@+id/textView21"
                 app:layout_constraintEnd_toStartOf="@+id/searchItem_textView_seats"
                 app:layout_constraintTop_toTopOf="@+id/textView21" />
@@ -212,33 +212,34 @@
                 android:id="@+id/searchItem_textView_bags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="2 / 2"
                 android:textColor="#000"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView35"
-                app:layout_constraintStart_toEndOf="@+id/textView35"
+                app:layout_constraintEnd_toEndOf="@+id/searchItem_textView_price"
                 app:layout_constraintTop_toTopOf="@+id/textView35" />
 
             <Button
                 android:id="@+id/searchItem_button_select"
                 android:layout_width="116dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/main_btn_login"
+                android:layout_height="38dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/trip_page_btn_message"
                 android:text="Επεξεργασία"
                 android:textAllCaps="false"
-                android:textColor="#fff"
+                android:textColor="#8297FF"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/searchItem_textView_time" />
 
             <TextView
                 android:id="@+id/searchItem_textView_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="24dp"
                 android:text="10€"
                 android:textColor="#000"
                 android:textSize="22sp"

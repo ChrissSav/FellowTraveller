@@ -64,6 +64,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         TabLayout.Tab tab = mTabLayout.getTabAt(1);
         tab.select();
+        mViewPager.setOffscreenPageLimit(4);
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
@@ -81,6 +82,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
        // loadImageFromStorage();
         BottonNav();
+
 
 
     }

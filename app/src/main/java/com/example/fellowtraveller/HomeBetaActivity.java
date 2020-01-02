@@ -100,7 +100,8 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                                 finish();
                                 break;
                             case R.id.bottom_nav_home:
-
+                                TabLayout.Tab tab = mTabLayout.getTabAt(1);
+                                tab.select();
                                 break;
                             case R.id.bottom_nav_notification:
                                 Intent a = new Intent(HomeBetaActivity.this, NotificationActivity.class);

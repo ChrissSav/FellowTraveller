@@ -92,9 +92,10 @@ public class TripPageActivity extends AppCompatActivity {
             img.setImageBitmap(StringToBitMap(trip.getCreator().getPicture()));
         }
 
-        if(!flag)
+        if(!flag) {
+            bag.setVisibility(View.GONE);
             select.setVisibility(View.GONE);
-
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -16,7 +16,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/search_trip_page_backround"
-        android:maxWidth="375dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +32,16 @@
 
         <TextView
             android:id="@+id/offerItem_textView_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginEnd="100dp"
             android:text="Σπυρίδων Ράντογλου"
+            android:textSize="16sp"
             android:textColor="#000"
             android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintStart_toEndOf="@+id/offerItem_user_pic"
             app:layout_constraintTop_toTopOf="@+id/offerItem_user_pic" />
 
@@ -87,28 +90,34 @@
 
         <TextView
             android:id="@+id/offerItem_textView_from"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="130dp"
             android:text="Αθήνα"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@+id/textView24"
-            app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toTopOf="@+id/textView24"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView24" />
 
         <TextView
             android:id="@+id/offerItem_textView_to"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="130dp"
             android:text="Θεσσαλονίκη"
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/textView25"
-            app:layout_constraintStart_toStartOf="@+id/offerItem_textView_from"
             app:layout_constraintTop_toTopOf="@+id/textView25" />
 
         <LinearLayout
@@ -214,28 +223,28 @@
             android:id="@+id/offerItem_textView_bags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:text="2 / 2"
             android:textColor="#000"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView35"
-            app:layout_constraintStart_toEndOf="@+id/textView35"
+            app:layout_constraintEnd_toEndOf="@+id/offerItem_textView_seats"
             app:layout_constraintTop_toTopOf="@+id/textView35" />
 
         <Button
             android:id="@+id/offerItem_button_select"
             android:layout_width="117dp"
             android:layout_height="41dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/trip_page_btn_message"
-            android:textColor="#8297FF"
             android:text="Επεξεργασία"
             android:textAllCaps="false"
+            android:textColor="#8297FF"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offerItem_textView_time" />
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <TextView
             android:id="@+id/offerItem_textView_price"

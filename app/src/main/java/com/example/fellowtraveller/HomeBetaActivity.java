@@ -15,7 +15,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -82,7 +84,14 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
        // loadImageFromStorage();
         BottonNav();
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
 
+        float density  = getResources().getDisplayMetrics().density;
+        float dpHeight = outMetrics.heightPixels / density;
+        float dpWidth  = outMetrics.widthPixels / density;
+        Toast.makeText(HomeBetaActivity.this,"dpWidth : "+dpWidth, Toast.LENGTH_SHORT).show();
 
 
     }

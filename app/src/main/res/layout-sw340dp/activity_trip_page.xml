@@ -38,10 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="12dp"
-                android:text="Βασιλης Παπαδοπουλος"
-                android:textColor="#000"
                 android:singleLine="true"
+                android:textColor="#000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/tripPage_textView_status"
                 app:layout_constraintStart_toEndOf="@+id/tripPage_textView_adminImage"
@@ -51,7 +49,7 @@
                 android:id="@+id/tripPage_textView_adminImage"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
                 android:src="@drawable/blackshape"
                 app:layout_constraintStart_toStartOf="parent"
@@ -124,54 +122,51 @@
             <TextView
                 android:id="@+id/tripPage_textView_status"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/trip_page_btn_state"
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:textAlignment="center"
                 android:textColor="#FFAA5E"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tripPage_textView_adminImage"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tripPage_textView_adminImage"
-                tools:text="Ολοκληρώθηκε" />
+                app:layout_constraintTop_toTopOf="@+id/tripPage_textView_adminImage" />
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/date_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/tripPage_textView_date"
                 app:layout_constraintStart_toStartOf="@+id/tripPage_textView_adminImage"
-                app:layout_constraintTop_toTopOf="@+id/textView27" />
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
             <TextView
                 android:id="@+id/textView27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
                 android:text="Ημερομηνία"
                 android:textColor="#000"
-                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView26"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                app:layout_constraintTop_toTopOf="@+id/textView26" />
 
             <TextView
                 android:id="@+id/tripPage_textView_date"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@+id/textView27"
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
             <TextView
                 android:id="@+id/textView28"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/seats_icon"
                 app:layout_constraintEnd_toStartOf="@+id/textView29"
@@ -183,40 +178,38 @@
                 android:layout_height="wrap_content"
                 android:text="Θέσεις"
                 android:textColor="#000"
-                android:textSize="13sp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView33"
-                app:layout_constraintTop_toTopOf="@+id/textView27" />
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
 
             <TextView
                 android:id="@+id/tripPage_textView_seats"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@+id/textView29"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
             <TextView
                 android:id="@+id/textView30"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/hour_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/tripPage_textView_time"
                 app:layout_constraintStart_toStartOf="@+id/tripPage_textView_adminImage"
-                app:layout_constraintTop_toTopOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
             <TextView
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
                 android:text="Ώρα"
                 android:textColor="#000"
-                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView30"
-                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                app:layout_constraintTop_toTopOf="@+id/textView30" />
 
             <TextView
                 android:id="@+id/tripPage_textView_time"
@@ -227,8 +220,8 @@
 
             <TextView
                 android:id="@+id/textView32"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/suitcase_icon"
                 app:layout_constraintEnd_toStartOf="@+id/textView33"
@@ -238,19 +231,17 @@
                 android:id="@+id/textView33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="24dp"
                 android:text="Αποσκεύες"
                 android:textColor="#000"
-                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView31" />
+                app:layout_constraintTop_toTopOf="@+id/textView32" />
 
             <TextView
                 android:id="@+id/tripPage_textView_suitcases"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@+id/textView33"
                 app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
@@ -333,7 +324,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
         android:layout_width="fill_parent"
-        android:layout_height="65dp"
+        android:layout_height="79dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-10dp"
@@ -345,7 +336,7 @@
             android:layout_height="wrap_content"
             android:text="500 Ευρώ"
             android:textColor="#000"
-            android:textSize="14dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tripPage_button_select"
@@ -354,8 +345,8 @@
 
         <Button
             android:id="@+id/tripPage_button_select"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
+            android:layout_width="135dp"
+            android:layout_height="50dp"
             android:background="@drawable/main_btn_login"
             android:text="Επιλογή"
             android:textAllCaps="false"
@@ -373,7 +364,7 @@
             android:layout_height="wrap_content"
             android:text="Σακίδιο"
             android:textColor="#000"
-            android:textSize="13dp"
+            android:textSize="17dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

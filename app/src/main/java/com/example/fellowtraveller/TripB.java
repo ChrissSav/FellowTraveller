@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TripB implements Parcelable {
@@ -182,12 +183,13 @@ public class TripB implements Parcelable {
         this.state = state;
     }
 
-    public String getSeatesStatus(){
-        String s = current_num_of_seats+"/"+max_seats;
+    public String getSeatesStatus() {
+        String s = current_num_of_seats + "/" + max_seats;
         return s;
     }
-    public String getbagsStatus(){
-        String s = current_num_of_bags+"/"+max_bags;
+
+    public String getbagsStatus() {
+        String s = current_num_of_bags + "/" + max_bags;
         return s;
     }
 
@@ -229,4 +231,35 @@ public class TripB implements Parcelable {
         dest.writeString(state);
         dest.writeInt(price);
     }
+
+    public static Comparator<TripB> PriceComparatorLowFirst = new Comparator<TripB>() {
+
+        public int compare(TripB t1, TripB t2) {
+            String StudentName1 = t1.getPrice() + "";
+            String StudentName2 = t2.getPrice() + "";
+            Log.i("Compare",StudentName1+ " <-> "+StudentName2+" = "+StudentName2.compareTo(StudentName1));
+            return StudentName2.compareTo(StudentName1);
+        }
+    };
+
+    public static Comparator<TripB> PriceComparatorΗigherFirst = new Comparator<TripB>() {
+
+        public int compare(TripB t1, TripB t2) {
+            String StudentName1 = t1.getPrice() + "";
+            String StudentName2 = t2.getPrice() + "";
+            Log.i("Compare",StudentName1+ " <-> "+StudentName2+" = "+StudentName2.compareTo(StudentName1));
+            return StudentName1.compareTo(StudentName2);
+        }
+    };
+
+    public static Comparator<TripB> DateComparator = new Comparator<TripB>() {
+
+        public int compare(TripB t1, TripB t2) {
+
+            return t2.getDate().compareTo(t1.getDate());
+        }
+    };
+
+
+
 }

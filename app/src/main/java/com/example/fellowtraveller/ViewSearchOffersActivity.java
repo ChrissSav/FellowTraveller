@@ -11,9 +11,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,6 +55,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
     private String KEY;
+    private Spinner sort_spinner;
     private int id;
 
     @Override
@@ -67,7 +71,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         btn_filter = findViewById(R.id.ViewSearchOffersActivity_button_filters);
         btn_back = findViewById(R.id.ViewSearchOffersActivity_button_back);
         btn_refresh = findViewById(R.id.ViewSearchOffersActivity_button_refresh);
-
+        sort_spinner = findViewById(R.id.ViewSearchOffersActivity_spinner_sort);
         autoCompleteTextViewFrom = findViewById(R.id.ViewSearchOffersActivity_autoComplete_editText_from);
         autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(ViewSearchOffersActivity.this, android.R.layout.simple_list_item_1, KEY));
         autoCompleteTextViewTo = findViewById(R.id.ViewSearchOffersActivity_autoComplete_editText_to);
@@ -209,6 +213,32 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
                 date_to.setText(null);
                 return true;
             }
+        });
+
+
+        sort_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(position==0) {
+                    Collections.sort(ListOfTrips, TripB.DateComparator);
+                    mAdapter.notifyDataSetChanged();
+                }
+                if(position==1) {
+                    Collections.sort(ListOfTrips, TripB.PriceComparatorLowFirst);
+                    mAdapter.notifyDataSetChanged();
+                }
+                if(position==2) {
+                    Collections.sort(ListOfTrips, TripB.PriceComparatorΗigherFirst);
+                    mAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //Nothing
+            }
+
         });
 
     }

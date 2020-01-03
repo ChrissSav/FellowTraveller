@@ -32,7 +32,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/home_appBar"
-           />
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/NotificationActivity_RecyclerView"

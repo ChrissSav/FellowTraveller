@@ -10,12 +10,14 @@
     <ImageView
         android:id="@+id/main_imageView"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/main_shape"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/main_textView2"/>
 
     <TextView
         android:id="@+id/main_textView2"
@@ -25,7 +27,7 @@
         android:text="Καλώς ήρθατε"
         android:textAllCaps="false"
         android:textColor="#000"
-        android:textSize="26sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +44,7 @@
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="#C9C9C9"
         app:layout_constraintTop_toBottomOf="@+id/main_textView2" />
 
@@ -68,7 +70,8 @@
             android:textAllCaps="false"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            style="?android:attr/borderlessButtonStyle" />
 
         <Button
             android:id="@+id/main_button2"
@@ -76,11 +79,12 @@
             android:layout_marginStart="8dp"
             android:text="Εγγραφή"
             android:textSize="16sp"
-            android:textColor="#000"
+            android:textColor="@color/grey"
             android:textAllCaps="false"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            style="?android:attr/borderlessButtonStyle" />
 
     </LinearLayout>
 
@@ -107,7 +111,7 @@
             android:layout_marginEnd="24dp"
             android:text="Είσοδος με"
             android:textColor="#C9C9C9"
-            android:textSize="14dp"
+            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

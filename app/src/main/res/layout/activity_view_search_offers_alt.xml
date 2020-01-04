@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout"
     android:background="#fff"
+    android:id="@+id/layout"
     tools:context=".ViewSearchOffersActivity">
 
     <TextView
@@ -45,26 +45,27 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ViewSearchOffersActivity_ConstraintLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:animateLayoutChanges="true"
+        android:background="#888"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:animateLayoutChanges="true"
         app:layout_constraintTop_toBottomOf="@+id/textView8">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="4dp"
             android:textColorHint="#000"
             app:hintTextAppearance="@style/CustomTextAppearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
+            app:layout_constraintTop_toTopOf="parent">
 
             <AutoCompleteTextView
                 android:id="@+id/ViewSearchOffersActivity_autoComplete_editText_from"
@@ -113,7 +114,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="359dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/text_view_search_add_offer"
             app:layout_constraintEnd_toEndOf="parent"
@@ -214,11 +215,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ViewSearchOffersActivity_RecyclerView_items"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:background="#000"
         android:paddingBottom="0dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"

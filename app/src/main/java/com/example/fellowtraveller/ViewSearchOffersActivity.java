@@ -1,16 +1,22 @@
 package com.example.fellowtraveller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -57,17 +63,23 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private String KEY;
     private Spinner sort_spinner;
     private int id;
+    private ConstraintLayout constraintLayout;
+    private TextView textView;
+    private ConstraintSet constraintSetOld = new ConstraintSet();
+    private ConstraintSet constraintSetNew = new ConstraintSet();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_search_offers);
         KEY = getString(R.string.api_key);
         loadUserId();
-        setContentView(R.layout.activity_view_search_offers);
+
 
         ListOfTrips = new ArrayList<>();
         Intent intent = getIntent();
         filter_items = intent.getParcelableExtra("Filter");
+        mRecyclerView = findViewById(R.id.ViewSearchOffersActivity_RecyclerView_items);
         btn_filter = findViewById(R.id.ViewSearchOffersActivity_button_filters);
         btn_back = findViewById(R.id.ViewSearchOffersActivity_button_back);
         btn_refresh = findViewById(R.id.ViewSearchOffersActivity_button_refresh);
@@ -76,7 +88,11 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(ViewSearchOffersActivity.this, android.R.layout.simple_list_item_1, KEY));
         autoCompleteTextViewTo = findViewById(R.id.ViewSearchOffersActivity_autoComplete_editText_to);
         autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(ViewSearchOffersActivity.this, android.R.layout.simple_list_item_1, KEY));
+        textView = findViewById(R.id.textView8);
+        constraintLayout = findViewById(R.id.layout);
 
+        constraintSetOld.clone(constraintLayout);
+        constraintSetNew.clone(this, R.layout.activity_view_search_offers_alt);
 
         date_from = findViewById(R.id.ViewSearchOffersActivity_editText_date_from);
         date_to = findViewById(R.id.ViewSearchOffersActivity_editText_date_to);
@@ -219,7 +235,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         sort_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if(position==0) {
+                if(position==0 && ListOfTrips.size()>1) {
                     Collections.sort(ListOfTrips, TripB.DateComparator);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -241,6 +257,47 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
 
         });
 
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.i("makismakis","dy dy dy "+dy);
+                if (dy > 0) {
+                    Transition changeBounds = new ChangeBounds();
+                    changeBounds.setInterpolator(new OvershootInterpolator());
+                    TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                    constraintSetNew.applyTo(constraintLayout);
+                } else {
+                    Transition changeBounds = new ChangeBounds();
+                    changeBounds.setInterpolator(new OvershootInterpolator());
+                    TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                    constraintSetOld.applyTo(constraintLayout);
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+                    Log.i("makismakis","SCROLL_STATE_FLING");
+                } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    Log.i("makismakis","SCROLL_STATE_TOUCH_SCROLL");
+                } else {
+                    Log.i("mRecyclerView","else  " +mRecyclerView.computeVerticalScrollRange()+" "+mRecyclerView.computeVerticalScrollOffset());
+                    if(mRecyclerView.computeVerticalScrollOffset()==0){
+                        //Log.i("mRecyclerView","offset  " +(mRecyclerView.computeVerticalScrollOffset()==0)+" "+mRecyclerView.computeVerticalScrollOffset());
+                        Transition changeBounds = new ChangeBounds();
+                        changeBounds.setInterpolator(new OvershootInterpolator());
+                        TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                        constraintSetOld.applyTo(constraintLayout);
+                    }
+                }
+            }
+        });
+
     }
 
     public void FillFields(){
@@ -255,7 +312,6 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     }
 
     public void buildRecyclerView() {
-        mRecyclerView = findViewById(R.id.ViewSearchOffersActivity_RecyclerView_items);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(ViewSearchOffersActivity.this);
         mAdapter = new SearchAdapter(ListOfTrips);
@@ -402,3 +458,4 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         }
     }
 }
+

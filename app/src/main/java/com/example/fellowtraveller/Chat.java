@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
@@ -36,6 +37,7 @@ public class Chat extends AppCompatActivity {
     private String id, yourId;
     private ArrayList<ChatConversationItem> conversations = new ArrayList<>();
     private ImageButton backButton;
+    private DatabaseReference userStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class Chat extends AppCompatActivity {
 //        conversations.add(new ChatConversationItem("default","Σεμπάστιαν Ανδρεου", false, true, 545345363,"131", "132"));
 //        conversations.add(new ChatConversationItem("default","Τόλης Μόλης", true, false, 542345563,"131", "132"));
 //        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363,"131", "132"));
-
+        userStatus = FirebaseDatabase.getInstance().getReference();
         yourId = getId();
         loadConversations();
 
@@ -78,13 +80,16 @@ public class Chat extends AppCompatActivity {
 
                 Intent ii = new Intent(Chat.this, ChatConversation.class);
                 ii.putExtra("id", senderId);
+
+                finish();
+                userStatus.child("Users").child(yourId).child("online").setValue(true);
                 startActivity(ii);
 
                 //Intent intent2 = new Intent(Chat.this,ChatConversation.class);
                 //intent2.putExtra("Creator_id",senderId);
-                startActivity(ii);
 
-                finish();
+
+
             }
         });
 
@@ -100,9 +105,17 @@ public class Chat extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        userStatus.child("Users").child(yourId).child("online").setValue(false);
+        userStatus.child("Users").child(yourId).child("lastSeen").setValue(ServerValue.TIMESTAMP);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-
+        //yourId = getId();
+        userStatus.child("Users").child(yourId).child("online").setValue(true);
     }
 
     @Override

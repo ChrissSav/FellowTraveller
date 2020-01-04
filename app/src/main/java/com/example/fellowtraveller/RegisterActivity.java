@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -161,6 +162,8 @@ public class RegisterActivity extends AppCompatActivity {
         userMap.put("email", email);
         userMap.put("status", status);
         userMap.put("image","default");
+        //userMap.put("online","true");
+        //userMap.put("lastSeen", ServerValue.TIMESTAMP);
 
         userDatabase.setValue(userMap);
 

@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -106,6 +107,7 @@ public class ChatConversation extends AppCompatActivity {
         mMessagesList.setLayoutManager(mLinearLayout);
         mMessagesList.setAdapter(mAdapter);
 
+        chatDatabase.child("Users").child(userId).child("online").setValue(true);
         loadMessages();
         changeConversationStatus();
 
@@ -297,6 +299,19 @@ public class ChatConversation extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //chatDatabase.child("Users").child(userId).child("online").setValue(false);
+        //chatDatabase.child("Users").child(userId).child("lastSeen").setValue(ServerValue.TIMESTAMP);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        chatDatabase.child("Users").child(userId).child("online").setValue(true);
     }
 
 

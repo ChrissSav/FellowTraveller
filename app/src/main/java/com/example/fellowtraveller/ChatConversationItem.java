@@ -1,5 +1,13 @@
 package com.example.fellowtraveller;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class ChatConversationItem {
     private String imageUrl;
     private String name;
@@ -8,6 +16,7 @@ public class ChatConversationItem {
     private Long timestamp;
     private String yourId;
     private String senderId;
+    private DatabaseReference onlineRef = FirebaseDatabase.getInstance().getReference();
 
     public ChatConversationItem(String aImage, String aName, boolean sendMessage,boolean online,Long aTimestamp, String yourId, String aId){
 
@@ -28,8 +37,7 @@ public class ChatConversationItem {
         this.imageUrl = imageUrl;
     }
 
-    public String getName() {
-        return name;
+    public String getName() { return name;
     }
 
     public void setName(String name) {
@@ -45,7 +53,25 @@ public class ChatConversationItem {
     }
 
     public boolean isOnlineStatus() {
-        return onlineStatus;
+        String online = "false";
+        onlineRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String online = dataSnapshot.child("Users").child(yourId).child("online").getValue(String.class);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        if(online.equals("true")){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public void setOnlineStatus(boolean onlineStatus) {

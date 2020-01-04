@@ -107,7 +107,7 @@ public class Chat extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        userStatus.child("Users").child(yourId).child("online").setValue(false);
+        userStatus.child("Users").child(yourId).child("online").setValue("false");
         userStatus.child("Users").child(yourId).child("lastSeen").setValue(ServerValue.TIMESTAMP);
     }
 
@@ -115,7 +115,7 @@ public class Chat extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         //yourId = getId();
-        userStatus.child("Users").child(yourId).child("online").setValue(true);
+        userStatus.child("Users").child(yourId).child("online").setValue("true");
     }
 
     @Override

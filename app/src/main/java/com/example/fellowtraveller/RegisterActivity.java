@@ -166,6 +166,8 @@ public class RegisterActivity extends AppCompatActivity {
         //userMap.put("lastSeen", ServerValue.TIMESTAMP);
 
         userDatabase.setValue(userMap);
+        userDatabase.child("online").setValue("false");
+        userDatabase.child("lastSeen").setValue(ServerValue.TIMESTAMP);
 
 
         String text = status+"\n"+id+"\n"+name+"\n"+email;

@@ -66,7 +66,7 @@ public class ChatConversation extends AppCompatActivity {
     private String prevKey = "";
     private Context context = ChatConversation.this;
     private MediaPlayer sfxButton;
-    private TextView chatUserName;
+    private TextView chatUserName, lastSeenTextView;
     private CircleImageView chatProfilePicture;
     private ImageButton backToConvButton;
 
@@ -95,6 +95,7 @@ public class ChatConversation extends AppCompatActivity {
         sendImageButton = findViewById(R.id.chat_send);
         chatEditText = findViewById(R.id.ask_textView);
         chatUserName = findViewById(R.id.chat_user_name);
+        lastSeenTextView = findViewById(R.id.lastSeen);
         chatProfilePicture = findViewById(R.id.chat_conv_pic);
         sfxButton = MediaPlayer.create(this, R.raw.send_message_sfx);
 
@@ -107,7 +108,7 @@ public class ChatConversation extends AppCompatActivity {
         mMessagesList.setLayoutManager(mLinearLayout);
         mMessagesList.setAdapter(mAdapter);
 
-        chatDatabase.child("Users").child(userId).child("online").setValue(true);
+        chatDatabase.child("Users").child(userId).child("online").setValue("true");
         loadMessages();
         changeConversationStatus();
 
@@ -303,7 +304,7 @@ public class ChatConversation extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        //chatDatabase.child("Users").child(userId).child("online").setValue(false);
+        //chatDatabase.child("Users").child(userId).child("online").setValue("false");
         //chatDatabase.child("Users").child(userId).child("lastSeen").setValue(ServerValue.TIMESTAMP);
     }
 
@@ -311,7 +312,7 @@ public class ChatConversation extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        chatDatabase.child("Users").child(userId).child("online").setValue(true);
+        chatDatabase.child("Users").child(userId).child("online").setValue("true");
     }
 
 

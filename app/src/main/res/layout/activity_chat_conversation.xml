@@ -38,6 +38,7 @@
 
             />
         <TextView
+            android:id="@+id/lastSeen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/chat_user_name"

@@ -289,8 +289,6 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                     return line1;
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 } finally {
                     if (fis != null) {
                         try {

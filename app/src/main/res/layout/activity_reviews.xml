@@ -30,7 +30,6 @@
         android:layout_marginTop="20dp"
         android:background="#fff"
         android:scrollbars="vertical"
-        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

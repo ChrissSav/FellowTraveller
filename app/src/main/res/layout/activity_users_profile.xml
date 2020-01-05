@@ -46,7 +46,7 @@
 
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_picture"
+                            android:id="@+id/UsersProfile_profile_picture"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             android:layout_centerHorizontal="true"
@@ -55,95 +55,93 @@
                             />
 
 
-
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/profile_cardview_info"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="85dp"
-                                app:contentPaddingTop="15dp"
-                                app:contentPaddingRight="15dp"
-                                app:contentPaddingLeft="15dp"
-                                app:contentPaddingBottom="15dp"
-                                app:cardCornerRadius="10dp"
                                 app:cardBackgroundColor="#F8F7F3"
-                                >
+                                app:cardCornerRadius="10dp"
+                                app:contentPaddingBottom="15dp"
+                                app:contentPaddingLeft="15dp"
+                                app:contentPaddingRight="15dp"
+                                app:contentPaddingTop="15dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
+
                                     <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
 
 
-
                                         <TextView
-                                            android:id="@+id/profile_name"
+                                            android:id="@+id/UserProfile_tv_name"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Spuros Rantoglou"
-                                            android:textStyle="bold"
-                                            android:textSize="25sp"
-                                            app:layout_constraintRight_toRightOf="parent"
-                                            app:layout_constraintLeft_toLeftOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent"
+                                            android:layout_gravity="center"
                                             android:layout_marginTop="72dp"
-                                            android:layout_gravity="center"/>
+                                            android:text="Spuros Rantoglou"
+                                            android:textSize="25sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintRight_toRightOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+
                                         <LinearLayout
+                                            android:id="@+id/profile_rate"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:id="@+id/profile_rate"
-                                            android:orientation="horizontal"
                                             android:layout_marginTop="15dp"
-                                            app:layout_constraintTop_toBottomOf="@id/profile_name"
+                                            android:orientation="horizontal"
+                                            app:layout_constraintLeft_toLeftOf="parent"
                                             app:layout_constraintRight_toRightOf="parent"
-                                            app:layout_constraintLeft_toLeftOf="parent">
+                                            app:layout_constraintTop_toBottomOf="@id/UserProfile_tv_name">
 
                                             <ImageView
                                                 android:layout_width="20dp"
                                                 android:layout_height="20dp"
-                                                android:background="@drawable/ic_star"
-                                                android:layout_marginEnd="10dp"/>
+                                                android:layout_marginEnd="10dp"
+                                                android:background="@drawable/ic_star" />
 
                                             <TextView
-                                                android:id="@+id/user_rating"
+                                                android:id="@+id/UserProfile_user_rating"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="4.5"
-                                                android:textSize="16sp"
                                                 android:textColor="@color/black"
+                                                android:textSize="16sp"
                                                 android:textStyle="bold" />
 
                                             <ImageView
                                                 android:layout_width="4dp"
                                                 android:layout_height="4dp"
-                                                android:background="#C9C9C9"
                                                 android:layout_marginStart="15dp"
                                                 android:layout_marginEnd="15dp"
-                                                android:visibility="invisible"
-                                                />
+                                                android:background="#C9C9C9"
+                                                android:visibility="invisible" />
 
                                             <ImageView
                                                 android:layout_width="20dp"
                                                 android:layout_height="20dp"
-                                                android:background="@drawable/ic_review"
                                                 android:layout_gravity="bottom"
-                                                android:layout_marginEnd="10dp"/>
+                                                android:layout_marginEnd="10dp"
+                                                android:background="@drawable/ic_review" />
 
                                             <TextView
                                                 android:id="@+id/reviews_count"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="125"
-                                                android:textSize="16sp"
                                                 android:textColor="@color/black"
+                                                android:textSize="16sp"
                                                 android:textStyle="bold" />
 
                                         </LinearLayout>
@@ -152,11 +150,12 @@
                                             android:id="@+id/profile_location_linear"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginTop="20dp"
                                             android:orientation="horizontal"
-                                            app:layout_constraintTop_toBottomOf="@id/profile_rate"
                                             app:layout_constraintLeft_toLeftOf="parent"
                                             app:layout_constraintRight_toRightOf="parent"
-                                            android:layout_marginTop="20dp">
+                                            app:layout_constraintTop_toBottomOf="@id/profile_rate">
+
                                             <TextView
                                                 android:id="@+id/profile_mark"
                                                 android:layout_width="wrap_content"
@@ -172,19 +171,16 @@
                                                 android:id="@+id/profile_location"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
+                                                android:layout_marginStart="5dp"
+                                                android:layout_marginTop="3dp"
                                                 android:text="Φιλώτας, Φλώρινας"
                                                 android:textSize="16sp"
                                                 android:textStyle="bold"
-                                                android:layout_marginTop="3dp"
-                                                app:layout_constraintLeft_toLeftOf="@id/profile_mark"
-                                                app:layout_constraintTop_toTopOf="@id/profile_mark"
                                                 app:layout_constraintBottom_toBottomOf="@id/profile_mark"
+                                                app:layout_constraintLeft_toLeftOf="@id/profile_mark"
                                                 app:layout_constraintStart_toEndOf="@id/profile_mark"
-                                                android:layout_marginStart="5dp"/>
+                                                app:layout_constraintTop_toTopOf="@id/profile_mark" />
                                         </LinearLayout>
-
-
-
 
 
                                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -195,38 +191,37 @@
                                 android:id="@+id/profile_cardview_aboutMe"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:contentPaddingTop="15dp"
-                                app:contentPaddingRight="15dp"
-                                app:contentPaddingLeft="15dp"
-                                app:contentPaddingBottom="15dp"
-                                app:cardCornerRadius="10dp"
-                                app:cardBackgroundColor="#F8F7F3"
-                                app:layout_constraintTop_toBottomOf="@id/profile_cardview_info"
                                 android:layout_marginTop="15dp"
-                                >
+                                app:cardBackgroundColor="#F8F7F3"
+                                app:cardCornerRadius="10dp"
+                                app:contentPaddingBottom="15dp"
+                                app:contentPaddingLeft="15dp"
+                                app:contentPaddingRight="15dp"
+                                app:contentPaddingTop="15dp"
+                                app:layout_constraintTop_toBottomOf="@id/profile_cardview_info">
+
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
                                     android:layout_marginStart="0dp"
-                                    android:layout_marginEnd="0dp"
                                     android:layout_marginTop="0dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:orientation="vertical"
 
-                                    app:layout_constraintRight_toRightOf="parent"
                                     app:layout_constraintLeft_toLeftOf="parent"
-                                    >
+                                    app:layout_constraintRight_toRightOf="parent">
 
                                     <TextView
                                         android:id="@+id/profile_about_me_tV"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="15dp"
                                         android:text="Σχετικά με εμένα"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintLeft_toLeftOf="parent"
-                                        android:textSize="16sp"
                                         android:textColor="#5A5858"
+                                        android:textSize="16sp"
                                         android:textStyle="bold"
-                                        android:layout_marginBottom="15dp" />
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <TextView
                                         android:id="@+id/profile_about_me"
@@ -252,16 +247,15 @@
                                 android:id="@+id/profile_cardview_overall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:contentPaddingTop="15dp"
-                                app:contentPaddingRight="15dp"
-                                app:contentPaddingLeft="15dp"
-                                app:contentPaddingBottom="15dp"
-                                app:cardCornerRadius="10dp"
-                                app:cardBackgroundColor="#F8F7F3"
-                                app:layout_constraintTop_toBottomOf="@id/profile_cardview_aboutMe"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginBottom="15dp"
-                                >
+                                app:cardBackgroundColor="#F8F7F3"
+                                app:cardCornerRadius="10dp"
+                                app:contentPaddingBottom="15dp"
+                                app:contentPaddingLeft="15dp"
+                                app:contentPaddingRight="15dp"
+                                app:contentPaddingTop="15dp"
+                                app:layout_constraintTop_toBottomOf="@id/profile_cardview_aboutMe">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
@@ -335,6 +329,7 @@
                                         />
 
                                     <ImageView
+                                        android:id="@+id/UserProfile_img_friendly"
                                         android:layout_width="150dp"
                                         android:layout_height="15dp"
                                         android:layout_marginEnd="5dp"
@@ -346,6 +341,7 @@
                                         />
 
                                     <ImageView
+                                        android:id="@+id/UserProfile_img_reliable"
                                         android:layout_width="150dp"
                                         android:layout_height="15dp"
                                         android:layout_marginEnd="5dp"
@@ -357,6 +353,7 @@
                                         />
 
                                     <ImageView
+                                        android:id="@+id/UserProfile_img_careful"
                                         android:layout_width="150dp"
                                         android:layout_height="15dp"
                                         android:layout_marginEnd="5dp"
@@ -369,6 +366,7 @@
 
 
                                     <ImageView
+                                        android:id="@+id/UserProfile_img_consistent"
                                         android:layout_width="150dp"
                                         android:layout_height="15dp"
                                         android:layout_marginEnd="5dp"
@@ -382,40 +380,41 @@
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                             </androidx.cardview.widget.CardView>
+
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/profile_cardview_rate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:contentPaddingTop="15dp"
-                                app:contentPaddingRight="15dp"
-                                app:contentPaddingLeft="15dp"
-                                app:contentPaddingBottom="15dp"
-                                app:cardCornerRadius="10dp"
-                                app:cardBackgroundColor="#F8F7F3"
-                                app:layout_constraintTop_toBottomOf="@id/profile_cardview_overall"
                                 android:layout_marginTop="15dp"
+                                app:cardBackgroundColor="#F8F7F3"
+                                app:cardCornerRadius="10dp"
+                                app:contentPaddingBottom="15dp"
+                                app:contentPaddingLeft="15dp"
+                                app:contentPaddingRight="15dp"
+                                app:contentPaddingTop="15dp"
+                                app:layout_constraintTop_toBottomOf="@id/profile_cardview_overall"
 
                                 >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="25dp"
                                         android:text="Αξιολογήσεις"
-                                        android:textSize="16sp"
                                         android:textColor="#5A5858"
-                                        android:textStyle="bold"
-                                        android:layout_marginBottom="25dp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold" />
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="10dp">
+
                                         <de.hdodenhof.circleimageview.CircleImageView
                                             android:id="@+id/reviewer_profile_pic"
                                             android:layout_width="40dp"
@@ -434,51 +433,52 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Martijn Garritsen"
-                                                android:textSize="14sp"
                                                 android:textColor="#5A5858"
+                                                android:textSize="14sp"
                                                 android:textStyle="bold" />
 
                                             <TextView
                                                 android:id="@+id/review_date"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
+                                                android:layout_marginTop="20dp"
                                                 android:text="Μάρτιος 2018"
-                                                android:textSize="14sp"
                                                 android:textColor="@color/grey"
-                                                android:textStyle="normal"
-                                                android:layout_marginTop="20dp"/>
+                                                android:textSize="14sp"
+                                                android:textStyle="normal" />
 
                                         </RelativeLayout>
+
                                         <ImageView
                                             android:id="@+id/rating"
                                             android:layout_width="80dp"
                                             android:layout_height="24dp"
-                                            android:layout_centerVertical="true"
-                                            android:layout_alignParentEnd="true" />
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true" />
                                     </RelativeLayout>
 
                                     <TextView
                                         android:id="@+id/review"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:lineHeight="20dp"
                                         android:text="Πολύ καλός οδηγός, προσεκτικός και πολύ ευγενικός. Τ"
-                                        android:textSize="14sp"
                                         android:textColor="#726F6F"
-                                        android:textStyle="normal"
-                                        android:lineHeight="20dp" />
+                                        android:textSize="14sp"
+                                        android:textStyle="normal" />
 
                                     <Button
                                         android:id="@+id/profile_all_reviews_btn"
+                                        style="?android:attr/borderlessButtonStyle"
                                         android:layout_width="wrap_content"
                                         android:layout_height="40dp"
                                         android:layout_marginTop="20dp"
-                                        android:text="Read all reviews"
-                                        android:textSize="14sp"
-                                        android:textColor="@color/orange"
-                                        android:textStyle="normal"
-                                        android:textAllCaps="false"
                                         android:background="@null"
-                                        style="?android:attr/borderlessButtonStyle" />
+                                        android:text="Read all reviews"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/orange"
+                                        android:textSize="14sp"
+                                        android:textStyle="normal" />
 
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>

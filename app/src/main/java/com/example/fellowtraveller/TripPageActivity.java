@@ -106,6 +106,14 @@ public class TripPageActivity extends AppCompatActivity {
             }
         });
 
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(TripPageActivity.this,UsersProfileActivity.class);
+                intent1.putExtra("User_id",trip.getCreator().getId());
+                startActivity(intent1);
+            }
+        });
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

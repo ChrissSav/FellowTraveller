@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,11 +77,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private CircleImageView circleImageView, circleImageViewNav;
     private ImageButton imageButtonUpload, imageButtonEdit, imageButtonAccept, imageButtonCancel;
     private Uri mImageUri;
-    private TextView textViewAboutMe;
+    private TextView textViewAboutMe,textView_user_rating;
+    private ImageView Img_friendly,Img_reliable,Img_careful,Img_consistent;
     private EditText editText;
     private Button readReviewsButton;
     private String id;
-
+    private JsonApi jsonPlaceHolderApi;
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
     private DatabaseReference userDatabase;
     //Firabase Storage Profile Image
     private StorageReference mImageStorage;
@@ -93,7 +96,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Toolbar toolbar = findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
@@ -109,6 +112,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
+        Img_friendly = findViewById(R.id.profile_img_friendly);
+        Img_reliable = findViewById(R.id.profile_img_reliable);
+        Img_careful= findViewById(R.id.profile_img_careful);
+        Img_consistent = findViewById(R.id.profile_img_consistent);
+        textView_user_rating = findViewById(R.id.user_rating);
+
 
         imageButtonUpload = findViewById(R.id.profile_image_upload_button);
         imageButtonEdit = findViewById(R.id.profile_edit_button);
@@ -289,6 +298,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     public void loadUserInfo() {
         LoadUserPic();
+        LoadUserInfoFromServer();
         FileInputStream fis = null;
         try {
             fis = openFileInput(getString(R.string.FILE_USER_INFO));
@@ -486,9 +496,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     public void UploadUserPic(byte[] thumb_byte){
-        JsonApi jsonPlaceHolderApi;
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
         final String teemp = Base64.encodeToString(thumb_byte, Base64.DEFAULT);
 
         JsonObject jsonObject = new JsonObject();
@@ -660,6 +668,135 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }catch(Exception e){
             e.getMessage();
             return null;
+        }
+    }
+
+
+    private void LoadUserInfoFromServer(){
+        Call<RateUserContainerItem> call = jsonPlaceHolderApi.getUserInfo(Integer.parseInt(id));
+        call.enqueue(new Callback<RateUserContainerItem>() {
+            @Override
+            public void onResponse(Call<RateUserContainerItem> mcall, Response<RateUserContainerItem> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(Profile.this,"response "+response.errorBody()+"\n"+"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                RateUserContainerItem container = response.body();
+                textView_user_rating.setText(container.getUser().getRate()+"");
+                SetImgToFriendly(container.getFriendly());
+                SetImgToReliable(container.getReliable());
+                SetImgToCareful(container.getCareful());
+                SetImgToConsistent(container.getConsistent());
+
+               /* Img_friendly = findViewById(R.id.profile_img_friendly);
+                Img_reliable = findViewById(R.id.profile_img_reliable);
+                Img_careful= findViewById(R.id.profile_img_careful);
+                Img_consistent = findViewById(R.id.profile_img_consistent);*/
+
+            }
+
+            @Override
+            public void onFailure(Call<RateUserContainerItem> call, Throwable t) {
+                // Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void SetImgToFriendly(int pos){
+        switch (pos){
+            case 0:
+                Img_friendly.setImageResource(R.drawable.ic_0_orange);
+                break;
+            case 1:
+                Img_friendly.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_friendly.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_friendly.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_friendly.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_friendly.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+    public void SetImgToReliable(int pos){
+        switch (pos){
+            case 0:
+                Img_reliable.setImageResource(R.drawable.ic_0_orange);
+                break;
+            case 1:
+                Img_reliable.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_reliable.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_reliable.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_reliable.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_reliable.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+    public void SetImgToCareful(int pos){
+        switch (pos){
+            case 0:
+                Img_careful.setImageResource(R.drawable.ic_0_orange);
+                break;
+            case 1:
+                Img_careful.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_careful.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_careful.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_careful.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_careful.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
+        }
+    }
+    public void SetImgToConsistent(int pos){
+        switch (pos){
+            case 0:
+                Img_consistent.setImageResource(R.drawable.ic_0_orange);
+                break;
+            case 1:
+                Img_consistent.setImageResource(R.drawable.ic_1_orange);
+                break;
+            case 2:
+                Img_consistent.setImageResource(R.drawable.ic_2_orange);
+                break;
+            case 3:
+                Img_consistent.setImageResource(R.drawable.ic_3_orange);
+                break;
+            case 4:
+                Img_consistent.setImageResource(R.drawable.ic_4_orange);
+                break;
+            case 5:
+                Img_consistent.setImageResource(R.drawable.ic_5_orange);
+                break;
+            default:
+                break;
         }
     }
 

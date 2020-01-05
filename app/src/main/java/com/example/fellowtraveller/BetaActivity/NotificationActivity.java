@@ -429,8 +429,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                     return line1;
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 } finally {
                     if (fis != null) {
                         try {

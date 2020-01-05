@@ -1,5 +1,9 @@
 package com.example.fellowtraveller;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -54,14 +60,17 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
         holder.dateTV.setText(curr.getDate());
         holder.reviewTV.setText(curr.getReview());*/
         holder.name.setText(curr.getUser().getName());
-        holder.date.setText(curr.getDate());
+        holder.date.setText(SetImgToReliable(curr.getDate()));
         holder.num.setText(round(curr.getRate(),1)+"");
+        SetImgToReliable(curr.getDate());
         if(curr.getDescription().equals("") || curr.getDescription().equals(" "))
             holder.review.setText("Δεν υπάρχει περιγραφή");
         else
             holder.review.setText(curr.getDescription());
 
-
+        if(!curr.getUser().getPicture().equals("null")){
+            holder.circleImageView.setImageBitmap(StringToBitMap(curr.getUser().getPicture()));
+        }
 
 
     }
@@ -77,5 +86,67 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
     @Override
     public int getItemCount() {
         return mReviewsList.size();
+    }
+
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+    public String SetImgToReliable(String ddate) {
+        String[] parts = ddate.split("-");
+        String day = parts[0];
+        String month = parts[1];
+        String year = parts[2];
+        int num = Integer.parseInt(month);
+        String teliko = null;
+        switch (num){
+            case 1:
+                teliko = "Ιανουαρίου";
+                break;
+            case 0:
+                teliko =  "Φεβρουαρίου";
+                break;
+            case 3:
+                teliko =  "Μαρτίου";
+                break;
+            case 4:
+                teliko =  "Απριλίου";
+                break;
+            case 5:
+                teliko =  "Μαΐου";
+                break;
+            case 6:
+                teliko =  "Ιουνίου";
+                break;
+            case 7:
+                teliko =  "Ιουλίου";
+                break;
+            case 8:
+                teliko =  "Αυγούστου";
+                break;
+            case 9:
+                teliko =  "Σεπτεμβρίου";
+                break;
+            case 10:
+                teliko =  "Οκτωμβρίου";
+                break;
+            case 11:
+                teliko =  "Νοεμβρίου";
+                break;
+            case 12:
+                teliko =  "Δεκεμβρίου";
+                break;
+            default:
+                break;
+        }
+        return day+" "+teliko+" "+year;
     }
 }

@@ -199,6 +199,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             super.onBackPressed();
     }
     public void save(String status) {
+        DeleteUserPicture();
         String text = status;
         FileOutputStream fos = null;
         try {
@@ -219,6 +220,26 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         }
     }
 
+    public void DeleteUserPicture() {
+        String text = "null";
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public void onChooseFile(View v){
         CropImage.activity().start(Wallet.this);
 
@@ -336,7 +357,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
             @Override
             protected void onPostExecute( String result ) {
                 // continue what you are doing...
-                if(result!="null") {
+                if(!result.equals("null")) {
                     circleImageView.setImageBitmap(StringToBitMap(result));
                 }
 

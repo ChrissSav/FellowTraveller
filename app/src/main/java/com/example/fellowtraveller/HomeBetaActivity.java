@@ -176,10 +176,33 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     }
 
     public void save() {
+        DeleteUserPicture();
         String text = "false";
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public void DeleteUserPicture() {
+        String text = "null";
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -278,7 +301,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
             @Override
             protected void onPostExecute( String result ) {
                 // continue what you are doing...
-                if(result!="null") {
+                if(!result.equals("null")) {
                     circleImageViewNav.setImageBitmap(StringToBitMap(result));
                 }
 

@@ -37,7 +37,8 @@ public class Chat extends AppCompatActivity {
     private String id, yourId;
     private ArrayList<ChatConversationItem> conversations = new ArrayList<>();
     private ImageButton backButton;
-    private DatabaseReference userStatus;
+    private DatabaseReference userStatus,convs;
+    private boolean online;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,11 @@ public class Chat extends AppCompatActivity {
 //        conversations.add(new ChatConversationItem("default","Γιώργος Γεωργίου", false, false, 542545363,"131", "132"));
         userStatus = FirebaseDatabase.getInstance().getReference();
         yourId = getId();
+        convs = FirebaseDatabase.getInstance().getReference();
+
+
+
+
         loadConversations();
 
 
@@ -127,7 +133,7 @@ public class Chat extends AppCompatActivity {
     }
 
     public void loadConversations(){
-        DatabaseReference convs = FirebaseDatabase.getInstance().getReference();
+
         convs.child("Chat").child(yourId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -138,7 +144,8 @@ public class Chat extends AppCompatActivity {
                         String image = childDataSnapshot.child("image").getValue(String.class);
                         String name = childDataSnapshot.child("name").getValue(String.class);
 
-                        conversations.add(new ChatConversationItem(image, name, true, true, timestamp, yourId, chatterId));
+
+                        conversations.add(new ChatConversationItem(image, name, true, false, timestamp, yourId, chatterId));
                     }
                 }
                 mAdapter.notifyDataSetChanged();

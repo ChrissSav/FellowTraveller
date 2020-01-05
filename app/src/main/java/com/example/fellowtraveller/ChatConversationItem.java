@@ -54,7 +54,7 @@ public class ChatConversationItem {
     }
 
     public boolean isOnlineStatus() {
-        online = "false";
+        online = "";
         onlineRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,9 +68,9 @@ public class ChatConversationItem {
             }
         });
         if(online.equals("true")){
-            return true;
+            return onlineStatus;
         }else {
-            return false;
+            return onlineStatus;
         }
     }
 

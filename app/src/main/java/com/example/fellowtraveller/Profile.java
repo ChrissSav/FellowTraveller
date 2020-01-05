@@ -1,5 +1,6 @@
 package com.example.fellowtraveller;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -8,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -371,8 +373,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] thumb_byte = baos.toByteArray();
 
-                SaveUserPicture(thumb_byte);
-                LoadUserPic();
+                UploadUserPic(thumb_byte);
                 //FireBase Image Storage
                 StorageReference filepath = mImageStorage.child("profile_images").child(id + ".jpg");
                 filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -488,12 +489,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         JsonApi jsonPlaceHolderApi;
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        String temp = Base64.encodeToString(thumb_byte, Base64.DEFAULT);
+        final String teemp = Base64.encodeToString(thumb_byte, Base64.DEFAULT);
 
         JsonObject jsonObject = new JsonObject();
         getId();
         jsonObject.addProperty("id", id);
-        jsonObject.addProperty("icon", temp);
+        jsonObject.addProperty("icon", teemp);
         Call<Status_handling> call = jsonPlaceHolderApi.uploadImage(jsonObject);
 
         call.enqueue(new Callback<Status_handling>() {
@@ -502,14 +503,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 if (!response.isSuccessful()) {
                     Status_handling st = response.body();
                     Toast.makeText(Profile.this,"msg "+st.getMsg(),Toast.LENGTH_SHORT).show();
-
-
                     return;
                 }
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
                     //   Toast.makeText(MainActivity.this,status.getMsg(),Toast.LENGTH_SHORT).show();
                     //  img2.setImageBitmap(StringToBitMap(status.getMsg()));
+                    Log.i("SaveUserPicture","status.getStatus() = "+status.getStatus());
+                    SaveUserPicture(status.getMsg());
+                    LoadUserPic();
                     return;
                 }else{
                     Toast.makeText(Profile.this,status.getMsg(),Toast.LENGTH_SHORT).show();
@@ -526,10 +528,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
     public Bitmap StringToBitMap(String image){
         try{
-            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
 
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+            Log.i("BtimapSize","Size : "+encodeByte.length/1024 );
             InputStream inputStream  = new ByteArrayInputStream(encodeByte);
             Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+
             return bitmap;
         }catch(Exception e){
             e.getMessage();
@@ -537,20 +541,74 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    public void LoadUserPic() {
+    public void LoadUserPic(){
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void ... params ) {
+                FileInputStream fis = null;
+                try {
+                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line,line1 = "";
+                    try
+                    {
+                        while ((line = br.readLine()) != null)
+                            line1+=line;
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    return line1;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                return "null";
+            }
+
+            @Override
+            protected void onPostExecute( String result ) {
+                // continue what you are doing...
+                if(result!="null") {
+                    circleImageView.setImageBitmap(StringToBitMap(result));
+                    circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+                    circleImageViewNav.setImageBitmap(StringToBitMap(result));
+                }
+
+            }
+        }.execute();
+
+    }
+
+    public void LoadUserPic2() {
+
         FileInputStream fis = null;
         try {
             fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i == 1) {
-                    circleImageView.setImageBitmap(StringToBitMap(text));
-                }
-                i++;
+            String line,line1 = "";
+            try
+            {
+                while ((line = br.readLine()) != null)
+                    line1+=line;
+            }catch (Exception e)
+            {
+                e.printStackTrace();
             }
+            circleImageView.setImageBitmap(StringToBitMap(line1));
+            circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+            circleImageViewNav.setImageBitmap(StringToBitMap(line1));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -566,9 +624,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    public void SaveUserPicture(byte[] byteArray) {
-        String text =Base64.encodeToString(byteArray, Base64.DEFAULT);
+    public void SaveUserPicture(String image) {
+        String text = image;
         FileOutputStream fos = null;
+        Log.i("SaveUserPicture","getString(R.string.FILE_USER_PICTURE) "+getString(R.string.FILE_USER_PICTURE));
+
         try {
             fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
             fos.write(text.getBytes());
@@ -587,6 +647,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
+
+
     public String BitMapToString (Bitmap bitmap){
         try{
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -598,4 +660,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             return null;
         }
     }
+
+
+
 }
+

@@ -14,6 +14,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -49,7 +50,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private int id;
     private BottomNavigationView bottomNavigationView;
-    private CircleImageView circleImageView;
+    private CircleImageView circleImageViewNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +79,12 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        loadUserInfo();
         navigationView.getMenu().getItem(0).setChecked(true);
 
         bottomNavigationView = findViewById(R.id.homeBetaActivity_Bottom_Nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
-       // loadImageFromStorage();
+        loadUserInfo();
+        // loadImageFromStorage();
         BottonNav();
         Display display = getWindowManager().getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -239,33 +240,50 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
 
 
     public void LoadUserPic() {
-        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i == 1) {
-                    circleImageView.setImageBitmap(StringToBitMap(text));
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
+        circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void ... params ) {
+                FileInputStream fis = null;
                 try {
-                    fis.close();
+                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line,line1 = "";
+                    try
+                    {
+                        while ((line = br.readLine()) != null)
+                            line1+=line;
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    return line1;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+                } finally {
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+                return "null";
             }
-        }
+
+            @Override
+            protected void onPostExecute( String result ) {
+                // continue what you are doing...
+                if(result!="null") {
+                    circleImageViewNav.setImageBitmap(StringToBitMap(result));
+                }
+
+            }
+        }.execute();
     }
 
     public Bitmap StringToBitMap(String image){

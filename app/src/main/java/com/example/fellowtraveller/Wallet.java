@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -298,32 +299,49 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
     public void LoadUserPic() {
         circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i == 1) {
-                    circleImageView.setImageBitmap(StringToBitMap(text));
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void ... params ) {
+                FileInputStream fis = null;
                 try {
-                    fis.close();
+                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line,line1 = "";
+                    try
+                    {
+                        while ((line = br.readLine()) != null)
+                            line1+=line;
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    return line1;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+                } finally {
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+                return "null";
             }
-        }
+
+            @Override
+            protected void onPostExecute( String result ) {
+                // continue what you are doing...
+                if(result!="null") {
+                    circleImageView.setImageBitmap(StringToBitMap(result));
+                }
+
+            }
+        }.execute();
     }
 
     public Bitmap StringToBitMap(String image){

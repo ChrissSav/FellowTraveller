@@ -15,6 +15,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -69,7 +70,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private  BottomNavigationView bottomNavigationView;
-    private  CircleImageView circleImageView;
+    private  CircleImageView circleImageViewNav;
     private int id;
 
 
@@ -385,33 +386,50 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     }
 
     public void LoadUserPic() {
-        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i == 1) {
-                    circleImageView.setImageBitmap(StringToBitMap(text));
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
+        circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void ... params ) {
+                FileInputStream fis = null;
                 try {
-                    fis.close();
+                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line,line1 = "";
+                    try
+                    {
+                        while ((line = br.readLine()) != null)
+                            line1+=line;
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    return line1;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+                } finally {
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+                return "null";
             }
-        }
+
+            @Override
+            protected void onPostExecute( String result ) {
+                // continue what you are doing...
+                if(result!="null") {
+                    circleImageViewNav.setImageBitmap(StringToBitMap(result));
+                }
+
+            }
+        }.execute();
     }
 
     public Bitmap StringToBitMap(String image){

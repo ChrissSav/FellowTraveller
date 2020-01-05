@@ -37,7 +37,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn_back;
     private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
     private JsonApi jsonPlaceHolderApi= retrofit.create(JsonApi.class);
@@ -133,7 +132,7 @@ public class NewOfferActivity extends AppCompatActivity {
         int id =0;
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;

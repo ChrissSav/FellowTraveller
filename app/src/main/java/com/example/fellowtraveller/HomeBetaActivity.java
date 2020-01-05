@@ -41,6 +41,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeBetaActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawerLayout;
@@ -239,7 +244,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                 }else if(i==1){
                     id = Integer.parseInt(text);
                     Log.i("NotificationDev","id: "+id);
-
+                    CheckUserInfoToUpdate(id);
                 }
                 i++;
             }
@@ -319,6 +324,57 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         }catch(Exception e){
             e.getMessage();
             return null;
+        }
+    }
+
+    private void CheckUserInfoToUpdate(int id){
+        JsonApi jsonPlaceHolderApi;
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        Call<UserAuth> call = jsonPlaceHolderApi.CheckUserInfo(id);
+
+        call.enqueue(new Callback<UserAuth>() {
+            @Override
+            public void onResponse(Call<UserAuth> mcall, Response<UserAuth> response) {
+                if (!response.isSuccessful()) {
+                   // Toast.makeText(MainActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                UserAuth user = response.body();
+                if(user.getName()!=null){
+                    //save("true",user.getId()+"",user.getName(),user.getEmail());
+                    SaveUserPicture(user.getPicture());
+                    LoadUserPic();
+                    return;
+                }
+               // Toast.makeText(MainActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<UserAuth> call, Throwable t) {
+                //  Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void SaveUserPicture(String image) {
+        String text = image;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

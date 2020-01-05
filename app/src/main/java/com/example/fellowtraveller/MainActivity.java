@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn;
@@ -124,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(MainActivity.this, HomeBetaActivity.class);
                 startActivity(mainIntent);
                 finish();
+
             }
 
         } catch (FileNotFoundException e) {
@@ -143,8 +151,59 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    public void SaveUserPicture(String image) {
+        String text = image;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-
+    public int loadUserId() {
+        int id =0;
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if(i==1){
+                    id =  Integer.parseInt(text);
+                    break;
+                }
+                i++;
+            }
+            return id;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return id;
+    }
 
 
 }

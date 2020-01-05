@@ -136,5 +136,11 @@ public interface JsonApi {
 
     @POST("uploadimage/")
     Call<Status_handling> uploadImage(@Body JsonObject image);
+
+
+    @GET("CheckUserInfo/{id}")
+    Call<UserAuth> CheckUserInfo(
+        @Path("id") int id
+    );
 }
 

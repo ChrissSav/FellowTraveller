@@ -530,7 +530,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         try{
 
             byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
-            Log.i("BtimapSize","Size : "+encodeByte.length/1024 );
+            //Log.i("BtimapSize","Size : "+encodeByte.length/1024 );
             InputStream inputStream  = new ByteArrayInputStream(encodeByte);
             Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
 
@@ -579,7 +579,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             protected void onPostExecute( String result ) {
                 // continue what you are doing...
-                if(result!="null") {
+                if(!result.equals("null")) {
                     circleImageView.setImageBitmap(StringToBitMap(result));
                     circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
                     circleImageViewNav.setImageBitmap(StringToBitMap(result));
@@ -606,9 +606,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             {
                 e.printStackTrace();
             }
-            circleImageView.setImageBitmap(StringToBitMap(line1));
-            circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-            circleImageViewNav.setImageBitmap(StringToBitMap(line1));
+            if(line1!="null") {
+                circleImageView.setImageBitmap(StringToBitMap(line1));
+                circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+                circleImageViewNav.setImageBitmap(StringToBitMap(line1));
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

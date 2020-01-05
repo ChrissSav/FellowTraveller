@@ -14,7 +14,7 @@ public interface JsonApi {
 
 
     @GET("getuserauth/{email}/{password}")
-    Call<User> getUserAuth(
+    Call<UserAuth> getUserAuth(
             @Path("email") String email,
             @Path("password") String password
     );

@@ -69,18 +69,19 @@ public class LoginActivity extends AppCompatActivity {
     private void LoginUser(){
         final String email = textInputEmail.getEditText().getText().toString();
         final String password = textInputPassword.getEditText().getText().toString();
-        Call<User> call = jsonPlaceHolderApi.getUserAuth(email,password);
+        Call<UserAuth> call = jsonPlaceHolderApi.getUserAuth(email,password);
 
-        call.enqueue(new Callback<User> () {
+        call.enqueue(new Callback<UserAuth> () {
             @Override
-            public void onResponse(Call<User> mcall, Response<User> response) {
+            public void onResponse(Call<UserAuth> mcall, Response<UserAuth> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(LoginActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                User user = response.body();
+                UserAuth user = response.body();
                 if(user.getName()!=null){
                     save("true",user.getId()+"",user.getName(),user.getEmail());
+                    SaveUserPicture(user.getPicture());
                     Intent intent = new Intent(LoginActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     finish();
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<UserAuth> call, Throwable t) {
                 Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -102,6 +103,29 @@ public class LoginActivity extends AppCompatActivity {
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void SaveUserPicture(String image) {
+        String text = image;
+        FileOutputStream fos = null;
+        Log.i("SaveUserPicture","getString(R.string.FILE_USER_PICTURE) "+getString(R.string.FILE_USER_PICTURE));
+
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();

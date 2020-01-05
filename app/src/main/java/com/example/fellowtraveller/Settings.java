@@ -120,6 +120,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
             super.onBackPressed();
     }
     public void save(String status) {
+        DeleteUserPicture();
         String text = status;
         FileOutputStream fos = null;
         try {
@@ -139,7 +140,26 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
             }
         }
     }
-
+    public void DeleteUserPicture() {
+        String text = "null";
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     public void loadUserInfo() {
         LoadUserPic();
@@ -218,7 +238,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             protected void onPostExecute( String result ) {
                 // continue what you are doing...
-                if(result!="null") {
+                if(!result.equals("null")) {
                     circleImageView.setImageBitmap(StringToBitMap(result));
                 }
 

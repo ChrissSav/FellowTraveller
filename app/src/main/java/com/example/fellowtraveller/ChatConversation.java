@@ -188,6 +188,19 @@ public class ChatConversation extends AppCompatActivity {
                    Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(chatProfilePicture);
                }
 
+               String online = dataSnapshot.child("online").getValue(String.class);
+               Long time = (Long) dataSnapshot.child("lastSeen").getValue();
+               if(online.equals("true")){
+                   lastSeenTextView.setText("Ενεργός τώρα");
+               }else{
+                    ChatGetTimeAgo getTimeAgo = new ChatGetTimeAgo();
+                    long lastTime = time;
+
+                    String lastSeenTime  = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
+                    lastSeenTextView.setText(lastSeenTime);
+
+               }
+
            }
 
            @Override

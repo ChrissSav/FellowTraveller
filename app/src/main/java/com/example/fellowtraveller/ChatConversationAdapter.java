@@ -76,8 +76,8 @@ public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversati
         if(!currItem.isNewMessage()){
             holder.lastMessageTV.setVisibility(View.GONE);
         }
-        if (!currItem.isOnlineStatus()){
-            holder.onlineStatusTV.setVisibility(View.GONE);
+        if (currItem.isOnlineStatus()){
+            holder.onlineStatusTV.setVisibility(View.VISIBLE);
         }
 
     }

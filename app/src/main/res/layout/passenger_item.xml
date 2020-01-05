@@ -15,8 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/passenger_item_textView"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/passenger_item_CircleImageView_pic"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
@@ -29,23 +29,25 @@
 
         <TextView
             android:id="@+id/passenger_item_textView_name"
-            android:layout_width="146dp"
+            android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text=""
-            app:layout_constraintStart_toEndOf="@+id/passenger_item_textView"
-            app:layout_constraintTop_toTopOf="@+id/passenger_item_textView" />
+            app:layout_constraintEnd_toStartOf="@+id/passenger_item_textView_bag"
+            app:layout_constraintStart_toEndOf="@+id/passenger_item_CircleImageView_pic"
+            app:layout_constraintTop_toTopOf="@+id/passenger_item_CircleImageView_pic" />
 
         <TextView
             android:id="@+id/passenger_item_textView5"
-            android:layout_width="69dp"
-            android:layout_height="12dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_star"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/star_4"
-            app:layout_constraintBottom_toBottomOf="@+id/passenger_item_textView"
-            app:layout_constraintStart_toEndOf="@+id/passenger_item_textView" />
+            app:layout_constraintBottom_toBottomOf="@+id/passenger_item_CircleImageView_pic"
+            app:layout_constraintStart_toEndOf="@+id/passenger_item_CircleImageView_pic" />
 
         <TextView
             android:id="@+id/passenger_item_textView_bag"
@@ -56,6 +58,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/passenger_item_textView_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="4.5"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/passenger_item_textView5"
+            app:layout_constraintStart_toEndOf="@+id/passenger_item_textView5"
+            app:layout_constraintTop_toTopOf="@+id/passenger_item_textView5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

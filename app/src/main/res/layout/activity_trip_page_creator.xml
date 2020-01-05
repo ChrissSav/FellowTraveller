@@ -33,6 +33,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:textColor="#000"
+            android:singleLine="true"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/TripPageCreatorActivity_textView_status"
             app:layout_constraintStart_toEndOf="@+id/TripPageCreatorActivity_textView_adminImage"

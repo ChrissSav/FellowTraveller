@@ -3,7 +3,10 @@ package com.example.fellowtraveller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,11 +19,14 @@ import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +34,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WriteReviewActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private int friendlyScore, reliableScore, carefulScore,consistentScore;
     private TextView textView;
     private Button btn_submit;
@@ -40,6 +45,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private SmileRating smileRatingReliable;
     private SmileRating smileRatingCareful;
     private SmileRating smileRatingConsistent;
+    private CircleImageView circleImageView;
     private int id;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit;
@@ -58,8 +64,11 @@ public class WriteReviewActivity extends AppCompatActivity {
         username = findViewById(R.id.WriteReviewActivity_userName);
         textView = findViewById(R.id.review_text);
         btn_submit = findViewById(R.id.submit_rate_btn);
-
+        circleImageView = findViewById(R.id.WriteReviewActivity_circle_image);
         username.setText(trip.getCreator().getName());
+        if (!trip.getCreator().getPicture().equals("null")){
+            circleImageView.setImageBitmap(StringToBitMap(trip.getCreator().getPicture()));
+        }
         smileRatingFriendly = (SmileRating) findViewById(R.id.smileRatingFriendly);
         smileRatingReliable = (SmileRating) findViewById(R.id.smileRatingReliable);
         smileRatingCareful = (SmileRating) findViewById(R.id.smileRatingCarefull);
@@ -234,7 +243,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     public void loadUserInfo() {
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -259,6 +268,19 @@ public class WriteReviewActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
         }
     }
 }

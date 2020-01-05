@@ -1,5 +1,8 @@
 package com.example.fellowtraveller;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +11,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleViewHolder> {
     private List<UserB> mExampleList;
@@ -26,8 +33,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
-        public TextView name,bag;
+        public TextView name,bag,rate;
         public Button btn_accept,btn_reject;
+        private CircleImageView img;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -35,6 +43,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
             btn_accept = itemView.findViewById(R.id.request_item_button_accept);
             btn_reject = itemView.findViewById(R.id.request_item_button_reject);
             bag = itemView.findViewById(R.id.request_item_textView_bag);
+            rate = itemView.findViewById(R.id.request_item_textView_rate);
+            img = itemView.findViewById(R.id.request_item_CircleImageView_pic);
             btn_accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,6 +85,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
+        holder.rate.setText(currentItem.getRate()+"");
+        holder.name.setText(currentItem.getName());
+        if(!currentItem.getPicture().equals("null"))
+            holder.img.setImageBitmap(StringToBitMap(currentItem.getPicture()));
         if(currentItem.getBag().equals("no"))
             holder.bag.setVisibility(View.GONE);
     }
@@ -82,5 +96,18 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
     @Override
     public int getItemCount() {
         return mExampleList.size();
+    }
+
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 }

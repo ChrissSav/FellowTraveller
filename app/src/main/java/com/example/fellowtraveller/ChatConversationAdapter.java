@@ -86,12 +86,15 @@ public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversati
         DatabaseReference convs = FirebaseDatabase.getInstance().getReference();
         convs.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String onlineCase = dataSnapshot.child("Users").child(currItem.getSenderId()).child("online").getValue(String.class);
-                if(onlineCase.equals("true")){
-                    holder.onlineStatusTV.setVisibility(View.VISIBLE);
-                }else{
-                    holder.onlineStatusTV.setVisibility(View.GONE);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String onlineCase;
+                 onlineCase = dataSnapshot.child("Users").child(currItem.getSenderId()).child("online").getValue(String.class);
+                if(onlineCase!=null) {
+                    if (onlineCase.equals("true")) {
+                        holder.onlineStatusTV.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.onlineStatusTV.setVisibility(View.GONE);
+                    }
                 }
             }
             @Override

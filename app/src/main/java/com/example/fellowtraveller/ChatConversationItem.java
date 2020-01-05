@@ -16,8 +16,6 @@ public class ChatConversationItem {
     private Long timestamp;
     private String yourId;
     private String senderId;
-    private DatabaseReference onlineRef = FirebaseDatabase.getInstance().getReference();
-    private String online;
 
     public ChatConversationItem(String aImage, String aName, boolean sendMessage,boolean online,Long aTimestamp, String yourId, String aId){
 
@@ -54,24 +52,7 @@ public class ChatConversationItem {
     }
 
     public boolean isOnlineStatus() {
-        online = "";
-        onlineRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                online = dataSnapshot.child("Users").child(senderId).child("online").getValue().toString();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        if(online.equals("true")){
-            return onlineStatus;
-        }else {
-            return onlineStatus;
-        }
+        return onlineStatus;
     }
 
     public void setOnlineStatus(boolean onlineStatus) {

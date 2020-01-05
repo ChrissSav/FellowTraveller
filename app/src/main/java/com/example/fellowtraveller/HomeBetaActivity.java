@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -29,18 +30,18 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeBetaActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
-
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ViewPager mViewPager;
@@ -88,10 +89,10 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         DisplayMetrics outMetrics = new DisplayMetrics();
         display.getMetrics(outMetrics);
 
-        float density  = getResources().getDisplayMetrics().density;
+        /*float density  = getResources().getDisplayMetrics().density;
         float dpHeight = outMetrics.heightPixels / density;
         float dpWidth  = outMetrics.widthPixels / density;
-        Toast.makeText(HomeBetaActivity.this,"dpWidth : "+dpWidth, Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeBetaActivity.this,"dpWidth : "+dpWidth, Toast.LENGTH_SHORT).show();*/
 
 
     }
@@ -177,7 +178,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         String text = "false";
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -195,9 +196,10 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     }
 
     public void loadUserInfo() {
+        LoadUserPic();
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -234,21 +236,48 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         }
     }
 
-    /*private void loadImageFromStorage()
-    {
+
+
+    public void LoadUserPic() {
         circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        FileInputStream fis = null;
         try {
-            File f = new File(directory, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            circleImageView.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
+            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    circleImageView.setImageBitmap(StringToBitMap(text));
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
 
-    }*/
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
 
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
 }

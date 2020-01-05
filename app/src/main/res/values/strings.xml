@@ -16,6 +16,8 @@
         <item>Ακριβά>Φθηνά</item>
     </string-array>
     <string name="api_key">AIzaSyDucU0rzkgk_uvxcYIWFfOXMQY0AwoS8vg</string>
+    <string name="FILE_USER_INFO">fellow_login_state.txt</string>
+    <string name="FILE_USER_PICTURE">user_pic.txt</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="user_name">UserName</string>

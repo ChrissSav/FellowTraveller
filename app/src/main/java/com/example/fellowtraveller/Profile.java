@@ -68,7 +68,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String FILE_NAME = "fellow_login_state.txt";
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -136,7 +135,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
 
-                    Picasso.get().load(image).placeholder(R.drawable.cylinder).error(R.drawable.profile_pic).into(circleImageView);
+                   // Picasso.get().load(image).placeholder(R.drawable.cylinder).error(R.drawable.profile_pic).into(circleImageView);
 
             }
 
@@ -147,7 +146,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         });
 
         loadUserInfo();
-        //loadImageFromStorage();
 
 
         imageButtonUpload.setOnClickListener(new View.OnClickListener() {
@@ -270,7 +268,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         String text = status;
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -288,9 +286,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     public void loadUserInfo() {
+        LoadUserPic();
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -327,25 +326,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    private void loadImageFromStorage() {
-        //circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        //circleImageView = findViewById(R.id.profile_picture);
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        try {
-            File f = new File(directory, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            //circleImageView.setImageBitmap(b);
-            //circleImageViewNav.setImageBitmap(b);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void onChooseFile(View v) {
         CropImage.activity().start(Profile.this);
-
 
     }
 
@@ -388,7 +371,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] thumb_byte = baos.toByteArray();
 
-
+                SaveUserPicture(thumb_byte);
+                LoadUserPic();
                 //FireBase Image Storage
                 StorageReference filepath = mImageStorage.child("profile_images").child(id + ".jpg");
                 filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -467,7 +451,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     public String getId() {
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -482,8 +466,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 }
                 i++;
             }
-            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -502,7 +484,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     }
 
-    public void UploadFile(byte[] thumb_byte){
+    public void UploadUserPic(byte[] thumb_byte){
         JsonApi jsonPlaceHolderApi;
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
@@ -549,6 +531,68 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             InputStream inputStream  = new ByteArrayInputStream(encodeByte);
             Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
             return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
+    public void LoadUserPic() {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    circleImageView.setImageBitmap(StringToBitMap(text));
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void SaveUserPicture(byte[] byteArray) {
+        String text =Base64.encodeToString(byteArray, Base64.DEFAULT);
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public String BitMapToString (Bitmap bitmap){
+        try{
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
         }catch(Exception e){
             e.getMessage();
             return null;

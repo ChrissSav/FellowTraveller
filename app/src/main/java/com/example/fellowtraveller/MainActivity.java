@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn;
     private Button btn1;
     private TextView text;
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         FileInputStream fis = null;
 
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();

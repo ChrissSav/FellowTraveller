@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,11 +41,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +66,11 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private ArrayList<Notification> mExampleList;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
-    private final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private  BottomNavigationView bottomNavigationView;
     private  CircleImageView circleImageView;
     private int id;
-    private boolean read = false;
 
 
     @Override
@@ -246,7 +247,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         int id =0;
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -279,7 +280,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         String text = "false";
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -347,9 +348,10 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
 
     public void loadUserInfo() {
+        LoadUserPic();
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -382,20 +384,29 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         }
     }
 
-    public void save(String status,String id,String name,String email) {
-        String text = status+"\n"+id+"\n"+name+"\n"+email;
-        FileOutputStream fos = null;
+    public void LoadUserPic() {
+        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        FileInputStream fis = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            fos.write(text.getBytes());
+            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    circleImageView.setImageBitmap(StringToBitMap(text));
+                }
+                i++;
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (fos != null) {
+            if (fis != null) {
                 try {
-                    fos.close();
+                    fis.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -403,20 +414,16 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         }
     }
 
-    private void loadImageFromStorage()
-    {
-        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        try {
-            File f = new File(directory, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            circleImageView.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
 
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -50,8 +52,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Wallet extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String IMAGE_URI = "fellow_login_state.txt";
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ImageButton imgBtn1, imgBtn2;
@@ -106,9 +106,10 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
 
 
     public void loadUserInfo() {
+        LoadUserPic();
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -200,7 +201,7 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
         String text = status;
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -295,5 +296,46 @@ public class Wallet extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
 
+    public void LoadUserPic() {
+        circleImageView = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    circleImageView.setImageBitmap(StringToBitMap(text));
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
 }

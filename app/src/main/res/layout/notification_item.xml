@@ -29,7 +29,7 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
-    <ImageView
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="64dp"
         android:layout_height="64dp"

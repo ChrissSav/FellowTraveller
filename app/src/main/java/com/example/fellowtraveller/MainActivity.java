@@ -53,15 +53,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         text = findViewById(R.id.main_textView10);
-        text.setOnClickListener(new View.OnClickListener() {
+       /* text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent mainIntent = new Intent(MainActivity.this, MainHomeActivity.class);
                 startActivity(mainIntent);
             }
-        });
+        });*/
 
         text1 = findViewById(R.id.main_textView11);
-        text1.setOnClickListener(new View.OnClickListener() {
+        /*text1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 save("true","96","Χρήστος Σαβ","uom@uom.gr");
@@ -69,27 +69,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
 
         text3 = findViewById(R.id.main_textView3);
-        text3.setOnClickListener(new View.OnClickListener() {
+       /* text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, WriteReviewActivity.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
         load();
 
-        eisodos.setOnClickListener(new View.OnClickListener() {
+        /*eisodos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, HomeBetaActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 

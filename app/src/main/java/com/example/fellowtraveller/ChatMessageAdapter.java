@@ -139,7 +139,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
             return MSG_TYPE_RIGHT;
         }
         if( position + 1 < mMessageList.size()) {
-            if ((mMessageList.get(position).getFrom()!=null && id!=null && !mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position + 1).getFrom().equals(id))) {
+            if ((mMessageList.get(position).getFrom()!=null && id!=null && mMessageList.get(position + 1).getFrom()!=null && !mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position + 1).getFrom().equals(id))) {
                 return MSG_TYPE_LEFT_NO_IMG;
             }
         }

@@ -227,13 +227,22 @@ public class ChatConversation extends AppCompatActivity {
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
+
+                String from = dataSnapshot.child("from").getValue(String.class);
+                String to = dataSnapshot.child("to").getValue(String.class);
+                String message = dataSnapshot.child("message").getValue(String.class);
+                Boolean seen = (Boolean) dataSnapshot.child("seen").getValue();
+                String type = dataSnapshot.child("type").getValue(String.class);
+                Long time = (Long) dataSnapshot.child("time").getValue();
+
+                ChatMessages aMessage = new ChatMessages(message,seen,time,type, from, to);
+                //ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
 
                 String messageKey = dataSnapshot.getKey();
 
                 if(!prevKey.equals(messageKey)){
 
-                    messagesList.add(itemPos++, message);
+                    messagesList.add(itemPos++, aMessage);
 
                 }else{
                     prevKey = lastKey;
@@ -392,40 +401,50 @@ public class ChatConversation extends AppCompatActivity {
             return randomStringBuilder.toString();
         }
 
-        private void seenMessage(final String chatUser){
-        reference = FirebaseDatabase.getInstance().getReference("Messages");
-        seenListener = reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                   // ChatMessages chatMessages = snapshot.getValue(ChatMessages.class);
+        private void seenMessage(final String chatUser) {
+            reference = FirebaseDatabase.getInstance().getReference("Messages").child(userId).child(chatUser);
+            Query myQuery = reference.limitToLast(1);
+            myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   // HashMap<String, Object> hashMap = new HashMap<>();
+                    //hashMap.put("seen", true);
 
-                    String from = snapshot.child("from").getValue(String.class);
-                    String to = snapshot.child("to").getValue(String.class);
-
-                    if (userId != null && chatUser != null && from != null && to != null) {
-                        if (to.equals(userId) && from.equals(chatUser)) {
-
-
-                            //String key = snapshot.getKey();
-                            //reference.child(key).setValue(true);
-                            //HashMap<String, Object> hashMap = new HashMap<>();
-                            //hashMap.put("seen", true);
-                            //snapshot.getRef().updateChildren(hashMap);
-                            mAdapter.notifyDataSetChanged();
-
-                        }
-                    }
+                    //dataSnapshot.getRef().updateChildren(hashMap);
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
+                }
+            });
+//        seenListener = reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+//                   // ChatMessages chatMessages = snapshot.getValue(ChatMessages.class);
+//
+//                    String from = snapshot.child("from").getValue(String.class);
+//                    String to = snapshot.child("to").getValue(String.class);
+//
+//                    if (userId != null && chatUser != null && from != null && to != null) {
+//                        if (to.equals(userId) && from.equals(chatUser)) {
+//
+//
+//                            //String key = snapshot.getKey();
+//                            //reference.child(key).setValue(true);
+//                            //HashMap<String, Object> hashMap = new HashMap<>();
+//                            //hashMap.put("seen", true);
+//                            //snapshot.getRef().updateChildren(hashMap);
+//                            mAdapter.notifyDataSetChanged();
+//
+//                        }
+//                    }
+//                }
         }
+
+
+
 
         public void sendMessage(){
             String getMessage = chatEditText.getText().toString();
@@ -509,7 +528,7 @@ public class ChatConversation extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        reference.removeEventListener(seenListener);
+        //reference.removeEventListener(seenListener);
     }
 }
 

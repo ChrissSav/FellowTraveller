@@ -86,11 +86,10 @@ public class Chat extends AppCompatActivity {
 
                 Intent ii = new Intent(Chat.this, ChatConversation.class);
                 ii.putExtra("id", senderId);
-                startActivity(ii);
+
                 finish();
-
                 userStatus.child("Users").child(yourId).child("online").setValue("true");
-
+                startActivity(ii);
 
                 //Intent intent2 = new Intent(Chat.this,ChatConversation.class);
                 //intent2.putExtra("Creator_id",senderId);
@@ -100,14 +99,14 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-     backButton.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             Intent a = new Intent(Chat.this, HomeBetaActivity.class);
-             startActivity(a);
-             finish();
-         }
-     });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(Chat.this, HomeBetaActivity.class);
+                startActivity(a);
+                finish();
+            }
+        });
 
     }
 

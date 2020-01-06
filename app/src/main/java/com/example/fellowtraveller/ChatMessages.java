@@ -3,12 +3,13 @@ package com.example.fellowtraveller;
 public class ChatMessages {
     private String message, type;
     private Boolean seen;
-    private Long time;
-    private String from, to;
+    private long time;
+    private String from,to;
 
 
 
-    public ChatMessages(String aMessage, Boolean aSeen, Long aTime, String aType, String aFrom,String aTo){
+
+    public ChatMessages(String aMessage, Boolean aSeen, long aTime, String aType, String aFrom,String aTo){
 
         this.message = aMessage;
         this.seen = aSeen;
@@ -26,7 +27,7 @@ public class ChatMessages {
         this.message = message;
     }
 
-    public Boolean isSeen() {
+    public boolean isSeen() {
         return seen;
     }
 
@@ -56,17 +57,7 @@ public class ChatMessages {
     public void setFrom(String from) {
         this.from = from;
     }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
     public ChatMessages(){
 
     }
-
 }

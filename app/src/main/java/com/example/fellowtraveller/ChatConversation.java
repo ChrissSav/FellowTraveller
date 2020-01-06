@@ -58,7 +58,7 @@ public class ChatConversation extends AppCompatActivity {
     private final List<ChatMessages> messagesList = new ArrayList<>();
     private LinearLayoutManager mLinearLayout;
     private ChatMessageAdapter mAdapter;
-    private DatabaseReference reference,userDatabase;
+    private DatabaseReference mMessageDatabase,userDatabase;
     private static final int TOTAL_ITEMS_TO_LOAD = 10;
     private int mCurrentPage = 1;
     private int itemPos = 0;
@@ -69,8 +69,6 @@ public class ChatConversation extends AppCompatActivity {
     private TextView chatUserName, lastSeenTextView;
     private CircleImageView chatProfilePicture;
     private ImageButton backToConvButton;
-    private ValueEventListener seenListener;
-
 
 
     @Override
@@ -113,8 +111,6 @@ public class ChatConversation extends AppCompatActivity {
         chatDatabase.child("Users").child(userId).child("online").setValue("true");
         loadMessages();
         changeConversationStatus();
-        seenMessage(chatUser);
-
 
         backToConvButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +120,6 @@ public class ChatConversation extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
         //Create Chats.. one for you and the chatter.. and one for the chatter and you
@@ -178,42 +173,41 @@ public class ChatConversation extends AppCompatActivity {
 
 
 
-
     }
 
     private void changeConversationStatus() {
         userDatabase = FirebaseDatabase.getInstance().getReference();
         userDatabase.child("Users").child(chatUser).addListenerForSingleValueEvent(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               String name = dataSnapshot.child("name").getValue(String.class);
-               chatUserName.setText(name);
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("name").getValue(String.class);
+                chatUserName.setText(name);
 
-               String imageUrl = dataSnapshot.child("image").getValue().toString();
-               if (!imageUrl.equals("default")) {
-                   Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(chatProfilePicture);
-               }
+                String imageUrl = dataSnapshot.child("image").getValue().toString();
+                if (!imageUrl.equals("default")) {
+                    Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(chatProfilePicture);
+                }
 
-               String online = dataSnapshot.child("online").getValue(String.class);
-               Long time = (Long) dataSnapshot.child("lastSeen").getValue();
-               if(online.equals("true")){
-                   lastSeenTextView.setText("Ενεργός τώρα");
-               }else{
+                String online = dataSnapshot.child("online").getValue(String.class);
+                Long time = (Long) dataSnapshot.child("lastSeen").getValue();
+                if(online.equals("true")){
+                    lastSeenTextView.setText("Ενεργός τώρα");
+                }else{
                     ChatGetTimeAgo getTimeAgo = new ChatGetTimeAgo();
                     long lastTime = time;
 
                     String lastSeenTime  = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
                     lastSeenTextView.setText(lastSeenTime);
 
-               }
+                }
 
-           }
+            }
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-           }
-       });
+            }
+        });
 
 
 
@@ -227,22 +221,13 @@ public class ChatConversation extends AppCompatActivity {
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                String from = dataSnapshot.child("from").getValue(String.class);
-                String to = dataSnapshot.child("to").getValue(String.class);
-                String message = dataSnapshot.child("message").getValue(String.class);
-                Boolean seen = (Boolean) dataSnapshot.child("seen").getValue();
-                String type = dataSnapshot.child("type").getValue(String.class);
-                Long time = (Long) dataSnapshot.child("time").getValue();
-
-                ChatMessages aMessage = new ChatMessages(message,seen,time,type, from, to);
-                //ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
+                ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
 
                 String messageKey = dataSnapshot.getKey();
 
                 if(!prevKey.equals(messageKey)){
 
-                    messagesList.add(itemPos++, aMessage);
+                    messagesList.add(itemPos++, message);
 
                 }else{
                     prevKey = lastKey;
@@ -293,16 +278,7 @@ public class ChatConversation extends AppCompatActivity {
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                //ChatMessages messages = dataSnapshot.getValue(ChatMessages.class);
-
-                String from = dataSnapshot.child("from").getValue(String.class);
-                String to = dataSnapshot.child("to").getValue(String.class);
-                String message = dataSnapshot.child("message").getValue(String.class);
-                Boolean seen = (Boolean) dataSnapshot.child("seen").getValue();
-                String type = dataSnapshot.child("type").getValue(String.class);
-                Long time = (Long) dataSnapshot.child("time").getValue();
-
-                ChatMessages aMessage = new ChatMessages(message,seen,time,type, from, to);
+                ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
                 //The key at the top of the list its time, we storing his message key to continue loading from this key and above
                 itemPos++;
                 if(itemPos==1){
@@ -310,7 +286,7 @@ public class ChatConversation extends AppCompatActivity {
                     lastKey = messageKey;
                     prevKey = messageKey;
                 }
-                messagesList.add(aMessage);
+                messagesList.add(message);
                 mAdapter.notifyDataSetChanged();
                 mMessagesList.scrollToPosition(messagesList.size()-1);
 
@@ -353,64 +329,80 @@ public class ChatConversation extends AppCompatActivity {
     }
 
 
-        public String getId () {
-            FileInputStream fis = null;
-            try {
-                fis = openFileInput(FILE_NAME);
-                InputStreamReader isr = new InputStreamReader(fis);
-                BufferedReader br = new BufferedReader(isr);
-                String text;
-                String id = "-1";
+    public String getId () {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            String id = "-1";
 
-                int i = 0;
-                while ((text = br.readLine()) != null) {
-                    if (i == 1) {
-                        id = text;
-                        return id;
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    id = text;
+                    return id;
 
-                    }
-                    i++;
                 }
-                //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-                //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                i++;
+            }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-            return id;
         }
+        return id;
+    }
 
-        public static String random () {
-            Random generator = new Random();
-            StringBuilder randomStringBuilder = new StringBuilder();
-            int randomLength = generator.nextInt(10);
-            char tempChar;
-            for (int i = 0; i < randomLength; i++) {
-                tempChar = (char) (generator.nextInt(96) + 32);
-                randomStringBuilder.append(tempChar);
-            }
-            return randomStringBuilder.toString();
+    public static String random () {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(10);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++) {
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
         }
+        return randomStringBuilder.toString();
+    }
 
-        private void seenMessage(final String chatUser) {
-            reference = FirebaseDatabase.getInstance().getReference("Messages").child(userId).child(chatUser);
-            Query myQuery = reference.limitToLast(1);
-            myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void sendMessage(){
+        String getMessage = chatEditText.getText().toString();
+        if(!TextUtils.isEmpty(getMessage)){
+
+            sfxButton.start();
+
+            String current_user_ref = "Messages/"+userId+"/"+chatUser;
+            final String chat_user_ref = "Messages/"+chatUser+"/"+userId;
+
+            DatabaseReference userMessagePush = chatDatabase.child("Messages").child(userId).child(chatUser).push();
+            String push_id = userMessagePush.getKey();
+
+            chatDatabase.child("Chat").child(userId).child(chatUser).child("sendMessage").setValue("true");
+            chatDatabase.child("Chat").child(chatUser).child(userId).child("sendMessage").setValue("true");
+            chatDatabase.child("Chat").child(userId).child(chatUser).child("lastMessage").setValue(ServerValue.TIMESTAMP);
+            chatDatabase.child("Chat").child(chatUser).child(userId).child("lastMessage").setValue(ServerValue.TIMESTAMP);
+            chatDatabase.child("Chat").child(userId).child(chatUser).child("chatterId").setValue(chatUser);
+            chatDatabase.child("Chat").child(chatUser).child(userId).child("chatterId").setValue(userId);
+            chatDatabase.child("Users").child(chatUser).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   // HashMap<String, Object> hashMap = new HashMap<>();
-                    //hashMap.put("seen", true);
+                    String image = dataSnapshot.child("image").getValue(String.class);
+                    String name =  dataSnapshot.child("name").getValue(String.class);
+                    chatDatabase.child("Chat").child(userId).child(chatUser).child("image").setValue(image);
+                    chatDatabase.child("Chat").child(userId).child(chatUser).child("name").setValue(name);
 
-                    //dataSnapshot.getRef().updateChildren(hashMap);
                 }
 
                 @Override
@@ -418,117 +410,46 @@ public class ChatConversation extends AppCompatActivity {
 
                 }
             });
-//        seenListener = reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-//                   // ChatMessages chatMessages = snapshot.getValue(ChatMessages.class);
-//
-//                    String from = snapshot.child("from").getValue(String.class);
-//                    String to = snapshot.child("to").getValue(String.class);
-//
-//                    if (userId != null && chatUser != null && from != null && to != null) {
-//                        if (to.equals(userId) && from.equals(chatUser)) {
-//
-//
-//                            //String key = snapshot.getKey();
-//                            //reference.child(key).setValue(true);
-//                            //HashMap<String, Object> hashMap = new HashMap<>();
-//                            //hashMap.put("seen", true);
-//                            //snapshot.getRef().updateChildren(hashMap);
-//                            mAdapter.notifyDataSetChanged();
-//
-//                        }
-//                    }
-//                }
+            chatDatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String image = dataSnapshot.child("image").getValue(String.class);
+                    String name =  dataSnapshot.child("name").getValue(String.class);
+                    chatDatabase.child("Chat").child(chatUser).child(userId).child("image").setValue(image);
+                    chatDatabase.child("Chat").child(chatUser).child(userId).child("name").setValue(name);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            Map messageMap = new HashMap();
+            messageMap.put("message", getMessage);
+            messageMap.put("seen", false);
+            messageMap.put("type", "text");
+            messageMap.put("time", ServerValue.TIMESTAMP);
+            messageMap.put("from", userId);
+
+
+            Map messageUserMap = new HashMap();
+            messageUserMap.put(current_user_ref+"/"+push_id,messageMap);
+            messageUserMap.put(chat_user_ref+"/"+push_id,messageMap);
+            //To delete the text when the user text someone
+            chatEditText.setText("");
+
+            chatDatabase.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    if(databaseError != null){
+                        //error
+                    }
+                }
+            });
         }
-
-
-
-
-        public void sendMessage(){
-            String getMessage = chatEditText.getText().toString();
-            if(!TextUtils.isEmpty(getMessage)){
-
-                sfxButton.start();
-
-                String current_user_ref = "Messages/"+userId+"/"+chatUser;
-                final String chat_user_ref = "Messages/"+chatUser+"/"+userId;
-
-                DatabaseReference userMessagePush = chatDatabase.child("Messages").child(userId).child(chatUser).push();
-                String push_id = userMessagePush.getKey();
-
-                chatDatabase.child("Chat").child(userId).child(chatUser).child("sendMessage").setValue("true");
-                chatDatabase.child("Chat").child(chatUser).child(userId).child("sendMessage").setValue("true");
-                chatDatabase.child("Chat").child(userId).child(chatUser).child("lastMessage").setValue(ServerValue.TIMESTAMP);
-                chatDatabase.child("Chat").child(chatUser).child(userId).child("lastMessage").setValue(ServerValue.TIMESTAMP);
-                chatDatabase.child("Chat").child(userId).child(chatUser).child("chatterId").setValue(chatUser);
-                chatDatabase.child("Chat").child(chatUser).child(userId).child("chatterId").setValue(userId);
-                chatDatabase.child("Users").child(chatUser).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String image = dataSnapshot.child("image").getValue(String.class);
-                        String name =  dataSnapshot.child("name").getValue(String.class);
-                        chatDatabase.child("Chat").child(userId).child(chatUser).child("image").setValue(image);
-                        chatDatabase.child("Chat").child(userId).child(chatUser).child("name").setValue(name);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                chatDatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String image = dataSnapshot.child("image").getValue(String.class);
-                        String name =  dataSnapshot.child("name").getValue(String.class);
-                        chatDatabase.child("Chat").child(chatUser).child(userId).child("image").setValue(image);
-                        chatDatabase.child("Chat").child(chatUser).child(userId).child("name").setValue(name);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                Map messageMap = new HashMap();
-                messageMap.put("message", getMessage);
-                messageMap.put("seen", false);
-                messageMap.put("type", "text");
-                messageMap.put("time", ServerValue.TIMESTAMP);
-                messageMap.put("from", userId);
-                messageMap.put("to", chatUser);
-
-
-                Map messageUserMap = new HashMap();
-                messageUserMap.put(current_user_ref+"/"+push_id,messageMap);
-                messageUserMap.put(chat_user_ref+"/"+push_id,messageMap);
-                //To delete the text when the user text someone
-                chatEditText.setText("");
-
-                chatDatabase.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        if(databaseError != null){
-                            //error
-                        }
-                    }
-                });
-            }
-        }
-
-
-
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //reference.removeEventListener(seenListener);
     }
-}
 
+
+}

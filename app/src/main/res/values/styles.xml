@@ -6,9 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicator">@drawable/tab_indicator</item>
+        <item name="tabIndicatorColor">@color/blue</item>
+        <item name="tabSelectedTextColor">@color/blue</item>
+        <item name="tabIndicatorFullWidth">false</item>
+    </style>
+
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
         <item name="textAllCaps">false</item>
     </style>
 

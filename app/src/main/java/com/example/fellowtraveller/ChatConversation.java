@@ -58,7 +58,7 @@ public class ChatConversation extends AppCompatActivity {
     private final List<ChatMessages> messagesList = new ArrayList<>();
     private LinearLayoutManager mLinearLayout;
     private ChatMessageAdapter mAdapter;
-    private DatabaseReference mMessageDatabase,userDatabase;
+    private DatabaseReference reference,userDatabase;
     private static final int TOTAL_ITEMS_TO_LOAD = 10;
     private int mCurrentPage = 1;
     private int itemPos = 0;
@@ -69,6 +69,8 @@ public class ChatConversation extends AppCompatActivity {
     private TextView chatUserName, lastSeenTextView;
     private CircleImageView chatProfilePicture;
     private ImageButton backToConvButton;
+    private ValueEventListener seenListener;
+
 
 
     @Override
@@ -111,6 +113,8 @@ public class ChatConversation extends AppCompatActivity {
         chatDatabase.child("Users").child(userId).child("online").setValue("true");
         loadMessages();
         changeConversationStatus();
+        seenMessage(chatUser);
+
 
         backToConvButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +124,7 @@ public class ChatConversation extends AppCompatActivity {
                 finish();
             }
         });
+
 
 
         //Create Chats.. one for you and the chatter.. and one for the chatter and you
@@ -170,6 +175,7 @@ public class ChatConversation extends AppCompatActivity {
                 loadMoreMessages();
             }
         });
+
 
 
 
@@ -278,7 +284,16 @@ public class ChatConversation extends AppCompatActivity {
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ChatMessages message = dataSnapshot.getValue(ChatMessages.class);
+                //ChatMessages messages = dataSnapshot.getValue(ChatMessages.class);
+
+                String from = dataSnapshot.child("from").getValue(String.class);
+                String to = dataSnapshot.child("to").getValue(String.class);
+                String message = dataSnapshot.child("message").getValue(String.class);
+                Boolean seen = (Boolean) dataSnapshot.child("seen").getValue();
+                String type = dataSnapshot.child("type").getValue(String.class);
+                Long time = (Long) dataSnapshot.child("time").getValue();
+
+                ChatMessages aMessage = new ChatMessages(message,seen,time,type, from, to);
                 //The key at the top of the list its time, we storing his message key to continue loading from this key and above
                 itemPos++;
                 if(itemPos==1){
@@ -286,7 +301,7 @@ public class ChatConversation extends AppCompatActivity {
                     lastKey = messageKey;
                     prevKey = messageKey;
                 }
-                messagesList.add(message);
+                messagesList.add(aMessage);
                 mAdapter.notifyDataSetChanged();
                 mMessagesList.scrollToPosition(messagesList.size()-1);
 
@@ -377,6 +392,41 @@ public class ChatConversation extends AppCompatActivity {
             return randomStringBuilder.toString();
         }
 
+        private void seenMessage(final String chatUser){
+        reference = FirebaseDatabase.getInstance().getReference("Messages");
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                   // ChatMessages chatMessages = snapshot.getValue(ChatMessages.class);
+
+                    String from = snapshot.child("from").getValue(String.class);
+                    String to = snapshot.child("to").getValue(String.class);
+
+                    if (userId != null && chatUser != null && from != null && to != null) {
+                        if (to.equals(userId) && from.equals(chatUser)) {
+
+
+                            //String key = snapshot.getKey();
+                            //reference.child(key).setValue(true);
+                            //HashMap<String, Object> hashMap = new HashMap<>();
+                            //hashMap.put("seen", true);
+                            //snapshot.getRef().updateChildren(hashMap);
+                            mAdapter.notifyDataSetChanged();
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        }
+
         public void sendMessage(){
             String getMessage = chatEditText.getText().toString();
             if(!TextUtils.isEmpty(getMessage)){
@@ -432,6 +482,7 @@ public class ChatConversation extends AppCompatActivity {
                 messageMap.put("type", "text");
                 messageMap.put("time", ServerValue.TIMESTAMP);
                 messageMap.put("from", userId);
+                messageMap.put("to", chatUser);
 
 
                 Map messageUserMap = new HashMap();
@@ -452,5 +503,13 @@ public class ChatConversation extends AppCompatActivity {
         }
 
 
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reference.removeEventListener(seenListener);
+    }
 }
 

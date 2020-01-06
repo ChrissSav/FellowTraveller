@@ -17,6 +17,7 @@ public class ChatConversationItem {
     private String yourId;
     private String senderId;
 
+
     public ChatConversationItem(String aImage, String aName, boolean sendMessage,boolean online,Long aTimestamp, String yourId, String aId){
 
         this.imageUrl = aImage;
@@ -82,4 +83,5 @@ public class ChatConversationItem {
     public void setSenderId(String senderId) {
         this.senderId = senderId;
     }
+
 }

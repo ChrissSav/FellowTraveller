@@ -88,7 +88,7 @@ public class ChatConversationAdapter extends RecyclerView.Adapter<ChatConversati
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String onlineCase;
-                 onlineCase = dataSnapshot.child("Users").child(currItem.getSenderId()).child("online").getValue(String.class);
+                 onlineCase = (String) dataSnapshot.child("Users").child(currItem.getSenderId()).child("online").getValue(String.class);
                 if(onlineCase!=null) {
                     if (onlineCase.equals("true")) {
                         holder.onlineStatusTV.setVisibility(View.VISIBLE);

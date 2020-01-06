@@ -76,23 +76,36 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         ChatMessages c = mMessageList.get(position);
         String from_user = c.getFrom();
         profileDatabase = FirebaseDatabase.getInstance().getReference();
-        profileDatabase.child("Users").child(from_user).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String imageUrl = dataSnapshot.child("image").getValue(String.class);
+        //Load Image
+        if(from_user!=null) {
+            profileDatabase.child("Users").child(from_user).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String imageUrl = dataSnapshot.child("image").getValue(String.class);
 
-                Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(viewHolder.profileImage);
+                    Picasso.get().load(imageUrl).placeholder(R.drawable.cylinder).into(viewHolder.profileImage);
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
+                }
+            });
+        }
+        //Set Message
         viewHolder.messageText.setText(c.getMessage());
+        //Seen/Send Message
+        if(position == mMessageList.size()-1){
+            if (c.isSeen()!=null && c.isSeen()) {
+                    viewHolder.seenTextView.setText("Διαβάστηκε");
+                } else {
+                    viewHolder.seenTextView.setText("Στάλθηκε");
+                }
 
+        }else{
+            viewHolder.seenTextView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -103,12 +116,14 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     public class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView messageText;
         public CircleImageView profileImage;
+        public TextView seenTextView;
 
         public MessageViewHolder(View view) {
             super(view);
 
             messageText = (TextView) view.findViewById(R.id.message_shape);
             profileImage = (CircleImageView) view.findViewById(R.id.message_pic);
+            seenTextView = (TextView) view.findViewById(R.id.message_seen);
 
         }
 
@@ -119,11 +134,12 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     @Override
     public int getItemViewType(int position) {
         id = getId();
-        if (mMessageList.get(position).getFrom().equals(id)) {
+
+        if (mMessageList.get(position).getFrom()!= null && id!=null && mMessageList.get(position).getFrom().equals(id)) {
             return MSG_TYPE_RIGHT;
         }
-        if(position + 1 < mMessageList.size()) {
-            if ((!mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position + 1).getFrom().equals(id))) {
+        if( position + 1 < mMessageList.size()) {
+            if ((mMessageList.get(position).getFrom()!=null && id!=null && !mMessageList.get(position).getFrom().equals(id)) && (!mMessageList.get(position + 1).getFrom().equals(id))) {
                 return MSG_TYPE_LEFT_NO_IMG;
             }
         }

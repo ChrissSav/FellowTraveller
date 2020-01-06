@@ -86,10 +86,11 @@ public class Chat extends AppCompatActivity {
 
                 Intent ii = new Intent(Chat.this, ChatConversation.class);
                 ii.putExtra("id", senderId);
-
-                finish();
-                userStatus.child("Users").child(yourId).child("online").setValue(true);
                 startActivity(ii);
+                finish();
+
+                userStatus.child("Users").child(yourId).child("online").setValue("true");
+
 
                 //Intent intent2 = new Intent(Chat.this,ChatConversation.class);
                 //intent2.putExtra("Creator_id",senderId);

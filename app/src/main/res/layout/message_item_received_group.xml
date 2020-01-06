@@ -45,6 +45,16 @@
         android:textSize="15sp"
         android:textColor="#fff"
         />
+    <TextView
+        android:id="@+id/message_seen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Διαβάστηκε"
+        android:visibility="gone"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

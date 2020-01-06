@@ -34,6 +34,14 @@
             android:text="Καλησπέρα.. τι κάνεις;"
             android:textColor="@color/black"
             android:textSize="14sp" />
+        <TextView
+            android:id="@+id/message_seen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Διαβάστηκε"
+            android:visibility="gone"
+            />
+
 
     </LinearLayout>
 

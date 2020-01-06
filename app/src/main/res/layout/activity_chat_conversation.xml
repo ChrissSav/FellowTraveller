@@ -67,7 +67,8 @@
         android:layout_above="@id/conv_bottom_view"
         android:id="@+id/chat_messages"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/message_swipe"

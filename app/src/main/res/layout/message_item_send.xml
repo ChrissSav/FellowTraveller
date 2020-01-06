@@ -23,6 +23,19 @@
         android:textColor="#fff"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/message_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_shape"
+        android:layout_marginTop="3dp"
+        android:layout_alignEnd="@id/message_shape"
+        android:layout_marginEnd="15dp"
+        android:text="Διαβάστηκε"
+        android:textSize="10sp"
+        android:visibility="visible"
+    />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/message_pic"
         android:layout_width="0dp"

@@ -20,12 +20,15 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -88,6 +91,8 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
 
         bottomNavigationView = findViewById(R.id.homeBetaActivity_Bottom_Nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
+
+
         loadUserInfo();
         // loadImageFromStorage();
         BottonNav();
@@ -245,6 +250,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                     id = Integer.parseInt(text);
                     Log.i("NotificationDev","id: "+id);
                     CheckUserInfoToUpdate(id);
+                    CheckUserNotification(id);
                 }
                 i++;
             }
@@ -375,4 +381,53 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
             }
         }
     }
+
+
+    private void CheckUserNotification(int id){
+        JsonApi jsonPlaceHolderApi;
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        Call<Status_handling> call = jsonPlaceHolderApi.getNotificationOfUserCount(id);
+
+        call.enqueue(new Callback<Status_handling>() {
+            @Override
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+                if (!response.isSuccessful()) {
+                    // Toast.makeText(MainActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Status_handling status = response.body();
+                if(!status.getMsg().equals("0")){
+                    UpdateNotificationCount(status.getMsg());
+                    return;
+                }
+                // Toast.makeText(MainActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<Status_handling> call, Throwable t) {
+                //  Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void UpdateNotificationCount(String count){
+        BottomNavigationMenuView mBottomNavigationMenuView =
+                (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+
+        View view = mBottomNavigationMenuView.getChildAt(2);
+
+        BottomNavigationItemView itemView = (BottomNavigationItemView) view;
+
+        View cart_badge = LayoutInflater.from(this)
+                .inflate(R.layout.notification_icon_icon,
+                        mBottomNavigationMenuView, false);
+
+        TextView textView = cart_badge.findViewById(R.id.notification_counter);
+        textView.setText(count);
+        itemView.addView(cart_badge);
+    }
 }
+

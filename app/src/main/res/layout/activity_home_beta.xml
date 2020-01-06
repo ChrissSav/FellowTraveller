@@ -31,6 +31,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/homeBetaActivity_container_main_tabs"
                 app:tabTextAppearance="@style/MyCustomTextAppearance"
+                style="@style/MyCustomTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"

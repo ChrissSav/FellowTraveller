@@ -1,62 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#FFF">
+    android:paddingStart="25dp"
+    android:paddingEnd="25dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/conv_profile_pic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/profile_picture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/conv_user_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:text="Tyler Joseph"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/conv_profile_pic"
+        app:layout_constraintStart_toEndOf="@+id/conv_profile_pic"
+        android:layout_marginStart="20dp"
+        android:textStyle="bold" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/conv_profile_pic"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/profile_picture"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/conv_new_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Νέο Μήνυμα"
+        android:textSize="12sp"
+        android:textColor="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@+id/conv_profile_pic"
+        app:layout_constraintStart_toStartOf="@+id/conv_user_name" />
 
-        <TextView
-            android:id="@+id/conv_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="16sp"
-            android:text="Tyler Joseph"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="@id/conv_profile_pic"
-            app:layout_constraintStart_toEndOf="@+id/conv_profile_pic"
-            android:layout_marginStart="20dp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/conv_online_status"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/blackshape"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/conv_profile_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/conv_profile_pic" />
 
-        <TextView
-            android:id="@+id/conv_new_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Νέο Μήνυμα"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            app:layout_constraintBottom_toBottomOf="@+id/conv_profile_pic"
-            app:layout_constraintStart_toStartOf="@+id/conv_user_name" />
-
-        <TextView
-            android:id="@+id/conv_online_status"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/blackshape"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/conv_profile_pic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/conv_profile_pic" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

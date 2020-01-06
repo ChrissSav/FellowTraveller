@@ -55,6 +55,11 @@ public interface JsonApi {
     );
 
 
+    @GET("getnotificationcount/{id}")
+    Call<Status_handling> getNotificationOfUserCount(
+            @Path("id") int id
+    );
+
 
     @GET("registerrequesttotrip/{user_id}/{bag}/{target_id}/{trip_id}")
     Call<Status_handling> sendRequest(

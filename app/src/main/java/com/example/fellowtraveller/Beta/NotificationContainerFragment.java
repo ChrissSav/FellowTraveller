@@ -1,4 +1,4 @@
-package com.example.fellowtraveller;
+package com.example.fellowtraveller.Beta;
 
 
 import android.content.Intent;
@@ -14,6 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.fellowtraveller.JsonApi;
+import com.example.fellowtraveller.Notification;
+import com.example.fellowtraveller.NotificationAdapter;
+import com.example.fellowtraveller.R;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

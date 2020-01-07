@@ -130,6 +130,11 @@ public class TripPageCreatorActivity extends AppCompatActivity {
                 }//flag==1 reject
                 else if(flag == 1){
                     getUserTrips(requests.get(position).getId(),trip.getId(),REJECT,position);
+                }else if(flag==2){
+                    Intent intent = new Intent(TripPageCreatorActivity.this,UsersProfileActivity.class);
+                    intent.putExtra("User_id",requests.get(position).getId());
+                    startActivity(intent);
+
                 }
             }
         });
@@ -178,6 +183,14 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             mAdapterPassengers = new PassengerAdapter(passengers);
             mRecyclerViewPassengers.setLayoutManager(mLayoutManagerP);
             mRecyclerViewPassengers.setAdapter(mAdapterPassengers);
+            mAdapterPassengers.setOnItemClickListener(new PassengerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Intent intent = new Intent(TripPageCreatorActivity.this,UsersProfileActivity.class);
+                    intent.putExtra("User_id",passengers.get(position).getId());
+                    startActivity(intent);
+                }
+            });
 
     }
 

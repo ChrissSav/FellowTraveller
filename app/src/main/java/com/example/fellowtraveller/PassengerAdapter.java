@@ -24,7 +24,7 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
 
     public interface OnItemClickListener {
 
-        void onItemClick(int position, int flag);
+        void onItemClick(int position);
     }
 
 
@@ -42,6 +42,18 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
             bag = itemView.findViewById(R.id.passenger_item_textView_bag);
             rate = itemView.findViewById(R.id.passenger_item_textView_rate);
             img = itemView.findViewById(R.id.passenger_item_CircleImageView_pic);
+
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 

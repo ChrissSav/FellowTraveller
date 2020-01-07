@@ -67,6 +67,17 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
                     }
                 }
             });
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position,2);
+                        }
+                    }
+                }
+            });
         }
     }
 

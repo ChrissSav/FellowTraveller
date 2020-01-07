@@ -154,6 +154,14 @@ public class TripPageActivity extends AppCompatActivity {
             mAdapterPassengers = new PassengerAdapter(passengers);
             mRecyclerViewPassengers.setLayoutManager(mLayoutManagerP);
             mRecyclerViewPassengers.setAdapter(mAdapterPassengers);
+            mAdapterPassengers.setOnItemClickListener(new PassengerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Intent intent = new Intent(TripPageActivity.this,UsersProfileActivity.class);
+                    intent.putExtra("User_id",passengers.get(position).getId());
+                    startActivity(intent);
+                }
+            });
         }
     }
 

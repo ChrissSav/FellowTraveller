@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,94 +8,98 @@
     android:background="#fff"
     tools:context=".NewOfferActivity">
 
-
-    <Button
-        android:id="@+id/new_offer_button_back"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/new_offer_container"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/new_offer_bottomBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_offer_button_back"
-        app:layout_constraintVertical_bias="0.0">
-
-        <view
-            android:id="@+id/view"
-            class="androidx.viewpager.widget.ViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/new_offer_bottomBar"
-        android:layout_width="0dp"
-        android:layout_height="99dp"
-        android:paddingTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:elevation="1dp"
+        android:outlineProvider="none">
 
         <TextView
             android:id="@+id/new_offer_textView_stage1"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="100dp"
-            android:background="@drawable/new_offer_btn_bottom_click"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment"
-            app:layout_constraintVertical_bias="0.509" />
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:background="@color/orange" />
 
         <TextView
             android:id="@+id/new_offer_textView_stage2"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/new_offer_btn_bottom_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/new_offer_textView_stage3"
-            app:layout_constraintStart_toEndOf="@+id/new_offer_textView_stage1"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:background="@color/lightOrange"/>
 
         <TextView
             android:id="@+id/new_offer_textView_stage3"
-            android:layout_width="55dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="100dp"
-            android:background="@drawable/new_offer_btn_bottom_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_button_next_fragment" />
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:background="@color/lightOrange"/>
 
-        <Button
-            android:id="@+id/new_offer_button_next_fragment"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/main_btn_login"
-            android:text=" Επόμενο"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#fff"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/new_offer_button_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/ic_arrow_back"
+                style="?android:attr/borderlessButtonStyle" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <FrameLayout
+            android:id="@+id/new_offer_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <view
+                android:id="@+id/view"
+                class="androidx.viewpager.widget.ViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/new_offer_button_next_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="@drawable/main_btn_login"
+        android:text="Επόμενο"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_margin="30dp"
+        app:layout_anchor="@id/nested_scroll_view"
+        app:layout_anchorGravity="bottom|end"
+        style="?android:attr/borderlessButtonStyle" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

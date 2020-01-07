@@ -1,174 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="30dp"
     android:background="#fff"
     tools:context=".NewOfferActivity">
 
     <TextView
-        android:id="@+id/fragment_new_offer_step_two_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:text="Πες μας το πότε θα γίνει αυτό το ταξίδι"
         android:textColor="@color/black"
         android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout10"
-        android:layout_width="0dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659">
+        android:layout_marginTop="40dp"
+        android:text="Ποιά μέρα;"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/fragment_new_offer_step_two_textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="Ποιά μέρα;"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_new_offer_step_two_TextInputLayout_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/text_view_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fragment_new_offer_step_two_TextInputLayout_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/text_view_search_add_offer"
-            android:paddingTop="10dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_new_offer_step_two_TextInputEditText_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Ημερομηνία"
+            android:inputType="date"
+            android:longClickable="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="#817F7F"
             android:textColorHint="#000"
-            app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_two_textView2">
+            android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_new_offer_step_two_TextInputEditText_date"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="Ημερομηνία"
-                android:inputType="date"
-                android:longClickable="false"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:textColor="#817F7F"
-                android:textColorHint="#000"
-                android:textSize="16sp"
-                tools:layout_editor_absoluteX="241dp"
-                tools:layout_editor_absoluteY="85dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/fragment_new_offer_step_two_textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Τι ώρα θα γίνει η αναχώρηση;"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_two_TextInputLayout_date" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Τι ώρα θα γίνει η αναχώρηση;"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fragment_fragment_new_offer_step_two_step_two_editText_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/text_view_search_add_offer"
-            android:paddingTop="10dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_fragment_new_offer_step_two_step_two_editText_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/text_view_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_new_offer_step_two_TextInputEditText_time"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Ώρα"
+            android:inputType="text"
+            android:longClickable="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="#817F7F"
             android:textColorHint="#000"
-            app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_new_offer_step_two_textView3">
+            android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_new_offer_step_two_TextInputEditText_time"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="Ώρα"
-                android:inputType="text"
-                android:longClickable="false"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:textColor="#817F7F"
-                android:textColorHint="#000"
-                android:textSize="16sp"
-                tools:layout_editor_absoluteX="241dp"
-                tools:layout_editor_absoluteY="85dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Γραψε κατι για τους επιβάτες"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout9"
-            android:layout_width="0dp"
-            android:layout_height="107dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/text_view_search_add_offer"
-            android:paddingTop="5dp"
-            android:textColorHint="#000"
-            app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/text_view_search_add_offer"
+        android:paddingTop="5dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_new_offer_step_two_editText_description"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:backgroundTint="#FFC088"
-                android:hint="Περιγραφή"
-                android:inputType="textMultiLine"
-                android:paddingLeft="20dp"
-                android:paddingTop="8dp"
-                android:textColor="#817F7F"
-                android:textColorHint="#FFC088"
-                android:textSize="17dp"
-                tools:layout_editor_absoluteX="46dp"
-                tools:layout_editor_absoluteY="446dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_new_offer_step_two_editText_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:backgroundTint="#FFC088"
+            android:hint="Περιγραφή"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="8dp"
+            android:textColor="#817F7F"
+            android:textColorHint="#FFC088"
+            android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Γραψε κατι για τους επιβάτες"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/fragment_new_offer_step_two_textView3"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_fragment_new_offer_step_two_step_two_editText_time" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

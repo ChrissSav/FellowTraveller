@@ -71,14 +71,12 @@ public class NewOfferActivity extends AppCompatActivity {
                 if(fra.toString().equals("stage1") && stage1.Check()){
                     Log.i("IsStatment","satage1"+stage1.Check());
                     fra = stage2;
-                    tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
-                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+                    tvStage2.setBackgroundResource(R.color.orange);
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.new_offer_container,fra).commit();
                 }
                 else if(fra.toString().equals("stage2") && stage2.Check()){
                     fra = stage3;
-                    tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
-                    tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+                    tvStage3.setBackgroundResource(R.color.orange);
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.new_offer_container,fra).commit();
                     btn_next_stage.setText("Καταχώρηση");
                 }else if(fra.toString().equals("stage3") && stage3.Check()){
@@ -188,16 +186,14 @@ public class NewOfferActivity extends AppCompatActivity {
         }
         else if(fra.toString().equals("stage2") ){
             fra = stage1;
-            tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
-            tvStage1.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+            tvStage2.setBackgroundResource(R.color.lightOrange);
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
         }
         else if(fra.toString().equals("stage3")){
             fra = stage2;
             btn_next_stage.setText("Επόμενο");
 
-            tvStage3.setBackgroundResource(R.drawable.new_offer_btn_bottom_default);
-            tvStage2.setBackgroundResource(R.drawable.new_offer_btn_bottom_click);
+            tvStage3.setBackgroundResource(R.color.lightOrange);
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.new_offer_container,fra).commit();
         }
     }

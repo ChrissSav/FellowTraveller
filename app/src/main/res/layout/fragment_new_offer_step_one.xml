@@ -1,127 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="30dp"
     android:background="#fff"
     tools:context=".NewOfferActivity">
 
-
     <TextView
         android:id="@+id/new_offer_textView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:text="Μοιράσου μαζί μας το ταξίδι σου"
         android:textColor="@color/black"
         android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout8"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/new_offer_textView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="40dp"
+        android:text="Από που θα ξεκινήσεις;"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/text_view_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance">
 
-        <TextView
-            android:id="@+id/new_offer_textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="60dp"
-            android:text="Από που θα ξεκινήσεις;"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_textView" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/new_offer_editText_from"
+        <AutoCompleteTextView
+            android:id="@+id/new_offer_autoComplete_editText_from"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/text_view_search_add_offer"
-            android:paddingTop="10dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="Άπο"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:longClickable="false"
+            android:textColor="#817F7F"
             android:textColorHint="#000"
-            app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_textView2">
+            android:textSize="16sp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/new_offer_autoComplete_editText_from"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:hint="Άπο"
-                android:inputType="text"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:longClickable="false"
-                android:textColor="#817F7F"
-                android:textColorHint="#000"
-                android:textSize="16sp"
-                tools:layout_editor_absoluteX="241dp"
-                tools:layout_editor_absoluteY="85dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/new_offer_textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Ποιος είναι ο προορισμός σου;"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_editText_from" />
+    <TextView
+        android:id="@+id/new_offer_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Ποιος είναι ο προορισμός σου;"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/new_offer_editText_to"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_offer_editText_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/text_view_search_add_offer"
+        android:paddingTop="10dp"
+        android:textColorHint="#000"
+        app:hintTextAppearance="@style/CustomTextAppearance">
+
+        <AutoCompleteTextView
+            android:id="@+id/new_offer_autoComplete_editText_to"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/text_view_search_add_offer"
-            android:paddingTop="10dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="Πρός"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="#817F7F"
             android:textColorHint="#000"
-            app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_offer_textView3">
+            android:longClickable="false"
+            android:textSize="16sp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/new_offer_autoComplete_editText_to"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:hint="Πρός"
-                android:inputType="text"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:textColor="#817F7F"
-                android:textColorHint="#000"
-                android:longClickable="false"
-                android:textSize="16sp"
-                tools:layout_editor_absoluteX="241dp"
-                tools:layout_editor_absoluteY="85dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

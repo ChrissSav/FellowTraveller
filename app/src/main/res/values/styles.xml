@@ -13,6 +13,8 @@
         <item name="tabIndicatorColor">@color/blue</item>
         <item name="tabSelectedTextColor">@color/blue</item>
         <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="android:layout_marginBottom">10dp</item>
     </style>
 
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">

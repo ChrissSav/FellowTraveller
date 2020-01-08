@@ -75,8 +75,9 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip_page_creator);
         Intent intent = getIntent();
         trip = intent.getParcelableExtra("Trip");
+        requests = new ArrayList<>();
         requests = trip.getRequests();
-        passengers = new ArrayList<>();
+
         passengers = trip.getPassengers();
         textView_rate = findViewById(R.id.TripPageCreatorActivity_textView_rate);
         img = findViewById(R.id.TripPageCreatorActivity_textView_adminImage);

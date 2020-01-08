@@ -124,6 +124,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
             public void onItemClick(int position) {
                 SetNotificationsRead(mExampleList.get(position).getId(),position);
 
+
             }
         });
     }
@@ -132,32 +133,40 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         Log.i("ChrisSav","getType "+mExampleList.get(position).getType());
         switch ((mExampleList.get(position).getType())){
             case "accept":
+                Log.i("IntentStarter","accept");
                 Intent intent = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
                 intent.putExtra("Trip",mExampleList.get(position).getTrip());
                 intent.putExtra("F",false);
                 startActivity(intent);
+                Refresh(position);
                 // Toast.makeText(NotificationActivity.this,"accept",Toast.LENGTH_SHORT).show();
                 break;
             case "reject":
+                Log.i("IntentStarter","reject");
                 Toast.makeText(NotificationActivity.this,"reject ",Toast.LENGTH_SHORT).show();
+                Refresh(position);
                 break;
             case "rate":
-                Log.i("ChrisSav","rate");
+                Log.i("IntentStarter","rate");
                 Intent intentRate = new Intent(NotificationActivity.this, WriteReviewActivity.class);
                 intentRate.putExtra("Trip",mExampleList.get(position).getTrip());
                 startActivity(intentRate);
+                Refresh(position);
                 //Toast.makeText(NotificationActivity.this,"rate ",Toast.LENGTH_SHORT).show();
                 break;
             case "request":
+                Log.i("IntentStarter","request");
                 Intent intentRequest = new Intent(NotificationActivity.this, TripPageCreatorActivity.class);
+                Log.i("IntentStarter","request "+mExampleList.get(position).getTrip().getId());
                 intentRequest.putExtra("Trip",mExampleList.get(position).getTrip());
                 startActivity(intentRequest);
+                Refresh(position);
                 break;
             default:
                 break;
 
         }
-        Refresh(position);
+
 
     }
 

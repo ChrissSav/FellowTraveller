@@ -243,7 +243,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     public void loadUserInfo() {
         FileInputStream fis = null;
         try {
-            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
+            fis = openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;

@@ -213,6 +213,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             public void onClick(View v) {
                 Intent r = new Intent(Profile.this, ReviewsActivity.class);
+                r.putExtra("Target_id",Integer.parseInt(id));
                 startActivity(r);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }

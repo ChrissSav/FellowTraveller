@@ -44,7 +44,7 @@ public class ReviewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
         Intent intent = getIntent();
-        id = intent.getIntExtra("Target_id",96);
+        id = intent.getIntExtra("Target_id",0);
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         reviewsList= new ArrayList<>();

@@ -3,25 +3,31 @@ package com.example.fellowtraveller;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleViewHolder> {
     private ArrayList<ReviewItem> mReviewsList;
+    private ReviewsAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(ReviewsAdapter.OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
         public CircleImageView circleImageView;
@@ -32,7 +38,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
         public TextView num;
 
 
-        public ExampleViewHolder(@NonNull View itemView) {
+        public ExampleViewHolder(@NonNull View itemView,final OnItemClickListener listener) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.reviewer_profile_pic);
             rating = itemView.findViewById(R.id.rating);
@@ -40,6 +46,18 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
             date = itemView.findViewById(R.id.review_date);
             review = itemView.findViewById(R.id.review);
             num = itemView.findViewById(R.id.rating_num);
+
+            circleImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
     public ReviewsAdapter (ArrayList<ReviewItem> reviewsList){
@@ -49,7 +67,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ExampleV
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_item, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v);
+        ExampleViewHolder evh = new ExampleViewHolder(v,mListener);
         return evh;
     }
 

@@ -29,12 +29,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReviewsActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ReviewsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private ArrayList<ReviewItem> reviewsList;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
@@ -74,9 +71,17 @@ public class ReviewsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ReviewsAdapter(reviewsList);
-
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new ReviewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(ReviewsActivity.this,UsersProfileActivity.class);
+                intent.putExtra("User_id",reviewsList.get(position).getUser().getId());
+                startActivity(intent);
+            }
+        });
+
     }
 
 

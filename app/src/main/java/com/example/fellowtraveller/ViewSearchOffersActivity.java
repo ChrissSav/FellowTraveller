@@ -67,6 +67,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private TextView textView;
     private ConstraintSet constraintSetOld = new ConstraintSet();
     private ConstraintSet constraintSetNew = new ConstraintSet();
+    private boolean View_id_visible = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -262,18 +263,32 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                Log.i("makismakis","dy dy dy "+dy);
+                Log.i("addOnScrollListener","dy : "+dy);
+                Log.i("AaddOnScrollListener","Extent : "+recyclerView.computeVerticalScrollExtent());
+                Log.i("AaddOnScrollListener","Offset : "+recyclerView.computeVerticalScrollOffset());
+                Log.i("AaddOnScrollListener","  Range : "+recyclerView.computeVerticalScrollRange());
+                Log.i("flag_View","   flag_View :  "+ View_id_visible);
+
                 if (dy > 0) {
-                    Transition changeBounds = new ChangeBounds();
-                    changeBounds.setInterpolator(new OvershootInterpolator());
-                    TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
-                    constraintSetNew.applyTo(constraintLayout);
-                } else {
-                    Transition changeBounds = new ChangeBounds();
-                    changeBounds.setInterpolator(new OvershootInterpolator());
-                    TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
-                    constraintSetOld.applyTo(constraintLayout);
+                    if(View_id_visible) {
+                        recyclerView.setLayoutFrozen(true);
+                        Transition changeBounds = new ChangeBounds();
+                        changeBounds.setInterpolator(new OvershootInterpolator());
+                        TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                        constraintSetNew.applyTo(constraintLayout);
+                        recyclerView.setLayoutFrozen(false);
+                        View_id_visible=false;
+                    }
+                } else if(dy < 0){
+                    if(!View_id_visible) {
+                        recyclerView.setLayoutFrozen(true);
+                        Transition changeBounds = new ChangeBounds();
+                        changeBounds.setInterpolator(new OvershootInterpolator());
+                        TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                        constraintSetOld.applyTo(constraintLayout);
+                        recyclerView.setLayoutFrozen(false);
+                        View_id_visible=true;
+                    }
                 }
             }
 
@@ -282,17 +297,21 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    Log.i("makismakis","SCROLL_STATE_FLING");
+                    Log.i("addOnScrollListener","SCROLL_STATE_FLING");
                 } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    Log.i("makismakis","SCROLL_STATE_TOUCH_SCROLL");
+                    Log.i("addOnScrollListener","SCROLL_STATE_TOUCH_SCROLL");
                 } else {
-                    Log.i("mRecyclerView","else  " +mRecyclerView.computeVerticalScrollRange()+" "+mRecyclerView.computeVerticalScrollOffset());
+                    Log.i("addOnScrollListener","else  " +mRecyclerView.computeVerticalScrollRange()+" "+mRecyclerView.computeVerticalScrollOffset());
                     if(mRecyclerView.computeVerticalScrollOffset()==0){
-                        //Log.i("mRecyclerView","offset  " +(mRecyclerView.computeVerticalScrollOffset()==0)+" "+mRecyclerView.computeVerticalScrollOffset());
-                        Transition changeBounds = new ChangeBounds();
-                        changeBounds.setInterpolator(new OvershootInterpolator());
-                        TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
-                        constraintSetOld.applyTo(constraintLayout);
+                        if(!View_id_visible) {
+                            recyclerView.setLayoutFrozen(true);
+                            Transition changeBounds = new ChangeBounds();
+                            changeBounds.setInterpolator(new OvershootInterpolator());
+                            TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                            constraintSetOld.applyTo(constraintLayout);
+                            recyclerView.setLayoutFrozen(false);
+                            View_id_visible=true;
+                        }
                     }
                 }
             }

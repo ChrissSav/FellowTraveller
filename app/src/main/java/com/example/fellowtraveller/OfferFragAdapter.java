@@ -98,12 +98,13 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
         holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
         holder.price.setText(currentItem.getPrice()+" €");
+        holder.rate.setText(currentItem.getRate()+"");
 
         if(currentItem.getRequests().size()==0){
             holder.btnReq.setVisibility(View.GONE);
         }
 
-        holder.rate.setText(currentItem.getRate()+"");
+        holder.rate.setText(currentItem.getCreator().getRate()+"");
         if(!currentItem.getCreator().getPicture().equals("null")){
             holder.img.setImageBitmap(StringToBitMap(currentItem.getCreator().getPicture()));
         }

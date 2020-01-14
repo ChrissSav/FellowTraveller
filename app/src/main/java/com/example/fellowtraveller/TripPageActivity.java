@@ -10,10 +10,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -118,7 +120,17 @@ public class TripPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(bag.isChecked()){
-                    Register("yes");
+                    if(trip.getCurrent_num_of_bags()+1<=trip.getMax_bags()){
+                        Register("yes");
+                    }else{
+                        if(trip.getMax_bags()==0) {
+                            Toast.makeText(TripPageActivity.this, "Δεν υπάρχει η δυνατότητα μεταφοράς αποσκεύης! ", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(TripPageActivity.this, "Ο χώρος των αποσεκύων ειναι γεμάτος! ", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
                 }else {
                     Register("no");
                 }

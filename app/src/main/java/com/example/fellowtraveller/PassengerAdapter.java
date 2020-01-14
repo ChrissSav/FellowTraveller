@@ -73,6 +73,7 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
         UserB currentItem = mExampleList.get(position);
         holder.name.setText(currentItem.getName());
         holder.name.setText(currentItem.getName());
+        holder.rate.setText(currentItem.getRate()+"");
         if(!currentItem.getPicture().equals("null"))
             holder.img.setImageBitmap(StringToBitMap(currentItem.getPicture()));
         if(currentItem.getBag().equals("no"))

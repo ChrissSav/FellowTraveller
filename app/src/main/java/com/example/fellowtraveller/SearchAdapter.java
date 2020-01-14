@@ -98,7 +98,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleVie
         holder.number_of_passengers.setText(currentItem.getSeatesStatus()+"");
         holder.number_of_bags.setText(currentItem.getbagsStatus()+"");
         holder.price.setText(currentItem.getPrice()+" €");
-        holder.rate.setText(currentItem.getRate()+"");
+        holder.rate.setText(currentItem.getCreator().getRate()+"");
         if(!currentItem.getCreator().getPicture().equals("null")){
             holder.img.setImageBitmap(StringToBitMap(currentItem.getCreator().getPicture()));
         }

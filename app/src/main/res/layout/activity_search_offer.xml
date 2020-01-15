@@ -7,6 +7,8 @@
     android:background="#fff"
     tools:context=".SearchOfferActivity">
 
+
+
     <Button
         android:id="@+id/search_offer_button_back"
         android:layout_width="20dp"
@@ -32,75 +34,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_offer_editText_from"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/text_view_search_add_offer"
-        android:paddingTop="4dp"
-        android:textColorHint="#000"
-        app:hintTextAppearance="@style/CustomTextAppearance"
+        app:layout_constraintBottom_toTopOf="@+id/new_offer_button_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        android:background="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_offer_textView_header"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.1">
-
-        <AutoCompleteTextView
-            android:id="@+id/search_offer_autoComplete_editText_from"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:background="@null"
-            android:hint="Από"
-            android:inputType="text"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
-            android:textColor="#817F7F"
-            android:textColorHint="#000"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="85dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/text_view_search_add_offer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_to">
+        app:layout_constraintVertical_bias="0.41000003">
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/search_offer_editText_from"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/text_view_search_add_offer"
+            android:paddingTop="4dp"
+            android:textColorHint="#000"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/search_offer_autoComplete_editText_from"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:hint="Από"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
+                android:textColor="#817F7F"
+                android:textColorHint="#000"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="30dp"
+                tools:layout_editor_absoluteY="85dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="5dp"
             android:textColorHint="#000"
             app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintStart_toStartOf="@+id/search_offer_editText_from"
+            app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_to">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_offer_editText_date_from"
-                android:layout_width="126dp"
+                android:layout_width="150dp"
                 android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:focusable="false"
                 android:hint="Ημερ/νία (από)"
                 android:inputType="date"
+                android:paddingStart="20dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
                 android:textSize="16sp"
@@ -109,27 +106,26 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="5dp"
             android:textColorHint="#000"
             app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/search_offer_textView4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintEnd_toEndOf="@+id/search_offer_editText_from"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_offer_editText_date_to"
-                android:layout_width="126dp"
+                android:layout_width="150dp"
                 android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:focusable="false"
                 android:hint="Ημερ/νία (έως)"
                 android:inputType="date"
+                android:paddingStart="20dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
                 android:textSize="16sp"
@@ -137,52 +133,27 @@
                 tools:layout_editor_absoluteY="4dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/search_offer_textView4"
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#FFAA5E"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/text_view_search_add_offer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="5dp"
             android:textColorHint="#000"
             app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/search_offer_textView3"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="@+id/search_offer_editText_from"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout10">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_offer_editText_time_to"
-                android:layout_width="126dp"
+                android:layout_width="150dp"
                 android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:focusable="false"
                 android:hint="Ώρα (έως)"
                 android:inputType="time"
+                android:paddingStart="20dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
                 android:textSize="16sp"
@@ -191,26 +162,28 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/text_view_search_add_offer"
             android:paddingTop="5dp"
             android:textColorHint="#000"
             app:hintTextAppearance="@style/CustomTextAppearance"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="@+id/search_offer_editText_from"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_offer_editText_time_from"
-                android:layout_width="126dp"
+                android:layout_width="150dp"
                 android:layout_height="42dp"
                 android:background="@null"
                 android:backgroundTint="#FFC088"
                 android:focusable="false"
                 android:hint="Ώρα (από)"
                 android:inputType="time"
+
+                android:paddingStart="20dp"
                 android:textColor="#817F7F"
                 android:textColorHint="#FFC088"
                 android:textSize="16sp"
@@ -218,48 +191,38 @@
                 tools:layout_editor_absoluteY="446dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/search_offer_textView3"
-            android:layout_width="1dp"
-            android:layout_height="48dp"
-            android:background="#FFAA5E"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_offer_editText_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/text_view_search_add_offer"
+            android:paddingTop="10dp"
+            android:textColorHint="#000"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            app:layout_constraintEnd_toEndOf="@+id/search_offer_editText_from"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/search_offer_editText_from"
+            app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_from">
+
+            <AutoCompleteTextView
+                android:id="@+id/search_offer_autoComplete_editText_to"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@null"
+                android:hint="Προς"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
+                android:textColor="#817F7F"
+                android:textColorHint="#000"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="260dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_offer_editText_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/text_view_search_add_offer"
-        android:paddingTop="10dp"
-        android:textColorHint="#000"
-        app:hintTextAppearance="@style/CustomTextAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_offer_editText_from">
-
-        <AutoCompleteTextView
-            android:id="@+id/search_offer_autoComplete_editText_to"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:background="@null"
-            android:hint="Προς"
-            android:inputType="text"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
-            android:textColor="#817F7F"
-            android:textColorHint="#000"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="260dp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button

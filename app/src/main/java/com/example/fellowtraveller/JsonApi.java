@@ -19,7 +19,7 @@ public interface JsonApi {
             @Path("email") String email,
             @Path("password") String password
     );
-    
+
     @GET("trips/{from}/{to}/{date}/{time}/{creator_id}/{description}/{max_seats}/{max_bags}/{price}")
     Call<Status_handling> createTrip(
             @Path("from") String from,

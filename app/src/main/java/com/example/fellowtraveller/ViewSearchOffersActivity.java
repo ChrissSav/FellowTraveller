@@ -64,7 +64,6 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
     private Spinner sort_spinner;
     private int id;
     private ConstraintLayout constraintLayout;
-    private TextView textView;
     private ConstraintSet constraintSetOld = new ConstraintSet();
     private ConstraintSet constraintSetNew = new ConstraintSet();
     private boolean View_id_visible = true;
@@ -89,7 +88,6 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         autoCompleteTextViewFrom.setAdapter(new PlaceAutoSuggestAdapter(ViewSearchOffersActivity.this, android.R.layout.simple_list_item_1, KEY));
         autoCompleteTextViewTo = findViewById(R.id.ViewSearchOffersActivity_autoComplete_editText_to);
         autoCompleteTextViewTo.setAdapter(new PlaceAutoSuggestAdapter(ViewSearchOffersActivity.this, android.R.layout.simple_list_item_1, KEY));
-        textView = findViewById(R.id.textView8);
         constraintLayout = findViewById(R.id.layout);
 
         constraintSetOld.clone(constraintLayout);
@@ -238,15 +236,15 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if(position==0 && ListOfTrips.size()>1) {
                     Collections.sort(ListOfTrips, TripB.DateComparator);
-                    mAdapter.notifyDataSetChanged();
+                    buildRecyclerView();
                 }
                 if(position==1) {
                     Collections.sort(ListOfTrips, TripB.PriceComparatorLowFirst);
-                    mAdapter.notifyDataSetChanged();
+                    buildRecyclerView();
                 }
                 if(position==2) {
                     Collections.sort(ListOfTrips, TripB.PriceComparatorΗigherFirst);
-                    mAdapter.notifyDataSetChanged();
+                    buildRecyclerView();
                 }
 
             }
@@ -419,8 +417,10 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 filter_items = data.getParcelableExtra("filter");
-                if(data.getBooleanExtra("flag",false))
-                   getTrips();
+                if(data.getBooleanExtra("flag",false)) {
+                    getTrips();
+                    sort_spinner.setSelection(0);
+                }
 
             }
             if (resultCode == RESULT_CANCELED) {

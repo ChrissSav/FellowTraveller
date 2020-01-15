@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RegisterStage1Fragment stage1 = new RegisterStage1Fragment() ;
     private RegisterStage2Fragment stage2 = new RegisterStage2Fragment();
     private FragmentManager fragmentManager;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.RegisterActivity_button_next);
         button_back = findViewById(R.id.RegisterActivity_button_back);
-
+        textView = findViewById(R.id.RegisterActivity_textView);
 
         fra = stage1;
         fragmentManager.beginTransaction().replace(R.id.register_stages_container,fra).commit();
@@ -82,6 +84,8 @@ public class RegisterActivity extends AppCompatActivity {
                     fra = stage2;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.register_stages_container,fra).commit();
                     btn_next_stage.setText("Καταχώρηση");
+                    textView.setBackground(getDrawable(R.drawable.register_tv_background2));
+
                 }
                 else if(fra.toString().equals("stage2") && stage2.Check()){
                     createUser();
@@ -106,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if(fra.toString().equals("stage2") ){
             btn_next_stage.setText("Επόμενο");
-
+            textView.setBackground(getDrawable(R.drawable.register_tv_background1));
             fra = stage1;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.register_stages_container,fra).commit();
         }

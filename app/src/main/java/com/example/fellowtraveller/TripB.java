@@ -232,30 +232,29 @@ public class TripB implements Parcelable {
         dest.writeInt(price);
     }
 
-    public static Comparator<TripB> PriceComparatorLowFirst = new Comparator<TripB>() {
-
-        public int compare(TripB t1, TripB t2) {
-            String StudentName1 = t1.getPrice() + "";
-            String StudentName2 = t2.getPrice() + "";
-            Log.i("Compare",StudentName1+ " <-> "+StudentName2+" = "+StudentName2.compareTo(StudentName1));
-            return StudentName2.compareTo(StudentName1);
-        }
-    };
-
     public static Comparator<TripB> PriceComparatorΗigherFirst = new Comparator<TripB>() {
 
         public int compare(TripB t1, TripB t2) {
             String StudentName1 = t1.getPrice() + "";
             String StudentName2 = t2.getPrice() + "";
-            Log.i("Compare",StudentName1+ " <-> "+StudentName2+" = "+StudentName2.compareTo(StudentName1));
-            return StudentName1.compareTo(StudentName2);
+            Log.i("Comparator1",t1.date+" :"+ StudentName1+ " <-> "+t2.date+" : "+StudentName2+" = "+StudentName2.compareTo(StudentName1));
+            return StudentName2.compareTo(StudentName1);
+        }
+    };
+
+    public static Comparator<TripB> PriceComparatorLowFirst = new Comparator<TripB>() {
+
+        public int compare(TripB t1, TripB t2) {
+            String  price1 = t1.getPrice() + "";
+            String price2 = t2.getPrice() + "";
+            Log.i("Comparator2",t1.date+" :"+ price1+ " <-> "+t2.date+" : "+price2+" = "+price2.compareTo(price1));
+            return price1.compareTo(price2);
         }
     };
 
     public static Comparator<TripB> DateComparator = new Comparator<TripB>() {
 
         public int compare(TripB t1, TripB t2) {
-
             return t2.getDate().compareTo(t1.getDate());
         }
     };

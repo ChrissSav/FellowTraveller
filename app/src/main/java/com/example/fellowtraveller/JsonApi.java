@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface JsonApi {
@@ -18,16 +19,7 @@ public interface JsonApi {
             @Path("email") String email,
             @Path("password") String password
     );
-
-    @GET("registeruser/{name}/{birthday}/{email}/{password}/{phone}")
-    Call<Status_handling> createUser(
-            @Path("name") String name,
-            @Path("birthday") String birthday,
-            @Path("email") String email,
-            @Path("password") String password,
-            @Path("phone") String phone
-    );
-
+    
     @GET("trips/{from}/{to}/{date}/{time}/{creator_id}/{description}/{max_seats}/{max_bags}/{price}")
     Call<Status_handling> createTrip(
             @Path("from") String from,
@@ -139,5 +131,11 @@ public interface JsonApi {
     Call<UserAuth> CheckUserInfo(
         @Path("id") int id
     );
+
+    @POST("registerUser")
+    Call<Status_handling> createUseR(
+            @Body JsonObject jsonObject
+    );
 }
+
 

@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.gson.JsonObject;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -83,7 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
                     btn_next_stage.setText("Καταχώρηση");
                 }
                 else if(fra.toString().equals("stage2") && stage2.Check()){
-
                     createUser();
                 }
             }
@@ -120,8 +120,13 @@ public class RegisterActivity extends AppCompatActivity {
         String password = stage1.getPassword();
         String phone = stage2.getNumber();
 
-
-        Call<Status_handling> call = jsonPlaceHolderApi.createUser(name,birth,email,password,phone);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", name);
+        jsonObject.addProperty("birthday", birth);
+        jsonObject.addProperty("email", email);
+        jsonObject.addProperty("password", password);
+        jsonObject.addProperty("phone", phone);
+        Call<Status_handling> call = jsonPlaceHolderApi.createUseR(jsonObject);
         FireBaseRegister(name, email, password, birth, phone);
 
         call.enqueue(new Callback<Status_handling> () {
@@ -137,7 +142,6 @@ public class RegisterActivity extends AppCompatActivity {
                     save("true",Integer.parseInt(status.getMsg())+"",name,email);
                     //we have to get the id of user and this id save it to the database
                     //Or we have to send the email of user as unique object
-
                     Intent intent = new Intent(RegisterActivity.this, HomeBetaActivity.class);
                     startActivity(intent);
                     finish();
@@ -152,8 +156,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
     public void save(String status,String id,String name,String email) {
         //FireBase Database for storing the id of users
         userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);

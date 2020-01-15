@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,13 +43,14 @@ public class ProsforesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private OfferFragAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<TripB> Listoftrips ;
+    private ArrayList<TripB> ListOfTrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
-    private final String FILE_NAME = "fellow_login_state.txt";
     private View mMainView;
     private int id;
     private ImageView noResultsImage;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     public ProsforesFragment() {
         // Required empty public constructor
@@ -60,10 +62,19 @@ public class ProsforesFragment extends Fragment {
 
         loadUserId();
 
-        Listoftrips = new ArrayList<>();
-
+        ListOfTrips = new ArrayList<>();
+        swipeRefreshLayout = mMainView.findViewById(R.id.ProsforesFragment_SwipeRefreshLayout);
         noResultsImage = mMainView.findViewById(R.id.no_results);
         getUserTrips();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getUserTrips();
+
+            }
+        });
 
         return mMainView;
     }
@@ -73,7 +84,7 @@ public class ProsforesFragment extends Fragment {
         id = 0;
         FileInputStream fis = null;
         try {
-            fis = getActivity().openFileInput(FILE_NAME);
+            fis = getActivity().openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -106,14 +117,14 @@ public class ProsforesFragment extends Fragment {
         mRecyclerView = mMainView.findViewById(R.id.recyclerViewOffer);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new OfferFragAdapter(Listoftrips);
+        mAdapter = new OfferFragAdapter(ListOfTrips);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new OfferFragAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), TripPageCreatorActivity.class);
-                intent.putExtra("Trip",Listoftrips.get(position));
+                intent.putExtra("Trip",ListOfTrips.get(position));
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
@@ -133,20 +144,20 @@ public class ProsforesFragment extends Fragment {
                 @Override
                 public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    ListOfTrips.clear();
                     List<TripB> trips = response.body();
-                    if(trips.size()==0){
-
-                    }
-                    else {
+                    if(trips.size()!=0) {
                         noResultsImage.setVisibility(View.GONE);
                         for (int i = 0; i < trips.size(); i++) {
-                            Listoftrips.add(trips.get(i));
+                            ListOfTrips.add(trips.get(i));
                         }
                         buildRecyclerView();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
+
                 }
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,11 +38,11 @@ public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<TripB> Listoftrips ;
+    private ArrayList<TripB> ListOfTrips ;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
-    private final String FILE_NAME = "fellow_login_state.txt";
     private View mMainView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public SearchFragment() {
     }
@@ -50,10 +51,21 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_search, container, false);
+        swipeRefreshLayout = mMainView.findViewById(R.id.SearchFragment_SwipeRefreshLayout);
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        Listoftrips = new ArrayList<>();
+        ListOfTrips = new ArrayList<>();
         getTrips();
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getTrips();
+
+            }
+        });
         return mMainView;
     }
 
@@ -64,17 +76,17 @@ public class SearchFragment extends Fragment {
     }
 
     public void buildRecyclerView(View v) {
-        mRecyclerView = v.findViewById(R.id.recyclerView);
+        mRecyclerView = v.findViewById(R.id.SearchFragment_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new SearchAdapter(Listoftrips);
+        mAdapter = new SearchAdapter(ListOfTrips);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), TripPageActivity.class);
-                intent.putExtra("Trip",Listoftrips.get(position));
+                intent.putExtra("Trip",ListOfTrips.get(position));
                 intent.putExtra("F",false);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -97,10 +109,13 @@ public class SearchFragment extends Fragment {
                         return;
                     }
                     List<TripB> trips = response.body();
+                    ListOfTrips.clear();
                     for (int i=0; i<trips.size(); i++){
-                        Listoftrips.add(trips.get(i));
+                        ListOfTrips.add(trips.get(i));
                     }
+
                     buildRecyclerView(mMainView);
+                    swipeRefreshLayout.setRefreshing(false);
 
                 }
                 @Override
@@ -118,7 +133,7 @@ public class SearchFragment extends Fragment {
         int id =0;
         FileInputStream fis = null;
         try {
-            fis = getActivity().openFileInput(FILE_NAME);
+            fis = getActivity().openFileInput(getString(R.string.FILE_USER_INFO));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;

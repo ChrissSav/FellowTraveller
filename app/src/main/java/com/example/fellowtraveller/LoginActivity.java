@@ -29,7 +29,6 @@ yourEditText.setTransformationMethod(new PasswordTransformationMethod());
 */
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn,btn_login;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
@@ -102,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();

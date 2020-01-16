@@ -104,9 +104,9 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Log.i("view_stand_byOnClickLis","size :"+ListOfStand_by.size());
                 Log.i("view_stand_byOnClickLis","View_id_visible :"+View_id_visible);
+
                 Transition changeBounds = new ChangeBounds();
                 changeBounds.setInterpolator(new OvershootInterpolator());
-
                 TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
                 if(!View_id_visible) {
                     constraintSetNew.applyTo(constraintLayout);

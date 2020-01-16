@@ -52,7 +52,7 @@
             android:background="@drawable/ic_star" />
 
         <TextView
-            android:id="@+id/user_rating"
+            android:id="@+id/offerItem2_user_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4.5"
@@ -184,7 +184,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/offer_trip_item2_textView_info2"
+        android:id="@+id/offer_trip_item2_textView_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

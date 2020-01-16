@@ -40,6 +40,11 @@ public interface JsonApi {
             @Path("id") int id
     );
 
+    @GET("getTripsStandBy/{id}")
+    Call<List<TripB>> getTripsStandBy(
+            @Path("id") int id
+    );
+
 
     @GET("getnotification/{id}")
     Call<List<Notification>> getNotificationOfUser(

@@ -6,15 +6,22 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.transition.ChangeBounds;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,27 +50,71 @@ public class SearchFragment extends Fragment {
     private Retrofit retrofit ;
     private View mMainView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    //=============================
+    private ConstraintLayout constraintLayout,constraintLayout_to_hide;
+    private ConstraintSet constraintSetOld = new ConstraintSet();
+    private ConstraintSet constraintSetNew = new ConstraintSet();
+    private boolean View_id_visible = false;
+    private TextView textView_count_stand_by;
+    private Button view_stand_by;
+    private RecyclerView mRecyclerView_stand_by;
+    private StandByAdapter mAdapter_stand_by;
+    private RecyclerView.LayoutManager mLayoutManager_stand_by;
+    private ArrayList<TripB> ListOfStand_by;
+    //=============================
 
     public SearchFragment() {
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_search, container, false);
+
         swipeRefreshLayout = mMainView.findViewById(R.id.SearchFragment_SwipeRefreshLayout);
+        view_stand_by = mMainView.findViewById(R.id.SearchFragment_button_stand_by);
+        constraintLayout_to_hide = mMainView.findViewById(R.id.constraintLayout2);
+        textView_count_stand_by = mMainView.findViewById(R.id.SearchFragment_textView_num_of_StandBy);
+
+
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
+        constraintLayout = mMainView.findViewById(R.id.SearchFragment_Layout_layout);
+        constraintSetOld.clone(constraintLayout);
+        constraintSetNew.clone(container.getContext(), R.layout.fragment_search_alt);
+
+        ListOfStand_by = new ArrayList<>();
         ListOfTrips = new ArrayList<>();
+        if(ListOfStand_by.size()==0)
+            constraintLayout_to_hide.setVisibility(View.GONE);
+        getTripsStandBy();
         getTrips();
-
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
                 getTrips();
 
+            }
+        });
+        view_stand_by.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("view_stand_byOnClickLis","size :"+ListOfStand_by.size());
+                Log.i("view_stand_byOnClickLis","View_id_visible :"+View_id_visible);
+                Transition changeBounds = new ChangeBounds();
+                changeBounds.setInterpolator(new OvershootInterpolator());
+
+                TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
+                if(!View_id_visible) {
+                    constraintSetNew.applyTo(constraintLayout);
+                    View_id_visible = true;
+                }else{
+                    constraintSetOld.applyTo(constraintLayout);
+                    View_id_visible = false;
+                }
             }
         });
         return mMainView;
@@ -93,6 +144,15 @@ public class SearchFragment extends Fragment {
 
             }
         });
+    }
+
+    public void buildRecyclerView2(View v) {
+        mRecyclerView_stand_by = v.findViewById(R.id.SearchFragment_recyclerView_StandBy);
+        mRecyclerView_stand_by.setHasFixedSize(true);
+        mLayoutManager_stand_by = new LinearLayoutManager(getActivity());
+        mAdapter_stand_by = new StandByAdapter(ListOfStand_by);
+        mRecyclerView_stand_by.setLayoutManager(mLayoutManager_stand_by);
+        mRecyclerView_stand_by.setAdapter(mAdapter_stand_by);
     }
 
 
@@ -126,6 +186,40 @@ public class SearchFragment extends Fragment {
         }else {
             Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void getTripsStandBy() {
+
+        Call<List<TripB>> call = jsonPlaceHolderApi.getTripsStandBy(loadUserId());
+        call.enqueue(new Callback<List<TripB>>() {
+            @Override
+            public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                List<TripB> trips = response.body();
+                ListOfStand_by.clear();
+                for (int i=0; i<trips.size(); i++){
+                    ListOfStand_by.add(trips.get(i));
+                }
+                if(ListOfStand_by.size()==0){
+                    constraintLayout_to_hide.setVisibility(View.GONE);
+                }else{
+                    textView_count_stand_by.setText(ListOfStand_by.size()+"");
+                    constraintLayout_to_hide.setVisibility(View.VISIBLE);
+                    buildRecyclerView2(mMainView);
+                }
+
+
+
+            }
+            @Override
+            public void onFailure(Call<List<TripB>> call, Throwable t) {
+                //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 

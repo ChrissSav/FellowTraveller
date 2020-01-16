@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/RegisterActivity_textView"
             android:layout_width="76dp"
-            android:layout_height="21dp"
+            android:layout_height="5dp"
             android:background="@drawable/register_tv_background1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

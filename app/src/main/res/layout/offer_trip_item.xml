@@ -102,7 +102,7 @@
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView24"
-            app:layout_constraintEnd_toStartOf="@+id/offerItem_request_button"
+            app:layout_constraintEnd_toStartOf="@+id/offerItem_request_textView"
             app:layout_constraintStart_toEndOf="@+id/textView24"
             app:layout_constraintTop_toTopOf="@+id/textView24" />
 
@@ -118,7 +118,7 @@
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView25"
-            app:layout_constraintEnd_toStartOf="@+id/offerItem_request_button"
+            app:layout_constraintEnd_toEndOf="@+id/offerItem_textView_from"
             app:layout_constraintStart_toStartOf="@+id/offerItem_textView_from"
             app:layout_constraintTop_toTopOf="@+id/textView25" />
 
@@ -243,7 +243,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/trip_page_btn_message"
-            android:text="Επεξεργασία"
+            android:text="Προβολή"
             android:textAllCaps="false"
             android:textColor="#8297FF"
             android:textSize="14sp"
@@ -266,15 +266,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/offerItem_textView_name" />
 
-        <Button
-            android:id="@+id/offerItem_request_button"
+        <TextView
+            android:id="@+id/offerItem_request_textView"
             android:layout_width="64dp"
             android:layout_height="19dp"
             android:background="@drawable/main_btn_login"
+            android:gravity="center"
             android:text="Αιτήματα"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="9sp"
+            android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/offerItem_textView_to"
             app:layout_constraintEnd_toEndOf="@+id/offerItem_textView_price"

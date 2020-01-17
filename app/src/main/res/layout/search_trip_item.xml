@@ -241,7 +241,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/trip_page_btn_message"
-            android:text="Επεξεργασία"
+            android:text="Προβολή"
             android:textAllCaps="false"
             android:textColor="#8297FF"
             android:textSize="14sp"

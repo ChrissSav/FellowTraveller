@@ -103,7 +103,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView24"
-            app:layout_constraintEnd_toStartOf="@+id/offerItem_request_button"
+            app:layout_constraintEnd_toStartOf="@+id/offerItem_request_textView"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView24"
             app:layout_constraintTop_toTopOf="@+id/textView24"
@@ -242,7 +242,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/trip_page_btn_message"
-            android:text="Επεξεργασία"
+            android:text="Προβολή"
             android:textAllCaps="false"
             android:textColor="#8297FF"
             android:textStyle="bold"
@@ -264,14 +264,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/offerItem_textView_name" />
 
-        <Button
-            android:id="@+id/offerItem_request_button"
-            android:layout_width="77dp"
-            android:layout_height="27dp"
+        <TextView
+            android:id="@+id/offerItem_request_textView"
+            android:layout_width="67dp"
+            android:layout_height="24dp"
             android:background="@drawable/main_btn_login"
+            android:gravity="center"
             android:text="Αιτήματα"
             android:textAllCaps="false"
             android:textColor="#fff"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/offerItem_textView_to"
             app:layout_constraintEnd_toEndOf="@+id/offerItem_textView_price"

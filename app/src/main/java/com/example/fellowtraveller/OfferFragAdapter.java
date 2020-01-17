@@ -37,11 +37,11 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         public TextView from;
         public TextView to;
         public TextView date;
-        public TextView time,rate;
+        public TextView time,rate,Req;
         private CircleImageView img;
         public TextView number_of_passengers;
         public TextView number_of_bags;
-        public Button btnEdit, btnReq;
+        public Button btnEdit;
         private TextView price;
         public CircleImageView circleImageView;
 
@@ -55,7 +55,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
             number_of_passengers = itemView.findViewById(R.id.offerItem_textView_seats);
             number_of_bags = itemView.findViewById(R.id.offerItem_textView_bags);
             btnEdit = itemView.findViewById(R.id.offerItem_button_select);
-            btnReq = itemView.findViewById(R.id.offerItem_request_button);
+            Req = itemView.findViewById(R.id.offerItem_request_textView);
             price = itemView.findViewById(R.id.offerItem_textView_price);
             img = itemView.findViewById(R.id.offerItem_user_pic);
             rate = itemView.findViewById(R.id.offerItem_textView_rate);
@@ -101,7 +101,7 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         holder.rate.setText(currentItem.getRate()+"");
 
         if(currentItem.getRequests().size()==0){
-            holder.btnReq.setVisibility(View.GONE);
+            holder.Req.setVisibility(View.GONE);
         }
 
         holder.rate.setText(currentItem.getCreator().getRate()+"");

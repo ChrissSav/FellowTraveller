@@ -34,10 +34,10 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="Καλώς όρισες"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +47,7 @@
             android:id="@+id/RegisterActivity_textView"
             android:layout_width="76dp"
             android:layout_height="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/register_tv_background1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,20 +79,24 @@
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">>
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/RegisterActivity_button_next"
-            android:layout_width="326dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_marginBottom="32dp"
+            android:layout_margin="30dp"
             android:background="@drawable/main_btn_login"
-            android:text=" Επόμενο"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Επόμενο"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="18dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_anchorGravity="bottom|end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

@@ -78,6 +78,9 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Exam
             holder.img.setImageBitmap(StringToBitMap(currentItem.getPicture()));
         if(currentItem.getBag().equals("no"))
             holder.bag.setVisibility(View.GONE);
+        else{
+            holder.bag.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

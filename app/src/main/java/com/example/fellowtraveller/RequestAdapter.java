@@ -102,6 +102,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ExampleV
             holder.img.setImageBitmap(StringToBitMap(currentItem.getPicture()));
         if(currentItem.getBag().equals("no"))
             holder.bag.setVisibility(View.GONE);
+        else{
+            holder.bag.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

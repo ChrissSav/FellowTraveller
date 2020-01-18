@@ -16,10 +16,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -66,9 +68,12 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     private RecyclerView mRecyclerViewPassengers;
     private PassengerAdapter mAdapterPassengers;
     private RecyclerView.LayoutManager mLayoutManagerP;
+    private RelativeLayout relativeLayout;
+    private int lat_pos_pass = -1;
+    private int lat_pos_req = -1;
+    private UserB user_Stand_by;
 
-
-
+    private boolean flag1,flag2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +82,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         trip = intent.getParcelableExtra("Trip");
         requests = new ArrayList<>();
         requests = trip.getRequests();
-
+        relativeLayout = findViewById(R.id.TripPageCreatorActivity_Layout);
         passengers = trip.getPassengers();
         textView_rate = findViewById(R.id.TripPageCreatorActivity_textView_rate);
         img = findViewById(R.id.TripPageCreatorActivity_textView_adminImage);
@@ -123,14 +128,14 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new RequestAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position,int flag) {
+
                 //flag==0 accept
                 if(flag == 0){
-                    if(CheckΑvailability(position)) {
-                        getUserTrips(requests.get(position).getId(), trip.getId(), ACCEPT, position);
-                    }
+                    AcceptPassenger(position);
                 }//flag==1 reject
                 else if(flag == 1){
-                    getUserTrips(requests.get(position).getId(),trip.getId(),REJECT,position);
+                    RejectPassenger(position);
+                    //getUserTrips(requests.get(position).getId(),trip.getId(),REJECT,position);
                 }else if(flag==2){
                     Intent intent = new Intent(TripPageCreatorActivity.this,UsersProfileActivity.class);
                     intent.putExtra("User_id",requests.get(position).getId());
@@ -141,11 +146,93 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         });
     }
 
-    public void Addpassenger(int position){
-        passengers.add(requests.get(position));
+
+    public void AcceptPassenger(final int position){
+        if(CheckΑvailability(position)) {
+            flag2 = true;
+            Snackbar snackbar = Snackbar
+                    .make(relativeLayout, "Θέλεις να αναιρέσεις την αποδοχή;", Snackbar.LENGTH_LONG)
+                    .setAction("ΝΑΙ", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            flag2 = false;
+                            DecreaseTripNum(passengers.size()-1);
+                            RemovePassenger();
+                            AddRequest(user_Stand_by);
+                        }
+                    });
+
+            snackbar.show();
+            snackbar.addCallback(new Snackbar.Callback() {
+                @Override
+                public void onDismissed(Snackbar snackbar, int event) {
+                    Log.i("addCallback","onDismissed");
+                    if(flag2){
+                        getUserTrips(user_Stand_by, trip.getId(), ACCEPT);
+
+                    }
+                }
+                //position request
+                @Override
+                public void onShown(Snackbar snackbar) {
+                    Log.i("addCallback","onShown");
+                    AddPassenger(requests.get(position));
+                    Increase(position);
+                    user_Stand_by = requests.get(position);
+                    DeleteRequest(position);
+                }
+            });
+        }
+    }
+
+
+    public void RejectPassenger(final int position){
+        flag1 = true;
+        Snackbar snackbar = Snackbar
+                .make(relativeLayout, "Θέλεις να αναιρέσεις την απόρριψη;", Snackbar.LENGTH_LONG)
+                .setAction("ΝΑΙ", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        flag1 = false;
+                        AddRequest(user_Stand_by);
+                    }
+                });
+
+        snackbar.show();
+        snackbar.addCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                Log.i("addCallback","onDismissed");
+                if(flag1){
+                    getUserTrips(user_Stand_by, trip.getId(), REJECT);
+                }
+
+            }
+            //position request
+            @Override
+            public void onShown(Snackbar snackbar) {
+                user_Stand_by = requests.get(position);
+                DeleteRequest(position);
+            }
+        });
+
+    }
+    public void AddPassenger(UserB user){
+        passengers.add(user);
         mAdapterPassengers.notifyDataSetChanged();
     }
 
+    public void RemovePassenger(){
+        passengers.remove(passengers.size()-1);
+        mAdapterPassengers.notifyDataSetChanged();
+    }
+    public void AddRequest(UserB userB){
+        Log.i("lat_pos_req",lat_pos_req+"");
+        requests.add(lat_pos_req,userB);
+
+       // requests.add(userB);
+        mAdapter.notifyDataSetChanged();
+    }
 
     public void Increase(int position) {
         trip.setCurrent_num_of_seats(trip.getCurrent_num_of_seats() + 1);
@@ -154,6 +241,20 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             trip.setCurrent_num_of_bags(trip.getCurrent_num_of_bags() + 1);
             textView_bags.setText(trip.getbagsStatus());
 
+        }
+
+    }
+    public void DeleteRequest(int pos){
+        requests.remove(pos);
+        lat_pos_req = pos;
+        mAdapter.notifyDataSetChanged();
+    }
+    public void DecreaseTripNum(int position) {
+        trip.setCurrent_num_of_seats(trip.getCurrent_num_of_seats() - 1);
+        textView_seats.setText(trip.getSeatesStatus());
+        if (passengers.get(position).getBag().equals("yes")){
+            trip.setCurrent_num_of_bags(trip.getCurrent_num_of_bags() - 1);
+            textView_bags.setText(trip.getbagsStatus());
         }
 
     }
@@ -195,10 +296,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
 
     }
 
-    public void Delete(int pos){
-        requests.remove(pos);
-        mAdapter.notifyDataSetChanged();
-    }
+
     public void FillFields(){
         String status = trip.getState();
         if(status.equals("available")){
@@ -250,30 +348,30 @@ public class TripPageCreatorActivity extends AppCompatActivity {
     }
 
 
-    private void getUserTrips(int user_id, int trip_id, final String status, final int position) {
-        final String st = status;
+    private void getUserTrips(final UserB user, int trip_id, final String status) {
         if(CheckInternetConnection()){
             retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
             jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-            final Call<Status_handling> call = jsonPlaceHolderApi.ChangeRequestStatus(user_id,requests.get(position).getBag(), trip_id,status);
+            final Call<Status_handling> call = jsonPlaceHolderApi.ChangeRequestStatus(
+                    user.getId(),user.getBag(),trip_id,status);
             call.enqueue(new Callback<Status_handling>() {
                 @Override
                 public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(TripPageCreatorActivity.this,"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TripPageCreatorActivity.this,"response "+response.message(),Toast.LENGTH_SHORT).show();
                         return;
                     }
                     Status_handling status_han = response.body();
                     if(status_han.getStatus().equals("success")){
-                        if(st.equals(ACCEPT)){
-                            Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
-                            Addpassenger(position);
-                            Increase(position);
-                            Delete(position);
+                        if(status.equals(ACCEPT)){
+                            Toast.makeText(TripPageCreatorActivity.this,"Εγκρίθηκε το αίτημα του χρήστη "+user.getName(),Toast.LENGTH_SHORT).show();
+                           // //Addpassenger(position);
+                           // Increase(position);
+                          //  DeleteRequest(position);
 
                         }else{
-                            Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+requests.get(position).getName(),Toast.LENGTH_SHORT).show();
-                            Delete(position);
+                            Toast.makeText(TripPageCreatorActivity.this,"Απορρίφθηκε το αίτημα του χρήστη "+user.getName(),Toast.LENGTH_SHORT).show();
+                         //   DeleteRequest(position);
                         }
                         return;
                     }

@@ -9,152 +9,102 @@
 
     <ImageView
         android:id="@+id/main_imageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/main_shape"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/main_textView2"/>
-
-    <TextView
-        android:id="@+id/main_textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Καλώς ήρθατε"
-        android:textAllCaps="false"
-        android:textColor="#000"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_width="311dp"
+        android:layout_height="129dp"
+        android:background="@drawable/ic_fellow_logo_1"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
-    <TextView
-        android:id="@+id/main_textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
-        android:textSize="14sp"
-        android:textColor="#C9C9C9"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView2" />
+        <TextView
+            android:id="@+id/main_textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Καλώς ήρθατε"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/main_textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
+            android:textColor="#C9C9C9"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_textView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_linearLayout"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/main_textView3"
-        app:layout_constraintBottom_toTopOf="@+id/main_linearLayout2"
-        app:layout_constraintVertical_bias="0.4">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
+        tools:layout_editor_absoluteX="-16dp">
 
         <Button
             android:id="@+id/main_button1"
-            android:background="@drawable/main_btn_login"
-            android:layout_marginEnd="8dp"
-            android:text="Σύνδεση"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            style="?android:attr/borderlessButtonStyle" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/main_btn_login"
+            android:text="Σύνδεση"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/main_button2"
-            android:background="@drawable/main_btn_sigin"
-            android:layout_marginStart="8dp"
-            android:text="Εγγραφή"
-            android:textSize="16sp"
-            android:textColor="@color/grey"
-            android:textAllCaps="false"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            style="?android:attr/borderlessButtonStyle" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/main_linearLayout2"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/main_linearLayout3">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/main_line" />
-
-        <TextView
-            android:id="@+id/main_textView9"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="Είσοδος με"
-            android:textColor="#C9C9C9"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/main_line" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/main_linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95">
-
-        <TextView
-            android:id="@+id/main_textView10"
-            android:layout_marginEnd="16dp"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/main_f_b"
-            android:gravity="center"
-            android:text="F"
-            android:textColor="#FFC088" />
-
-        <TextView
-            android:id="@+id/main_textView11"
             android:layout_marginStart="16dp"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/main_f_b"
-            android:gravity="center"
-            android:text="G"
-            android:textColor="#FFC088" />
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/main_btn_sigin"
+            android:text="Εγγραφή"
+            android:textAllCaps="false"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_button1" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

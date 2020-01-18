@@ -4,56 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.fellowtraveller.BetaActivity.NotificationActivity;
+import android.os.Handler;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class MainActivity extends AppCompatActivity {
-    private Button btn_log_in;
-    private Button btn_reg;
-
-
+public class SplashActivity extends AppCompatActivity {
+    int SPLASH_TIME = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        btn_log_in = findViewById(R.id.main_button1);
-        btn_log_in.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(mainIntent);
+        setContentView(R.layout.activity_welcome);
+
+
+
+        //Code to start timer and take action after the timer ends
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do any action here. Now we are moving to next page
+                load();
+
+                //This 'finish()' is for exiting the app when back button pressed from Home page which is ActivityHome
+
             }
-        });
-
-        btn_reg = findViewById(R.id.main_button2);
-        btn_reg.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-
-
-        load();
-
+        }, SPLASH_TIME);
     }
+
+    //Method to run progress bar for 5 seconds
 
 
     public void load() {
@@ -70,10 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(text);
             }
             if (!(sb.toString().equals("false"))){
-                Intent mainIntent = new Intent(MainActivity.this, HomeBetaActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, HomeBetaActivity.class);
                 startActivity(mainIntent);
                 finish();
 
+            }else{
+                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(mainIntent);
+                finish();
             }
 
         } catch (FileNotFoundException e) {

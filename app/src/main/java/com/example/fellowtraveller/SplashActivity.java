@@ -54,11 +54,14 @@ public class SplashActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(SplashActivity.this, HomeBetaActivity.class);
                 startActivity(mainIntent);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
 
             }else{
                 Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(mainIntent);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             }
 
         } catch (FileNotFoundException e) {

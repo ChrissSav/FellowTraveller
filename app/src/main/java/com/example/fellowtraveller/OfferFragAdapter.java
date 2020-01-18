@@ -3,6 +3,7 @@ package com.example.fellowtraveller;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +102,11 @@ public class OfferFragAdapter extends RecyclerView.Adapter<OfferFragAdapter.Exam
         holder.rate.setText(currentItem.getRate()+"");
 
         if(currentItem.getRequests().size()==0){
+            Log.i("GONE",currentItem.getFfrom()+"  : "+currentItem.getRequests().size());
             holder.Req.setVisibility(View.GONE);
+        }else{
+            Log.i("VISIBLE",currentItem.getFfrom()+"  : "+currentItem.getRequests().size());
+            holder.Req.setVisibility(View.VISIBLE);
         }
 
         holder.rate.setText(currentItem.getCreator().getRate()+"");

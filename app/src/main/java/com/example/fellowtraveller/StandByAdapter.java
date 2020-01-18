@@ -19,9 +19,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StandByAdapter extends RecyclerView.Adapter<StandByAdapter.ExampleViewHolder> {
     private ArrayList<TripB> mExampleList;
+    private StandByAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+
+        void onItemClick(int position);
+    }
 
 
-
+    public void setOnItemClickListener(StandByAdapter.OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
@@ -31,8 +39,9 @@ public class StandByAdapter extends RecyclerView.Adapter<StandByAdapter.ExampleV
         public TextView rate;
         private TextView price;
         private CircleImageView img;
+        private Button btn;
 
-        public ExampleViewHolder(View itemView) {
+        public ExampleViewHolder(View itemView,final StandByAdapter.OnItemClickListener listener) {
             super(itemView);
 
 
@@ -43,7 +52,18 @@ public class StandByAdapter extends RecyclerView.Adapter<StandByAdapter.ExampleV
             name = itemView.findViewById(R.id.offerItem2_textView_name);
             img = itemView.findViewById(R.id.offerItem2_user_pic);
             price = itemView.findViewById(R.id.offer_trip_item2_textView_price);
-
+            btn = itemView.findViewById(R.id.offerItem2_btn_exit);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -54,7 +74,7 @@ public class StandByAdapter extends RecyclerView.Adapter<StandByAdapter.ExampleV
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_trip_item2, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v);
+        ExampleViewHolder evh = new ExampleViewHolder(v,mListener);
         return evh;
     }
 

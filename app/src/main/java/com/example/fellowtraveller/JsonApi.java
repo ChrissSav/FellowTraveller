@@ -141,6 +141,9 @@ public interface JsonApi {
     Call<Status_handling> createUseR(
             @Body JsonObject jsonObject
     );
+
+    @POST("CancelTrip/")
+    Call<Status_handling> CancelTripById(@Body JsonObject image);
 }
 
 

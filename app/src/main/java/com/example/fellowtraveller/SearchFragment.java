@@ -25,6 +25,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -62,7 +64,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager_stand_by;
     private ArrayList<TripB> ListOfStand_by;
     //=============================
-
+    private int cancelPosition = -1;
     public SearchFragment() {
 
     }
@@ -146,13 +148,25 @@ public class SearchFragment extends Fragment {
         });
     }
 
-    public void buildRecyclerView2(View v) {
-        mRecyclerView_stand_by = v.findViewById(R.id.SearchFragment_recyclerView_StandBy);
+    public void buildRecyclerView2() {
+        mRecyclerView_stand_by = mMainView.findViewById(R.id.SearchFragment_recyclerView_StandBy);
         mRecyclerView_stand_by.setHasFixedSize(true);
         mLayoutManager_stand_by = new LinearLayoutManager(getActivity());
         mAdapter_stand_by = new StandByAdapter(ListOfStand_by);
         mRecyclerView_stand_by.setLayoutManager(mLayoutManager_stand_by);
         mRecyclerView_stand_by.setAdapter(mAdapter_stand_by);
+        mAdapter_stand_by.setOnItemClickListener(new StandByAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if(cancelPosition==position){
+                    CancelTrip(position);
+                }else{
+                    Toast.makeText(getActivity(),"Είσαι σίγουρος ότι θες να ακυρώσεις την αίτηση",Toast.LENGTH_SHORT).show();
+                    cancelPosition=position;
+                }
+
+            }
+        });
     }
 
 
@@ -208,7 +222,7 @@ public class SearchFragment extends Fragment {
                 }else{
                     textView_count_stand_by.setText(ListOfStand_by.size()+"");
                     constraintLayout_to_hide.setVisibility(View.VISIBLE);
-                    buildRecyclerView2(mMainView);
+                    buildRecyclerView2();
                 }
 
 
@@ -222,6 +236,42 @@ public class SearchFragment extends Fragment {
 
     }
 
+    private void CancelTrip(final int pos) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("trip_id", ListOfStand_by.get(pos).getId());
+        jsonObject.addProperty("trip_creator_id", ListOfStand_by.get(pos).getCreator().getId());
+        jsonObject.addProperty("user_id", loadUserId());
+        Log.i("CancelTrip","trip_id : "+ListOfStand_by.get(pos).getId());
+        Log.i("CancelTrip","trip_creator_id : "+ListOfStand_by.get(pos).getCreator().getId());
+        Log.i("CancelTrip","user_id : "+loadUserId());
+        Call<Status_handling> call = jsonPlaceHolderApi.CancelTripById(jsonObject);
+        call.enqueue(new Callback<Status_handling>() {
+            @Override
+            public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Status_handling status_handling = response.body();
+                if(status_handling.getStatus().equals("success")){
+                    Toast.makeText(getActivity(),"επιτυχης",Toast.LENGTH_SHORT).show();
+                    ListOfStand_by.remove(pos);
+                    if(ListOfStand_by.size()==0){
+                        constraintLayout_to_hide.setVisibility(View.GONE);
+                    }
+                    buildRecyclerView2();
+                }else{
+                    Toast.makeText(getActivity(),"αποτυχης",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            @Override
+            public void onFailure(Call<Status_handling> call, Throwable t) {
+                //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 
     public int loadUserId() {
         int id =0;

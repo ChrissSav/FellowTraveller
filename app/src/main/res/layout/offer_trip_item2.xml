@@ -80,12 +80,12 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <Button
+        android:id="@+id/offerItem2_btn_exit"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/ic_trip_completed"
+        android:background="@drawable/ic_exit"
         app:layout_constraintBottom_toBottomOf="@+id/offerItem2_user_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/offerItem2_user_pic" />
@@ -168,7 +168,7 @@
         android:layout_height="30dp"
         android:background="@drawable/blue_square"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/offerItem2_btn_exit"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
     <TextView

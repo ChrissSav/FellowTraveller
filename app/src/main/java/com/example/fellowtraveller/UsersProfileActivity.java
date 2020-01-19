@@ -47,12 +47,6 @@ public class UsersProfileActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
         circleImageView = findViewById(R.id.UsersProfile_profile_picture);
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
         rate = findViewById(R.id.UserProfile_user_rating);
         Img_friendly = findViewById(R.id.UserProfile_img_friendly);

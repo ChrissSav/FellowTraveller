@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellowtraveller.GlobalClass;
 import com.example.fellowtraveller.HomeBetaActivity;
 import com.example.fellowtraveller.JsonApi;
 import com.example.fellowtraveller.MainActivity;
@@ -71,13 +72,14 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     private NavigationView navigationView;
     private  BottomNavigationView bottomNavigationView;
     private  CircleImageView circleImageViewNav;
-    private int id;
+    private GlobalClass globalClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        globalClass = (GlobalClass) getApplicationContext();
 
 
         Toolbar toolbar =  findViewById(R.id.home_appBar);
@@ -108,7 +110,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
         mExampleList = new ArrayList<>();
         getNotifications();
 
-       // loadImageFromStorage();
     }
 
 
@@ -204,9 +205,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
     }
 
     public void getNotifications() {
-        int id = loadUserId();
-        Log.i("NotificationDev","id: "+id);
-        Call<List<Notification>> call = jsonPlaceHolderApi.getNotificationOfUser(id);
+        Call<List<Notification>> call = jsonPlaceHolderApi.getNotificationOfUser(globalClass.getId());
         call.enqueue(new Callback<List<Notification>>() {
             @Override
             public void onResponse(Call<List<Notification>> mcall, Response<List<Notification>> response) {
@@ -253,38 +252,6 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
 
 
-    public int loadUserId() {
-        int id =0;
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id =  Integer.parseInt(text);
-                    break;
-                }
-                i++;
-            }
-            return id;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return id;
-    }
 
     public void save() {
         DeleteUserPicture();
@@ -380,85 +347,16 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
 
     public void loadUserInfo() {
-        LoadUserPic();
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            View header = navigationView.getHeaderView(0);
-            TextView name = header.findViewById(R.id.user_name_drawer);
-            TextView email = header.findViewById(R.id.user_email_drawer);
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i==2){
-                    name.setText(text);
-                }else if(i==3){
-                    email.setText(text);
-                }else if(i==1){
-                    id = Integer.parseInt(text);
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void LoadUserPic() {
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.user_name_drawer);
+        TextView email = header.findViewById(R.id.user_email_drawer);
+        name.setText(globalClass.getName());
+        email.setText(globalClass.getEmail());
         circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void ... params ) {
-                FileInputStream fis = null;
-                try {
-                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-                    InputStreamReader isr = new InputStreamReader(fis);
-                    BufferedReader br = new BufferedReader(isr);
-                    String line,line1 = "";
-                    try
-                    {
-                        while ((line = br.readLine()) != null)
-                            line1+=line;
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                    return line1;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (fis != null) {
-                        try {
-                            fis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                return "null";
-            }
+        if(!globalClass.getUser_icon().equals("null")) {
+            circleImageViewNav.setImageBitmap(StringToBitMap(globalClass.getUser_icon()));
+        }
 
-            @Override
-            protected void onPostExecute( String result ) {
-                // continue what you are doing...
-                if(!result.equals("null")) {
-                    circleImageViewNav.setImageBitmap(StringToBitMap(result));
-                }
-
-            }
-        }.execute();
     }
 
     public Bitmap StringToBitMap(String image){

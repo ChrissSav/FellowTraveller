@@ -81,7 +81,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private ImageView Img_friendly,Img_reliable,Img_careful,Img_consistent;
     private EditText editText;
     private Button readReviewsButton;
-    private String id;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
     private DatabaseReference userDatabase;
@@ -89,26 +88,26 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private StorageReference mImageStorage;
     //Progress Dialog
     private ProgressDialog mProgressDialog;
+    private GlobalClass globalClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+        globalClass = (GlobalClass) getApplicationContext();
 
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Toolbar toolbar = findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);
 
-        id = getId();
         userDatabase = FirebaseDatabase.getInstance().getReference();
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        circleImageView = (CircleImageView) findViewById(R.id.profile_picture);
+        circleImageView =  findViewById(R.id.profile_picture);
 
-        id = getId();
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
@@ -124,7 +123,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         imageButtonAccept = findViewById(R.id.profile_button_accept);
         imageButtonCancel = findViewById(R.id.profile_button_cancel);
 
-        editText = (EditText) findViewById(R.id.profile_editText);
+        editText = findViewById(R.id.profile_editText);
         textViewAboutMe = findViewById(R.id.profile_about_me);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -142,7 +141,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @RequiresApi(api = Build.VERSION_CODES.O_MR1)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String image = dataSnapshot.child("Users").child(id).child("image").getValue(String.class);
+                String image = dataSnapshot.child("Users").child(globalClass.getId()+"").child("image").getValue(String.class);
 
 
 
@@ -156,9 +155,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-        loadUserInfo();
+      //  loadUserInfo();
 
-
+        LoadUserAllInfo();
         imageButtonUpload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onChooseFile(v);
@@ -213,7 +212,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             public void onClick(View v) {
                 Intent r = new Intent(Profile.this, ReviewsActivity.class);
-                r.putExtra("Target_id",Integer.parseInt(id));
+                r.putExtra("Target_id",globalClass.getId());
                 startActivity(r);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
@@ -297,48 +296,22 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    public void loadUserInfo() {
-        LoadUserPic();
+    public  void LoadUserAllInfo(){
         LoadUserInfoFromServer();
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            View header = navigationView.getHeaderView(0);
-            TextView name = header.findViewById(R.id.user_name_drawer);
-            TextView email = header.findViewById(R.id.user_email_drawer);
-            TextView name2 = findViewById(R.id.profile_name);
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i == 2) {
-                    name.setText(text);
-                    name2.setText(text);
-                } else if (i == 3) {
-                    email.setText(text);
-                } else if (i == 1) {
-                    // id = Integer.parseInt(text);
-                }
-                i++;
-            }
-            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.user_name_drawer);
+        TextView email = header.findViewById(R.id.user_email_drawer);
+        TextView name2 = findViewById(R.id.profile_name);
+        name.setText(globalClass.getName());
+        name2.setText(globalClass.getName());
+        email.setText(globalClass.getEmail());
+        if(!globalClass.getUser_icon().equals("null")){
+            circleImageView.setImageBitmap(StringToBitMap(globalClass.getUser_icon()));
+            circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+            circleImageViewNav.setImageBitmap(StringToBitMap(globalClass.getUser_icon()));
         }
-    }
 
+    }
 
     public void onChooseFile(View v) {
         CropImage.activity().start(Profile.this);
@@ -386,7 +359,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
                 UploadUserPic(thumb_byte);
                 //FireBase Image Storage
-                StorageReference filepath = mImageStorage.child("profile_images").child(id + ".jpg");
+                StorageReference filepath = mImageStorage.child("profile_images").child(globalClass.getId() + ".jpg");
                 filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -396,7 +369,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                                 if (task.isSuccessful()) {
                                     mProgressDialog.dismiss();
                                     Uri download = task.getResult();
-                                    userDatabase.child("Users").child(id).child("image").setValue(download.toString());
+                                    userDatabase.child("Users").child(globalClass.getId()+"").child("image").setValue(download.toString());
                                 } else {
 
                                 }
@@ -426,27 +399,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
 
-    private String saveToInternalStorage(Bitmap bitmapImage) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        File path = new File(directory, "profile.jpg");
-        Log.i("Chris", "path : " + path.getPath());
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(path);
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
-
     public static String random() {
         Random generator = new Random();
         StringBuilder randomStringBuilder = new StringBuilder();
@@ -459,50 +411,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         return randomStringBuilder.toString();
     }
 
-
-    public String getId() {
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            String id = "-1";
-
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i == 1) {
-                    id = text;
-                    return id;
-
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return id;
-
-
-    }
-
     public void UploadUserPic(byte[] thumb_byte){
 
         final String teemp = Base64.encodeToString(thumb_byte, Base64.DEFAULT);
 
         JsonObject jsonObject = new JsonObject();
-        getId();
-        jsonObject.addProperty("id", id);
+        jsonObject.addProperty("id", globalClass.getId());
         jsonObject.addProperty("icon", teemp);
         Call<Status_handling> call = jsonPlaceHolderApi.uploadImage(jsonObject);
 
@@ -520,7 +434,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     //  img2.setImageBitmap(StringToBitMap(status.getMsg()));
                     Log.i("SaveUserPicture","status.getStatus() = "+status.getStatus());
                     SaveUserPicture(status.getMsg());
-                    LoadUserPic();
+                    globalClass.setUser_icon(status.getMsg());
+                    LoadUserAllInfo();
                     return;
                 }else{
                     Toast.makeText(Profile.this,status.getMsg(),Toast.LENGTH_SHORT).show();
@@ -550,90 +465,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    public void LoadUserPic(){
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void ... params ) {
-                FileInputStream fis = null;
-                try {
-                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-                    InputStreamReader isr = new InputStreamReader(fis);
-                    BufferedReader br = new BufferedReader(isr);
-                    String line,line1 = "";
-                    try
-                    {
-                        while ((line = br.readLine()) != null)
-                            line1+=line;
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                    return line1;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (fis != null) {
-                        try {
-                            fis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                return "null";
-            }
 
-            @Override
-            protected void onPostExecute( String result ) {
-                // continue what you are doing...
-                if(!result.equals("null")) {
-                    circleImageView.setImageBitmap(StringToBitMap(result));
-                    circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-                    circleImageViewNav.setImageBitmap(StringToBitMap(result));
-                }
 
-            }
-        }.execute();
-
-    }
-
-    public void LoadUserPic2() {
-
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String line,line1 = "";
-            try
-            {
-                while ((line = br.readLine()) != null)
-                    line1+=line;
-            }catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            if(line1!="null") {
-                circleImageView.setImageBitmap(StringToBitMap(line1));
-                circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-                circleImageViewNav.setImageBitmap(StringToBitMap(line1));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     public void SaveUserPicture(String image) {
         String text = image;
@@ -660,21 +493,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
 
-    public String BitMapToString (Bitmap bitmap){
-        try{
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream .toByteArray();
-            return Base64.encodeToString(byteArray, Base64.DEFAULT);
-        }catch(Exception e){
-            e.getMessage();
-            return null;
-        }
-    }
-
 
     private void LoadUserInfoFromServer(){
-        Call<RateUserContainerItem> call = jsonPlaceHolderApi.getUserInfo(Integer.parseInt(id));
+        Call<RateUserContainerItem> call = jsonPlaceHolderApi.getUserInfo(globalClass.getId());
         call.enqueue(new Callback<RateUserContainerItem>() {
             @Override
             public void onResponse(Call<RateUserContainerItem> mcall, Response<RateUserContainerItem> response) {
@@ -689,10 +510,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 SetImgToCareful(container.getCareful());
                 SetImgToConsistent(container.getConsistent());
 
-               /* Img_friendly = findViewById(R.id.profile_img_friendly);
-                Img_reliable = findViewById(R.id.profile_img_reliable);
-                Img_careful= findViewById(R.id.profile_img_careful);
-                Img_consistent = findViewById(R.id.profile_img_consistent);*/
+
 
             }
 

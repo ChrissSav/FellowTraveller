@@ -34,10 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
+    private GlobalClass globalClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        globalClass = (GlobalClass) getApplicationContext();
 
 
         setContentView(R.layout.activity_login);
@@ -80,6 +83,10 @@ public class LoginActivity extends AppCompatActivity {
                 UserAuth user = response.body();
                 if(user.getName()!=null){
                     save("true",user.getId()+"",user.getName(),user.getEmail());
+                    globalClass.setId(user.getId());
+                    globalClass.setName(user.getName());
+                    globalClass.setEmail(user.getEmail());
+                    globalClass.setUser_icon(user.getPicture());
                     SaveUserPicture(user.getPicture());
                     Intent intent = new Intent(LoginActivity.this, HomeBetaActivity.class);
                     startActivity(intent);

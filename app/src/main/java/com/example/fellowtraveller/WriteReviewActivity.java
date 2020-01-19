@@ -46,10 +46,11 @@ public class WriteReviewActivity extends AppCompatActivity {
     private SmileRating smileRatingCareful;
     private SmileRating smileRatingConsistent;
     private CircleImageView circleImageView;
-    private int id;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit;
     private TripB trip;
+    private GlobalClass globalClass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class WriteReviewActivity extends AppCompatActivity {
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         setContentView(R.layout.activity_write_review);
+        globalClass = (GlobalClass) getApplicationContext();
 
 
         username = findViewById(R.id.WriteReviewActivity_userName);
@@ -175,8 +177,6 @@ public class WriteReviewActivity extends AppCompatActivity {
             }
         });
 
-        loadUserInfo();
-
     }
 
     public void setEmojiNames(SmileRating item) {
@@ -215,7 +215,7 @@ public class WriteReviewActivity extends AppCompatActivity {
 
     private void RegisterRateUser(){
 
-        Call<Status_handling> call = jsonPlaceHolderApi.RegisterRate(id,trip.getCreator().getId(),friendlyScore, reliableScore,
+        Call<Status_handling> call = jsonPlaceHolderApi.RegisterRate(globalClass.getId(),trip.getCreator().getId(),friendlyScore, reliableScore,
                 carefulScore,consistentScore,editText.getText().toString()+" ");
         call.enqueue(new Callback<Status_handling>() {
             @Override
@@ -240,36 +240,7 @@ public class WriteReviewActivity extends AppCompatActivity {
         });
     }
 
-    public void loadUserInfo() {
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id = Integer.parseInt(text);
-                    Log.i("loadUserInfo","id: "+id);
-                    break;
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
 
     public Bitmap StringToBitMap(String image){
         try{

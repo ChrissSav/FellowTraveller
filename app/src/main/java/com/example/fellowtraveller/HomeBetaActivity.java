@@ -60,10 +60,13 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     private BottomNavigationView bottomNavigationView;
     private CircleImageView circleImageViewNav;
 
+    private GlobalClass globalClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_beta);
+        globalClass = (GlobalClass) getApplicationContext();
 
 
 
@@ -92,19 +95,10 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         bottomNavigationView = findViewById(R.id.homeBetaActivity_Bottom_Nav);
         bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
 
+        LoadUserAllInfo();
 
-        loadUserInfo();
-        // loadImageFromStorage();
         BottonNav();
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        display.getMetrics(outMetrics);
-
-        /*float density  = getResources().getDisplayMetrics().density;
-        float dpHeight = outMetrics.heightPixels / density;
-        float dpWidth  = outMetrics.widthPixels / density;
-        Toast.makeText(HomeBetaActivity.this,"dpWidth : "+dpWidth, Toast.LENGTH_SHORT).show();*/
-
+        CheckUserNotification(globalClass.getId());
 
     }
 
@@ -229,95 +223,20 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         }
     }
 
-    public void loadUserInfo() {
-        LoadUserPic();
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            View header = navigationView.getHeaderView(0);
-            TextView name = header.findViewById(R.id.user_name_drawer);
-            TextView email = header.findViewById(R.id.user_email_drawer);
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if (i==2){
-                    name.setText(text);
-                }else if(i==3){
-                    email.setText(text);
-                }else if(i==1){
-                    id = Integer.parseInt(text);
-                    Log.i("NotificationDev","id: "+id);
-                    CheckUserInfoToUpdate(id);
-                    CheckUserNotification(id);
-                }
-                i++;
-            }
-            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
-           // Toast.makeText(HomeBetaActivity.this,"id : "+id, Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
+
+    public  void LoadUserAllInfo(){
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.user_name_drawer);
+        TextView email = header.findViewById(R.id.user_email_drawer);
+        name.setText(globalClass.getName());
+        email.setText(globalClass.getEmail());
+        if(!globalClass.getUser_icon().equals("null")){
+            circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
+            circleImageViewNav.setImageBitmap(StringToBitMap(globalClass.getUser_icon()));
         }
+
     }
-
-
-
-    public void LoadUserPic() {
-        circleImageViewNav = navigationView.getHeaderView(0).findViewById(R.id.nav_user_pic);
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void ... params ) {
-                FileInputStream fis = null;
-                try {
-                    fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
-                    InputStreamReader isr = new InputStreamReader(fis);
-                    BufferedReader br = new BufferedReader(isr);
-                    String line,line1 = "";
-                    try
-                    {
-                        while ((line = br.readLine()) != null)
-                            line1+=line;
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                    return line1;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (fis != null) {
-                        try {
-                            fis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                return "null";
-            }
-
-            @Override
-            protected void onPostExecute( String result ) {
-                // continue what you are doing...
-                if(!result.equals("null")) {
-                    circleImageViewNav.setImageBitmap(StringToBitMap(result));
-                }
-
-            }
-        }.execute();
-    }
-
     public Bitmap StringToBitMap(String image){
         try{
             byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
@@ -331,56 +250,6 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
         }
     }
 
-    private void CheckUserInfoToUpdate(int id){
-        JsonApi jsonPlaceHolderApi;
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
-        Call<UserAuth> call = jsonPlaceHolderApi.CheckUserInfo(id);
-
-        call.enqueue(new Callback<UserAuth>() {
-            @Override
-            public void onResponse(Call<UserAuth> mcall, Response<UserAuth> response) {
-                if (!response.isSuccessful()) {
-                   // Toast.makeText(MainActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                UserAuth user = response.body();
-                if(user.getName()!=null){
-                    //save("true",user.getId()+"",user.getName(),user.getEmail());
-                    SaveUserPicture(user.getPicture());
-                    LoadUserPic();
-                    return;
-                }
-               // Toast.makeText(MainActivity.this,"Ανεπιτυχής είσοδος",Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<UserAuth> call, Throwable t) {
-                //  Toast.makeText(LoginActivity.this,"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    public void SaveUserPicture(String image) {
-        String text = image;
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
-            fos.write(text.getBytes());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
 
     private void CheckUserNotification(int id){

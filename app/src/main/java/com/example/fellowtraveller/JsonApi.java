@@ -116,7 +116,7 @@ public interface JsonApi {
             @Path("consistentScore") int consistentScore,
             @Path("description") String description
     );
-
+ 
     @GET("GetUsersRateAnother/{user_id}")
     Call<List<ReviewItem>> getUsersRateAnother(
             @Path("user_id") int user_id

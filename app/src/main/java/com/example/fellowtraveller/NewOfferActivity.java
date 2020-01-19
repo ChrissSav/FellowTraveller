@@ -47,12 +47,14 @@ public class NewOfferActivity extends AppCompatActivity {
     private FragmentNewOfferStepTwo stage2 = new FragmentNewOfferStepTwo();
     private FragmentNewOfferStepThree stage3 = new FragmentNewOfferStepThree() ;
     private FragmentManager fragmentManager;
+    private GlobalClass globalClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_offer);
+        globalClass = (GlobalClass) getApplicationContext();
 
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.new_offer_button_next_fragment);
@@ -126,39 +128,6 @@ public class NewOfferActivity extends AppCompatActivity {
     }
 
 
-    public int loadUserId() {
-        int id =0;
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.FILE_USER_INFO));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id =  Integer.parseInt(text);
-                    break;
-                }
-                i++;
-            }
-            return id;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return id;
-    }
-
     public void registerTrip(){
        // Toast.makeText(NewOfferActivity.this, "rgregerg καταχώρηση", Toast.LENGTH_SHORT).show();
 
@@ -171,7 +140,7 @@ public class NewOfferActivity extends AppCompatActivity {
         int price_trip = Integer.parseInt(stage3.getPrice());
         int max_seats = Integer.parseInt(stage3.getSeats());
         int  max_bags = Integer.parseInt(stage3.getBags());
-        int creator_id = loadUserId();
+        int creator_id = globalClass.getId();
         if (creator_id!=0) {
             sendToAPi(from, to, date, time, creator_id, des, max_seats, max_bags,price_trip);
         }

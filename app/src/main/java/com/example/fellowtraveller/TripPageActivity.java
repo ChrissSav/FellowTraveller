@@ -53,13 +53,13 @@ public class TripPageActivity extends AppCompatActivity {
     private TextView textView_price;
     private CircleImageView img;
     private Button select,back,messega_btn;
-    private int id;
     private boolean flag;
     private CheckBox bag;
     private List<UserB> passengers ;
     private RecyclerView mRecyclerViewPassengers;
     private PassengerAdapter mAdapterPassengers;
     private RecyclerView.LayoutManager mLayoutManagerP;
+    private GlobalClass globalClass;
 
 
     @Override
@@ -67,6 +67,7 @@ public class TripPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_page);
         final Intent intent = getIntent();
+        globalClass = (GlobalClass) getApplicationContext();
         trip =  intent.getParcelableExtra("Trip");
         flag =  intent.getBooleanExtra("F", true);
         passengers = trip.getPassengers();
@@ -147,7 +148,6 @@ public class TripPageActivity extends AppCompatActivity {
         });
 
         FillFields();
-        loadUserInfo();
         buildRecyclerViewPassengers();
 
     }
@@ -200,12 +200,12 @@ public class TripPageActivity extends AppCompatActivity {
 
 
     public void Register(String bag){
-        Call<Status_handling> call = jsonPlaceHolderApi.sendRequest(id,bag,trip.getCreator().getId(),trip.getId());
+        Call<Status_handling> call = jsonPlaceHolderApi.sendRequest(globalClass.getId(),bag,trip.getCreator().getId(),trip.getId());
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(TripPageActivity.this,"response "+response.errorBody()+"\n"+"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TripPageActivity.this,"response "+response.errorBody()+"\n"+"response "+response.message(),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Status_handling status = response.body();
@@ -229,35 +229,7 @@ public class TripPageActivity extends AppCompatActivity {
     }
 
 
-    public void loadUserInfo() {
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id = Integer.parseInt(text);
-                    break;
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
     public Bitmap StringToBitMap(String image){
         try{
             byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);

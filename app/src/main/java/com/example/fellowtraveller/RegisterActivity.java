@@ -59,6 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
     private RegisterStage2Fragment stage2 = new RegisterStage2Fragment();
     private FragmentManager fragmentManager;
     private TextView textView;
+    private GlobalClass globalClass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        globalClass = (GlobalClass) getApplicationContext();
 
 
         fragmentManager = getSupportFragmentManager();
@@ -144,6 +147,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if(status.getStatus().equals("success")){
                     Toast.makeText(RegisterActivity.this,"Επιτυχής καταχώρηση",Toast.LENGTH_SHORT).show();
                     save("true",Integer.parseInt(status.getMsg())+"",name,email);
+                    globalClass.setName(name);
+                    globalClass.setEmail(email);
+                    globalClass.setUser_icon("null");
                     //we have to get the id of user and this id save it to the database
                     //Or we have to send the email of user as unique object
                     Intent intent = new Intent(RegisterActivity.this, HomeBetaActivity.class);

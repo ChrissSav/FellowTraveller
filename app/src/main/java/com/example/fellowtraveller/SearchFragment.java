@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,7 +58,6 @@ public class SearchFragment extends Fragment {
     private ConstraintLayout constraintLayout,constraintLayout_to_hide;
     private ConstraintSet constraintSetOld = new ConstraintSet();
     private ConstraintSet constraintSetNew = new ConstraintSet();
-    private boolean View_id_visible = false;
     private TextView textView_count_stand_by;
     private Button view_stand_by;
     private RecyclerView mRecyclerView_stand_by;
@@ -65,15 +66,18 @@ public class SearchFragment extends Fragment {
     private ArrayList<TripB> ListOfStand_by;
     //=============================
     private int cancelPosition = -1;
+    private boolean altLayout;
+
+    private boolean flag1,flag2;
     public SearchFragment() {
 
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_search, container, false);
-
+        flag1 = flag2 = false;
         swipeRefreshLayout = mMainView.findViewById(R.id.SearchFragment_SwipeRefreshLayout);
         view_stand_by = mMainView.findViewById(R.id.SearchFragment_button_stand_by);
         constraintLayout_to_hide = mMainView.findViewById(R.id.constraintLayout2);
@@ -85,7 +89,7 @@ public class SearchFragment extends Fragment {
 
         constraintLayout = mMainView.findViewById(R.id.SearchFragment_Layout_layout);
         constraintSetOld.clone(constraintLayout);
-        constraintSetNew.clone(container.getContext(), R.layout.fragment_search_alt);
+        constraintSetNew.clone(mMainView.getContext(), R.layout.fragment_search_alt);
 
         ListOfStand_by = new ArrayList<>();
         ListOfTrips = new ArrayList<>();
@@ -93,30 +97,44 @@ public class SearchFragment extends Fragment {
             constraintLayout_to_hide.setVisibility(View.GONE);
         getTripsStandBy();
         getTrips();
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 getTrips();
+                getTripsStandBy();
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void ... params ) {
+                        while(!flag1 && !flag2){
 
+                        }
+                        return "null";
+                    }
+
+                    @Override
+                    protected void onPostExecute( String result ) {
+                        swipeRefreshLayout.setRefreshing(false);
+
+
+                    }
+                }.execute();
             }
         });
-        view_stand_by.setOnClickListener(new View.OnClickListener() {
+       view_stand_by.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("view_stand_byOnClickLis","size :"+ListOfStand_by.size());
-                Log.i("view_stand_byOnClickLis","View_id_visible :"+View_id_visible);
-
                 Transition changeBounds = new ChangeBounds();
                 changeBounds.setInterpolator(new OvershootInterpolator());
                 TransitionManager.beginDelayedTransition(constraintLayout, changeBounds);
-                if(!View_id_visible) {
+                if (!altLayout) {
                     constraintSetNew.applyTo(constraintLayout);
-                    View_id_visible = true;
-                }else{
+                    altLayout = true;
+                } else {
                     constraintSetOld.applyTo(constraintLayout);
-                    View_id_visible = false;
+                    altLayout = false;
                 }
+
             }
         });
         return mMainView;
@@ -148,6 +166,7 @@ public class SearchFragment extends Fragment {
         });
     }
 
+
     public void buildRecyclerView2() {
         mRecyclerView_stand_by = mMainView.findViewById(R.id.SearchFragment_recyclerView_StandBy);
         mRecyclerView_stand_by.setHasFixedSize(true);
@@ -172,7 +191,7 @@ public class SearchFragment extends Fragment {
 
 
     private void getTrips() {
-
+        flag2=false;
         if(CheckInternetConnection()){
             Call<List<TripB>> call = jsonPlaceHolderApi.getTripsTakesPart(loadUserId());
             call.enqueue(new Callback<List<TripB>>() {
@@ -189,21 +208,23 @@ public class SearchFragment extends Fragment {
                     }
 
                     buildRecyclerView(mMainView);
-                    swipeRefreshLayout.setRefreshing(false);
-
+                    flag2=true;
                 }
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {
                     //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    flag2=true;
                 }
             });
         }else {
+            flag2=true;
             Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void getTripsStandBy() {
-
+        flag1=false;
         Call<List<TripB>> call = jsonPlaceHolderApi.getTripsStandBy(loadUserId());
         call.enqueue(new Callback<List<TripB>>() {
             @Override
@@ -225,12 +246,14 @@ public class SearchFragment extends Fragment {
                     buildRecyclerView2();
                 }
 
+                flag1=true;
 
 
             }
             @Override
             public void onFailure(Call<List<TripB>> call, Throwable t) {
                 //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                flag2=true;
             }
         });
 

@@ -30,8 +30,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -112,6 +116,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
         if(!trip.getCreator().getPicture().equals("null")){
             img.setImageBitmap(StringToBitMap(trip.getCreator().getPicture()));
         }
+
     }
 
     public void onBackPressed(){
@@ -130,17 +135,26 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             public void onItemClick(int position,int flag) {
 
                 //flag==0 accept
-                if(flag == 0){
-                    AcceptPassenger(position);
+                if(flag == 0 ){
+                    if(trip.getState().equals("available")){
+                        AcceptPassenger(position);
+                    }else{
+                        Toast.makeText(TripPageCreatorActivity.this,"Δεν επιτρέπονται αλλαγές η διαδρομή έχει ολοκληρωθεί! ",Toast.LENGTH_SHORT).show();
+
+                    }
                 }//flag==1 reject
                 else if(flag == 1){
-                    RejectPassenger(position);
+                    if(trip.getState().equals("available")){
+                        RejectPassenger(position);
+                    }else{
+                        Toast.makeText(TripPageCreatorActivity.this,"Δεν επιτρέπονται αλλαγές η διαδρομή έχει ολοκληρωθεί!",Toast.LENGTH_SHORT).show();
+
+                    }
                     //getUserTrips(requests.get(position).getId(),trip.getId(),REJECT,position);
-                }else if(flag==2){
+                }else if(flag==2 ){
                     Intent intent = new Intent(TripPageCreatorActivity.this,UsersProfileActivity.class);
                     intent.putExtra("User_id",requests.get(position).getId());
                     startActivity(intent);
-
                 }
             }
         });
@@ -317,36 +331,6 @@ public class TripPageCreatorActivity extends AppCompatActivity {
 
 
 
-    public void loadUserInfo() {
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-            int i = 0;
-            while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id = Integer.parseInt(text);
-                }
-                i++;
-                break;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     private void getUserTrips(final UserB user, int trip_id, final String status) {
         if(CheckInternetConnection()){
@@ -414,4 +398,5 @@ public class TripPageCreatorActivity extends AppCompatActivity {
             return null;
         }
     }
+
 }

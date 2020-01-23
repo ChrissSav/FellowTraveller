@@ -72,6 +72,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String FILE_NAME = "fellow_login_state.txt";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private CircleImageView circleImageView, circleImageViewNav;
@@ -89,6 +90,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     //Progress Dialog
     private ProgressDialog mProgressDialog;
     private GlobalClass globalClass;
+    private String yourId;
+    private String id;
 
 
     @Override
@@ -135,13 +138,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         imageButtonAccept.setVisibility(View.GONE);
         imageButtonCancel.setVisibility(View.GONE);
+        yourId = getId();
+        //loadUserInfo();
 
 
         userDatabase.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O_MR1)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String image = dataSnapshot.child("Users").child(globalClass.getId()+"").child("image").getValue(String.class);
+                String image = dataSnapshot.child("Users").child(yourId).child("image").getValue(String.class);
 
 
 
@@ -155,7 +160,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-      //  loadUserInfo();
+
 
         LoadUserAllInfo();
         imageButtonUpload.setOnClickListener(new View.OnClickListener() {
@@ -330,8 +335,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             if (resultCode == RESULT_OK) {
 
                 mProgressDialog = new ProgressDialog(Profile.this);
-                mProgressDialog.setTitle("Uploading Image..");
-                mProgressDialog.setMessage("Please wait while we process the image.");
+                mProgressDialog.setTitle("Ανέβασμα εικόνας..");
+                mProgressDialog.setMessage("Παρακαλώ περιμένετε όσο ανεβάζουμε την εικόνα σας.");
                 mProgressDialog.setCanceledOnTouchOutside(false);
                 mProgressDialog.show();
 
@@ -341,7 +346,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 File thumb_filePath = new File(result.getUri().getPath());
 
 
-                Bitmap thumb_bitmap = null;
+               /*Bitmap thumb_bitmap = null;
                 try {
                     thumb_bitmap = new Compressor(this)
                             .setMaxWidth(200)
@@ -358,8 +363,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 byte[] thumb_byte = baos.toByteArray();
 
                 UploadUserPic(thumb_byte);
+                */
+
                 //FireBase Image Storage
-                StorageReference filepath = mImageStorage.child("profile_images").child(globalClass.getId() + ".jpg");
+                StorageReference filepath = mImageStorage.child("profile_images").child(yourId + ".jpg");
                 filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -369,7 +376,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                                 if (task.isSuccessful()) {
                                     mProgressDialog.dismiss();
                                     Uri download = task.getResult();
-                                    userDatabase.child("Users").child(globalClass.getId()+"").child("image").setValue(download.toString());
+                                    userDatabase.child("Users").child(yourId).child("image").setValue(download.toString());
                                 } else {
 
                                 }
@@ -393,7 +400,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             //saveToInternalStorage(result.getBitmap());
         } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
             // Exception e = result.getError();
-            //Log.i("error",e.getMessage());
+           // Log.i("error",e.getMessage());
 
         }
     }
@@ -618,6 +625,41 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             default:
                 break;
         }
+    }
+    public String getId () {
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            String id = "-1";
+
+            int i = 0;
+            while ((text = br.readLine()) != null) {
+                if (i == 1) {
+                    id = text;
+                    return id;
+
+                }
+                i++;
+            }
+            //String t = "name : "+name.getText()+"\n"+"email: "+email.getText()+"\n"+"id : "+id;
+            //Toast.makeText(MainHomeActivity.this,t,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return id;
     }
 
 

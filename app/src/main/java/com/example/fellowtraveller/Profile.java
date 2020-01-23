@@ -346,7 +346,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 File thumb_filePath = new File(result.getUri().getPath());
 
 
-               /*Bitmap thumb_bitmap = null;
+               Bitmap thumb_bitmap = null;
                 try {
                     thumb_bitmap = new Compressor(this)
                             .setMaxWidth(200)
@@ -363,7 +363,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 byte[] thumb_byte = baos.toByteArray();
 
                 UploadUserPic(thumb_byte);
-                */
+
 
                 //FireBase Image Storage
                 StorageReference filepath = mImageStorage.child("profile_images").child(yourId + ".jpg");

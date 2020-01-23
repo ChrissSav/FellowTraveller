@@ -78,18 +78,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 i++;
             }
-            if(flag){
-                Intent mainIntent = new Intent(SplashActivity.this, HomeBetaActivity.class);
-                startActivity(mainIntent);
-                finish();
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }else{
-                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(mainIntent);
-                finish();
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }
-        } catch (FileNotFoundException e) {
+                    } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,6 +90,18 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+        if(flag){
+            Intent mainIntent = new Intent(SplashActivity.this, HomeBetaActivity.class);
+            startActivity(mainIntent);
+            finish();
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        }else{
+            save();
+            Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(mainIntent);
+            finish();
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         }
     }
 
@@ -152,6 +153,7 @@ public class SplashActivity extends AppCompatActivity {
                 if(user.getName()!=null){
                     //save("true",user.getId()+"",user.getName(),user.getEmail());
                     globalClass.setUser_icon(user.getPicture());
+                    SaveUserPicture(user.getPicture());
                     return;
                 }
 
@@ -166,8 +168,53 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+
     public void SaveUserPicture(String image) {
         String text = image;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public void save() {
+        DeleteUserPicture();
+        String text = "false";
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void DeleteUserPicture() {
+        String text = "null";
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(getString(R.string.FILE_USER_PICTURE), MODE_PRIVATE);

@@ -51,7 +51,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/blackshape"
+                android:src="@drawable/profile_picture"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tripPage_button_back" />
 

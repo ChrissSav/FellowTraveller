@@ -46,7 +46,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/blackshape"
+            android:src="@drawable/profile_picture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TripPageCreatorActivity_button_back" />
 

@@ -26,14 +26,13 @@
                 android:id="@+id/settings_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="94dp"
                 android:layout_marginStart="34dp"
-                android:text="Settings"
+                android:layout_marginTop="94dp"
+                android:textColor="#000"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                android:textColor="#000"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/settings_personal_information"

@@ -236,10 +236,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.wallet:
-                Intent s = new Intent(Profile.this, Wallet.class);
+                /*Intent s = new Intent(Profile.this, Wallet.class);
                 startActivity(s);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
+                finish();*/
                 break;
             case R.id.settings:
                 Intent k = new Intent(Profile.this, Settings.class);
@@ -430,6 +430,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 }
                 Status_handling status = response.body();
                 if(status.getStatus().equals("success")){
+                    mProgressDialog.dismiss();
                     //   Toast.makeText(MainActivity.this,status.getMsg(),Toast.LENGTH_SHORT).show();
                     //  img2.setImageBitmap(StringToBitMap(status.getMsg()));
                     Log.i("SaveUserPicture","status.getStatus() = "+status.getStatus());

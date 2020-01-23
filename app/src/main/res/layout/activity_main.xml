@@ -48,7 +48,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="Και τι α κανς να κατς να μαλως.. Ε να κατς να σκας βρωμιαρη"
+            android:text="Ο στόχος \n μας είναι να φέρουμε κοντά τους ανθρώπους"
             android:textColor="#C9C9C9"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

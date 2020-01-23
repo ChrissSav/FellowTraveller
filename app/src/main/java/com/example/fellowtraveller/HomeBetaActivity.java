@@ -145,9 +145,9 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
                 finish();
                 break;
             case R.id.wallet:
-                Intent s = new Intent(HomeBetaActivity.this, Wallet.class);
+               /* Intent s = new Intent(HomeBetaActivity.this, Wallet.class);
                 startActivity(s);
-                finish();
+                finish();*/
                 break;
             case R.id.settings:
                 Intent i = new Intent(HomeBetaActivity.this, Settings.class);

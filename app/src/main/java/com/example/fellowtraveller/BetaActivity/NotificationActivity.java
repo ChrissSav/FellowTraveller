@@ -311,9 +311,9 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
                 finish();
                 break;
             case R.id.wallet:
-                Intent s = new Intent(NotificationActivity.this, Wallet.class);
+                /*Intent s = new Intent(NotificationActivity.this, Wallet.class);
                 startActivity(s);
-                finish();
+                finish();*/
                 break;
             case R.id.settings:
                 Intent i = new Intent(NotificationActivity.this, Settings.class);

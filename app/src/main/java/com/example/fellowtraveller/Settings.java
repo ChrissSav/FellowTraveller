@@ -86,10 +86,10 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
                 break;
 
             case R.id.wallet:
-                Intent s = new Intent(Settings.this, Wallet.class);
+               /* Intent s = new Intent(Settings.this, Wallet.class);
                 startActivity(s);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
+                finish();*/
                 break;
             case R.id.settings:
 

@@ -378,7 +378,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                                     Uri download = task.getResult();
                                     userDatabase.child("Users").child(yourId).child("image").setValue(download.toString());
                                 } else {
-
+                                    Toast.makeText(Profile.this,"Η εικόνα σας δεν μπόρεσε να ανέβει",Toast.LENGTH_SHORT).show();
+                                    mProgressDialog.dismiss();
                                 }
                             }
                         });

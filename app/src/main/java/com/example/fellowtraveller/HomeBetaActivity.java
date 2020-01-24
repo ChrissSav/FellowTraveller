@@ -59,7 +59,6 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     private int id;
     private BottomNavigationView bottomNavigationView;
     private CircleImageView circleImageViewNav;
-
     private GlobalClass globalClass;
 
     @Override

@@ -60,6 +60,14 @@ public class ProsforesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_prosfores, container, false);
 
+
+
+        return mMainView;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
         loadUserId();
 
         ListOfTrips = new ArrayList<>();
@@ -75,8 +83,7 @@ public class ProsforesFragment extends Fragment {
 
             }
         });
-
-        return mMainView;
+        Log.i("mMainView","onStart");
     }
 
 

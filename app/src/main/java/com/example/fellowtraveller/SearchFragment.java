@@ -82,7 +82,11 @@ public class SearchFragment extends Fragment {
         view_stand_by = mMainView.findViewById(R.id.SearchFragment_button_stand_by);
         constraintLayout_to_hide = mMainView.findViewById(R.id.constraintLayout2);
         textView_count_stand_by = mMainView.findViewById(R.id.SearchFragment_textView_num_of_StandBy);
-
+        return mMainView;
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
 
         retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
@@ -121,7 +125,7 @@ public class SearchFragment extends Fragment {
                 }.execute();
             }
         });
-       view_stand_by.setOnClickListener(new View.OnClickListener() {
+        view_stand_by.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Transition changeBounds = new ChangeBounds();
@@ -137,12 +141,6 @@ public class SearchFragment extends Fragment {
 
             }
         });
-        return mMainView;
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
 
     }
 

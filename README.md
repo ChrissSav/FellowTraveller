@@ -10,6 +10,7 @@
 
 <b>Βιβλιοθήκες</b>
 - [Retrofit](https://square.github.io/retrofit/)
+- [Picasso](https://square.github.io/picasso/) 
 - [Firebase](https://firebase.google.com/?gclid=EAIaIQobChMIxKjK_Pik5wIVgtDeCh3QfQ5MEAAYASAAEgLuv_D_BwE)
 - [PlacesAPI](https://cloud.google.com/maps-platform/places/?utm_source=google&utm_medium=cpc&utm_campaign=FY18-Q2-global-demandgen-paidsearchonnetworkhouseads-cs-maps_contactsal_saf&utm_content=text-ad-none-none-DEV_c-CRE_397052992298-ADGP_Hybrid+%7C+AW+SEM+%7C+BKWS+~+Places+%7C+BMM+%7C+Google+Maps+Places+API-KWID_43700049595992094-kwd-301485308762-userloc_9067682&utm_term=KW_%2Bgoogle%20%2Bplaces%20%2Bapi-ST_%2Bgoogle+%2Bplaces+%2Bapi&gclid=EAIaIQobChMIgfCep_mk5wIVh-F3Ch0i5ggMEAAYASAAEgI_3PD_BwE)
 - [Smileyrating](https://github.com/sujithkanna/SmileyRating) 

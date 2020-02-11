@@ -8,6 +8,22 @@
 
 Τα δεδομένα της εφαρμογής διατηρούνται σε δυο διαφορετικά σημεία. Για την αποθήκευση και άντληση των δεδομένων που αφορούν τα ταξίδια χρησιμοποιήθηκε ένα [REST API](https://github.com/ChrissSav/FellowTravellerBackEnd) ενώ για την επικοινωνία των χρηστών χρησιμοποιήθηκε το Firebase.
 
+
+![1](https://user-images.githubusercontent.com/38664123/74241534-e8c99180-4ce4-11ea-8f8c-bbf7d43937ba.png)
+![2](https://user-images.githubusercontent.com/38664123/74241597-0ac31400-4ce5-11ea-81e8-19f24a78f41a.png)
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+![3](https://user-images.githubusercontent.com/38664123/74241638-1dd5e400-4ce5-11ea-82ae-5b766f6f46cc.png)
+![5](https://user-images.githubusercontent.com/38664123/74242012-d3089c00-4ce5-11ea-97b1-b4598a280686.png)
+
+
+
+
+
 <b>Βιβλιοθήκες</b>
 - [Retrofit](https://square.github.io/retrofit/)
 - [Picasso](https://square.github.io/picasso/) 

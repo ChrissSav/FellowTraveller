@@ -83,7 +83,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private EditText editText;
     private Button readReviewsButton;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit ;
     private DatabaseReference userDatabase;
     //Firabase Storage Profile Image
     private StorageReference mImageStorage;
@@ -99,7 +99,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         globalClass = (GlobalClass) getApplicationContext();
-
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Toolbar toolbar = findViewById(R.id.home_appBar);
         setSupportActionBar(toolbar);

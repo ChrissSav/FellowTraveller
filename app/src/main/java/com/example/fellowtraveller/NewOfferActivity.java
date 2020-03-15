@@ -38,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
     private Button btn_back;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit ;
     private JsonApi jsonPlaceHolderApi= retrofit.create(JsonApi.class);
     private Button btn_next_stage;
     private Fragment fra;
@@ -55,7 +55,7 @@ public class NewOfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_offer);
         globalClass = (GlobalClass) getApplicationContext();
-
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.new_offer_button_next_fragment);
         btn_back = findViewById(R.id.new_offer_button_back);

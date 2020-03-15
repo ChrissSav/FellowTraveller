@@ -38,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TripPageActivity extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit;
     private TripB trip;
     private TextView textView_status;
     private TextView textView_creator_name;
@@ -71,6 +71,7 @@ public class TripPageActivity extends AppCompatActivity {
         trip =  intent.getParcelableExtra("Trip");
         flag =  intent.getBooleanExtra("F", true);
         passengers = trip.getPassengers();
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         img = findViewById(R.id.tripPage_textView_adminImage);
         messega_btn = findViewById(R.id.tripPage_button_sendMessage);

@@ -48,10 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn_next_stage,button_back;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(getString(R.string.api_url))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    private Retrofit retrofit ;
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
     private Fragment fra;
@@ -71,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         globalClass = (GlobalClass) getApplicationContext();
-
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
 
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.RegisterActivity_button_next);

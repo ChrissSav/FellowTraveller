@@ -31,7 +31,7 @@ yourEditText.setTransformationMethod(new PasswordTransformationMethod());
 public class LoginActivity extends AppCompatActivity {
     private Button btn,btn_login;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit; //= new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit;
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
     private GlobalClass globalClass;

@@ -44,8 +44,9 @@ public class UsersProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users_profile);
         final Intent intent = getIntent();
         id = intent.getIntExtra("User_id",0);
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
         circleImageView = findViewById(R.id.UsersProfile_profile_picture);
         readReviewsButton = findViewById(R.id.profile_all_reviews_btn);
         rate = findViewById(R.id.UserProfile_user_rating);

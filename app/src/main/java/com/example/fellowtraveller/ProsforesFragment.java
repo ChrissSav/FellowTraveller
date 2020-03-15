@@ -61,13 +61,6 @@ public class ProsforesFragment extends Fragment {
         mMainView = inflater.inflate(R.layout.fragment_prosfores, container, false);
 
 
-
-        return mMainView;
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
         loadUserId();
 
         ListOfTrips = new ArrayList<>();
@@ -84,6 +77,28 @@ public class ProsforesFragment extends Fragment {
             }
         });
         Log.i("mMainView","onStart");
+        return mMainView;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        /*loadUserId();
+
+        ListOfTrips = new ArrayList<>();
+        swipeRefreshLayout = mMainView.findViewById(R.id.ProsforesFragment_SwipeRefreshLayout);
+        noResultsImage = mMainView.findViewById(R.id.no_results);
+        getUserTrips();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getUserTrips();
+
+            }
+        });
+        Log.i("mMainView","onStart");*/
     }
 
 

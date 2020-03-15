@@ -82,12 +82,19 @@ public class SearchFragment extends Fragment {
         view_stand_by = mMainView.findViewById(R.id.SearchFragment_button_stand_by);
         constraintLayout_to_hide = mMainView.findViewById(R.id.constraintLayout2);
         textView_count_stand_by = mMainView.findViewById(R.id.SearchFragment_textView_num_of_StandBy);
+
+        BuildContainer();
         return mMainView;
     }
     @Override
     public void onStart(){
         super.onStart();
 
+
+
+    }
+
+    public void BuildContainer(){
         retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
@@ -141,7 +148,6 @@ public class SearchFragment extends Fragment {
 
             }
         });
-
     }
 
     public void buildRecyclerView(View v) {

@@ -38,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TripPageActivity extends AppCompatActivity {
     private static final String FILE_NAME = "fellow_login_state.txt";
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
     private TripB trip;
     private TextView textView_status;
     private TextView textView_creator_name;

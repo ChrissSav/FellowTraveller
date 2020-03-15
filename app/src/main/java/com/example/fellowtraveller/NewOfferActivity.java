@@ -38,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
     private Button btn_back;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
     private JsonApi jsonPlaceHolderApi= retrofit.create(JsonApi.class);
     private Button btn_next_stage;
     private Fragment fra;

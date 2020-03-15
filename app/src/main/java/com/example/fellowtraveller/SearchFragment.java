@@ -88,7 +88,7 @@ public class SearchFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
         constraintLayout = mMainView.findViewById(R.id.SearchFragment_Layout_layout);

@@ -42,7 +42,7 @@ public class ReviewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reviews);
         Intent intent = getIntent();
         id = intent.getIntExtra("Target_id",0);
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         reviewsList= new ArrayList<>();
         /*reviewsList.add(new ReviewItem("Σπύρος Ράντογλου", "Μάιος 2017", "Πολύ καλός οδηγός, προσέχει πολύ στον δρόμο"));

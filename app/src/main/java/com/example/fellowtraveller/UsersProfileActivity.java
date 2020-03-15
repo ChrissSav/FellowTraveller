@@ -35,7 +35,7 @@ public class UsersProfileActivity extends AppCompatActivity {
     private int id;
     private ImageView Img_friendly,Img_reliable,Img_careful,Img_consistent;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
 
 
     @Override

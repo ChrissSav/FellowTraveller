@@ -48,8 +48,6 @@ dependencies {
     //SiliCompressor
     implementation 'com.iceteck.silicompressorr:silicompressor:2.2.2'
     implementation 'id.zelory:compressor:2.1.0'
-    //Paypal SDK
-    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
 
 
 }

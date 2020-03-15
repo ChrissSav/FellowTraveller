@@ -31,7 +31,7 @@ yourEditText.setTransformationMethod(new PasswordTransformationMethod());
 public class LoginActivity extends AppCompatActivity {
     private Button btn,btn_login;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit; //= new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
     private GlobalClass globalClass;
@@ -39,10 +39,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
         globalClass = (GlobalClass) getApplicationContext();
-
-
+        //Log.i("frfrfrf",getString(R.string.api_url));
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         setContentView(R.layout.activity_login);
         textInputEmail = findViewById(R.id.login_editText_email);
         textInputPassword = findViewById(R.id.login_editText_password);

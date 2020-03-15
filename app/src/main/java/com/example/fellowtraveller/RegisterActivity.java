@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btn_next_stage,button_back;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/")
+            .baseUrl(getString(R.string.api_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private FirebaseAuth mAuth;

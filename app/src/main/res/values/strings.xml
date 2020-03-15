@@ -21,4 +21,5 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="user_name">UserName</string>
+    <string name="api_url">http://snf-874026.vm.okeanos.grnet.gr:5000/</string>
 </resources>

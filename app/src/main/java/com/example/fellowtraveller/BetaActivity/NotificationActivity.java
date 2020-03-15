@@ -105,7 +105,7 @@ public class NotificationActivity extends AppCompatActivity  implements Navigati
 
         loadUserInfo();
 
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         mExampleList = new ArrayList<>();
         getNotifications();

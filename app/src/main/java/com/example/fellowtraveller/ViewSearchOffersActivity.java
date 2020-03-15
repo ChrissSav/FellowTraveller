@@ -351,7 +351,7 @@ public class ViewSearchOffersActivity extends AppCompatActivity {
         ListOfTrips.clear();
         Log.i("RefreshFilter", "To : "+filter_items.getDate_to());
         Log.i("RefreshFilter", "From : "+filter_items.getDate_from());
-        retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Call<List<TripB>> call = jsonPlaceHolderApi.getTripsfilter(filter_items.getFrom(),filter_items.getTo(),filter_items.getDate_from(),filter_items.getDate_to(),filter_items.getTime_from(),filter_items.getTime_to(),
                 filter_items.getSeats_from(),filter_items.getSeats_to(),filter_items.getBags_from(),filter_items.getBags_to(),

@@ -334,7 +334,7 @@ public class TripPageCreatorActivity extends AppCompatActivity {
 
     private void getUserTrips(final UserB user, int trip_id, final String status) {
         if(CheckInternetConnection()){
-            retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
             jsonPlaceHolderApi = retrofit.create(JsonApi.class);
             final Call<Status_handling> call = jsonPlaceHolderApi.ChangeRequestStatus(
                     user.getId(),user.getBag(),trip_id,status);

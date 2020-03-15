@@ -83,7 +83,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private EditText editText;
     private Button readReviewsButton;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
     private DatabaseReference userDatabase;
     //Firabase Storage Profile Image
     private StorageReference mImageStorage;
@@ -378,8 +378,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                                     Uri download = task.getResult();
                                     userDatabase.child("Users").child(yourId).child("image").setValue(download.toString());
                                 } else {
-                                    Toast.makeText(Profile.this,"Η εικόνα σας δεν μπόρεσε να ανέβει",Toast.LENGTH_SHORT).show();
-                                    mProgressDialog.dismiss();
+
                                 }
                             }
                         });

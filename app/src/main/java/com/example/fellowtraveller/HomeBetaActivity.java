@@ -253,7 +253,7 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
 
     private void CheckUserNotification(int id){
         JsonApi jsonPlaceHolderApi;
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         Call<Status_handling> call = jsonPlaceHolderApi.getNotificationOfUserCount(id);
 

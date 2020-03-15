@@ -1,4 +1,4 @@
-package com.example.fellowtraveller;
+package com.example.fellowtraveller.Beta;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,7 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.fellowtraveller.Beta.NotificationContainerFragment;
+import com.example.fellowtraveller.ChatContainerFragment;
+import com.example.fellowtraveller.HomeContainerFragment;
+import com.example.fellowtraveller.MainActivity;
+import com.example.fellowtraveller.Profile;
+import com.example.fellowtraveller.R;
+import com.example.fellowtraveller.Settings;
+import com.example.fellowtraveller.Wallet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 

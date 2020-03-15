@@ -144,7 +144,7 @@ public class ProsforesFragment extends Fragment {
     private void getUserTrips() {
 
         if(CheckInternetConnection()){
-            retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
             jsonPlaceHolderApi = retrofit.create(JsonApi.class);
             Call<List<TripB>> call = jsonPlaceHolderApi.getTripsCreated(id);
             call.enqueue(new Callback<List<TripB>>() {

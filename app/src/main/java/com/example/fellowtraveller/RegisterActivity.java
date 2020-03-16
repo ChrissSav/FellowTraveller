@@ -45,7 +45,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "fellow_login_state.txt";
     private Button btn_next_stage,button_back;
     private JsonApi jsonPlaceHolderApi;
     private Retrofit retrofit ;
@@ -64,12 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         globalClass = (GlobalClass) getApplicationContext();
         retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
-
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
         fragmentManager = getSupportFragmentManager();
         btn_next_stage = findViewById(R.id.RegisterActivity_button_next);
         button_back = findViewById(R.id.RegisterActivity_button_back);
@@ -182,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
         String text = status+"\n"+id+"\n"+name+"\n"+email;
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(getString(R.string.FILE_USER_INFO), MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private ProsforesFragment requestsFragment  = new ProsforesFragment();
+    private ProsforesFragment prosforesFragment  = new ProsforesFragment();
     private HomeFragment homeFragment  = new HomeFragment();
     private SearchFragment searchFragment  = new SearchFragment();
 
@@ -24,7 +24,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 Log.i("SectionsPagerAdapter","requestsFragment");
-                return requestsFragment;
+                return prosforesFragment;
 
             case 1:
                 Log.i("SectionsPagerAdapter","homeFragment");

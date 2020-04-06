@@ -43,13 +43,14 @@ public class ProsforesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private OfferFragAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<TripB> ListOfTrips ;
+    private ArrayList<TripB> ListOfTrips;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit ;
+    private Retrofit retrofit;
     private View mMainView;
     private int id;
     private ImageView noResultsImage;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private GlobalClass globalClass;
 
 
     public ProsforesFragment() {
@@ -57,17 +58,24 @@ public class ProsforesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_prosfores, container, false);
 
 
         loadUserId();
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
 
         ListOfTrips = new ArrayList<>();
         swipeRefreshLayout = mMainView.findViewById(R.id.ProsforesFragment_SwipeRefreshLayout);
         noResultsImage = mMainView.findViewById(R.id.no_results);
-        getUserTrips();
-
+        Log.i("globalClass", "globalClass.getListOfTrips_to_SearchFragment().size()"+globalClass.getListOfTrips_to_ProsforesFragment().size());
+        if (globalClass.getListOfTrips_to_ProsforesFragment().size() == 0) {
+            getUserTrips();
+        } else {
+            noResultsImage.setVisibility(View.GONE);
+            ListOfTrips = globalClass.getListOfTrips_to_ProsforesFragment();
+            buildRecyclerView();
+        }
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -76,12 +84,12 @@ public class ProsforesFragment extends Fragment {
 
             }
         });
-        Log.i("mMainView","onStart");
+
         return mMainView;
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         /*loadUserId();
 
@@ -102,7 +110,7 @@ public class ProsforesFragment extends Fragment {
     }
 
 
-    public  void loadUserId() {
+    public void loadUserId() {
         id = 0;
         FileInputStream fis = null;
         try {
@@ -112,8 +120,8 @@ public class ProsforesFragment extends Fragment {
             String text;
             int i = 0;
             while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id =  Integer.parseInt(text);
+                if (i == 1) {
+                    id = Integer.parseInt(text);
                     break;
                 }
                 i++;
@@ -146,7 +154,7 @@ public class ProsforesFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), TripPageCreatorActivity.class);
-                intent.putExtra("Trip",ListOfTrips.get(position));
+                intent.putExtra("Trip", ListOfTrips.get(position));
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
@@ -156,9 +164,10 @@ public class ProsforesFragment extends Fragment {
 
 
     }
+
     private void getUserTrips() {
 
-        if(CheckInternetConnection()){
+        if (CheckInternetConnection()) {
             retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
             jsonPlaceHolderApi = retrofit.create(JsonApi.class);
             Call<List<TripB>> call = jsonPlaceHolderApi.getTripsCreated(id);
@@ -166,12 +175,12 @@ public class ProsforesFragment extends Fragment {
                 @Override
                 public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "response " + response.message(), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     ListOfTrips.clear();
                     List<TripB> trips = response.body();
-                    if(trips.size()!=0) {
+                    if (trips.size() != 0) {
                         noResultsImage.setVisibility(View.GONE);
                         for (int i = 0; i < trips.size(); i++) {
                             ListOfTrips.add(trips.get(i));
@@ -181,16 +190,18 @@ public class ProsforesFragment extends Fragment {
                     }
 
                 }
+
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {
                     //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
-        }else {
-            Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
         }
     }
-    public boolean CheckInternetConnection(){
+
+    public boolean CheckInternetConnection() {
         boolean haveConnectedWifi = false;
         boolean haveConnectedMobile = false;
 

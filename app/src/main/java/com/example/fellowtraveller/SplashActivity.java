@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,8 +24,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SplashActivity extends AppCompatActivity {
-    int SPLASH_TIME = 2000;
+    int SPLASH_TIME = 2500;
     private GlobalClass globalClass;
+    private JsonApi jsonPlaceHolderApi;
+    private Retrofit retrofit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +51,6 @@ public class SplashActivity extends AppCompatActivity {
     //Method to run progress bar for 5 seconds
 
 
-
-
-
     public void load2() {
         FileInputStream fis = null;
         boolean flag = false;
@@ -60,25 +60,25 @@ public class SplashActivity extends AppCompatActivity {
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
             String text;
-            String m ="";
-            int i =0;
+            String m = "";
+            int i = 0;
             while ((text = br.readLine()) != null) {
-                if (i==2){
+                if (i == 2) {
                     globalClass.setName(text);
-                }else if(i==3){
+                } else if (i == 3) {
                     globalClass.setEmail(text);
-                }else if(i==1){
+                } else if (i == 1) {
                     globalClass.setId(Integer.parseInt(text));
                     CheckUserInfoToUpdate(globalClass.getId());
-                }else if (i==0) {
-                    if(text.equals("true")){
+                } else if (i == 0) {
+                    if (text.equals("true")) {
                         LoadUserPic();
                         flag = true;
                     }
                 }
                 i++;
             }
-                    } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,17 +91,18 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }
-        if(flag){
+        if (flag) {
+
             Intent mainIntent = new Intent(SplashActivity.this, HomeBetaActivity.class);
             startActivity(mainIntent);
             finish();
-            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-        }else{
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else {
             save();
             Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(mainIntent);
             finish();
-            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -112,13 +113,11 @@ public class SplashActivity extends AppCompatActivity {
             fis = openFileInput(getString(R.string.FILE_USER_PICTURE));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            String line,line1 = "";
-            try
-            {
+            String line, line1 = "";
+            try {
                 while ((line = br.readLine()) != null)
-                    line1+=line;
-            }catch (Exception e)
-            {
+                    line1 += line;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             globalClass.setUser_icon(line1);
@@ -136,7 +135,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void CheckUserInfoToUpdate(int id){
+    private void CheckUserInfoToUpdate(int id) {
         JsonApi jsonPlaceHolderApi;
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://snf-871339.vm.okeanos.grnet.gr:5000/").addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
@@ -150,7 +149,7 @@ public class SplashActivity extends AppCompatActivity {
                     return;
                 }
                 final UserAuth user = response.body();
-                if(user.getName()!=null){
+                if (user.getName() != null) {
                     //save("true",user.getId()+"",user.getName(),user.getEmail());
                     globalClass.setUser_icon(user.getPicture());
                     SaveUserPicture(user.getPicture());
@@ -233,5 +232,33 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void getTripsFor_SearchFragment() {
+        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+        jsonPlaceHolderApi = retrofit.create(JsonApi.class);
+        Call<List<TripB>> call = jsonPlaceHolderApi.getTripsTakesPart(globalClass.getId());
+        call.enqueue(new Callback<List<TripB>>() {
+            @Override
+            public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
+                if (!response.isSuccessful()) {
+                    //Toast.makeText(this, "response " + response.message(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                List<TripB> trips = response.body();
+                for (int i = 0; i < trips.size(); i++) {
+                    globalClass.getListOfTrips_to_SearchFragment().add(trips.get(i));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<TripB>> call, Throwable t) {
+                //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                // flag2 = true;
+            }
+        });
+    }
+
+
 }
 

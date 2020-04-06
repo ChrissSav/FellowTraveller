@@ -56,7 +56,6 @@ public class HomeBetaActivity extends AppCompatActivity  implements NavigationVi
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private int id;
     private BottomNavigationView bottomNavigationView;
     private CircleImageView circleImageViewNav;
     private GlobalClass globalClass;

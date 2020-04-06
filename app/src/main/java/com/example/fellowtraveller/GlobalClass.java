@@ -2,12 +2,25 @@ package com.example.fellowtraveller;
 
 import android.app.Application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GlobalClass extends Application {
     private String name;
     private String email;
     private int id;
     private String user_icon = "null";
+    private ArrayList<TripB> ListOfTrips_to_SearchFragment = new ArrayList<>();
+    private ArrayList<TripB> ListOfTrips_to_ProsforesFragment = new ArrayList<>();
 
+
+    public ArrayList<TripB> getListOfTrips_to_ProsforesFragment() {
+        return ListOfTrips_to_ProsforesFragment;
+    }
+
+    public void setListOfTrips_to_ProsforesFragment(ArrayList<TripB> listOfTrips_to_ProsforesFragment) {
+        ListOfTrips_to_ProsforesFragment = listOfTrips_to_ProsforesFragment;
+    }
 
     public int getId() {
         return id;
@@ -17,7 +30,13 @@ public class GlobalClass extends Application {
         this.id = id;
     }
 
+    public ArrayList<TripB> getListOfTrips_to_SearchFragment() {
+        return ListOfTrips_to_SearchFragment;
+    }
 
+    public void setListOfTrips_to_SearchFragment(ArrayList<TripB> listOfTrips_to_SearchFragment) {
+        ListOfTrips_to_SearchFragment = listOfTrips_to_SearchFragment;
+    }
 
     public String getName() {
         return name;

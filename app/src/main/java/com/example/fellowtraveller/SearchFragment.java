@@ -44,18 +44,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-
 public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<TripB> ListOfTrips ;
+    private ArrayList<TripB> ListOfTrips;
     private JsonApi jsonPlaceHolderApi;
-    private Retrofit retrofit ;
+    private Retrofit retrofit;
     private View mMainView;
     private SwipeRefreshLayout swipeRefreshLayout;
     //=============================
-    private ConstraintLayout constraintLayout,constraintLayout_to_hide;
+    private ConstraintLayout constraintLayout, constraintLayout_to_hide;
     private ConstraintSet constraintSetOld = new ConstraintSet();
     private ConstraintSet constraintSetNew = new ConstraintSet();
     private TextView textView_count_stand_by;
@@ -67,34 +66,30 @@ public class SearchFragment extends Fragment {
     //=============================
     private int cancelPosition = -1;
     private boolean altLayout;
+    private GlobalClass globalClass;
+    private boolean flag1, flag2;
 
-    private boolean flag1,flag2;
     public SearchFragment() {
 
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mMainView = inflater.inflate(R.layout.fragment_search, container, false);
         flag1 = flag2 = false;
         swipeRefreshLayout = mMainView.findViewById(R.id.SearchFragment_SwipeRefreshLayout);
         view_stand_by = mMainView.findViewById(R.id.SearchFragment_button_stand_by);
         constraintLayout_to_hide = mMainView.findViewById(R.id.constraintLayout2);
         textView_count_stand_by = mMainView.findViewById(R.id.SearchFragment_textView_num_of_StandBy);
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
 
         BuildContainer();
         return mMainView;
     }
-    @Override
-    public void onStart(){
-        super.onStart();
 
 
-
-    }
-
-    public void BuildContainer(){
+    public void BuildContainer() {
         retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         jsonPlaceHolderApi = retrofit.create(JsonApi.class);
 
@@ -104,11 +99,13 @@ public class SearchFragment extends Fragment {
 
         ListOfStand_by = new ArrayList<>();
         ListOfTrips = new ArrayList<>();
-        if(ListOfStand_by.size()==0)
+        if (ListOfStand_by.size() == 0)
             constraintLayout_to_hide.setVisibility(View.GONE);
         getTripsStandBy();
-        getTrips();
-
+        if (!globalClass.getListOfTrips_to_SearchFragment().isEmpty())
+            getTrips();
+        else
+            ListOfTrips = globalClass.getListOfTrips_to_SearchFragment();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -116,15 +113,15 @@ public class SearchFragment extends Fragment {
                 getTripsStandBy();
                 new AsyncTask<Void, Void, String>() {
                     @Override
-                    protected String doInBackground(Void ... params ) {
-                        while(!flag1 && !flag2){
+                    protected String doInBackground(Void... params) {
+                        while (!flag1 && !flag2) {
 
                         }
                         return "null";
                     }
 
                     @Override
-                    protected void onPostExecute( String result ) {
+                    protected void onPostExecute(String result) {
                         swipeRefreshLayout.setRefreshing(false);
 
 
@@ -161,8 +158,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), TripPageActivity.class);
-                intent.putExtra("Trip",ListOfTrips.get(position));
-                intent.putExtra("F",false);
+                intent.putExtra("Trip", ListOfTrips.get(position));
+                intent.putExtra("F", false);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
@@ -181,11 +178,11 @@ public class SearchFragment extends Fragment {
         mAdapter_stand_by.setOnItemClickListener(new StandByAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if(cancelPosition==position){
+                if (cancelPosition == position) {
                     CancelTrip(position);
-                }else{
-                    Toast.makeText(getActivity(),"Είσαι σίγουρος ότι θες να ακυρώσεις την αίτηση",Toast.LENGTH_SHORT).show();
-                    cancelPosition=position;
+                } else {
+                    Toast.makeText(getActivity(), "Είσαι σίγουρος ότι θες να ακυρώσεις την αίτηση", Toast.LENGTH_SHORT).show();
+                    cancelPosition = position;
                 }
 
             }
@@ -193,71 +190,72 @@ public class SearchFragment extends Fragment {
     }
 
 
-
     private void getTrips() {
-        flag2=false;
-        if(CheckInternetConnection()){
+        flag2 = false;
+        if (CheckInternetConnection()) {
             Call<List<TripB>> call = jsonPlaceHolderApi.getTripsTakesPart(loadUserId());
             call.enqueue(new Callback<List<TripB>>() {
                 @Override
                 public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(getActivity(),"responseb "+response.message(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "response " + response.message(), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     List<TripB> trips = response.body();
                     ListOfTrips.clear();
-                    for (int i=0; i<trips.size(); i++){
+                    for (int i = 0; i < trips.size(); i++) {
                         ListOfTrips.add(trips.get(i));
                     }
 
                     buildRecyclerView(mMainView);
-                    flag2=true;
+                    flag2 = true;
                 }
+
                 @Override
                 public void onFailure(Call<List<TripB>> call, Throwable t) {
                     //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
-                    flag2=true;
+                    flag2 = true;
                 }
             });
-        }else {
-            flag2=true;
-            Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT).show();
+        } else {
+            flag2 = true;
+            Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private void getTripsStandBy() {
-        flag1=false;
+        flag1 = false;
         Call<List<TripB>> call = jsonPlaceHolderApi.getTripsStandBy(loadUserId());
         call.enqueue(new Callback<List<TripB>>() {
             @Override
             public void onResponse(Call<List<TripB>> mcall, Response<List<TripB>> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "response " + response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<TripB> trips = response.body();
                 ListOfStand_by.clear();
-                for (int i=0; i<trips.size(); i++){
+                for (int i = 0; i < trips.size(); i++) {
                     ListOfStand_by.add(trips.get(i));
                 }
-                if(ListOfStand_by.size()==0){
+                if (ListOfStand_by.size() == 0) {
                     constraintLayout_to_hide.setVisibility(View.GONE);
-                }else{
-                    textView_count_stand_by.setText(ListOfStand_by.size()+"");
+                } else {
+                    textView_count_stand_by.setText(ListOfStand_by.size() + "");
                     constraintLayout_to_hide.setVisibility(View.VISIBLE);
                     buildRecyclerView2();
                 }
 
-                flag1=true;
+                flag1 = true;
 
 
             }
+
             @Override
             public void onFailure(Call<List<TripB>> call, Throwable t) {
                 //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
-                flag2=true;
+                flag2 = true;
             }
         });
 
@@ -268,30 +266,31 @@ public class SearchFragment extends Fragment {
         jsonObject.addProperty("trip_id", ListOfStand_by.get(pos).getId());
         jsonObject.addProperty("trip_creator_id", ListOfStand_by.get(pos).getCreator().getId());
         jsonObject.addProperty("user_id", loadUserId());
-        Log.i("CancelTrip","trip_id : "+ListOfStand_by.get(pos).getId());
-        Log.i("CancelTrip","trip_creator_id : "+ListOfStand_by.get(pos).getCreator().getId());
-        Log.i("CancelTrip","user_id : "+loadUserId());
+        Log.i("CancelTrip", "trip_id : " + ListOfStand_by.get(pos).getId());
+        Log.i("CancelTrip", "trip_creator_id : " + ListOfStand_by.get(pos).getCreator().getId());
+        Log.i("CancelTrip", "user_id : " + loadUserId());
         Call<Status_handling> call = jsonPlaceHolderApi.CancelTripById(jsonObject);
         call.enqueue(new Callback<Status_handling>() {
             @Override
             public void onResponse(Call<Status_handling> mcall, Response<Status_handling> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),"response "+response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "response " + response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Status_handling status_handling = response.body();
-                if(status_handling.getStatus().equals("success")){
-                    Toast.makeText(getActivity(),"επιτυχης",Toast.LENGTH_SHORT).show();
+                if (status_handling.getStatus().equals("success")) {
+                    Toast.makeText(getActivity(), "επιτυχης", Toast.LENGTH_SHORT).show();
                     ListOfStand_by.remove(pos);
-                    if(ListOfStand_by.size()==0){
+                    if (ListOfStand_by.size() == 0) {
                         constraintLayout_to_hide.setVisibility(View.GONE);
                     }
                     buildRecyclerView2();
-                }else{
-                    Toast.makeText(getActivity(),"αποτυχης",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "αποτυχης", Toast.LENGTH_SHORT).show();
 
                 }
             }
+
             @Override
             public void onFailure(Call<Status_handling> call, Throwable t) {
                 //Toast.makeText(getActivity(),"t: "+t.getMessage(),Toast.LENGTH_SHORT).show();
@@ -301,7 +300,7 @@ public class SearchFragment extends Fragment {
     }
 
     public int loadUserId() {
-        int id =0;
+        int id = 0;
         FileInputStream fis = null;
         try {
             fis = getActivity().openFileInput(getString(R.string.FILE_USER_INFO));
@@ -310,8 +309,8 @@ public class SearchFragment extends Fragment {
             String text;
             int i = 0;
             while ((text = br.readLine()) != null) {
-                if(i==1){
-                    id =  Integer.parseInt(text);
+                if (i == 1) {
+                    id = Integer.parseInt(text);
                     break;
                 }
                 i++;
@@ -334,7 +333,7 @@ public class SearchFragment extends Fragment {
     }
 
 
-    public boolean CheckInternetConnection(){
+    public boolean CheckInternetConnection() {
         boolean haveConnectedWifi = false;
         boolean haveConnectedMobile = false;
 
@@ -350,7 +349,6 @@ public class SearchFragment extends Fragment {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-
 
 
 }

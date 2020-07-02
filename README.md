@@ -36,5 +36,5 @@
 - [Smileyrating](https://github.com/sujithkanna/SmileyRating) 
 - [Compressor](https://github.com/zetbaitsu/Compressor) 
 - [Circleimageview](https://github.com/hdodenhof/CircleImageView)
-
-<b>*  Το πρότζεκτ βρίσκεται σε εξέλιξη. Για ευνόητους λόγους έχει μεταφερθεί σε άλλο repository. Για περισσότερες πληροφορίες πατήστε [εδώ](https://fellowtraveller.gr/) .</b>
+<br/><br/><br/><br/><br/>
+# <b>*  Το πρότζεκτ βρίσκεται σε εξέλιξη. Για ευνόητους λόγους έχει μεταφερθεί σε άλλο repository. Περισσότερες πληροφορίες στο [Fellow Travller](https://fellowtraveller.gr/) .</b>

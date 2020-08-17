@@ -37,4 +37,4 @@
 - [Compressor](https://github.com/zetbaitsu/Compressor) 
 - [Circleimageview](https://github.com/hdodenhof/CircleImageView)
 <br/><br/><br/><br/><br/>
-# <b>*  Το πρότζεκτ βρίσκεται σε εξέλιξη. Για ευνόητους λόγους έχει μεταφερθεί σε άλλο repository. Για περισσότερες πληροφορίες επισκεφτείτε την ιστοσελίδα μας [fellowtravller.gr](https://fellowtraveller.gr/) .</b>
+# <b>*  Το πρότζεκτ βρίσκεται σε εξέλιξη. Για ευνόητους λόγους έχει μεταφερθεί σε άλλο repository. Για περισσότερες πληροφορίες επισκεφτείτε την ιστοσελίδα μας [fellowtraveller.gr](https://fellowtraveller.gr/) .</b>
